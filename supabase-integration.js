@@ -702,20 +702,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Check authentication
     await checkAuth();
 
-    // Load products from database
-    await renderProductsFromDB();
+    // Try to load products from database first
+    const dbProducts = await loadProducts();
 
-    // Set up product filters to use database
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', async () => {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    if (dbProducts && dbProducts.length > 0) {
+        // Use database products if available
+        console.log('✅ Loading products from database');
+        await renderProductsFromDB();
 
-            const filter = btn.dataset.filter;
-            await renderProductsFromDB(filter === 'all' ? null : filter);
+        // Set up product filters to use database
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                await renderProductsFromDB(filter === 'all' ? null : filter);
+            });
         });
-    });
+    } else {
+        // Fallback to static products if database is empty
+        console.log('⚠️ No products in database, using static products');
+        if (typeof initializeProductsWithFilters === 'function') {
+            initializeProductsWithFilters();
+        } else if (typeof initializeProducts === 'function') {
+            initializeProducts();
+        } else {
+            console.error('❌ Static products not available');
+        }
+    }
 
     console.log('✅ Supabase integration ready!');
 });

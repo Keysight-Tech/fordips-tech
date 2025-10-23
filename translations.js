@@ -30,14 +30,16 @@ const translations = {
         // Categories
         categoriesTitle: 'Shop by Category',
         categoriesSubtitle: 'Premium electronics for every need',
+        categoryPhones: 'Phones',
+        categoryPhonesDesc: 'Latest smartphone models',
         categoryIphones: 'iPhones',
         categoryIphonesDesc: 'Latest iPhone models',
-        categoryMacbooks: 'MacBooks',
-        categoryMacbooksDesc: 'Powerful laptops',
+        categoryMacbooks: 'Laptops',
+        categoryMacbooksDesc: 'Powerful computing devices',
         categoryCameras: 'Cameras',
-        categoryCamerasDesc: 'Professional photography',
+        categoryCamerasDesc: 'Professional photography equipment',
         categoryAccessories: 'Accessories',
-        categoryAccessoriesDesc: 'Premium add-ons',
+        categoryAccessoriesDesc: 'Premium tech accessories',
         shopNow: 'Shop Now →',
 
         // Products
@@ -103,14 +105,16 @@ const translations = {
         // Categories
         categoriesTitle: 'Acheter par catégorie',
         categoriesSubtitle: 'Électronique premium pour tous les besoins',
+        categoryPhones: 'Téléphones',
+        categoryPhonesDesc: 'Derniers modèles de smartphones',
         categoryIphones: 'iPhones',
         categoryIphonesDesc: 'Derniers modèles iPhone',
-        categoryMacbooks: 'MacBooks',
-        categoryMacbooksDesc: 'Ordinateurs portables puissants',
+        categoryMacbooks: 'Ordinateurs portables',
+        categoryMacbooksDesc: 'Appareils informatiques puissants',
         categoryCameras: 'Caméras',
-        categoryCamerasDesc: 'Photographie professionnelle',
+        categoryCamerasDesc: 'Équipement photographique professionnel',
         categoryAccessories: 'Accessoires',
-        categoryAccessoriesDesc: 'Ajouts premium',
+        categoryAccessoriesDesc: 'Accessoires technologiques premium',
         shopNow: 'Acheter maintenant →',
 
         // Products
@@ -164,13 +168,11 @@ function translatePage(lang) {
         }
     });
 
-    // Update language buttons
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.lang === lang) {
-            btn.classList.add('active');
-        }
-    });
+    // Update language dropdown
+    const langDropdown = document.getElementById('languageSelect');
+    if (langDropdown) {
+        langDropdown.value = lang;
+    }
 
     // Save preference
     localStorage.setItem('fordipsTechLang', lang);
@@ -181,10 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('fordipsTechLang') || 'en';
     translatePage(savedLang);
 
-    // Language switcher buttons
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.dataset.lang;
+    // Language dropdown
+    const langDropdown = document.getElementById('languageSelect');
+    if (langDropdown) {
+        langDropdown.addEventListener('change', (e) => {
+            const lang = e.target.value;
             translatePage(lang);
 
             // Show notification
@@ -193,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'success'
             );
         });
-    });
+    }
 });
 
 function showNotification(message, type = 'info') {

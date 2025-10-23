@@ -438,10 +438,8 @@ function filterProducts(category) {
     }
 }
 
-// Product filters
-document.addEventListener('DOMContentLoaded', () => {
-    initializeProducts();
-
+// Setup product filters (called from initializeProducts)
+function setupProductFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -469,4 +467,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         });
     });
-});
+}
+
+// Enhanced initialize function that also sets up filters
+function initializeProductsWithFilters() {
+    initializeProducts();
+    setupProductFilters();
+}
+
+// Auto-initialize if Supabase doesn't take over (fallback)
+// Note: This will be prevented if supabase-integration.js loads first
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Only initialize if products aren't already loaded
+        setTimeout(() => {
+            const productsGrid = document.getElementById('productsGrid');
+            if (productsGrid && productsGrid.children.length === 0) {
+                console.log('🟡 Auto-initializing static products (Supabase fallback)');
+                initializeProductsWithFilters();
+            }
+        }, 100);
+    });
+}
