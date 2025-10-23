@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Fordips Tech</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="admin-header-content">
+                <div class="admin-logo">
+                    <h1>FORDIPS TECH</h1>
+                    <span class="admin-badge">Admin Panel</span>
+                </div>
+                <div class="admin-user">
+                    <span id="adminUserName">Admin</span>
+                    <button onclick="handleLogout()" class="btn-logout">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="admin-container">
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="showTab('dashboard')">Dashboard</button>
+                <button class="admin-tab" onclick="showTab('products')">Products</button>
+                <button class="admin-tab" onclick="showTab('orders')">Orders</button>
+                <button class="admin-tab" onclick="showTab('contacts')">Contact Submissions</button>
+                <button class="admin-tab" onclick="showTab('newsletter')">Newsletter</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="admin-content active">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <h3 id="totalProducts">0</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🛒</div>
+                        <div class="stat-info">
+                            <h3 id="totalOrders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3 id="totalRevenue">$0.00</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📧</div>
+                        <div class="stat-info">
+                            <h3 id="totalContacts">0</h3>
+                            <p>Contact Submissions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3>Recent Orders</h3>
+                    <div id="recentOrders" class="data-table-wrapper"></div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products" class="admin-content">
+                <div class="content-header">
+                    <h2>Product Management</h2>
+                    <button onclick="openAddProductModal()" class="btn-primary">+ Add New Product</button>
+                </div>
+
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="iphone">iPhones</option>
+                        <option value="samsung">Samsung</option>
+                        <option value="laptop">Laptops</option>
+                        <option value="desktop">Desktops</option>
+                        <option value="tablet">Tablets</option>
+                        <option value="smartwatch">Smartwatches</option>
+                        <option value="starlink">Starlink</option>
+                    </select>
+                    <input type="search" id="productSearch" placeholder="Search products..." onkeyup="searchProducts()">
+                </div>
+
+                <div id="productsTable" class="data-table-wrapper"></div>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="orders" class="admin-content">
+                <div class="content-header">
+                    <h2>Order Management</h2>
+                </div>
+
+                <div class="filters">
+                    <select id="statusFilter" onchange="filterOrders()">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <input type="search" id="orderSearch" placeholder="Search by order number or customer..." onkeyup="searchOrders()">
+                </div>
+
+                <div id="ordersTable" class="data-table-wrapper"></div>
+            </div>
+
+            <!-- Contact Submissions Tab -->
+            <div id="contacts" class="admin-content">
+                <div class="content-header">
+                    <h2>Contact Submissions</h2>
+                </div>
+
+                <div class="filters">
+                    <select id="contactStatusFilter" onchange="filterContacts()">
+                        <option value="all">All Status</option>
+                        <option value="new">New</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+
+                <div id="contactsTable" class="data-table-wrapper"></div>
+            </div>
+
+            <!-- Newsletter Tab -->
+            <div id="newsletter" class="admin-content">
+                <div class="content-header">
+                    <h2>Newsletter Subscribers</h2>
+                    <button onclick="exportSubscribers()" class="btn-secondary">Export CSV</button>
+                </div>
+
+                <div id="newsletterTable" class="data-table-wrapper"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="productModalTitle">Add New Product</h3>
+                <button onclick="closeProductModal()" class="btn-close">&times;</button>
+            </div>
+            <form id="productForm">
+                <input type="hidden" id="productId" name="productId">
+
+                <div class="form-group">
+                    <label for="productName">Product Name *</label>
+                    <input type="text" id="productName" name="productName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productCategory">Category *</label>
+                        <select id="productCategory" name="productCategory" required>
+                            <option value="iphone">iPhones</option>
+                            <option value="samsung">Samsung</option>
+                            <option value="laptop">Laptops</option>
+                            <option value="desktop">Desktops</option>
+                            <option value="tablet">Tablets</option>
+                            <option value="smartwatch">Smartwatches</option>
+                            <option value="starlink">Starlink</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productPrice">Price ($) *</label>
+                        <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="productDescription">Description *</label>
+                    <textarea id="productDescription" name="productDescription" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="productImage">Image URL *</label>
+                    <input type="url" id="productImage" name="productImage" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productBadge">Badge (optional)</label>
+                        <select id="productBadge" name="productBadge">
+                            <option value="">No Badge</option>
+                            <option value="NEW">NEW</option>
+                            <option value="HOT">HOT</option>
+                            <option value="SALE">SALE</option>
+                            <option value="PRO">PRO</option>
+                            <option value="VALUE">VALUE</option>
+                            <option value="POPULAR">POPULAR</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productStock">Stock Quantity *</label>
+                        <input type="number" id="productStock" name="productStock" min="0" value="100" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="productActive" name="productActive" checked>
+                        Active (visible on website)
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" onclick="closeProductModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Order Details</h3>
+                <button onclick="closeOrderModal()" class="btn-close">&times;</button>
+            </div>
+            <div id="orderDetails"></div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-integration.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

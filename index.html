@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fordips Tech - Premium Electronics Store. Shop latest iPhones, MacBooks, Cameras & More. Free Worldwide Shipping!">
+    <title>Fordips Tech - Premium Electronics Store | Latest iPhones, MacBooks & More</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Language Switcher Floating -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">🇺🇸 EN</button>
+        <button class="lang-btn" data-lang="fr">🇫🇷 FR</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">
+                    <div class="logo-circle">
+                        <div class="logo-circle-inner">
+                            <span class="logo-initial">F</span>
+                        </div>
+                    </div>
+                    <span class="logo-text" data-i18n="brandName">FORDIPS TECH</span>
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link" data-i18n="navHome">Home</a></li>
+                    <li><a href="#products" class="nav-link" data-i18n="navProducts">Products</a></li>
+                    <li><a href="#categories" class="nav-link" data-i18n="navCategories">Categories</a></li>
+                    <li><a href="#locations" class="nav-link" data-i18n="navLocations">Locations</a></li>
+                    <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
+                    <li>
+                        <button class="cart-button" id="cartButton" aria-label="Shopping cart">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cinematic Hero Section -->
+    <section class="cinematic-hero" id="home">
+        <!-- Dark Tech Gradient Background -->
+        <div class="hero-dark-gradient"></div>
+
+        <!-- Particle Effects -->
+        <div class="cinematic-particles">
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+            <div class="particle-dot"></div>
+        </div>
+
+        <!-- Water Reflection Effect -->
+        <div class="water-reflection"></div>
+
+        <div class="container">
+            <div class="cinematic-grid">
+                <!-- Left: Text Content -->
+                <div class="cinematic-content">
+                    <h1 class="cinematic-title">
+                        WELCOME TO<br>
+                        <span class="brand-highlight">FORDIP'S TECH LLC</span>
+                    </h1>
+                    <p class="cinematic-subtitle">
+                        Innovating the Future of Electronics and Connectivity
+                    </p>
+                    <a href="#products" class="btn-cinematic">
+                        <span>SHOP NOW</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Right: 3D Device Showcase -->
+                <div class="cinematic-devices">
+                    <div class="device-container">
+                        <!-- iPhone -->
+                        <div class="device-3d device-iphone">
+                            <img src="https://images.unsplash.com/photo-1592286927505-24b683486e36?w=400&q=80" alt="iPhone" class="device-img">
+                            <div class="device-glow glow-blue"></div>
+                        </div>
+
+                        <!-- MacBook -->
+                        <div class="device-3d device-macbook">
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80" alt="MacBook" class="device-img">
+                            <div class="device-glow glow-silver"></div>
+                        </div>
+
+                        <!-- Apple Watch -->
+                        <div class="device-3d device-watch">
+                            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=300&q=80" alt="Apple Watch" class="device-img">
+                            <div class="device-glow glow-purple"></div>
+                        </div>
+
+                        <!-- iPad -->
+                        <div class="device-3d device-ipad">
+                            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=450&q=80" alt="iPad" class="device-img">
+                            <div class="device-glow glow-teal"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-down-cinematic">
+            <div class="scroll-line"></div>
+            <div class="scroll-dot"></div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title" data-i18n="categoriesTitle">Shop by Category</h2>
+                <p class="section-subtitle" data-i18n="categoriesSubtitle">Premium electronics for every need</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card fade-in-up" data-category="iphone">
+                    <div class="category-icon">📱</div>
+                    <h3 data-i18n="categoryIphones">iPhones</h3>
+                    <p data-i18n="categoryIphonesDesc">Latest iPhone models</p>
+                    <button class="btn-category" data-i18n="shopNow">Shop Now →</button>
+                </div>
+                <div class="category-card fade-in-up" data-category="macbook">
+                    <div class="category-icon">💻</div>
+                    <h3 data-i18n="categoryMacbooks">MacBooks</h3>
+                    <p data-i18n="categoryMacbooksDesc">Powerful laptops</p>
+                    <button class="btn-category" data-i18n="shopNow">Shop Now →</button>
+                </div>
+                <div class="category-card fade-in-up" data-category="camera">
+                    <div class="category-icon">📷</div>
+                    <h3 data-i18n="categoryCameras">Cameras</h3>
+                    <p data-i18n="categoryCamerasDesc">Professional photography</p>
+                    <button class="btn-category" data-i18n="shopNow">Shop Now →</button>
+                </div>
+                <div class="category-card fade-in-up" data-category="accessories">
+                    <div class="category-icon">🎧</div>
+                    <h3 data-i18n="categoryAccessories">Accessories</h3>
+                    <p data-i18n="categoryAccessoriesDesc">Premium add-ons</p>
+                    <button class="btn-category" data-i18n="shopNow">Shop Now →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header scale-in">
+                <h2 class="section-title" data-i18n="productsTitle">Featured Products</h2>
+                <p class="section-subtitle" data-i18n="productsSubtitle">Handpicked for you</p>
+            </div>
+
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="iphone">iPhones</button>
+                <button class="filter-btn" data-filter="samsung">Samsung</button>
+                <button class="filter-btn" data-filter="laptop">Laptops</button>
+                <button class="filter-btn" data-filter="desktop">Desktops</button>
+                <button class="filter-btn" data-filter="tablet">Tablets</button>
+                <button class="filter-btn" data-filter="smartwatch">Smartwatches</button>
+                <button class="filter-btn" data-filter="starlink">Starlink</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations -->
+    <section class="locations" id="locations">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title" data-i18n="locationsTitle">Our Locations</h2>
+                <p class="section-subtitle" data-i18n="locationsSubtitle">Visit us worldwide</p>
+            </div>
+
+            <div class="locations-grid">
+                <div class="location-card fade-in-up">
+                    <div class="location-flag">🇺🇸</div>
+                    <h3 data-i18n="locationUSA">United States</h3>
+                    <p class="location-address">
+                        123 Tech Avenue<br>
+                        San Francisco, CA 94102<br>
+                        United States
+                    </p>
+                    <div class="location-contact">
+                        <p>📞 +1 (555) 123-4567</p>
+                        <p>📧 usa@fordipstech.com</p>
+                    </div>
+                </div>
+
+                <div class="location-card fade-in-up">
+                    <div class="location-flag">🇨🇲</div>
+                    <h3 data-i18n="locationBuea">Buea, Cameroon</h3>
+                    <p class="location-address">
+                        Mountain Plaza<br>
+                        Molyko, Buea<br>
+                        Cameroon
+                    </p>
+                    <div class="location-contact">
+                        <p>📞 +237 678 123 456</p>
+                        <p>📧 buea@fordipstech.com</p>
+                    </div>
+                </div>
+
+                <div class="location-card fade-in-up">
+                    <div class="location-flag">🇨🇲</div>
+                    <h3 data-i18n="locationLimbe">Limbe, Cameroon</h3>
+                    <p class="location-address">
+                        Beach Front Mall<br>
+                        Down Beach, Limbe<br>
+                        Cameroon
+                    </p>
+                    <div class="location-contact">
+                        <p>📞 +237 678 987 654</p>
+                        <p>📧 limbe@fordipstech.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info fade-in-left">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Visit Us</h3>
+                            <p>15706 Dorset Rd, Laurel, MD<br>United States 20707</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>(667) 256 3680</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>support@fordipstech.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form fade-in-right" id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Full Name *</label>
+                        <input type="text" id="contactName" name="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject">Subject *</label>
+                        <input type="text" id="contactSubject" name="subject" required placeholder="How can we help?">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell us more about your inquiry..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    <p class="form-status" id="contactFormStatus"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content fade-in-up">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for exclusive deals and tech news</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <p class="form-status" id="newsletterStatus"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Contact Information -->
+                <div class="footer-column">
+                    <div class="logo footer-logo">
+                        <div class="logo-circle">
+                            <div class="logo-circle-inner">
+                                <span class="logo-initial">F</span>
+                            </div>
+                        </div>
+                        <span class="logo-text">FORDIPS TECH</span>
+                    </div>
+
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p>15706 Dorset Rd, Laurel, MD,<br>United States 20707</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <p>(667) 256 3680</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-social">
+                        <p class="social-label">Follow us on</p>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/profile.php?id=61558105979752&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="social-link-simple facebook" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <a href="https://tiktok.com/@fordipstechllc-xu2sd" target="_blank" rel="noopener noreferrer" class="social-link-simple tiktok" aria-label="TikTok">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                </svg>
+                            </a>
+                            <a href="https://youtube.com/@alsinna" target="_blank" rel="noopener noreferrer" class="social-link-simple youtube" aria-label="YouTube">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offers -->
+                <div class="footer-column">
+                    <h4 class="footer-title">OFFERS</h4>
+                    <ul class="footer-list">
+                        <li><a href="#products">Smart phones</a></li>
+                        <li><a href="#products">Tablets</a></li>
+                        <li><a href="#products">Smart watches</a></li>
+                        <li><a href="#products">Accessories</a></li>
+                        <li><a href="#products">Laptop computers</a></li>
+                        <li><a href="#products">Starlink internet service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h4 class="footer-title">QUICK LINKS</h4>
+                    <ul class="footer-list">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#checkout">Checkout</a></li>
+                        <li><a href="#newsletter">Newsletter</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#account">My account</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div class="footer-column">
+                    <h4 class="footer-title">SUPPORT</h4>
+                    <ul class="footer-list">
+                        <li><a href="#faq">FAQs</a></li>
+                        <li><a href="#shipping">Shipping & Returns</a></li>
+                        <li><a href="#warranty">Warranty Info</a></li>
+                        <li><a href="#support">Support Center</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 FTLLC Privacy Policy. All rights reserved. Designed & developed by FTLLC.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-overlay" id="cartOverlay"></div>
+        <div class="cart-sidebar">
+            <div class="cart-header">
+                <h2 data-i18n="cartTitle">Your Cart</h2>
+                <button class="cart-close" id="cartClose">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart" data-i18n="cartEmpty">Your cart is empty</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span data-i18n="cartTotal">Total:</span>
+                    <span class="total-amount" id="totalAmount">$0.00</span>
+                </div>
+                <button class="btn btn-primary btn-full" id="checkoutBtn" data-i18n="cartCheckout">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account/Login Modal -->
+    <div class="modal" id="accountModal">
+        <div class="modal-overlay" onclick="closeAccountModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAccountModal()">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
+                <button class="auth-tab" onclick="showAuthTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="auth-form" id="loginForm">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+                <p class="form-status" id="loginStatus"></p>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="auth-form hidden" id="signupForm">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                <p class="form-status" id="signupStatus"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Support Modal (FAQ, Shipping, Warranty, Support Center) -->
+    <div class="modal" id="supportModal">
+        <div class="modal-overlay" onclick="closeSupportModal()"></div>
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeSupportModal()">&times;</button>
+            <div class="support-content" id="supportContent">
+                <!-- Content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Modal (Privacy Policy, Terms & Conditions) -->
+    <div class="modal" id="legalModal">
+        <div class="modal-overlay" onclick="closeLegalModal()"></div>
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeLegalModal()">&times;</button>
+            <div class="legal-content" id="legalContent">
+                <!-- Content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-overlay" onclick="closeCheckoutModal()"></div>
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeCheckoutModal()">&times;</button>
+            <div class="checkout-content">
+                <h2>Checkout</h2>
+                <form id="checkoutForm">
+                    <div class="checkout-section">
+                        <h3>Shipping Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkoutFirstName">First Name *</label>
+                                <input type="text" id="checkoutFirstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutLastName">Last Name *</label>
+                                <input type="text" id="checkoutLastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutEmail">Email *</label>
+                            <input type="email" id="checkoutEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutAddress">Address *</label>
+                            <input type="text" id="checkoutAddress" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkoutCity">City *</label>
+                                <input type="text" id="checkoutCity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkoutZip">ZIP Code *</label>
+                                <input type="text" id="checkoutZip" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Payment Method</h3>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <span>Credit/Debit Card</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="paypal">
+                                <span>PayPal</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="checkoutSubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span>FREE</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="checkoutTotal">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Place Order</button>
+                    <p class="form-status" id="checkoutStatus"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Application Scripts -->
+    <script src="translations.js"></script>
+    <script src="supabase-integration.js"></script>
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="forms.js"></script>
+</body>
+</html>
