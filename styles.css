@@ -133,6 +133,21 @@ a {
     min-width: 160px;
 }
 
+/* Mobile adjustments for language switcher */
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 85px;
+        right: 10px;
+    }
+
+    .lang-dropdown {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        min-width: 130px;
+        padding-right: 2rem;
+    }
+}
+
 .lang-dropdown:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(44, 169, 161, 0.4);
@@ -2841,23 +2856,44 @@ a {
 .mobile-menu-toggle {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0.75rem;
+    z-index: 1003;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-menu-toggle span {
-    width: 25px;
+    width: 28px;
     height: 3px;
     background: var(--black);
-    transition: var(--transition-normal);
-    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 3px;
+    display: block;
 }
 
 .navbar:not(.scrolled) .mobile-menu-toggle span {
     background: var(--white);
+}
+
+/* Hamburger menu animation */
+.nav-menu.active ~ .mobile-menu-toggle span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.nav-menu.active ~ .mobile-menu-toggle span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.nav-menu.active ~ .mobile-menu-toggle span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
 }
 
 /* Extra Small Devices (Portrait phones, less than 576px) */
@@ -2868,6 +2904,15 @@ a {
 
     .container {
         padding: 0 1rem;
+    }
+
+    /* Enhanced navbar padding on mobile */
+    .navbar {
+        padding: 1rem 0;
+    }
+
+    .navbar.scrolled {
+        padding: 0.75rem 0;
     }
 
     /* Logo adjustments */
@@ -2881,7 +2926,15 @@ a {
     }
 
     .logo-text {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        display: none; /* Hide text on very small screens */
+    }
+
+    /* Mobile menu takes full width on small screens */
+    .nav-menu {
+        width: 90%;
+        max-width: 100%;
+        padding: 6rem 1.5rem 2rem;
     }
 
     /* Hero Section */
@@ -3249,15 +3302,15 @@ a {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
+        width: 85%;
         max-width: 400px;
         height: 100vh;
         background: var(--white);
         flex-direction: column;
         align-items: flex-start;
-        padding: 6rem var(--spacing-md) var(--spacing-md);
-        transition: right var(--transition-normal);
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+        padding: 7rem 2rem 2rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
         z-index: 1002;
         overflow-y: auto;
     }
@@ -3266,16 +3319,65 @@ a {
         right: 0;
     }
 
+    /* Mobile menu backdrop */
+    .nav-menu::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.4s, left 0s 0.4s;
+        z-index: -1;
+    }
+
+    .nav-menu.active::before {
+        left: 0;
+        opacity: 1;
+        transition: opacity 0.4s, left 0s 0s;
+    }
+
     .nav-link {
         color: var(--gray-900) !important;
         width: 100%;
-        padding: 1rem;
-        font-size: 1.1rem;
+        padding: 1.25rem 1rem;
+        font-size: 1.15rem;
+        border-bottom: 1px solid var(--gray-200);
+        transition: all 0.3s;
+    }
+
+    .nav-link:hover {
+        background: var(--gray-100);
+        padding-left: 1.5rem;
+        color: var(--primary) !important;
+    }
+
+    .nav-link::after {
+        display: none;
     }
 
     .mobile-menu-toggle {
         display: flex;
         z-index: 1003;
+    }
+
+    /* Cart button mobile styling */
+    .cart-button {
+        background: var(--primary);
+        color: var(--white);
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--radius-md);
+        margin: 1rem 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cart-count {
+        background: var(--white);
+        color: var(--primary);
     }
 
     .hero-grid {
