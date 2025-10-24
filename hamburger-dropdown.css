@@ -1,0 +1,145 @@
+/* ===== HAMBURGER DROPDOWN (NOT DRAWER) ===== */
+
+/* Show hamburger icon */
+.mobile-menu-toggle {
+    display: flex !important;
+    flex-direction: column;
+    gap: 6px;
+    width: 48px;
+    height: 48px;
+    padding: 10px;
+    background: rgba(44, 169, 161, 0.1);
+    border: 1.5px solid rgba(44, 169, 161, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 10000;
+    position: relative;
+}
+
+.mobile-menu-toggle span {
+    width: 28px;
+    height: 3px;
+    background: #1e293b;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Hide the drawer overlay */
+.mobile-drawer-overlay {
+    display: none !important;
+}
+
+/* Convert nav-menu from drawer to dropdown */
+.nav-menu {
+    position: absolute !important;
+    top: 70px !important;
+    right: 20px !important;
+    width: 320px !important;
+    height: auto !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    transform: none !important;
+    transition: max-height 0.3s ease, opacity 0.3s ease !important;
+    opacity: 0 !important;
+    z-index: 9999 !important;
+}
+
+/* Show dropdown when active */
+.nav-menu.active {
+    max-height: 500px !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Quick Links in Dropdown */
+.mobile-drawer-quick-links {
+    display: block !important;
+    visibility: visible !important;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.mobile-drawer-section-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+.mobile-quick-links-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.mobile-quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1e293b;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.mobile-quick-link:hover {
+    background: #f8fafc;
+    border-color: #2ca9a1;
+    color: #2ca9a1;
+    transform: translateY(-2px);
+}
+
+.mobile-quick-link svg {
+    color: #2ca9a1;
+}
+
+/* Hide regular nav items in dropdown */
+.nav-menu > li {
+    display: none !important;
+}
+
+/* Mobile only */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .nav-menu {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        width: auto !important;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    
+    .mobile-drawer-quick-links {
+        display: none !important;
+    }
+    
+    .nav-menu > li {
+        display: inline-block !important;
+    }
+}

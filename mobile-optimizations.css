@@ -3,6 +3,50 @@
  * Best-in-class mobile responsiveness for all devices
  */
 
+/* ===== HERO HEADER IMAGES ===== */
+.hero-header-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero-header-desktop,
+.hero-header-mobile {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Desktop: Show header.png, hide header1.png */
+@media (min-width: 769px) {
+    .hero-header-desktop {
+        display: block;
+    }
+
+    .hero-header-mobile {
+        display: none;
+    }
+}
+
+/* Mobile: Show header1.png, hide header.png */
+@media (max-width: 768px) {
+    .hero-header-desktop {
+        display: none;
+    }
+
+    .hero-header-mobile {
+        display: block;
+    }
+}
+
+/**
+ * FORDIPS TECH - Mobile Optimizations
+ * Best-in-class mobile responsiveness for all devices
+ */
+
 /* ===== MOBILE BREAKPOINTS ===== */
 /*
   Extra Small: < 375px (iPhone SE, small phones)
@@ -1288,5 +1332,55 @@
         .mobile-quick-link span {
             font-size: 0.75rem;
         }
+    }
+}
+
+/* ===== HAMBURGER MENU REMOVED ===== */
+.mobile-menu-toggle {
+    display: none !important;
+}
+
+/* ===== HIDE ALL MOBILE MENU COMPONENTS ===== */
+.mobile-drawer-quick-links,
+.mobile-drawer-overlay,
+.mobile-drawer-search,
+.mobile-quick-links-grid,
+.mobile-quick-link {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ===== FIX NAVBAR COVERING HERO TEXT ===== */
+.cinematic-hero {
+    padding-top: 120px !important; /* Space for fixed navbar */
+}
+
+@media (max-width: 768px) {
+    .cinematic-hero {
+        padding-top: 100px !important; /* Less space on mobile */
+    }
+}
+
+/* ===== REDUCE SLIDESHOW IMAGE HEIGHT ===== */
+.device-3d-large {
+    max-height: 350px !important; /* Reduced from default */
+}
+
+.device-img-large {
+    max-height: 320px !important; /* Reduced image height */
+    object-fit: contain !important;
+}
+
+.cinematic-devices {
+    margin-top: 2rem !important;
+}
+
+@media (max-width: 768px) {
+    .device-3d-large {
+        max-height: 280px !important;
+    }
+    
+    .device-img-large {
+        max-height: 250px !important;
     }
 }
