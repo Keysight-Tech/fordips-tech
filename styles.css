@@ -1348,7 +1348,7 @@ a {
     width: 100%;
     max-height: 700px;
     min-height: 500px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 20px;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
     transition: all 0.6s ease;
@@ -3704,7 +3704,7 @@ a {
         max-height: 750px;
         min-height: 600px;
         width: 100%;
-        object-fit: contain;
+        object-fit: cover;
     }
 
     .device-info {
@@ -3749,6 +3749,7 @@ a {
         max-height: 650px;
         min-height: 500px;
         width: 100%;
+        object-fit: cover;
     }
 
     .device-info {
