@@ -1,0 +1,283 @@
+/**
+ * FORDIPS TECH - Checkout Enhancements Styles
+ * Currency selector and Help Me Pay button
+ */
+
+/* ===== CHECKOUT SUMMARY HEADER ===== */
+.checkout-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.checkout-summary-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #1a1a2e;
+}
+
+/* ===== CHECKOUT CURRENCY SELECTOR ===== */
+.checkout-currency-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.currency-select-checkout {
+    padding: 0.6rem 2.5rem 0.6rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    background: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.currency-select-checkout:hover {
+    border-color: #667eea;
+    background-color: #f8f9ff;
+}
+
+.currency-select-checkout:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* ===== CHECKOUT ACTIONS SECTION ===== */
+.checkout-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-place-order {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-place-order:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-place-order svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== HELP ME PAY BUTTON ===== */
+.btn-help-me-pay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+}
+
+.btn-help-me-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(245, 87, 108, 0.4);
+}
+
+.btn-help-me-pay svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== CURRENCY INDICATOR IN SUMMARY ===== */
+.summary-row span {
+    display: flex;
+    align-items: center;
+}
+
+.currency-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .checkout-summary-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .checkout-currency-selector {
+        width: 100%;
+    }
+
+    .currency-select-checkout {
+        flex: 1;
+    }
+
+    .checkout-actions {
+        gap: 0.75rem;
+    }
+
+    .btn-place-order,
+    .btn-help-me-pay {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .btn-place-order {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .checkout-summary-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .currency-select-checkout {
+        font-size: 0.9rem;
+        padding: 0.5rem 2rem 0.5rem 0.8rem;
+    }
+
+    .btn-place-order,
+    .btn-help-me-pay {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-place-order svg,
+    .btn-help-me-pay svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* ===== LOADING STATE ===== */
+.btn-place-order:disabled,
+.btn-help-me-pay:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-place-order:disabled:hover,
+.btn-help-me-pay:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* ===== CURRENCY CHANGE ANIMATION ===== */
+@keyframes currencyChange {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        color: #667eea;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.currency-changing {
+    animation: currencyChange 0.3s ease;
+}
+
+/* ===== HELP ME PAY TOOLTIP ===== */
+.btn-help-me-pay {
+    position: relative;
+}
+
+.btn-help-me-pay::after {
+    content: 'Split payment with friends';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    margin-bottom: 0.5rem;
+}
+
+.btn-help-me-pay:hover::after {
+    opacity: 1;
+}
+
+/* ===== CHECKOUT MODAL IMPROVEMENTS ===== */
+.checkout-summary {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row.total {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+    border-top: 2px solid #667eea;
+}
+
+.summary-row.total span:last-child {
+    color: #667eea;
+}
