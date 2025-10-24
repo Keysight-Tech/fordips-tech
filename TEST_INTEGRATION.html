@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fordips Tech - Integration Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .test-section {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .success {
+            background: rgba(16, 185, 129, 0.2);
+            border-left: 3px solid #10b981;
+        }
+        .error {
+            background: rgba(239, 68, 68, 0.2);
+            border-left: 3px solid #ef4444;
+        }
+        .warning {
+            background: rgba(245, 158, 11, 0.2);
+            border-left: 3px solid #f59e0b;
+        }
+        .loading {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid #3b82f6;
+        }
+        .status-icon {
+            font-size: 24px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        .code-block {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+        h2 {
+            color: #60a5fa;
+            margin-top: 0;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        .stat-label {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Fordips Tech - Integration Test Suite</h1>
+        <p>Comprehensive test of Supabase and GitHub integration</p>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button onclick="runAllTests()">▶ Run All Tests</button>
+        <button onclick="testSupabaseConnection()">Test Supabase Connection</button>
+        <button onclick="testProducts()">Test Products</button>
+        <button onclick="testCategories()">Test Categories</button>
+        <button onclick="location.reload()">🔄 Reset</button>
+    </div>
+
+    <div class="stats" id="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="totalTests">0</div>
+            <div class="stat-label">Total Tests</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="passedTests" style="color: #10b981;">0</div>
+            <div class="stat-label">Passed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="failedTests" style="color: #ef4444;">0</div>
+            <div class="stat-label">Failed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="warningTests" style="color: #f59e0b;">0</div>
+            <div class="stat-label">Warnings</div>
+        </div>
+    </div>
+
+    <div id="results"></div>
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = 'https://loutcbvftzojsioahtdw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvdXRjYnZmdHpvanNpb2FodGR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDc5NjMsImV4cCI6MjA3NjgyMzk2M30.u49fBtuF99IsEAr8iYLo_3SnHAOqTR-Y7WPXnkGVKOs';
+
+        let supabase;
+        let testStats = { total: 0, passed: 0, failed: 0, warnings: 0 };
+
+        function updateStats() {
+            document.getElementById('totalTests').textContent = testStats.total;
+            document.getElementById('passedTests').textContent = testStats.passed;
+            document.getElementById('failedTests').textContent = testStats.failed;
+            document.getElementById('warningTests').textContent = testStats.warnings;
+        }
+
+        function addResult(section, message, type = 'loading') {
+            const results = document.getElementById('results');
+            let sectionDiv = document.getElementById(`section-${section}`);
+
+            if (!sectionDiv) {
+                sectionDiv = document.createElement('div');
+                sectionDiv.id = `section-${section}`;
+                sectionDiv.className = 'test-section';
+                sectionDiv.innerHTML = `<h2>${section}</h2>`;
+                results.appendChild(sectionDiv);
+            }
+
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '🔵';
+            resultDiv.innerHTML = `<span class="status-icon">${icon}</span><div>${message}</div>`;
+
+            sectionDiv.appendChild(resultDiv);
+
+            if (type === 'success') testStats.passed++;
+            if (type === 'error') testStats.failed++;
+            if (type === 'warning') testStats.warnings++;
+            if (type !== 'loading') testStats.total++;
+
+            updateStats();
+        }
+
+        async function testSupabaseConnection() {
+            addResult('Connection Test', 'Testing Supabase connection...', 'loading');
+
+            try {
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                addResult('Connection Test', `Supabase client created successfully<br><code>URL: ${SUPABASE_URL}</code>`, 'success');
+
+                // Test connection by querying a simple table
+                const { data, error } = await supabase.from('categories').select('count');
+
+                if (error) {
+                    addResult('Connection Test', `Connection error: ${error.message}`, 'error');
+                } else {
+                    addResult('Connection Test', 'Successfully connected to Supabase database', 'success');
+                }
+            } catch (error) {
+                addResult('Connection Test', `Failed to initialize: ${error.message}`, 'error');
+            }
+        }
+
+        async function testCategories() {
+            addResult('Categories Test', 'Loading categories...', 'loading');
+
+            try {
+                const { data, error } = await supabase
+                    .from('categories')
+                    .select('*')
+                    .order('name');
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    addResult('Categories Test', `Found ${data.length} categories`, 'success');
+
+                    const categoriesHTML = data.map(cat =>
+                        `<div style="margin: 5px 0;">${cat.icon} <strong>${cat.name}</strong> (${cat.slug})</div>`
+                    ).join('');
+
+                    addResult('Categories Test', `<div class="code-block">${categoriesHTML}</div>`, 'success');
+                } else {
+                    addResult('Categories Test', 'No categories found in database', 'error');
+                }
+            } catch (error) {
+                addResult('Categories Test', `Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testProducts() {
+            addResult('Products Test', 'Loading products...', 'loading');
+
+            try {
+                // Test 1: Count all products
+                const { count, error: countError } = await supabase
+                    .from('products')
+                    .select('*', { count: 'exact', head: true });
+
+                if (countError) throw countError;
+
+                if (count === 0) {
+                    addResult('Products Test', 'No products found in database', 'error');
+                    return;
+                }
+
+                addResult('Products Test', `Found ${count} total products`, 'success');
+
+                // Test 2: Load products with categories
+                const { data, error } = await supabase
+                    .from('products')
+                    .select(`
+                        *,
+                        categories(name, slug, icon)
+                    `)
+                    .eq('is_active', true)
+                    .limit(5);
+
+                if (error) throw error;
+
+                if (data && data.length > 0) {
+                    const productsHTML = data.map(p =>
+                        `<div style="margin: 10px 0; padding: 10px; background: #0f172a; border-radius: 4px;">
+                            <strong>${p.name}</strong><br>
+                            <small>Category: ${p.category_slug} | Price: $${p.price} | Stock: ${p.stock_quantity}</small>
+                        </div>`
+                    ).join('');
+
+                    addResult('Products Test', `Sample products (showing 5 of ${count}):<div class="code-block">${productsHTML}</div>`, 'success');
+                } else {
+                    addResult('Products Test', 'No active products found', 'warning');
+                }
+
+                // Test 3: Count by category
+                const { data: categoryData, error: categoryError } = await supabase
+                    .from('products')
+                    .select('category_slug');
+
+                if (!categoryError && categoryData) {
+                    const categoryCounts = {};
+                    categoryData.forEach(p => {
+                        categoryCounts[p.category_slug] = (categoryCounts[p.category_slug] || 0) + 1;
+                    });
+
+                    const countsHTML = Object.entries(categoryCounts)
+                        .map(([cat, count]) => `<div>${cat}: ${count} products</div>`)
+                        .join('');
+
+                    addResult('Products Test', `Products by category:<div class="code-block">${countsHTML}</div>`, 'success');
+                }
+
+            } catch (error) {
+                addResult('Products Test', `Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testRLS() {
+            addResult('Security Test', 'Testing Row Level Security policies...', 'loading');
+
+            try {
+                // Test public read access
+                const { data, error } = await supabase
+                    .from('products')
+                    .select('id')
+                    .limit(1);
+
+                if (!error && data) {
+                    addResult('Security Test', 'RLS: Public read access working correctly', 'success');
+                } else if (error) {
+                    addResult('Security Test', `RLS Error: ${error.message}`, 'error');
+                }
+
+                // Test tables structure
+                const tables = ['categories', 'products', 'profiles', 'orders', 'cart_items', 'contact_submissions', 'newsletter_subscriptions'];
+                let tablesExist = 0;
+
+                for (const table of tables) {
+                    const { error } = await supabase
+                        .from(table)
+                        .select('count', { count: 'exact', head: true });
+
+                    if (!error) tablesExist++;
+                }
+
+                if (tablesExist === tables.length) {
+                    addResult('Security Test', `All ${tables.length} database tables exist and are accessible`, 'success');
+                } else {
+                    addResult('Security Test', `Only ${tablesExist} of ${tables.length} tables are accessible`, 'warning');
+                }
+
+            } catch (error) {
+                addResult('Security Test', `Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testWebsiteScripts() {
+            addResult('Website Test', 'Checking website deployment...', 'loading');
+
+            try {
+                const websiteURL = 'https://keysight-tech.github.io/fordips-tech/';
+
+                // Test if website is accessible
+                fetch(websiteURL)
+                    .then(response => {
+                        if (response.ok) {
+                            addResult('Website Test', `Website deployed and accessible at:<br><a href="${websiteURL}" target="_blank" style="color: #60a5fa;">${websiteURL}</a>`, 'success');
+                        } else {
+                            addResult('Website Test', `Website returned status: ${response.status}`, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        addResult('Website Test', `Cannot access website: ${error.message}`, 'error');
+                    });
+
+                // Test required files
+                const requiredFiles = [
+                    'index.html',
+                    'supabase-integration.js',
+                    'cart.js',
+                    'forms.js',
+                    'script.js',
+                    'admin.html'
+                ];
+
+                requiredFiles.forEach(file => {
+                    fetch(`${websiteURL}${file}`)
+                        .then(response => {
+                            if (response.ok) {
+                                addResult('Website Test', `✓ ${file} exists`, 'success');
+                            } else {
+                                addResult('Website Test', `✗ ${file} missing (${response.status})`, 'error');
+                            }
+                        });
+                });
+
+            } catch (error) {
+                addResult('Website Test', `Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function runAllTests() {
+            // Reset stats
+            testStats = { total: 0, passed: 0, failed: 0, warnings: 0 };
+            document.getElementById('results').innerHTML = '';
+            updateStats();
+
+            await testSupabaseConnection();
+            await testCategories();
+            await testProducts();
+            await testRLS();
+            await testWebsiteScripts();
+
+            // Final summary
+            setTimeout(() => {
+                const allPassed = testStats.failed === 0;
+                const summaryMessage = allPassed
+                    ? `🎉 All tests passed! (${testStats.passed}/${testStats.total})`
+                    : `⚠️ Some tests failed. Passed: ${testStats.passed}, Failed: ${testStats.failed}, Warnings: ${testStats.warnings}`;
+
+                addResult('Test Summary', summaryMessage, allPassed ? 'success' : 'warning');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
