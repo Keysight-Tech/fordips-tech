@@ -2184,6 +2184,22 @@ a {
 
 .footer-logo .logo-circle {
     border: 2px solid #2CC4C4;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.footer-logo .logo-circle-inner {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.footer-logo .logo-image {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    aspect-ratio: 1 / 1;
 }
 
 .footer-logo .logo-initial {
