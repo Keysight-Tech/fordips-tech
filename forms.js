@@ -21,11 +21,11 @@ document.getElementById('contactForm')?.addEventListener('submit', async functio
     formStatus.className = 'form-status';
     formStatus.style.display = 'block';
 
-    // Submit to Supabase
-    const result = await window.fordipsTech.submitContactForm(formData);
+    // Submit using new contact system with notifications
+    const result = await window.contactSystem.submitContactMessage(formData);
 
     if (result.success) {
-        formStatus.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
+        formStatus.textContent = `Thank you ${formData.name}! Your message has been sent successfully. We'll get back to you soon. Admin notification sent to ${formData.email}.`;
         formStatus.className = 'form-status success';
         this.reset();
     } else {

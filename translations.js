@@ -104,6 +104,14 @@ const translations = {
         // Contact
         contactTitle: 'Get In Touch',
         contactSubtitle: "Have questions? We'd love to hear from you",
+        contactName: 'Full Name',
+        contactEmail: 'Email Address',
+        contactSubject: 'Subject',
+        contactMessage: 'Message',
+        contactSend: 'Send Message',
+        contactSending: 'Sending message...',
+        contactSuccess: 'Thank you! Your message has been sent. Admin has been notified.',
+        contactError: 'Error sending message. Please try again.',
 
         // Footer
         footerRights: '© 2024 FTLLC Privacy Policy. All rights reserved. Designed & developed by Mylestech Solutions.',
@@ -215,6 +223,14 @@ const translations = {
         // Contact
         contactTitle: 'Contactez-nous',
         contactSubtitle: 'Des questions? Nous aimerions vous entendre',
+        contactName: 'Nom complet',
+        contactEmail: 'Adresse email',
+        contactSubject: 'Sujet',
+        contactMessage: 'Message',
+        contactSend: 'Envoyer le message',
+        contactSending: 'Envoi du message...',
+        contactSuccess: 'Merci! Votre message a été envoyé. L\'admin a été notifié.',
+        contactError: 'Erreur lors de l\'envoi. Veuillez réessayer.',
 
         // Footer
         footerRights: '© 2024 FTLLC Politique de confidentialité. Tous droits réservés. Conçu et développé par Mylestech Solutions.',
@@ -326,6 +342,14 @@ const translations = {
         // Contact
         contactTitle: 'Talk To Us',
         contactSubtitle: 'You get question? We dey here',
+        contactName: 'Your Full Name',
+        contactEmail: 'Your Email',
+        contactSubject: 'Wetin You Wan Talk About',
+        contactMessage: 'Your Message',
+        contactSend: 'Send Message',
+        contactSending: 'We dey send am...',
+        contactSuccess: 'Thank you! We don receive your message. Admin don know.',
+        contactError: 'E no send. Please try again.',
 
         // Footer
         footerRights: '© 2024 FTLLC Privacy Policy. All rights reserved. Mylestech Solutions design and develop am.',
