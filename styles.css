@@ -3575,21 +3575,8 @@ a {
         z-index: 10102;
     }
 
-    /* Cart button mobile styling */
-    .cart-button {
-        background: var(--primary);
-        color: var(--white);
-        padding: 0.75rem 1.25rem;
-        border-radius: var(--radius-md);
-        margin: 1rem 0;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .cart-count {
-        background: var(--white);
-        color: var(--primary);
-    }
+    /* Cart button mobile styling - removed conflicting styles */
+    /* Floating cart button is now handled in mobile-optimizations.css */
 
     .hero-grid {
         grid-template-columns: 1fr;

@@ -275,15 +275,87 @@
         background: linear-gradient(90deg, rgba(44, 169, 161, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
     }
 
+    /* Floating Cart Button - Always Visible on Mobile */
     .cart-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-        z-index: 999;
+        position: fixed !important;
+        bottom: 24px !important;
+        right: 24px !important;
+        width: 64px !important;
+        height: 64px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%) !important;
+        box-shadow:
+            0 8px 28px rgba(44, 169, 161, 0.5),
+            0 4px 12px rgba(0, 0, 0, 0.25),
+            0 0 0 0 rgba(44, 169, 161, 0.7) !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: 3px solid rgba(255, 255, 255, 0.3) !important;
+        animation: cartPulse 2s ease-in-out infinite !important;
+        cursor: pointer;
+    }
+
+    @keyframes cartPulse {
+        0%, 100% {
+            box-shadow:
+                0 8px 28px rgba(44, 169, 161, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.25),
+                0 0 0 0 rgba(44, 169, 161, 0.7);
+        }
+        50% {
+            box-shadow:
+                0 8px 28px rgba(44, 169, 161, 0.6),
+                0 4px 12px rgba(0, 0, 0, 0.3),
+                0 0 0 10px rgba(44, 169, 161, 0);
+        }
+    }
+
+    .cart-button:active {
+        transform: scale(0.95) !important;
+    }
+
+    .cart-button svg {
+        width: 28px !important;
+        height: 28px !important;
+        color: white !important;
+        stroke-width: 2.5 !important;
+    }
+
+    .cart-count {
+        position: absolute !important;
+        top: -8px !important;
+        right: -8px !important;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+        color: white !important;
+        font-size: 0.8rem !important;
+        font-weight: 800 !important;
+        min-width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 2px solid white !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+}
+
+/* Smaller screens - adjust position to avoid blocking content */
+@media (max-width: 480px) {
+    .cart-button {
+        bottom: 20px !important;
+        right: 16px !important;
+        width: 58px !important;
+        height: 58px !important;
+    }
+
+    .cart-button svg {
+        width: 26px !important;
+        height: 26px !important;
     }
 }
 
