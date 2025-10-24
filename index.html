@@ -72,6 +72,8 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="category-products-styles.css">
+    <link rel="stylesheet" href="compact-layout-overrides.css">
     <link rel="stylesheet" href="enhanced-product-styles.css">
     <link rel="stylesheet" href="enhanced-checkout-styles.css">
     <link rel="stylesheet" href="currency-styles.css">
@@ -360,6 +362,26 @@
         </div>
     </section>
 
+    <!-- Global Search Bar -->
+    <section class="global-search-section">
+        <div class="container">
+            <div class="global-search-wrapper">
+                <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input
+                    type="text"
+                    id="globalSearchInput"
+                    class="global-search-input"
+                    placeholder="Search for products, categories, or brands..."
+                    autocomplete="off"
+                >
+                <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Categories -->
     <section class="categories" id="categories">
         <div class="container">
@@ -405,27 +427,131 @@
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Products Section - Category Based -->
     <section class="products" id="products">
         <div class="container">
             <div class="section-header scale-in">
                 <h2 class="section-title" data-i18n="productsTitle">Featured Products</h2>
-                <p class="section-subtitle" data-i18n="productsSubtitle">Handpicked for you</p>
+                <p class="section-subtitle" data-i18n="productsSubtitle">Explore by category</p>
             </div>
 
-            <div class="product-filters">
-                <button class="filter-btn active" data-filter="all">All Products</button>
-                <button class="filter-btn" data-filter="iphone">iPhones</button>
-                <button class="filter-btn" data-filter="samsung">Samsung</button>
-                <button class="filter-btn" data-filter="laptop">Laptops</button>
-                <button class="filter-btn" data-filter="desktop">Desktops</button>
-                <button class="filter-btn" data-filter="tablet">Tablets</button>
-                <button class="filter-btn" data-filter="smartwatch">Smartwatches</button>
-                <button class="filter-btn" data-filter="starlink">Starlink</button>
+            <!-- iPhones Category -->
+            <div class="category-section" id="category-iphone">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">iPhones</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="iphone">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="iphone">
+                    <span>View More iPhones</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
             </div>
 
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be dynamically loaded -->
+            <!-- Samsung Category -->
+            <div class="category-section" id="category-samsung">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Samsung Galaxy</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="samsung">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="samsung">
+                    <span>View More Samsung</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Laptops Category -->
+            <div class="category-section" id="category-laptop">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Laptops</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="laptop">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="laptop">
+                    <span>View More Laptops</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Desktops Category -->
+            <div class="category-section" id="category-desktop">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Desktops</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="desktop">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="desktop">
+                    <span>View More Desktops</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Tablets Category -->
+            <div class="category-section" id="category-tablet">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Tablets</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="tablet">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="tablet">
+                    <span>View More Tablets</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Smartwatches Category -->
+            <div class="category-section" id="category-smartwatch">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Smartwatches</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="smartwatch">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="smartwatch">
+                    <span>View More Smartwatches</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Starlink Category -->
+            <div class="category-section" id="category-starlink">
+                <div class="category-section-header">
+                    <h3 class="category-section-title">Starlink Internet</h3>
+                    <span class="category-item-count"></span>
+                </div>
+                <div class="products-grid" data-category="starlink">
+                    <!-- Products loaded dynamically -->
+                </div>
+                <button class="btn-view-more" data-category="starlink">
+                    <span>View More Starlink</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
@@ -945,6 +1071,7 @@
     <!-- Application Scripts -->
     <script src="translations.js"></script>
     <script src="products.js"></script>
+    <script src="category-products.js"></script>
     <script src="supabase-integration.js"></script>
     <script src="contact-system.js"></script>
     <script src="order-tracking-system.js"></script>

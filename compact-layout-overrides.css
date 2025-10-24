@@ -1,0 +1,331 @@
+/**
+ * FORDIPS TECH - Compact Layout Overrides
+ * Makes the site more compact with better spacing
+ */
+
+/* ===== HERO SECTION COMPACT ===== */
+.cinematic-hero {
+    min-height: 70vh;
+    height: auto;
+    padding: 4rem 0 3rem;
+}
+
+.cinematic-grid-new {
+    gap: 2rem;
+}
+
+.cinematic-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cinematic-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.device-carousel {
+    max-height: 400px;
+}
+
+.device-3d-large {
+    max-width: 350px;
+    max-height: 350px;
+}
+
+.device-info h3 {
+    font-size: 1.3rem;
+}
+
+.device-info p {
+    font-size: 0.95rem;
+}
+
+.scroll-down-cinematic {
+    bottom: 1.5rem;
+}
+
+/* ===== COMPACT CATEGORIES SECTION ===== */
+.categories {
+    padding: 3rem 0 2rem;
+}
+
+.categories-grid {
+    gap: 1.5rem;
+}
+
+.category-card {
+    padding: 1.5rem;
+}
+
+.category-image {
+    height: 200px;
+}
+
+.category-card h3 {
+    font-size: 1.3rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.category-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* ===== COMPACT PRODUCTS SECTION ===== */
+.products {
+    padding: 2rem 0 3rem;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+}
+
+/* ===== COMPACT LOCATIONS SECTION ===== */
+.locations {
+    padding: 3rem 0;
+}
+
+.locations-grid {
+    gap: 1.5rem;
+}
+
+.location-card {
+    padding: 2rem;
+}
+
+/* ===== COMPACT CONTACT SECTION ===== */
+.contact-section {
+    padding: 3rem 0;
+}
+
+.contact-grid {
+    gap: 2rem;
+}
+
+/* ===== COMPACT NEWSLETTER ===== */
+.newsletter-section {
+    padding: 2.5rem 0;
+}
+
+/* ===== COMPACT FOOTER ===== */
+.footer {
+    padding: 3rem 0 1.5rem;
+}
+
+/* ===== TABLET ADJUSTMENTS ===== */
+@media (max-width: 992px) {
+    .cinematic-hero {
+        min-height: 60vh;
+        padding: 3rem 0 2rem;
+    }
+
+    .cinematic-title {
+        font-size: 2rem;
+    }
+
+    .cinematic-subtitle {
+        font-size: 1rem;
+    }
+
+    .device-3d-large {
+        max-width: 280px;
+        max-height: 280px;
+    }
+
+    .categories {
+        padding: 2.5rem 0 1.5rem;
+    }
+
+    .products {
+        padding: 1.5rem 0 2.5rem;
+    }
+
+    .category-image {
+        height: 160px;
+    }
+}
+
+/* ===== MOBILE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+    .cinematic-hero {
+        min-height: 50vh;
+        padding: 2rem 0 1.5rem;
+    }
+
+    .cinematic-title {
+        font-size: 1.7rem;
+    }
+
+    .cinematic-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .device-3d-large {
+        max-width: 240px;
+        max-height: 240px;
+    }
+
+    .device-carousel {
+        max-height: 320px;
+    }
+
+    .categories {
+        padding: 2rem 0 1rem;
+    }
+
+    .products {
+        padding: 1rem 0 2rem;
+    }
+
+    .locations {
+        padding: 2rem 0;
+    }
+
+    .contact-section {
+        padding: 2rem 0;
+    }
+
+    .newsletter-section {
+        padding: 2rem 0;
+    }
+
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+
+    .category-image {
+        height: 180px;
+    }
+
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ===== EXTRA SMALL MOBILE ===== */
+@media (max-width: 576px) {
+    .cinematic-hero {
+        min-height: 45vh;
+        padding: 1.5rem 0 1rem;
+    }
+
+    .cinematic-title {
+        font-size: 1.5rem;
+    }
+
+    .cinematic-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .device-3d-large {
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .device-carousel {
+        max-height: 280px;
+    }
+
+    .device-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .device-info p {
+        font-size: 0.85rem;
+    }
+
+    .btn-cinematic {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== NAVBAR ADJUSTMENTS ===== */
+.navbar {
+    padding: 0.8rem 0;
+}
+
+.logo-text {
+    font-size: 1.1rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.6rem 0;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+}
+
+/* ===== SMOOTH SCROLL LENGTH ===== */
+html {
+    scroll-padding-top: 80px;
+}
+
+/* Ensure smooth transitions between sections */
+section {
+    scroll-margin-top: 80px;
+}
+
+/* ===== IMPROVE VISUAL HIERARCHY ===== */
+.container {
+    max-width: 1200px;
+    padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* ===== REDUCE EXCESSIVE WHITESPACE ===== */
+.cinematic-particles {
+    opacity: 0.5;
+}
+
+.hero-dark-gradient {
+    opacity: 0.7;
+}
+
+/* Make carousel dots smaller */
+.carousel-dots {
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+}
+
+.dot.active {
+    width: 24px;
+}
+
+/* ===== BALANCE BETWEEN HEADER AND FOOTER ===== */
+.footer-content {
+    gap: 2rem;
+}
+
+.footer-column {
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        gap: 1.5rem;
+    }
+
+    .footer-column {
+        min-width: 150px;
+    }
+}
