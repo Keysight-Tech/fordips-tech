@@ -24,12 +24,14 @@ const mobileDrawerSearchInput = document.getElementById('mobileDrawerSearchInput
 function openMobileDrawer() {
     navMenu.classList.add('active');
     if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add('active');
+    if (mobileMenuToggle) mobileMenuToggle.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeMobileDrawer() {
     navMenu.classList.remove('active');
     if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove('active');
+    if (mobileMenuToggle) mobileMenuToggle.classList.remove('active');
     document.body.style.overflow = '';
     // Clear search input when closing
     if (mobileDrawerSearchInput) mobileDrawerSearchInput.value = '';
@@ -53,11 +55,53 @@ if (mobileDrawerOverlay) {
 }
 
 // Close drawer on navigation link click
-document.querySelectorAll('.nav-link').forEach(link => {
+document.querySelectorAll('.nav-link, .mobile-quick-link').forEach(link => {
     link.addEventListener('click', () => {
         closeMobileDrawer();
     });
 });
+
+// Active Link Highlighting based on scroll position
+function updateActiveLink() {
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const quickLinks = document.querySelectorAll('.mobile-quick-link');
+
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (window.pageYOffset >= sectionTop - 200) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    // Update nav links
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
+
+    // Update quick links
+    quickLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Listen for scroll events to update active link
+window.addEventListener('scroll', updateActiveLink);
+
+// Update on page load
+document.addEventListener('DOMContentLoaded', updateActiveLink);
 
 // Mobile Drawer Search Functionality
 if (mobileDrawerSearchInput) {

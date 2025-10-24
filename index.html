@@ -89,7 +89,7 @@
     <link rel="stylesheet" href="support-styles.css">
     <link rel="stylesheet" href="testimonials-about-styles.css">
     <link rel="stylesheet" href="mobile-optimizations.css">
-    <link rel="stylesheet" href="hamburger-dropdown.css">
+    <link rel="stylesheet" href="hamburger-drawer.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- Load Configuration FIRST (before any other scripts) -->
@@ -187,6 +187,15 @@
                 <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
 
                 <ul class="nav-menu" id="navMenu">
+                    <!-- Mobile Drawer Close Button -->
+                    <div class="mobile-drawer-close" onclick="closeMobileDrawer()">
+                        <h3>Menu</h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </div>
+
                     <!-- Quick Links in Mobile Drawer -->
                     <div class="mobile-drawer-quick-links" style="display: block !important; width: 100%; padding: 1.5rem 1rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 2px solid #e2e8f0;">
                         <h4 class="mobile-drawer-section-title" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-bottom: 1rem;">Quick Links</h4>
