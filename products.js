@@ -46,7 +46,7 @@ const products = [
         name: 'iPhone SE',
         category: 'iphone',
         price: 429,
-        image: 'https://images.unsplash.com/photo-1592286927505-24b683486e36?w=800&q=80',
+        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/SE.jpg',
         badge: 'VALUE',
         description: 'Compact powerhouse, A15 Bionic'
     },
