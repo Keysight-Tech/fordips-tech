@@ -15,14 +15,16 @@ const categoryState = {
     desktop: { expanded: false, currentCount: ITEMS_PER_CATEGORY },
     tablet: { expanded: false, currentCount: ITEMS_PER_CATEGORY },
     smartwatch: { expanded: false, currentCount: ITEMS_PER_CATEGORY },
-    starlink: { expanded: false, currentCount: ITEMS_PER_CATEGORY }
+    starlink: { expanded: false, currentCount: ITEMS_PER_CATEGORY },
+    camera: { expanded: false, currentCount: ITEMS_PER_CATEGORY },
+    accessory: { expanded: false, currentCount: ITEMS_PER_CATEGORY }
 };
 
 /**
  * Initialize category-based product display
  */
 function initializeCategoryProducts() {
-    const categories = ['iphone', 'samsung', 'laptop', 'desktop', 'tablet', 'smartwatch', 'starlink'];
+    const categories = ['iphone', 'samsung', 'laptop', 'desktop', 'tablet', 'smartwatch', 'starlink', 'camera', 'accessory'];
 
     categories.forEach(category => {
         renderCategoryProducts(category);
@@ -270,7 +272,9 @@ function getCategoryDisplayName(category) {
         desktop: 'Desktops',
         tablet: 'Tablets',
         smartwatch: 'Smartwatches',
-        starlink: 'Starlink'
+        starlink: 'Starlink',
+        camera: 'Cameras',
+        accessory: 'Accessories'
     };
     return names[category] || category;
 }

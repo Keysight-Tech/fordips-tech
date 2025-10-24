@@ -385,6 +385,235 @@ const products = [
         image: 'https://images.unsplash.com/photo-1621905252472-119e265d1b12?w=800&q=80',
         badge: null,
         description: 'Professional mounting solution'
+    },
+
+    // ===== CAMERAS =====
+    {
+        id: 80,
+        name: 'Canon EOS R5',
+        category: 'camera',
+        price: 3899,
+        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg',
+        badge: 'PRO',
+        description: 'Professional mirrorless camera, 45MP'
+    },
+    {
+        id: 81,
+        name: 'Canon EOS R6 Mark II',
+        category: 'camera',
+        price: 2499,
+        image: 'https://images.unsplash.com/photo-1606988227002-a2c4e9b0c4c8?w=800&q=80',
+        badge: 'NEW',
+        description: 'Full-frame mirrorless, 24.2MP'
+    },
+    {
+        id: 82,
+        name: 'Sony Alpha A7 IV',
+        category: 'camera',
+        price: 2498,
+        image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800&q=80',
+        badge: 'POPULAR',
+        description: 'Versatile hybrid camera, 33MP'
+    },
+    {
+        id: 83,
+        name: 'Nikon Z9',
+        category: 'camera',
+        price: 5496,
+        image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80',
+        badge: 'FLAGSHIP',
+        description: 'Professional flagship, 45.7MP'
+    },
+    {
+        id: 84,
+        name: 'Sony ZV-E10',
+        category: 'camera',
+        price: 698,
+        image: 'https://images.unsplash.com/photo-1606800052052-f3b2c36dd8b3?w=800&q=80',
+        badge: 'VLOG',
+        description: 'Perfect for content creators'
+    },
+    {
+        id: 85,
+        name: 'Canon PowerShot G7 X Mark III',
+        category: 'camera',
+        price: 749,
+        image: 'https://images.unsplash.com/photo-1606800052175-e46c1ca5d7d3?w=800&q=80',
+        badge: null,
+        description: 'Compact camera for vlogging'
+    },
+    {
+        id: 86,
+        name: 'GoPro HERO12 Black',
+        category: 'camera',
+        price: 399,
+        image: 'https://images.unsplash.com/photo-1519395612667-e4d8c01f07de?w=800&q=80',
+        badge: 'ACTION',
+        description: 'Ultimate action camera, 5.3K video'
+    },
+    {
+        id: 87,
+        name: 'DJI Osmo Action 4',
+        category: 'camera',
+        price: 299,
+        image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80',
+        badge: null,
+        description: 'Action cam with superior stabilization'
+    },
+    {
+        id: 88,
+        name: 'Fujifilm X-T5',
+        category: 'camera',
+        price: 1699,
+        image: 'https://images.unsplash.com/photo-1606800052052-f3b2c36dd8b3?w=800&q=80',
+        badge: null,
+        description: 'Retro design, modern performance'
+    },
+
+    // ===== ACCESSORIES =====
+    {
+        id: 90,
+        name: 'Apple AirPods Pro (2nd Gen)',
+        category: 'accessory',
+        price: 249,
+        image: 'https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=800&q=80',
+        badge: 'POPULAR',
+        description: 'Active noise cancellation, spatial audio'
+    },
+    {
+        id: 91,
+        name: 'Apple AirPods Max',
+        category: 'accessory',
+        price: 549,
+        image: 'https://images.unsplash.com/photo-1625738656808-3c0b4b155163?w=800&q=80',
+        badge: 'PREMIUM',
+        description: 'Over-ear headphones with premium sound'
+    },
+    {
+        id: 92,
+        name: 'AirPods (3rd Generation)',
+        category: 'accessory',
+        price: 169,
+        image: 'https://images.unsplash.com/photo-1606400082777-ef05f3c5cde9?w=800&q=80',
+        badge: null,
+        description: 'Spatial audio, sweat resistant'
+    },
+    {
+        id: 93,
+        name: 'Samsung Galaxy Buds2 Pro',
+        category: 'accessory',
+        price: 229,
+        image: 'https://images.unsplash.com/photo-1590658165737-15a047b7a0c5?w=800&q=80',
+        badge: null,
+        description: 'Intelligent ANC, 360 audio'
+    },
+    {
+        id: 94,
+        name: 'Apple 20W USB-C Power Adapter',
+        category: 'accessory',
+        price: 19,
+        image: 'https://images.unsplash.com/photo-1591290619762-c588f5ad3e75?w=800&q=80',
+        badge: null,
+        description: 'Fast charging for iPhone and iPad'
+    },
+    {
+        id: 95,
+        name: 'Apple 35W Dual USB-C Charger',
+        category: 'accessory',
+        price: 59,
+        image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80',
+        badge: null,
+        description: 'Charge two devices simultaneously'
+    },
+    {
+        id: 96,
+        name: 'Anker 737 Power Bank (PowerCore 24K)',
+        category: 'accessory',
+        price: 149,
+        image: 'https://images.unsplash.com/photo-1609091839311-d7f4e0f15f3b?w=800&q=80',
+        badge: 'POWERFUL',
+        description: '24,000mAh portable charger'
+    },
+    {
+        id: 97,
+        name: 'Apple MagSafe Charger',
+        category: 'accessory',
+        price: 39,
+        image: 'https://images.unsplash.com/photo-1621768216002-5ac171876625?w=800&q=80',
+        badge: null,
+        description: 'Wireless charging for iPhone'
+    },
+    {
+        id: 98,
+        name: 'Belkin 3-in-1 Wireless Charger',
+        category: 'accessory',
+        price: 149,
+        image: 'https://images.unsplash.com/photo-1591290619762-c588f5ad3e75?w=800&q=80',
+        badge: null,
+        description: 'Charge iPhone, Watch, AirPods together'
+    },
+    {
+        id: 99,
+        name: 'USB-C to Lightning Cable (1m)',
+        category: 'accessory',
+        price: 19,
+        image: 'https://images.unsplash.com/photo-1625948692630-0ff155a933ee?w=800&q=80',
+        badge: null,
+        description: 'Fast charging and data sync'
+    },
+    {
+        id: 100,
+        name: 'Apple EarPods with Lightning',
+        category: 'accessory',
+        price: 19,
+        image: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80',
+        badge: null,
+        description: 'Wired earphones with remote'
+    },
+    {
+        id: 101,
+        name: 'Beats Studio Buds',
+        category: 'accessory',
+        price: 149,
+        image: 'https://images.unsplash.com/photo-1606220588913-b3afc51f4069?w=800&q=80',
+        badge: null,
+        description: 'True wireless noise cancelling'
+    },
+    {
+        id: 102,
+        name: 'Anker PowerLine III USB-C Cable',
+        category: 'accessory',
+        price: 15,
+        image: 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=800&q=80',
+        badge: 'DURABLE',
+        description: 'Ultra-durable 6ft charging cable'
+    },
+    {
+        id: 103,
+        name: 'Apple Pencil (2nd Generation)',
+        category: 'accessory',
+        price: 129,
+        image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
+        badge: null,
+        description: 'Precision stylus for iPad Pro'
+    },
+    {
+        id: 104,
+        name: 'Magic Keyboard for iPad Pro',
+        category: 'accessory',
+        price: 349,
+        image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&q=80',
+        badge: null,
+        description: 'Backlit keyboard with trackpad'
+    },
+    {
+        id: 105,
+        name: 'Samsung 45W Super Fast Charger',
+        category: 'accessory',
+        price: 49,
+        image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80',
+        badge: null,
+        description: 'Ultra-fast charging for Galaxy devices'
     }
 ];
 
