@@ -201,11 +201,26 @@ function loadCategoryProducts(category, container) {
  * Create product card HTML
  */
 function createProductCard(product) {
+    const isFav = typeof isFavorited === 'function' ? isFavorited(product.id) : false;
+
     return `
         <div class="product-card" data-product-id="${product.id}">
             <div class="product-image">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                <button class="product-favorite-btn ${isFav ? 'favorited' : ''}"
+                        data-product-id="${product.id}"
+                        data-product-name="${product.name}"
+                        data-product-price="${product.price}"
+                        data-product-image="${product.image}"
+                        data-product-category="${product.category}"
+                        data-product-description="${product.description || ''}"
+                        onclick="handleFavoriteClick(${product.id}, this)"
+                        aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="${isFav ? '#2CA9A1' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
             </div>
             <div class="product-content">
                 <div class="product-category">${product.category}</div>
@@ -226,6 +241,45 @@ function createProductCard(product) {
             </div>
         </div>
     `;
+}
+
+/**
+ * Handle favorite button click
+ */
+async function handleFavoriteClick(productId, button) {
+    if (typeof toggleFavorite !== 'function') {
+        return;
+    }
+
+    const productData = {
+        id: productId,
+        name: button.dataset.productName,
+        price: parseFloat(button.dataset.productPrice),
+        image: button.dataset.productImage,
+        category: button.dataset.productCategory,
+        description: button.dataset.productDescription
+    };
+
+    await toggleFavorite(productId, productData);
+
+    // Update button state
+    const isFav = typeof isFavorited === 'function' ? isFavorited(productId) : false;
+    const svg = button.querySelector('svg');
+
+    if (isFav) {
+        button.classList.add('favorited');
+        svg.setAttribute('fill', '#2CA9A1');
+        button.setAttribute('aria-label', 'Remove from favorites');
+    } else {
+        button.classList.remove('favorited');
+        svg.setAttribute('fill', 'none');
+        button.setAttribute('aria-label', 'Add to favorites');
+    }
+
+    // Update favorites count in header
+    if (typeof updateFavoritesCount === 'function') {
+        updateFavoritesCount();
+    }
 }
 
 /**
