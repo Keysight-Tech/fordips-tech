@@ -4,7 +4,7 @@
  */
 
 // Admin email for notifications (configure this)
-const ADMIN_EMAIL = 'support@fordipstech.com';
+const ADMIN_EMAIL = 'brineketum@gmail.com';
 
 // Enhanced checkout form submission
 function initializeEnhancedCheckout() {
