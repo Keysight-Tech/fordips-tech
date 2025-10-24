@@ -203,6 +203,9 @@
                 <div class="form-group">
                     <label for="productImage">Image URL *</label>
                     <input type="url" id="productImage" name="productImage" required>
+                    <div id="imagePreviewContainer" class="image-preview-container">
+                        <img id="imagePreview" class="image-preview" alt="Product preview">
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -261,7 +264,8 @@
     <script src="utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-integration.js"></script>
-    <script src="admin.js"></script>
-    <script src="ai-admin-chat.js"></script>
+    <script src="admin-notifications.js" defer></script>
+    <script src="admin.js" defer></script>
+    <script src="ai-admin-chat.js" defer></script>
 </body>
 </html>

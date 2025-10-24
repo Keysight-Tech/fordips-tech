@@ -25,20 +25,29 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Setup product form handler
     document.getElementById('productForm').addEventListener('submit', handleProductSubmit);
+
+    // Setup image preview
+    setupImagePreview();
+
+    // Start notification polling
+    startNotificationPolling();
+
+    // Request notification permission
+    requestNotificationPermission();
 });
 
 // ===================================
 // AUTHENTICATION
 // ===================================
 async function checkAdminAccess() {
-    showLoading();
+    showLoadingSpinner('Checking admin access...');
 
     try {
         currentUser = await window.fordipsTech.getCurrentUser();
 
         if (!currentUser) {
-            alert('Please log in to access the admin panel');
-            window.location.href = 'index.html';
+            showNotification('Please log in to access the admin panel', 'warning');
+            setTimeout(() => window.location.href = 'index.html', 2000);
             return;
         }
 
@@ -46,8 +55,8 @@ async function checkAdminAccess() {
         const isAdmin = await window.fordipsTech.isAdmin();
 
         if (!isAdmin) {
-            alert('You do not have admin privileges');
-            window.location.href = 'index.html';
+            showNotification('You do not have admin privileges', 'error');
+            setTimeout(() => window.location.href = 'index.html', 2000);
             return;
         }
 
@@ -56,15 +65,23 @@ async function checkAdminAccess() {
         document.getElementById('adminUserName').textContent = userName;
 
     } catch (error) {
-        alert('Error checking admin access');
-        window.location.href = 'index.html';
+        showNotification('Error checking admin access', 'error');
+        setTimeout(() => window.location.href = 'index.html', 2000);
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
 async function handleLogout() {
-    if (confirm('Are you sure you want to log out?')) {
+    const confirmed = await showConfirmDialog(
+        'Confirm Logout',
+        'Are you sure you want to log out of the admin panel?',
+        'Log Out',
+        'warning'
+    );
+
+    if (confirmed) {
+        showLoadingSpinner('Logging out...');
         await window.fordipsTech.signOut();
         window.location.href = 'index.html';
     }
@@ -114,7 +131,7 @@ function showTab(tabName) {
 // DASHBOARD
 // ===================================
 async function loadDashboard() {
-    showLoading();
+    showLoadingSpinner('Loading dashboard...');
 
     try {
         // Load all data
@@ -135,10 +152,16 @@ async function loadDashboard() {
         const recentOrders = allOrders.slice(0, 5);
         displayRecentOrders(recentOrders);
 
+        // Update notification badges
+        const newContacts = allContacts.filter(c => c.status === 'new' || !c.status);
+        if (newContacts.length > 0) {
+            updateNotificationBadge(newContacts.length, 'contacts');
+        }
+
     } catch (error) {
-        alert('Error loading dashboard data');
+        showNotification('Error loading dashboard data', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -182,15 +205,15 @@ function displayRecentOrders(orders) {
 // PRODUCTS MANAGEMENT
 // ===================================
 async function loadProducts() {
-    showLoading();
+    showLoadingSpinner('Loading products...');
 
     try {
         allProducts = await window.fordipsTech.loadProducts();
         displayProducts(allProducts);
     } catch (error) {
-        alert('Error loading products');
+        showNotification('Error loading products', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -301,29 +324,44 @@ async function editProduct(productId) {
     document.getElementById('productStock').value = product.stock_quantity;
     document.getElementById('productActive').checked = product.is_active;
 
+    // Show image preview
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    const previewImage = document.getElementById('imagePreview');
+    if (previewContainer && previewImage && product.image_url) {
+        previewImage.src = product.image_url;
+        previewContainer.classList.add('visible');
+    }
+
     document.getElementById('productModal').classList.add('active');
 }
 
 async function deleteProduct(productId, productName) {
-    if (!confirm(`Are you sure you want to delete "${productName}"?`)) {
+    const confirmed = await showConfirmDialog(
+        'Delete Product',
+        `Are you sure you want to delete "${productName}"? This action cannot be undone.`,
+        'Delete Product',
+        'danger'
+    );
+
+    if (!confirmed) {
         return;
     }
 
-    showLoading();
+    showLoadingSpinner('Deleting product...');
 
     try {
         const result = await window.fordipsTech.deleteProduct(productId);
 
         if (result.success) {
-            alert('Product deleted successfully!');
+            showNotification('Product deleted successfully!', 'success');
             await loadProducts();
         } else {
-            alert('Error deleting product: ' + (result.error || 'Unknown error'));
+            showNotification('Error deleting product: ' + (result.error || 'Unknown error'), 'error');
         }
     } catch (error) {
-        alert('Error deleting product');
+        showNotification('Error deleting product', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -341,11 +379,13 @@ async function handleProductSubmit(e) {
         is_active: document.getElementById('productActive').checked
     };
 
-    showLoading();
+    const productId = document.getElementById('productId').value;
+    const actionText = productId ? 'Updating product...' : 'Adding product...';
+
+    showLoadingSpinner(actionText);
 
     try {
         let result;
-        const productId = document.getElementById('productId').value;
 
         if (productId) {
             // Update existing product
@@ -356,22 +396,40 @@ async function handleProductSubmit(e) {
         }
 
         if (result.success) {
-            alert(productId ? 'Product updated successfully!' : 'Product added successfully!');
+            const successMessage = productId ? 'Product updated successfully!' : 'Product added successfully!';
+            showNotification(successMessage, 'success');
             closeProductModal();
             await loadProducts();
         } else {
-            alert('Error saving product: ' + (result.error || 'Unknown error'));
+            showNotification('Error saving product: ' + (result.error || 'Unknown error'), 'error');
         }
     } catch (error) {
-        alert('Error saving product');
+        showNotification('Error saving product', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
 function closeProductModal() {
     document.getElementById('productModal').classList.remove('active');
     document.getElementById('productForm').reset();
+
+    // Clear image preview
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    if (previewContainer) {
+        previewContainer.classList.remove('visible');
+    }
+
+    // Clear validation states
+    const formGroups = document.querySelectorAll('#productForm .form-group');
+    formGroups.forEach(group => {
+        group.classList.remove('error', 'success');
+        const errorEl = group.querySelector('.form-validation-error');
+        if (errorEl) {
+            errorEl.textContent = '';
+        }
+    });
+
     currentEditingProduct = null;
 }
 
@@ -379,15 +437,15 @@ function closeProductModal() {
 // ORDERS MANAGEMENT
 // ===================================
 async function loadOrders() {
-    showLoading();
+    showLoadingSpinner('Loading orders...');
 
     try {
         allOrders = await window.fordipsTech.getAllOrders();
         displayOrders(allOrders);
     } catch (error) {
-        alert('Error loading orders');
+        showNotification('Error loading orders', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -476,7 +534,7 @@ function searchOrders() {
 }
 
 async function updateOrderStatus(orderId, newStatus) {
-    showLoading();
+    showLoadingSpinner('Updating order status...');
 
     try {
         const result = await window.fordipsTech.updateOrderStatus(orderId, newStatus);
@@ -487,21 +545,21 @@ async function updateOrderStatus(orderId, newStatus) {
             if (order) {
                 order.status = newStatus;
             }
-            alert('Order status updated successfully!');
+            showNotification('Order status updated successfully!', 'success');
         } else {
-            alert('Error updating order status');
+            showNotification('Error updating order status', 'error');
             await loadOrders(); // Reload to reset
         }
     } catch (error) {
-        alert('Error updating order status');
+        showNotification('Error updating order status', 'error');
         await loadOrders();
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
 async function viewOrderDetails(orderId) {
-    showLoading();
+    showLoadingSpinner('Loading order details...');
 
     try {
         const orderItems = await window.fordipsTech.getOrderItems(orderId);
@@ -555,9 +613,9 @@ async function viewOrderDetails(orderId) {
         document.getElementById('orderModal').classList.add('active');
 
     } catch (error) {
-        alert('Error loading order details');
+        showNotification('Error loading order details', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -569,15 +627,19 @@ function closeOrderModal() {
 // CONTACT SUBMISSIONS
 // ===================================
 async function loadContacts() {
-    showLoading();
+    showLoadingSpinner('Loading contact submissions...');
 
     try {
         allContacts = await window.fordipsTech.getAllContactSubmissions();
         displayContacts(allContacts);
+
+        // Update notification badge
+        const newContacts = allContacts.filter(c => c.status === 'new' || !c.status);
+        updateNotificationBadge(newContacts.length, 'contacts');
     } catch (error) {
-        alert('Error loading contact submissions');
+        showNotification('Error loading contact submissions', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -647,7 +709,7 @@ function filterContacts() {
 }
 
 async function updateContactStatus(contactId, newStatus) {
-    showLoading();
+    showLoadingSpinner('Updating contact status...');
 
     try {
         const result = await window.fordipsTech.updateContactStatus(contactId, newStatus);
@@ -657,16 +719,20 @@ async function updateContactStatus(contactId, newStatus) {
             if (contact) {
                 contact.status = newStatus;
             }
-            alert('Contact status updated!');
+            showNotification('Contact status updated!', 'success');
+
+            // Update notification badge
+            const newContacts = allContacts.filter(c => c.status === 'new' || !c.status);
+            updateNotificationBadge(newContacts.length, 'contacts');
         } else {
-            alert('Error updating contact status');
+            showNotification('Error updating contact status', 'error');
             await loadContacts();
         }
     } catch (error) {
-        alert('Error updating contact status');
+        showNotification('Error updating contact status', 'error');
         await loadContacts();
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -674,15 +740,15 @@ async function updateContactStatus(contactId, newStatus) {
 // NEWSLETTER SUBSCRIBERS
 // ===================================
 async function loadNewsletter() {
-    showLoading();
+    showLoadingSpinner('Loading newsletter subscribers...');
 
     try {
         allSubscribers = await window.fordipsTech.getAllNewsletterSubscribers();
         displayNewsletter(allSubscribers);
     } catch (error) {
-        alert('Error loading newsletter subscribers');
+        showNotification('Error loading newsletter subscribers', 'error');
     } finally {
-        hideLoading();
+        hideLoadingSpinner();
     }
 }
 
@@ -726,39 +792,155 @@ function displayNewsletter(subscribers) {
 
 function exportSubscribers() {
     if (allSubscribers.length === 0) {
-        alert('No subscribers to export');
+        showNotification('No subscribers to export', 'warning');
         return;
     }
 
-    // Create CSV content
-    const csv = [
-        ['Email', 'Status', 'Subscribed Date'],
-        ...allSubscribers.map(sub => [
-            sub.email,
-            sub.is_active ? 'Active' : 'Inactive',
-            new Date(sub.created_at).toLocaleString()
-        ])
-    ].map(row => row.join(',')).join('\n');
+    try {
+        // Create CSV content
+        const csv = [
+            ['Email', 'Status', 'Subscribed Date'],
+            ...allSubscribers.map(sub => [
+                sub.email,
+                sub.is_active ? 'Active' : 'Inactive',
+                new Date(sub.created_at).toLocaleString()
+            ])
+        ].map(row => row.join(',')).join('\n');
 
-    // Download CSV
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `newsletter-subscribers-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+        // Download CSV
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `newsletter-subscribers-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        showNotification(`Successfully exported ${allSubscribers.length} subscribers`, 'success');
+    } catch (error) {
+        showNotification('Error exporting subscribers', 'error');
+    }
 }
 
 // ===================================
 // UTILITY FUNCTIONS
 // ===================================
-function showLoading() {
-    document.getElementById('loadingOverlay').classList.add('active');
+
+/**
+ * Setup image preview for product form
+ */
+function setupImagePreview() {
+    const imageInput = document.getElementById('productImage');
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    const previewImage = document.getElementById('imagePreview');
+
+    if (!imageInput || !previewContainer || !previewImage) return;
+
+    imageInput.addEventListener('input', function() {
+        const imageUrl = this.value.trim();
+
+        if (imageUrl) {
+            previewImage.src = imageUrl;
+            previewContainer.classList.add('visible');
+
+            // Handle image load errors
+            previewImage.onerror = function() {
+                previewContainer.classList.remove('visible');
+            };
+        } else {
+            previewContainer.classList.remove('visible');
+        }
+    });
+
+    // Setup real-time validation
+    setupProductFormValidation();
 }
 
-function hideLoading() {
-    document.getElementById('loadingOverlay').classList.remove('active');
+/**
+ * Setup form validation with inline feedback
+ */
+function setupProductFormValidation() {
+    const form = document.getElementById('productForm');
+    if (!form) return;
+
+    // Validate product name
+    const nameInput = document.getElementById('productName');
+    if (nameInput) {
+        nameInput.addEventListener('blur', function() {
+            validateField(this, value => value.length >= 3, 'Product name must be at least 3 characters');
+        });
+    }
+
+    // Validate price
+    const priceInput = document.getElementById('productPrice');
+    if (priceInput) {
+        priceInput.addEventListener('blur', function() {
+            validateField(this, value => parseFloat(value) > 0, 'Price must be greater than 0');
+        });
+    }
+
+    // Validate description
+    const descInput = document.getElementById('productDescription');
+    if (descInput) {
+        descInput.addEventListener('blur', function() {
+            validateField(this, value => value.length >= 10, 'Description must be at least 10 characters');
+        });
+    }
+
+    // Validate image URL
+    const imageInput = document.getElementById('productImage');
+    if (imageInput) {
+        imageInput.addEventListener('blur', function() {
+            validateField(this, value => {
+                try {
+                    new URL(value);
+                    return true;
+                } catch {
+                    return false;
+                }
+            }, 'Please enter a valid URL');
+        });
+    }
+
+    // Validate stock quantity
+    const stockInput = document.getElementById('productStock');
+    if (stockInput) {
+        stockInput.addEventListener('blur', function() {
+            validateField(this, value => parseInt(value) >= 0, 'Stock quantity must be 0 or greater');
+        });
+    }
+}
+
+/**
+ * Validate a single form field
+ */
+function validateField(input, validator, errorMessage) {
+    const formGroup = input.closest('.form-group');
+    if (!formGroup) return;
+
+    const value = input.value.trim();
+
+    // Remove existing error message
+    let errorEl = formGroup.querySelector('.form-validation-error');
+    if (!errorEl) {
+        errorEl = document.createElement('div');
+        errorEl.className = 'form-validation-error';
+        input.parentNode.insertBefore(errorEl, input.nextSibling);
+    }
+
+    // Validate
+    if (value && !validator(value)) {
+        formGroup.classList.add('error');
+        formGroup.classList.remove('success');
+        errorEl.textContent = errorMessage;
+    } else if (value) {
+        formGroup.classList.remove('error');
+        formGroup.classList.add('success');
+        errorEl.textContent = '';
+    } else {
+        formGroup.classList.remove('error', 'success');
+        errorEl.textContent = '';
+    }
 }
 
 // Close modals on background click
