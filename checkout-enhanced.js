@@ -407,12 +407,12 @@ function showThankYouWithTracking(orderNumber, trackingNumber, cartItems, orderD
                 </div>
 
                 <div class="thank-you-actions">
-                    <button onclick="window.showOrderTrackingModal('${orderNumber}')" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button onclick="window.showOrderTrackingModal('${orderNumber}')" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; padding: 0.875rem 1.75rem;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink: 0;">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
-                        Track Order
+                        <span>Track Order</span>
                     </button>
                     <button onclick="closeThankYouMessage()" class="btn btn-outline">
                         Continue Shopping

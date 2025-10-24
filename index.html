@@ -276,7 +276,16 @@
                     </li>
                 </ul>
 
-                <!-- Language Switcher - Positioned Below Track Order -->
+                <!-- Track Order Button -->
+                <button class="track-order-button" onclick="showOrderTrackingModal()" aria-label="Track Order">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>Track Order</span>
+                </button>
+
+                <!-- Language Switcher -->
                 <div class="language-switcher-nav">
                     <select id="languageSelect" class="lang-dropdown">
                         <option value="en" selected>🇺🇸 EN</option>
@@ -285,11 +294,11 @@
                     </select>
                 </div>
 
-                <!-- Hamburger Menu Button - Recreated for Maximum Visibility -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu" style="display: flex !important; flex-direction: column; justify-content: center; align-items: center; gap: 6px; width: 48px; height: 48px; padding: 10px; background: rgba(44, 169, 161, 0.1); border: 1.5px solid rgba(44, 169, 161, 0.2); border-radius: 12px; cursor: pointer; z-index: 10000; position: relative;">
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
+                <!-- Hamburger Menu Button -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </button>
             </div>
         </div>
@@ -328,7 +337,7 @@
                         <span class="brand-highlight">FORDIP'S TECH LLC</span>
                     </h1>
                     <p class="cinematic-subtitle">
-                        WHERE INNOVATION MEETS EXCELLENCE
+                        It's Either Fordips Tech or No Tech
                     </p>
                 </div>
 
@@ -950,7 +959,7 @@
             <div class="section-header">
                 <span class="section-badge">About Us</span>
                 <h2 class="section-title">Welcome to Fordips Tech LLC</h2>
-                <p class="section-subtitle">Your Trusted Partner in Premium Technology Since 2020</p>
+                <p class="section-subtitle">It's Either Fordips Tech or No Tech</p>
             </div>
 
             <div class="about-content">
@@ -1023,10 +1032,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"Best tech shopping experience ever! My iPhone 16 Pro Max arrived in perfect condition with all original packaging. Customer service was exceptional!"</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">SC</div>
+                        <div class="author-avatar">FM</div>
                         <div>
-                            <strong>Sarah Chen</strong>
-                            <span>New York, USA</span>
+                            <strong>Fon Michael</strong>
+                            <span>Buea, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>
@@ -1036,10 +1045,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"I was skeptical about ordering internationally, but Fordips Tech exceeded my expectations. Fast shipping, authentic products, and great prices!"</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">JM</div>
+                        <div class="author-avatar">MG</div>
                         <div>
-                            <strong>James Miller</strong>
-                            <span>London, UK</span>
+                            <strong>Moki Grace</strong>
+                            <span>Limbe, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>
@@ -1049,10 +1058,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"The payment flexibility is amazing! I used the 'Help Me Pay' feature and got my MacBook Pro without breaking the bank. Highly recommend!"</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">AP</div>
+                        <div class="author-avatar">BS</div>
                         <div>
-                            <strong>Amara Patel</strong>
-                            <span>Mumbai, India</span>
+                            <strong>Besong Sandra</strong>
+                            <span>Kumba, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>
@@ -1062,10 +1071,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"Free worldwide shipping and it actually arrived in 5 days to Nigeria! Product is 100% authentic. Will definitely shop here again."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">OA</div>
+                        <div class="author-avatar">EE</div>
                         <div>
-                            <strong>Oluwaseun Adebayo</strong>
-                            <span>Lagos, Nigeria</span>
+                            <strong>Ekwe Emmanuel</strong>
+                            <span>Tiko, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>
@@ -1075,10 +1084,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"Their customer support is top-notch. Had a question about warranty and they responded within hours. Very professional and helpful."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
+                        <div class="author-avatar">LF</div>
                         <div>
-                            <strong>Maria Rodriguez</strong>
-                            <span>Madrid, Spain</span>
+                            <strong>Luma Florence</strong>
+                            <span>Mamfe, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>
@@ -1088,10 +1097,10 @@
                     <div class="stars">★★★★★</div>
                     <p class="testimonial-text">"I've bought 3 devices from Fordips Tech now. Every single one arrived perfectly. They're my go-to for all electronics!"</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">DL</div>
+                        <div class="author-avatar">ND</div>
                         <div>
-                            <strong>David Lee</strong>
-                            <span>Toronto, Canada</span>
+                            <strong>Njie Daniel</strong>
+                            <span>Mutengene, Cameroon</span>
                         </div>
                     </div>
                     <div class="verified-badge">✓ Verified Purchase</div>

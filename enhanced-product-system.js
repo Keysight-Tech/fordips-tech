@@ -357,15 +357,93 @@ let currentProductView = {
 };
 
 /**
+ * Open Basic Product View (Fallback for products without enhanced data)
+ */
+function openBasicProductView(product) {
+    const modalHTML = `
+        <div class="enhanced-product-modal active" id="enhancedProductModal">
+            <div class="modal-overlay" onclick="closeEnhancedProductDetail()"></div>
+            <div class="product-detail-container basic-view">
+                <button class="modal-close-btn" onclick="closeEnhancedProductDetail()">&times;</button>
+
+                <div class="product-detail-grid">
+                    <div class="product-gallery">
+                        <div class="main-gallery-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <h1 class="product-title">${product.name}</h1>
+                        <p class="product-category">${product.category}</p>
+
+                        <div class="price-section">
+                            <div class="current-price">$${parseFloat(product.price).toLocaleString()}</div>
+                        </div>
+
+                        <div class="product-description">
+                            <p>${product.description || 'High-quality premium product from Fordips Tech.'}</p>
+                        </div>
+
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <button onclick="decrementQuantity()" class="qty-btn">−</button>
+                                <input type="number" id="quantityInput" value="1" min="1" readonly>
+                                <button onclick="incrementQuantity()" class="qty-btn">+</button>
+                            </div>
+
+                            <button class="add-to-cart-btn" onclick="addToCartFromBasicView(${product.id})">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const existing = document.getElementById('enhancedProductModal');
+    if (existing) existing.remove();
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Add to cart from basic view
+ */
+function addToCartFromBasicView(productId) {
+    const product = products.find(p => p.id === parseInt(productId));
+    if (!product) return;
+
+    const quantity = parseInt(document.getElementById('quantityInput')?.value || 1);
+
+    if (typeof addToCart === 'function') {
+        addToCart(product, quantity);
+        closeEnhancedProductDetail();
+    }
+}
+
+/**
  * Open Enhanced Product Detail Modal
  */
 function openEnhancedProductDetail(productId) {
     const product = products.find(p => p.id === parseInt(productId));
-    if (!product) return;
+    if (!product) {
+        console.warn('Product not found:', productId);
+        return;
+    }
 
     const enhanced = enhancedProductData[productId];
     if (!enhanced) {
-        // Fallback for products without enhanced data
+        // Fallback for products without enhanced data - show basic product info
+        console.log('No enhanced data for product:', productId, '- opening basic view');
+        openBasicProductView(product);
         return;
     }
 
@@ -1001,3 +1079,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Export to window for external use (e.g., favorites system)
+window.openEnhancedProductDetail = openEnhancedProductDetail;

@@ -27,22 +27,14 @@ function showNotification(message, type = 'info', duration = 5000) {
     initializeNotifications();
 
     const notification = document.createElement('div');
-    notification.className = `admin-notification ${type}`;
+    notification.className = `admin-notification ${type} simple-notification`;
     notification.setAttribute('role', 'alert');
     notification.setAttribute('aria-live', 'polite');
 
     const icon = getNotificationIcon(type);
 
     notification.innerHTML = `
-        <div class="notification-icon">${icon}</div>
-        <div class="notification-content">
-            <div class="notification-message">${message}</div>
-        </div>
-        <button class="notification-close" onclick="closeNotification(this)" aria-label="Close notification">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-            </path>
-        </button>
+        <div class="notification-icon-simple">${icon}</div>
     `;
 
     notificationContainer.appendChild(notification);
