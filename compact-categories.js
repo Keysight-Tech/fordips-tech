@@ -21,6 +21,7 @@ const CATEGORY_NAMES = {
  */
 function initializeCompactCategories() {
     updateCategoryCounts();
+    setupCategoryModalCloseListeners();
     console.log('✅ Compact categories initialized');
 }
 
@@ -93,7 +94,12 @@ function openCategoryModal(category) {
 /**
  * Close category modal
  */
-function closeCategoryModal() {
+function closeCategoryModal(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
     const modal = document.getElementById('categoryModal');
 
     if (modal) {
@@ -102,6 +108,65 @@ function closeCategoryModal() {
     }
 
     console.log('✅ Category modal closed');
+}
+
+/**
+ * Setup close button listeners
+ */
+function setupCategoryModalCloseListeners() {
+    const modal = document.getElementById('categoryModal');
+    const closeBtn = document.querySelector('.category-modal-close');
+    const overlay = document.querySelector('.category-modal-overlay');
+    const modalContent = document.querySelector('.category-modal-content');
+
+    if (closeBtn) {
+        // Remove any existing listeners and add new one
+        closeBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeCategoryModal(e);
+        };
+
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeCategoryModal(e);
+        });
+    }
+
+    if (overlay) {
+        overlay.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeCategoryModal(e);
+        };
+
+        overlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeCategoryModal(e);
+        });
+    }
+
+    // Prevent modal content clicks from closing modal
+    if (modalContent) {
+        modalContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    // ESC key to close
+    const escKeyHandler = (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+            closeCategoryModal(e);
+        }
+    };
+
+    // Remove existing handler if any
+    document.removeEventListener('keydown', escKeyHandler);
+    document.addEventListener('keydown', escKeyHandler);
+
+    console.log('✅ Category modal close listeners setup');
 }
 
 /**
