@@ -73,6 +73,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="category-products-styles.css">
+    <link rel="stylesheet" href="compact-categories-styles.css">
     <link rel="stylesheet" href="compact-layout-overrides.css">
     <link rel="stylesheet" href="location-detection-styles.css">
     <link rel="stylesheet" href="enhanced-product-styles.css">
@@ -429,16 +430,109 @@
         </div>
     </section>
 
-    <!-- Products Section - Category Based -->
-    <section class="products" id="products">
+    <!-- Products Section - Compact Category Blocks -->
+    <section class="products-compact" id="products">
         <div class="container">
             <div class="section-header scale-in">
-                <h2 class="section-title" data-i18n="productsTitle">Featured Products</h2>
-                <p class="section-subtitle" data-i18n="productsSubtitle">Explore by category</p>
+                <h2 class="section-title" data-i18n="productsTitle">Shop by Category</h2>
+                <p class="section-subtitle" data-i18n="productsSubtitle">Click any category to explore products</p>
             </div>
 
-            <!-- iPhones Category -->
-            <div class="category-section" id="category-iphone">
+            <div class="category-blocks-grid">
+                <!-- iPhones Block -->
+                <div class="category-block" data-category="iphone" onclick="openCategoryModal('iphone')">
+                    <div class="category-block-icon">📱</div>
+                    <h3 class="category-block-title">iPhones</h3>
+                    <p class="category-block-count"><span id="count-iphone">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Samsung Block -->
+                <div class="category-block" data-category="samsung" onclick="openCategoryModal('samsung')">
+                    <div class="category-block-icon">📱</div>
+                    <h3 class="category-block-title">Samsung Galaxy</h3>
+                    <p class="category-block-count"><span id="count-samsung">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Laptops Block -->
+                <div class="category-block" data-category="laptop" onclick="openCategoryModal('laptop')">
+                    <div class="category-block-icon">💻</div>
+                    <h3 class="category-block-title">Laptops</h3>
+                    <p class="category-block-count"><span id="count-laptop">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Desktops Block -->
+                <div class="category-block" data-category="desktop" onclick="openCategoryModal('desktop')">
+                    <div class="category-block-icon">🖥️</div>
+                    <h3 class="category-block-title">Desktops</h3>
+                    <p class="category-block-count"><span id="count-desktop">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Tablets Block -->
+                <div class="category-block" data-category="tablet" onclick="openCategoryModal('tablet')">
+                    <div class="category-block-icon">📲</div>
+                    <h3 class="category-block-title">Tablets</h3>
+                    <p class="category-block-count"><span id="count-tablet">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Smartwatches Block -->
+                <div class="category-block" data-category="smartwatch" onclick="openCategoryModal('smartwatch')">
+                    <div class="category-block-icon">⌚</div>
+                    <h3 class="category-block-title">Smartwatches</h3>
+                    <p class="category-block-count"><span id="count-smartwatch">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Cameras Block -->
+                <div class="category-block" data-category="camera" onclick="openCategoryModal('camera')">
+                    <div class="category-block-icon">📷</div>
+                    <h3 class="category-block-title">Cameras</h3>
+                    <p class="category-block-count"><span id="count-camera">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Accessories Block -->
+                <div class="category-block" data-category="accessory" onclick="openCategoryModal('accessory')">
+                    <div class="category-block-icon">🎧</div>
+                    <h3 class="category-block-title">Accessories</h3>
+                    <p class="category-block-count"><span id="count-accessory">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+
+                <!-- Starlink Block -->
+                <div class="category-block" data-category="starlink" onclick="openCategoryModal('starlink')">
+                    <div class="category-block-icon">🛰️</div>
+                    <h3 class="category-block-title">Starlink</h3>
+                    <p class="category-block-count"><span id="count-starlink">0</span> Products</p>
+                    <div class="category-block-badge">View All →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Products Modal -->
+    <div class="category-modal" id="categoryModal">
+        <div class="category-modal-overlay" onclick="closeCategoryModal()"></div>
+        <div class="category-modal-content">
+            <div class="category-modal-header">
+                <h2 id="categoryModalTitle">Category Products</h2>
+                <button class="category-modal-close" onclick="closeCategoryModal()">&times;</button>
+            </div>
+            <div class="category-modal-body">
+                <div class="products-grid-modal" id="categoryModalProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OLD LONG SECTION - HIDDEN -->
+    <div style="display: none;">
+        <div class="category-section" id="category-iphone-old">
                 <div class="category-section-header">
                     <h3 class="category-section-title">iPhones</h3>
                     <span class="category-item-count"></span>
@@ -591,6 +685,8 @@
             </div>
         </div>
     </section>
+    </div>
+    <!-- END HIDDEN OLD PRODUCTS SECTION -->
 
     <!-- Locations -->
     <section class="locations" id="locations">
@@ -1194,6 +1290,7 @@
     <script src="translations.js"></script>
     <script src="products.js"></script>
     <script src="category-products.js"></script>
+    <script src="compact-categories.js"></script>
     <script src="supabase-integration.js"></script>
     <script src="contact-system.js"></script>
     <script src="order-tracking-system.js"></script>
