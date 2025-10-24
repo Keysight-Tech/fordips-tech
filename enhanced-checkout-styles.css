@@ -756,3 +756,287 @@
         height: 28px;
     }
 }
+
+/* ===== SHIPPING OPTIONS STYLES ===== */
+.shipping-options-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.shipping-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shipping-option {
+    position: relative;
+    cursor: pointer;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s;
+    background: white;
+    display: block;
+}
+
+.shipping-option:hover {
+    border-color: #2ca9a1;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(44, 169, 161, 0.1);
+}
+
+.shipping-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.shipping-option input[type="radio"]:checked + .shipping-option-content {
+    border-left: 4px solid #2ca9a1;
+}
+
+.shipping-option input[type="radio"]:checked ~ * {
+    background: #f0fdfa;
+}
+
+.shipping-option:has(input[type="radio"]:checked) {
+    border-color: #2ca9a1;
+    background: #f0fdfa;
+    box-shadow: 0 2px 8px rgba(44, 169, 161, 0.15);
+}
+
+.shipping-option-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shipping-info strong {
+    font-size: 1rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.shipping-info small {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.shipping-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2ca9a1;
+    white-space: nowrap;
+}
+
+/* ===== MOBILE CHECKOUT IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+    /* Modal content should fill screen better on mobile */
+    .modal-content.modal-large {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+
+    .checkout-content {
+        padding: 1rem;
+    }
+
+    .checkout-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .checkout-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .checkout-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Payment methods - stack on mobile */
+    .payment-methods {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .payment-option {
+        padding: 12px;
+    }
+
+    .payment-option-content {
+        gap: 10px;
+    }
+
+    .payment-logo-single {
+        width: 40px;
+        height: auto;
+    }
+
+    .payment-logo {
+        width: 35px;
+        height: auto;
+    }
+
+    .payment-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+    }
+
+    .payment-option strong {
+        font-size: 0.95rem;
+    }
+
+    .payment-option small {
+        font-size: 0.8rem;
+    }
+
+    /* Shipping options mobile */
+    .shipping-options-section {
+        padding: 0.75rem;
+    }
+
+    .shipping-option {
+        padding: 12px;
+    }
+
+    .shipping-option-content {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .shipping-info strong {
+        font-size: 0.95rem;
+    }
+
+    .shipping-info small {
+        font-size: 0.8rem;
+    }
+
+    .shipping-price {
+        font-size: 1rem;
+    }
+
+    /* Checkout summary mobile */
+    .checkout-summary {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .summary-row {
+        padding: 10px 0;
+        font-size: 0.95rem;
+    }
+
+    .summary-row.total {
+        font-size: 1.1rem;
+    }
+
+    /* Buttons mobile */
+    .btn-place-order,
+    .btn-help-me-pay {
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+
+    .btn-place-order svg,
+    .btn-help-me-pay svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-content {
+        padding: 0.75rem;
+    }
+
+    .checkout-content h2 {
+        font-size: 1.25rem;
+    }
+
+    .checkout-section h3 {
+        font-size: 1rem;
+    }
+
+    /* Make form inputs more touch-friendly */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 14px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    /* Payment methods even more compact */
+    .payment-option {
+        padding: 10px;
+    }
+
+    .payment-logo-single {
+        width: 35px;
+    }
+
+    .payment-logo {
+        width: 30px;
+    }
+
+    .payment-option strong {
+        font-size: 0.9rem;
+    }
+
+    .payment-option small {
+        font-size: 0.75rem;
+    }
+
+    /* Shipping options compact */
+    .shipping-option {
+        padding: 10px;
+    }
+
+    .shipping-info strong {
+        font-size: 0.9rem;
+    }
+
+    .shipping-info small {
+        font-size: 0.75rem;
+    }
+
+    .shipping-price {
+        font-size: 0.95rem;
+    }
+
+    /* Trust badges smaller on very small screens */
+    .trust-badges {
+        gap: 0.5rem;
+    }
+
+    .trust-badge svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .trust-badge strong {
+        font-size: 0.75rem;
+    }
+
+    .trust-badge small {
+        font-size: 0.65rem;
+    }
+}

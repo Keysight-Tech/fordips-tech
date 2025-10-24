@@ -14,17 +14,8 @@ function openCheckoutModal() {
         return;
     }
 
-    // Calculate totals
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = 0; // FREE
-    const total = subtotal + shipping;
-
-    // Update checkout totals
-    const checkoutSubtotal = document.getElementById('checkoutSubtotal');
-    const checkoutTotal = document.getElementById('checkoutTotal');
-
-    if (checkoutSubtotal) checkoutSubtotal.textContent = `$${subtotal.toLocaleString()}`;
-    if (checkoutTotal) checkoutTotal.textContent = `$${total.toLocaleString()}`;
+    // Calculate totals with default free shipping
+    updateCheckoutTotals();
 
     // Display cart items in checkout summary (optional enhancement)
     displayCheckoutItems(cart);
@@ -38,7 +29,50 @@ function openCheckoutModal() {
         // Close cart modal if open
         const cartModal = document.getElementById('cartModal');
         if (cartModal) cartModal.classList.remove('active');
+
+        // Set up shipping option listeners
+        setupShippingOptionListeners();
     }
+}
+
+/**
+ * Update checkout totals based on cart and selected shipping
+ */
+function updateCheckoutTotals() {
+    const cart = JSON.parse(localStorage.getItem('fordipsTechCart')) || [];
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Get selected shipping option
+    const selectedShipping = document.querySelector('input[name="shipping"]:checked');
+    const shippingCost = selectedShipping && selectedShipping.value === 'express' ? 29.99 : 0;
+
+    const total = subtotal + shippingCost;
+
+    // Update display
+    const checkoutSubtotal = document.getElementById('checkoutSubtotal');
+    const checkoutShipping = document.getElementById('checkoutShipping');
+    const checkoutTotal = document.getElementById('checkoutTotal');
+
+    if (checkoutSubtotal) checkoutSubtotal.textContent = `$${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    if (checkoutShipping) checkoutShipping.textContent = shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`;
+    if (checkoutTotal) checkoutTotal.textContent = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+/**
+ * Setup shipping option listeners
+ */
+function setupShippingOptionListeners() {
+    const shippingOptions = document.querySelectorAll('input[name="shipping"]');
+    shippingOptions.forEach(option => {
+        option.addEventListener('change', () => {
+            updateCheckoutTotals();
+            // Add visual feedback
+            showNotification(
+                option.value === 'express' ? 'Express shipping selected' : 'Free shipping selected',
+                'success'
+            );
+        });
+    });
 }
 
 /**
