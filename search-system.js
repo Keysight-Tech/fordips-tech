@@ -65,9 +65,11 @@ class ProductSearchSystem {
 
     setupEventListeners() {
         const searchInput = document.getElementById('productSearchInput');
+        const globalSearchInput = document.getElementById('globalSearchInput');
         const clearBtn = document.getElementById('searchClearBtn');
         const overlay = document.getElementById('searchOverlay');
 
+        // Setup listeners for dynamically created search input
         if (searchInput) {
             // Real-time search as user types
             searchInput.addEventListener('input', (e) => {
@@ -83,6 +85,26 @@ class ProductSearchSystem {
 
             // Handle keyboard navigation
             searchInput.addEventListener('keydown', (e) => {
+                this.handleKeyboardNavigation(e);
+            });
+        }
+
+        // Setup listeners for global search input (static HTML)
+        if (globalSearchInput) {
+            // Real-time search as user types
+            globalSearchInput.addEventListener('input', (e) => {
+                this.handleSearchInput(e.target.value);
+            });
+
+            // Show results on focus if there's a query
+            globalSearchInput.addEventListener('focus', () => {
+                if (globalSearchInput.value.length >= this.minSearchLength) {
+                    this.showResults();
+                }
+            });
+
+            // Handle keyboard navigation
+            globalSearchInput.addEventListener('keydown', (e) => {
                 this.handleKeyboardNavigation(e);
             });
         }
@@ -312,9 +334,11 @@ class ProductSearchSystem {
 
     clearSearch() {
         const searchInput = document.getElementById('productSearchInput');
+        const globalSearchInput = document.getElementById('globalSearchInput');
         const clearBtn = document.getElementById('searchClearBtn');
 
         if (searchInput) searchInput.value = '';
+        if (globalSearchInput) globalSearchInput.value = '';
         if (clearBtn) clearBtn.style.display = 'none';
 
         this.hideResults();

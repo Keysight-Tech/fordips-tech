@@ -84,6 +84,8 @@
     <link rel="stylesheet" href="search-styles.css">
     <link rel="stylesheet" href="notifications-styles.css">
     <link rel="stylesheet" href="help-me-pay-styles.css">
+    <link rel="stylesheet" href="stripe-payment-styles.css">
+    <link rel="stylesheet" href="favorites-styles.css">
     <link rel="stylesheet" href="mobile-optimizations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
@@ -162,15 +164,6 @@
     </script>
 </head>
 <body>
-    <!-- Language Switcher Dropdown -->
-    <div class="language-switcher">
-        <select id="languageSelect" class="lang-dropdown">
-            <option value="en" selected>🇺🇸 English</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="pcm">🇨🇲 Pidgin</option>
-        </select>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -184,12 +177,39 @@
                     <span class="logo-text" data-i18n="brandName">FORDIPS TECH</span>
                 </a>
 
+                <!-- Mobile Drawer Overlay -->
+                <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+
                 <ul class="nav-menu" id="navMenu">
+                    <!-- Mobile Drawer Search -->
+                    <div class="mobile-drawer-search">
+                        <div class="mobile-drawer-search-input-wrapper">
+                            <svg class="mobile-drawer-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input
+                                type="text"
+                                id="mobileDrawerSearchInput"
+                                placeholder="Search products…"
+                                autocomplete="off"
+                            >
+                        </div>
+                    </div>
+
                     <li><a href="#home" class="nav-link" data-i18n="navHome">Home</a></li>
                     <li><a href="#products" class="nav-link" data-i18n="navProducts">Products</a></li>
                     <li><a href="#categories" class="nav-link" data-i18n="navCategories">Categories</a></li>
                     <li><a href="#locations" class="nav-link" data-i18n="navLocations">Locations</a></li>
                     <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
+                    <li>
+                        <button class="favorites-button" id="favoritesButton" onclick="openFavoritesModal()" aria-label="Favorites">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span class="favorites-count" id="favoritesCount" style="display: none;">0</span>
+                        </button>
+                    </li>
                     <li>
                         <button class="cart-button" id="cartButton" aria-label="Shopping cart">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -200,6 +220,15 @@
                         </button>
                     </li>
                 </ul>
+
+                <!-- Language Switcher - Positioned Below Track Order -->
+                <div class="language-switcher-nav">
+                    <select id="languageSelect" class="lang-dropdown">
+                        <option value="en" selected>🇺🇸 EN</option>
+                        <option value="fr">🇫🇷 FR</option>
+                        <option value="pcm">🇨🇲 PCM</option>
+                    </select>
+                </div>
 
                 <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
                     <span></span>
@@ -243,7 +272,7 @@
                         <span class="brand-highlight">FORDIP'S TECH LLC</span>
                     </h1>
                     <p class="cinematic-subtitle">
-                        Innovating the Future of Electronics and Connectivity
+                        ITS EITHER FORDIPS TECH OR NO TECH
                     </p>
                 </div>
 
@@ -381,8 +410,14 @@
                     placeholder="Search for products, categories, or brands..."
                     autocomplete="off"
                 >
-                <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+                <div class="search-results-dropdown" id="searchResultsDropdown">
+                    <div class="search-results-content" id="searchResultsContent">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
             </div>
+            <!-- Search Overlay (to close dropdown when clicking outside) -->
+            <div class="search-overlay" id="searchOverlay"></div>
         </div>
     </section>
 
@@ -435,14 +470,16 @@
     <section class="products-compact" id="products">
         <div class="container">
             <div class="section-header scale-in">
-                <h2 class="section-title" data-i18n="productsTitle">Shop by Category</h2>
-                <p class="section-subtitle" data-i18n="productsSubtitle">Click any category to explore products</p>
+                <h2 class="section-title">Featured Products</h2>
+                <p class="section-subtitle">Handpicked for you</p>
             </div>
 
             <div class="category-blocks-grid">
                 <!-- iPhones Block -->
                 <div class="category-block" data-category="iphone" onclick="openCategoryModal('iphone')">
-                    <div class="category-block-icon">📱</div>
+                    <div class="category-block-icon">
+                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp" alt="iPhone">
+                    </div>
                     <h3 class="category-block-title">iPhones</h3>
                     <p class="category-block-count"><span id="count-iphone">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -450,7 +487,9 @@
 
                 <!-- Samsung Block -->
                 <div class="category-block" data-category="samsung" onclick="openCategoryModal('samsung')">
-                    <div class="category-block-icon">📱</div>
+                    <div class="category-block-icon">
+                        <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80" alt="Samsung Galaxy">
+                    </div>
                     <h3 class="category-block-title">Samsung Galaxy</h3>
                     <p class="category-block-count"><span id="count-samsung">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -458,7 +497,9 @@
 
                 <!-- Laptops Block -->
                 <div class="category-block" data-category="laptop" onclick="openCategoryModal('laptop')">
-                    <div class="category-block-icon">💻</div>
+                    <div class="category-block-icon">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80" alt="MacBook">
+                    </div>
                     <h3 class="category-block-title">Laptops</h3>
                     <p class="category-block-count"><span id="count-laptop">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -466,7 +507,9 @@
 
                 <!-- Desktops Block -->
                 <div class="category-block" data-category="desktop" onclick="openCategoryModal('desktop')">
-                    <div class="category-block-icon">🖥️</div>
+                    <div class="category-block-icon">
+                        <img src="https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&q=80" alt="iMac">
+                    </div>
                     <h3 class="category-block-title">Desktops</h3>
                     <p class="category-block-count"><span id="count-desktop">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -474,7 +517,9 @@
 
                 <!-- Tablets Block -->
                 <div class="category-block" data-category="tablet" onclick="openCategoryModal('tablet')">
-                    <div class="category-block-icon">📲</div>
+                    <div class="category-block-icon">
+                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/ipad%20pro%20m5.webp" alt="iPad">
+                    </div>
                     <h3 class="category-block-title">Tablets</h3>
                     <p class="category-block-count"><span id="count-tablet">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -482,7 +527,9 @@
 
                 <!-- Smartwatches Block -->
                 <div class="category-block" data-category="smartwatch" onclick="openCategoryModal('smartwatch')">
-                    <div class="category-block-icon">⌚</div>
+                    <div class="category-block-icon">
+                        <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80" alt="Apple Watch">
+                    </div>
                     <h3 class="category-block-title">Smartwatches</h3>
                     <p class="category-block-count"><span id="count-smartwatch">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -490,7 +537,9 @@
 
                 <!-- Cameras Block -->
                 <div class="category-block" data-category="camera" onclick="openCategoryModal('camera')">
-                    <div class="category-block-icon">📷</div>
+                    <div class="category-block-icon">
+                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg" alt="Camera">
+                    </div>
                     <h3 class="category-block-title">Cameras</h3>
                     <p class="category-block-count"><span id="count-camera">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -498,7 +547,9 @@
 
                 <!-- Accessories Block -->
                 <div class="category-block" data-category="accessory" onclick="openCategoryModal('accessory')">
-                    <div class="category-block-icon">🎧</div>
+                    <div class="category-block-icon">
+                        <img src="https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=800&q=80" alt="AirPods">
+                    </div>
                     <h3 class="category-block-title">Accessories</h3>
                     <p class="category-block-count"><span id="count-accessory">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -506,7 +557,9 @@
 
                 <!-- Starlink Block -->
                 <div class="category-block" data-category="starlink" onclick="openCategoryModal('starlink')">
-                    <div class="category-block-icon">🛰️</div>
+                    <div class="category-block-icon">
+                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/starlink.png" alt="Starlink">
+                    </div>
                     <h3 class="category-block-title">Starlink</h3>
                     <p class="category-block-count"><span id="count-starlink">0</span> Products</p>
                     <div class="category-block-badge">View All →</div>
@@ -1181,16 +1234,38 @@
                             <div class="checkout-currency-selector">
                                 <label for="checkoutCurrencySelect" style="font-size: 0.9rem; margin-right: 0.5rem; color: #666;">Currency:</label>
                                 <select id="checkoutCurrencySelect" class="currency-select-checkout">
-                                    <option value="USD">USD ($)</option>
-                                    <option value="EUR">EUR (€)</option>
-                                    <option value="GBP">GBP (£)</option>
-                                    <option value="XAF">XAF (FCFA)</option>
-                                    <option value="NGN">NGN (₦)</option>
-                                    <option value="CAD">CAD (CA$)</option>
-                                    <option value="AUD">AUD (A$)</option>
-                                    <option value="JPY">JPY (¥)</option>
-                                    <option value="CNY">CNY (¥)</option>
-                                    <option value="INR">INR (₹)</option>
+                                    <!-- Major Global Currencies -->
+                                    <option value="USD">🇺🇸 USD - US Dollar ($)</option>
+                                    <option value="EUR">🇪🇺 EUR - Euro (€)</option>
+                                    <option value="GBP">🇬🇧 GBP - British Pound (£)</option>
+                                    <option value="CAD">🇨🇦 CAD - Canadian Dollar (CA$)</option>
+                                    <option value="AUD">🇦🇺 AUD - Australian Dollar (A$)</option>
+                                    <option value="JPY">🇯🇵 JPY - Japanese Yen (¥)</option>
+                                    <option value="CHF">🇨🇭 CHF - Swiss Franc</option>
+                                    <option value="SGD">🇸🇬 SGD - Singapore Dollar (S$)</option>
+                                    <option value="HKD">🇭🇰 HKD - Hong Kong Dollar (HK$)</option>
+                                    <option value="CNY">🇨🇳 CNY - Chinese Yuan (¥)</option>
+                                    <!-- African Currencies -->
+                                    <option value="XAF">🇨🇲 XAF - Central African CFA Franc</option>
+                                    <option value="XOF">🇸🇳 XOF - West African CFA Franc</option>
+                                    <option value="NGN">🇳🇬 NGN - Nigerian Naira (₦)</option>
+                                    <option value="GHS">🇬🇭 GHS - Ghanaian Cedi (GH₵)</option>
+                                    <option value="KES">🇰🇪 KES - Kenyan Shilling (KSh)</option>
+                                    <option value="ZAR">🇿🇦 ZAR - South African Rand (R)</option>
+                                    <option value="EGP">🇪🇬 EGP - Egyptian Pound (E£)</option>
+                                    <option value="TZS">🇹🇿 TZS - Tanzanian Shilling (TSh)</option>
+                                    <option value="UGX">🇺🇬 UGX - Ugandan Shilling (USh)</option>
+                                    <option value="RWF">🇷🇼 RWF - Rwandan Franc (FRw)</option>
+                                    <!-- Other International Currencies -->
+                                    <option value="NZD">🇳🇿 NZD - New Zealand Dollar (NZ$)</option>
+                                    <option value="SEK">🇸🇪 SEK - Swedish Krona (kr)</option>
+                                    <option value="NOK">🇳🇴 NOK - Norwegian Krone (kr)</option>
+                                    <option value="DKK">🇩🇰 DKK - Danish Krone (kr)</option>
+                                    <option value="PLN">🇵🇱 PLN - Polish Zloty (zł)</option>
+                                    <option value="TRY">🇹🇷 TRY - Turkish Lira (₺)</option>
+                                    <option value="PHP">🇵🇭 PHP - Philippine Peso (₱)</option>
+                                    <option value="THB">🇹🇭 THB - Thai Baht (฿)</option>
+                                    <option value="MYR">🇲🇾 MYR - Malaysian Ringgit (RM)</option>
                                 </select>
                             </div>
                         </div>
@@ -1228,6 +1303,28 @@
                     </div>
                     <p class="form-status" id="checkoutStatus"></p>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div class="favorites-modal" id="favoritesModal">
+        <div class="favorites-modal-content">
+            <div class="favorites-modal-header">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    My Favorites
+                </h2>
+                <button class="favorites-modal-close" onclick="closeFavoritesModal()" aria-label="Close favorites">
+                    &times;
+                </button>
+            </div>
+            <div class="favorites-modal-body">
+                <div class="favorites-container" id="favoritesContainer">
+                    <!-- Favorites will be loaded here -->
+                </div>
             </div>
         </div>
     </div>
@@ -1287,6 +1384,9 @@
     <!-- Supabase Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Stripe Payment Library -->
+    <script src="https://js.stripe.com/v3/"></script>
+
     <!-- Application Scripts -->
     <script src="translations.js"></script>
     <script src="products.js"></script>
@@ -1302,6 +1402,7 @@
     <script src="reviews.js"></script>
     <script src="product-variants.js"></script>
     <script src="enhanced-product-system.js"></script>
+    <script src="stripe-payment.js"></script>
     <script src="checkout-enhanced.js"></script>
     <script src="enhanced-checkout.js"></script>
     <script src="currency-system.js"></script>
@@ -1311,6 +1412,7 @@
     <script src="search-system.js"></script>
     <script src="notifications-system.js"></script>
     <script src="help-me-pay-system.js"></script>
+    <script src="favorites-system.js"></script>
 
     <!-- PWA Service Worker Registration -->
     <script>

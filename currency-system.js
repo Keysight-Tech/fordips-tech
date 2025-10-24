@@ -134,10 +134,10 @@ function changeCurrency(currencyCode) {
     selectedCurrency = currencyCode;
     localStorage.setItem('selectedCurrency', currencyCode);
 
-    // Update currency selector display
-    const currencyDisplay = document.getElementById('currentCurrencyDisplay');
-    if (currencyDisplay) {
-        currencyDisplay.textContent = `${currencies[currencyCode].flag} ${currencyCode}`;
+    // Update the select element if it exists
+    const currencySelect = document.getElementById('checkoutCurrencySelect');
+    if (currencySelect && currencySelect.value !== currencyCode) {
+        currencySelect.value = currencyCode;
     }
 
     // Update all prices
@@ -150,52 +150,28 @@ function changeCurrency(currencyCode) {
 }
 
 /**
- * Initialize currency selector
+ * Initialize currency selector - works with existing HTML select element
  */
 function initializeCurrencySelector() {
-    // Create currency selector HTML
-    const currencySelectorHTML = `
-        <div class="currency-selector-container">
-            <label class="currency-label">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 6v12M9 9h6M9 15h6"></path>
-                </svg>
-                Currency:
-            </label>
-            <div class="currency-selector-wrapper">
-                <button class="currency-selector-btn" id="currencySelectorBtn" onclick="toggleCurrencyDropdown()">
-                    <span id="currentCurrencyDisplay">${currencies[selectedCurrency].flag} ${selectedCurrency}</span>
-                    <svg width="12" height="12" viewBox="0 0 12 12" class="dropdown-arrow">
-                        <path d="M6 9L1 4h10z" fill="currentColor"/>
-                    </svg>
-                </button>
-                <div class="currency-dropdown" id="currencyDropdown">
-                    ${buildCurrencyOptions()}
-                </div>
-            </div>
-        </div>
-    `;
+    // Use the existing currency select in the checkout modal
+    const currencySelect = document.getElementById('checkoutCurrencySelect');
 
-    // Find checkout content and prepend currency selector
-    const checkoutContent = document.querySelector('.checkout-content');
-    if (checkoutContent) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = currencySelectorHTML;
-        checkoutContent.insertBefore(tempDiv.firstElementChild, checkoutContent.firstChild);
+    if (currencySelect) {
+        // Set current currency
+        currencySelect.value = selectedCurrency;
+
+        // Add event listener for changes
+        currencySelect.addEventListener('change', (e) => {
+            changeCurrency(e.target.value);
+        });
+
+        console.log('✅ Currency selector initialized with existing select element');
+    } else {
+        console.warn('⚠️ Currency select element not found in checkout');
     }
 
     // Initialize prices
     updateAllPrices();
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        const dropdown = document.getElementById('currencyDropdown');
-        const btn = document.getElementById('currencySelectorBtn');
-        if (dropdown && btn && !dropdown.contains(e.target) && !btn.contains(e.target)) {
-            dropdown.classList.remove('active');
-        }
-    });
 }
 
 /**

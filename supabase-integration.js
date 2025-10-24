@@ -130,7 +130,7 @@ async function loadProducts(category = null) {
     try {
         let query = supabase
             .from('products')
-            .select('*, categories(name, slug, icon)')
+            .select('*')
             .eq('is_active', true)
             .order('created_at', { ascending: false });
 

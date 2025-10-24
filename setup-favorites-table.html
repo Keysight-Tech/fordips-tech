@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Favorites Table - Fordips Tech</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        button {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        .error {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+        .info {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            color: #1e40af;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Setup Favorites Table</h1>
+        <p class="subtitle">Click the button below to create the favorites table in your Supabase database</p>
+
+        <div class="step">
+            <h3>Step 1: Create the Table</h3>
+            <p>This will create the favorites table with all necessary indexes and security policies.</p>
+            <button id="createTableBtn" onclick="createFavoritesTable()">Create Favorites Table</button>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="step" style="margin-top: 40px;">
+            <h3>Alternative: Manual Setup via Supabase Dashboard</h3>
+            <p>If the button doesn't work, you can manually run this SQL in your Supabase SQL Editor:</p>
+            <pre>-- Create favorites table
+CREATE TABLE IF NOT EXISTS favorites (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_identifier TEXT NOT NULL,
+    product_id INTEGER NOT NULL,
+    product_name TEXT NOT NULL,
+    product_price DECIMAL(10, 2) NOT NULL,
+    product_image TEXT,
+    product_category TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    UNIQUE(user_identifier, product_id)
+);
+
+-- Create indexes
+CREATE INDEX IF NOT EXISTS idx_favorites_user_identifier ON favorites(user_identifier);
+CREATE INDEX IF NOT EXISTS idx_favorites_product_id ON favorites(product_id);
+CREATE INDEX IF NOT EXISTS idx_favorites_created_at ON favorites(created_at DESC);
+
+-- Enable RLS
+ALTER TABLE favorites ENABLE ROW LEVEL SECURITY;
+
+-- Create policies
+CREATE POLICY "Users can view their own favorites"
+    ON favorites FOR SELECT
+    USING (true);
+
+CREATE POLICY "Users can insert their own favorites"
+    ON favorites FOR INSERT
+    WITH CHECK (true);
+
+CREATE POLICY "Users can delete their own favorites"
+    ON favorites FOR DELETE
+    USING (true);</pre>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        const SUPABASE_URL = window.FORDIPS_CONFIG?.SUPABASE_CONFIG?.url || 'https://loutcbvftzojsioahtdw.supabase.co';
+        const SUPABASE_ANON_KEY = window.FORDIPS_CONFIG?.SUPABASE_CONFIG?.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvdXRjYnZmdHpvanNpb2FodGR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDc5NjMsImV4cCI6MjA3NjgyMzk2M30.u49fBtuF99IsEAr8iYLo_3SnHAOqTR-Y7WPXnkGVKOs';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function createFavoritesTable() {
+            const btn = document.getElementById('createTableBtn');
+            const status = document.getElementById('status');
+
+            btn.disabled = true;
+            btn.textContent = 'Creating table...';
+            status.style.display = 'block';
+            status.className = 'info';
+            status.innerHTML = '⏳ Creating favorites table...';
+
+            try {
+                // Create the table
+                const { data, error } = await supabase.rpc('exec_sql', {
+                    query: `
+                        CREATE TABLE IF NOT EXISTS favorites (
+                            id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                            user_identifier TEXT NOT NULL,
+                            product_id INTEGER NOT NULL,
+                            product_name TEXT NOT NULL,
+                            product_price DECIMAL(10, 2) NOT NULL,
+                            product_image TEXT,
+                            product_category TEXT,
+                            created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+                            UNIQUE(user_identifier, product_id)
+                        );
+
+                        CREATE INDEX IF NOT EXISTS idx_favorites_user_identifier ON favorites(user_identifier);
+                        CREATE INDEX IF NOT EXISTS idx_favorites_product_id ON favorites(product_id);
+                        CREATE INDEX IF NOT EXISTS idx_favorites_created_at ON favorites(created_at DESC);
+
+                        ALTER TABLE favorites ENABLE ROW LEVEL SECURITY;
+                    `
+                });
+
+                if (error) throw error;
+
+                status.className = 'success';
+                status.innerHTML = `
+                    ✅ <strong>Success!</strong> Favorites table created successfully!<br><br>
+                    <strong>Next steps:</strong><br>
+                    1. You may need to create the RLS policies manually in Supabase Dashboard (SQL shown above)<br>
+                    2. Refresh your main website<br>
+                    3. You should now see favorite heart icons on products!
+                `;
+                btn.textContent = 'Table Created ✓';
+
+            } catch (error) {
+                console.error('Error:', error);
+                status.className = 'error';
+                status.innerHTML = `
+                    ❌ <strong>Error creating table:</strong> ${error.message}<br><br>
+                    <strong>Please use the manual setup method below:</strong><br>
+                    1. Go to your <a href="https://supabase.com/dashboard" target="_blank">Supabase Dashboard</a><br>
+                    2. Navigate to SQL Editor<br>
+                    3. Copy and paste the SQL code shown above<br>
+                    4. Click "Run"
+                `;
+                btn.disabled = false;
+                btn.textContent = 'Try Again';
+            }
+        }
+
+        // Test connection on load
+        window.addEventListener('load', async () => {
+            try {
+                const { data, error } = await supabase.from('favorites').select('count', { count: 'exact', head: true });
+
+                if (!error) {
+                    const status = document.getElementById('status');
+                    status.style.display = 'block';
+                    status.className = 'success';
+                    status.innerHTML = '✅ <strong>Favorites table already exists!</strong> You\'re all set. Go back to your website and start favoriting products!';
+                    document.getElementById('createTableBtn').disabled = true;
+                    document.getElementById('createTableBtn').textContent = 'Table Already Exists ✓';
+                }
+            } catch (e) {
+                console.log('Table does not exist yet, ready to create');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -292,11 +292,18 @@ body {
 .filters select,
 .filters input[type="search"] {
     padding: 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #334155;
     border-radius: 8px;
     font-size: 0.95rem;
-    background: white;
-    transition: all 0.3s ease;
+    background: #1e293b;
+    color: #94a3b8;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters input[type="search"]::placeholder {
+    color: #64748b;
+    opacity: 1;
 }
 
 .filters select {
@@ -308,10 +315,23 @@ body {
     min-width: 250px;
 }
 
+.filters select:hover,
+.filters input[type="search"]:hover {
+    border-color: #475569;
+}
+
 .filters select:focus,
-.filters input[type="search"]:focus {
+.filters input[type="search"]:focus,
+.filters input[type="search"]:not(:placeholder-shown) {
     outline: none;
     border-color: #2CC4C4;
+    background: #ffffff;
+    color: #1e293b;
+    box-shadow: 0 4px 12px rgba(44, 196, 196, 0.15);
+}
+
+.filters input[type="search"]:focus::placeholder {
+    color: #94a3b8;
 }
 
 /* ===================================
@@ -523,18 +543,49 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #334155;
     border-radius: 8px;
     font-size: 1rem;
     font-family: inherit;
-    transition: all 0.3s ease;
+    background: #1e293b;
+    color: #94a3b8;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #475569;
 }
 
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
+.form-group textarea:focus,
+.form-group input:not(:placeholder-shown),
+.form-group textarea:not(:placeholder-shown) {
+    background: #ffffff;
+    color: #1e293b;
     border-color: #2CC4C4;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(44, 196, 196, 0.15);
+}
+
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+    color: #94a3b8;
+}
+
+.form-group select:focus,
+.form-group select:valid:not([value=""]) {
+    background: #ffffff;
+    color: #1e293b;
 }
 
 .form-row {

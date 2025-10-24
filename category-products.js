@@ -81,6 +81,9 @@ function createProductCard(product) {
             <div class="product-image">
                 <img src="${product.image}" alt="${product.name}" loading="lazy">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                <button class="product-favorite-btn" data-favorite-id="${product.id}" aria-label="Add to favorites">
+                    🤍
+                </button>
             </div>
             <div class="product-content">
                 <div class="product-category">${product.category}</div>

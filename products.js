@@ -43,12 +43,13 @@ const products = [
     },
     {
         id: 5,
-        name: 'iPhone SE',
+        name: 'iPhone 17 Pro Max',
         category: 'iphone',
-        price: 429,
-        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/SE.jpg',
-        badge: 'VALUE',
-        description: 'Compact powerhouse, A15 Bionic'
+        price: 1199,
+        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp',
+        badge: 'NEW',
+        featured: true,
+        description: 'Titanium. So strong. So light. So Pro.'
     },
     {
         id: 6,
@@ -104,6 +105,7 @@ const products = [
         price: 1999,
         image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80',
         badge: 'PRO',
+        featured: true,
         description: 'Liquid Retina XDR display'
     },
     {
@@ -166,12 +168,13 @@ const products = [
     },
     {
         id: 41,
-        name: 'iPad Air 11"',
+        name: 'iPad Pro M5',
         category: 'tablet',
-        price: 599,
-        image: 'https://images.unsplash.com/photo-1585790050230-5dd28404f5ba?w=800&q=80',
-        badge: null,
-        description: 'Powerful M1 chip, stunning display'
+        price: 999,
+        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/ipad%20pro%20m5.webp',
+        badge: 'NEW',
+        featured: true,
+        description: 'Supercharged by the M5 chip'
     },
     {
         id: 42,
@@ -204,12 +207,13 @@ const products = [
     // ===== SMARTWATCHES =====
     {
         id: 50,
-        name: 'Apple Watch Series 1',
+        name: 'Apple Watch Series 9',
         category: 'smartwatch',
-        price: 199,
+        price: 399,
         image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
         badge: null,
-        description: 'Entry-level fitness tracking'
+        featured: true,
+        description: 'Advanced health and fitness tracking'
     },
     {
         id: 51,
@@ -256,6 +260,7 @@ const products = [
         price: 1199,
         image: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80',
         badge: 'NEW',
+        featured: true,
         description: 'Flagship power, S Pen included'
     },
     {
@@ -337,8 +342,9 @@ const products = [
         name: 'Starlink Internet Kit',
         category: 'starlink',
         price: 599,
-        image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80',
+        image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/starlink.png',
         badge: 'COMPLETE',
+        featured: true,
         description: 'Complete satellite internet system'
     },
     {
@@ -395,6 +401,7 @@ const products = [
         price: 3899,
         image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg',
         badge: 'PRO',
+        featured: true,
         description: 'Professional mirrorless camera, 45MP'
     },
     {
@@ -704,10 +711,137 @@ function initializeProductsWithFilters() {
     setupProductFilters();
 }
 
+// Load Featured Products into Hero Carousel
+function loadFeaturedProducts() {
+    console.log('🚀 loadFeaturedProducts() called');
+    const featuredProducts = products.filter(p => p.featured);
+    console.log('⭐ Found featured products:', featuredProducts.length);
+
+    const carousel = document.querySelector('.device-carousel');
+    const dots = document.querySelector('.carousel-dots');
+
+    console.log('🎠 Carousel element:', carousel ? 'Found ✅' : 'Not found ❌');
+    console.log('🔘 Dots element:', dots ? 'Found ✅' : 'Not found ❌');
+
+    if (!carousel) {
+        console.error('❌ Carousel element (.device-carousel) not found in DOM!');
+        return;
+    }
+
+    if (featuredProducts.length === 0) {
+        console.error('❌ No featured products found!');
+        return;
+    }
+
+    // Generate carousel slides from featured products
+    carousel.innerHTML = featuredProducts.map((product, index) => `
+        <div class="device-slide ${index === 0 ? 'active' : ''}">
+            <div class="device-3d-large">
+                <img src="${product.image}"
+                     alt="${product.name}"
+                     class="device-img-large"
+                     crossorigin="anonymous"
+                     onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80'">
+                <div class="device-glow glow-blue"></div>
+            </div>
+            <div class="device-info">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <div class="product-price-hero">$${product.price.toLocaleString()}</div>
+            </div>
+        </div>
+    `).join('');
+
+    // Generate navigation dots
+    if (dots) {
+        dots.innerHTML = featuredProducts.map((_, index) =>
+            `<span class="dot ${index === 0 ? 'active' : ''}" data-slide="${index}"></span>`
+        ).join('');
+    }
+
+    console.log(`✅ Loaded ${featuredProducts.length} featured products into hero carousel`);
+
+    // Re-initialize carousel functionality after loading products
+    if (typeof initDeviceCarousel === 'function') {
+        setTimeout(() => {
+            initDeviceCarousel();
+            console.log('🔄 Carousel re-initialized with featured products');
+        }, 100);
+    }
+}
+
+// Load Featured Products Grid
+function loadFeaturedProductsGrid() {
+    console.log('🎯 Loading featured products grid...');
+    const featuredProducts = products.filter(p => p.featured);
+    const grid = document.getElementById('featuredProductsGrid');
+
+    if (!grid) {
+        console.warn('⚠️ Featured products grid element not found');
+        return;
+    }
+
+    if (featuredProducts.length === 0) {
+        console.warn('⚠️ No featured products to display');
+        grid.innerHTML = '<p style="text-align:center;color:#999;">No featured products available</p>';
+        return;
+    }
+
+    grid.innerHTML = featuredProducts.map(product => `
+        <div class="product-card fade-in-up" data-category="${product.category}">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+            </div>
+            <div class="product-content">
+                <div class="product-category">${product.category}</div>
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-desc">${product.description}</p>
+                <div class="product-price">$${product.price.toLocaleString()}</div>
+                <button class="btn btn-add-cart"
+                        data-id="${product.id}"
+                        data-name="${product.name}"
+                        data-price="${product.price}"
+                        data-image="${product.image}">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span data-i18n="addToCart">Add to Cart</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // Re-attach cart button listeners
+    if (typeof attachCartListeners === 'function') {
+        attachCartListeners();
+    } else {
+        console.warn('⚠️ attachCartListeners function not available yet');
+    }
+
+    console.log(`✅ Loaded ${featuredProducts.length} featured products into grid`);
+}
+
 // Auto-initialize if Supabase doesn't take over (fallback)
 // Note: This will be prevented if supabase-integration.js loads first
+function initializeFeaturedProducts() {
+    console.log('🎯 Attempting to load featured products...');
+    console.log('📊 Total products:', products.length);
+    console.log('⭐ Featured products:', products.filter(p => p.featured).length);
+
+    setTimeout(() => {
+        loadFeaturedProducts(); // Hero carousel
+        loadFeaturedProductsGrid(); // Products grid
+    }, 50);
+}
+
 if (document.readyState === 'loading') {
+    console.log('⏳ DOM still loading, waiting for DOMContentLoaded...');
     document.addEventListener('DOMContentLoaded', () => {
+        console.log('✅ DOM loaded, initializing featured products');
+        initializeFeaturedProducts();
+
         // Only initialize if products aren't already loaded
         setTimeout(() => {
             const productsGrid = document.getElementById('productsGrid');
@@ -717,4 +851,8 @@ if (document.readyState === 'loading') {
             }
         }, 100);
     });
+} else {
+    // If DOM already loaded, run immediately
+    console.log('✅ DOM already loaded, initializing featured products immediately');
+    initializeFeaturedProducts();
 }

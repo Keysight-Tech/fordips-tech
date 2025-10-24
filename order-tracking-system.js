@@ -3,7 +3,7 @@
  * End-to-End Order Management with Customer & Admin Notifications
  */
 
-const ADMIN_EMAIL = 'brineketum@gmail.com';
+// Admin email defined in contact-system.js
 const ORDER_STATUSES = {
     pending: {
         label: 'Order Pending',

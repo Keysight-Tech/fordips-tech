@@ -1,0 +1,421 @@
+/**
+ * FORDIPS TECH - Favorites System Styles
+ * Styling for favorite buttons and favorites modal
+ */
+
+/* ========================================
+   FAVORITE BUTTON ON PRODUCTS
+======================================== */
+.product-favorite-btn {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 2px solid rgba(0, 0, 0, 0.05) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
+    z-index: 100 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.product-favorite-btn:hover {
+    transform: scale(1.15) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+    background: white !important;
+}
+
+.product-favorite-btn:active {
+    transform: scale(0.95) !important;
+}
+
+.product-favorite-btn.favorited {
+    animation: heartBeat 0.3s ease !important;
+    background: rgba(255, 240, 245, 0.98) !important;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(0.95); }
+    75% { transform: scale(1.1); }
+}
+
+/* Favorite button in product detail modal */
+.product-detail-favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e2e8f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.product-detail-favorite-btn:hover {
+    transform: scale(1.1);
+    border-color: #ef4444;
+}
+
+/* ========================================
+   FAVORITES BUTTON IN HEADER
+======================================== */
+.favorites-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.favorites-button:hover {
+    transform: scale(1.1);
+}
+
+.favorites-button svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+}
+
+.favorites-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+/* ========================================
+   FAVORITES MODAL
+======================================== */
+.favorites-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.favorites-modal-content {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.favorites-modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+}
+
+.favorites-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.favorites-modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.favorites-modal-close:hover {
+    background: #f1f5f9;
+}
+
+.favorites-modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* ========================================
+   FAVORITES LIST
+======================================== */
+.favorites-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.favorite-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.favorite-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.favorite-item-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: white;
+}
+
+.favorite-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.favorite-item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.favorite-item-details h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+    color: #1e293b;
+}
+
+.favorite-item-category {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0 0 0.75rem 0;
+    text-transform: capitalize;
+}
+
+.favorite-item-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0;
+}
+
+.favorite-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.btn-favorite-remove {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.btn-favorite-remove:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+}
+
+.btn-favorite-remove svg {
+    color: #64748b;
+}
+
+.btn-favorite-remove:hover svg {
+    color: #ef4444;
+}
+
+.btn-favorite-view {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-favorite-view:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+.empty-favorites-state {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.empty-favorites-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-favorites-state h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+}
+
+.empty-favorites-state p {
+    color: #64748b;
+    margin: 0 0 2rem 0;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 768px) {
+    .favorites-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .favorites-modal-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .favorites-modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .favorites-modal-body {
+        padding: 1rem;
+    }
+
+    .favorite-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .favorite-item-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .favorite-item-actions {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .btn-favorite-view {
+        flex: 1;
+    }
+
+    .favorites-button {
+        padding: 0.25rem;
+    }
+
+    .favorites-count {
+        top: -2px;
+        right: -2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .favorite-item-image {
+        height: 150px;
+    }
+
+    .favorite-item-details h4 {
+        font-size: 1rem;
+    }
+
+    .favorite-item-price {
+        font-size: 1.125rem;
+    }
+}

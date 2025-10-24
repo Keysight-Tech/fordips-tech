@@ -6,17 +6,28 @@
 /* ============================================
    SEARCH CONTAINER
    ============================================ */
-.product-search-container {
+.product-search-container,
+.global-search-section {
     position: relative;
     max-width: 700px;
     margin: 2rem auto 0;
     z-index: 100;
 }
 
+.global-search-section {
+    padding: 0 1rem;
+}
+
+.global-search-section .container {
+    max-width: 100%;
+    padding: 0;
+}
+
 /* ============================================
    SEARCH BAR
    ============================================ */
-.search-bar-wrapper {
+.search-bar-wrapper,
+.global-search-wrapper {
     position: relative;
     display: flex;
     align-items: center;
@@ -27,11 +38,13 @@
     transition: all 0.3s ease;
 }
 
-.search-bar-wrapper:hover {
+.search-bar-wrapper:hover,
+.global-search-wrapper:hover {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
 }
 
-.search-bar-wrapper:focus-within {
+.search-bar-wrapper:focus-within,
+.global-search-wrapper:focus-within {
     box-shadow: 0 6px 30px rgba(37, 99, 235, 0.2);
     outline: 2px solid rgba(37, 99, 235, 0.3);
     outline-offset: 2px;
@@ -40,9 +53,11 @@
 .search-icon {
     color: #9ca3af;
     flex-shrink: 0;
+    margin-right: 10px;
 }
 
-.product-search-input {
+.product-search-input,
+.global-search-input {
     flex: 1;
     border: none;
     outline: none;
@@ -50,9 +65,11 @@
     font-size: 16px;
     font-family: 'Inter', sans-serif;
     background: transparent;
+    width: 100%;
 }
 
-.product-search-input::placeholder {
+.product-search-input::placeholder,
+.global-search-input::placeholder {
     color: #9ca3af;
 }
 
@@ -394,21 +411,34 @@
    MOBILE RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
-    .product-search-container {
+    .product-search-container,
+    .global-search-section {
         max-width: 100%;
         margin: 1.5rem 1rem 0;
     }
 
-    .search-bar-wrapper {
+    .search-bar-wrapper,
+    .global-search-wrapper {
         padding: 0 15px;
     }
 
-    .product-search-input {
-        padding: 14px 12px;
-        font-size: 15px;
+    /* Fix search icon spacing on mobile */
+    .search-icon {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        margin-right: 12px;
     }
 
-    .product-search-input::placeholder {
+    .product-search-input,
+    .global-search-input {
+        padding: 14px 8px;
+        font-size: 15px;
+        padding-left: 0;
+    }
+
+    .product-search-input::placeholder,
+    .global-search-input::placeholder {
         font-size: 14px;
     }
 
@@ -438,17 +468,29 @@
 }
 
 @media (max-width: 480px) {
-    .product-search-container {
+    .product-search-container,
+    .global-search-section {
         margin: 1rem 0.75rem 0;
     }
 
-    .search-bar-wrapper {
+    .search-bar-wrapper,
+    .global-search-wrapper {
         padding: 0 12px;
     }
 
-    .product-search-input {
-        padding: 12px 10px;
+    /* Smaller search icon on very small screens */
+    .search-icon {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        margin-right: 10px;
+    }
+
+    .product-search-input,
+    .global-search-input {
+        padding: 12px 6px;
         font-size: 14px;
+        padding-left: 0;
     }
 
     .search-results-header {
@@ -466,7 +508,8 @@
 /* ============================================
    ACCESSIBILITY
    ============================================ */
-.product-search-input:focus {
+.product-search-input:focus,
+.global-search-input:focus {
     outline: none;
 }
 
@@ -499,16 +542,19 @@
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-    .search-bar-wrapper {
+    .search-bar-wrapper,
+    .global-search-wrapper {
         background: #1f2937;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .product-search-input {
+    .product-search-input,
+    .global-search-input {
         color: #f9fafb;
     }
 
-    .product-search-input::placeholder {
+    .product-search-input::placeholder,
+    .global-search-input::placeholder {
         color: #6b7280;
     }
 

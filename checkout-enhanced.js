@@ -3,8 +3,7 @@
  * Handles order placement, Supabase integration, and notifications
  */
 
-// Admin email for notifications (configure this)
-const ADMIN_EMAIL = 'brineketum@gmail.com';
+// Admin email defined in contact-system.js
 
 // Enhanced checkout form submission
 function initializeEnhancedCheckout() {
@@ -42,33 +41,52 @@ async function handleCheckoutSubmit(e) {
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span>Processing Order...</span>';
+    submitBtn.innerHTML = '<span>Processing Payment...</span>';
 
     try {
-        // Use the new order tracking system
-        const result = await window.orderTracking.createOrderWithTracking(orderData, cartItems);
+        // Check if payment method is Stripe (credit card)
+        if (orderData.paymentMethod === 'card' || orderData.paymentMethod === 'stripe') {
+            // Process with Stripe - this will redirect to Stripe Checkout
+            if (window.stripePayment && typeof window.stripePayment.processPayment === 'function') {
+                // Save order data to localStorage for after payment
+                localStorage.setItem('pending_order', JSON.stringify({
+                    orderData,
+                    cartItems,
+                    timestamp: Date.now()
+                }));
 
-        if (result.success) {
-            // Clear cart
-            clearCart();
-
-            // Close checkout modal
-            if (typeof closeCheckoutModal === 'function') {
-                closeCheckoutModal();
+                // Process Stripe payment (will redirect)
+                await window.stripePayment.processPayment(orderData, cartItems);
+                // Note: Code won't reach here as Stripe redirects to their checkout page
+            } else {
+                throw new Error('Stripe payment not initialized. Please try again.');
             }
-
-            // Show thank you message with tracking
-            showThankYouWithTracking(result.orderNumber, result.trackingNumber, cartItems, orderData);
-
-            // Show success notification
-            showNotification('Order placed successfully!', 'success');
         } else {
-            throw new Error(result.error || 'Failed to create order');
+            // For other payment methods (COD, bank transfer, etc.), create order without payment
+            const result = await window.orderTracking.createOrderWithTracking(orderData, cartItems);
+
+            if (result.success) {
+                // Clear cart
+                clearCart();
+
+                // Close checkout modal
+                if (typeof closeCheckoutModal === 'function') {
+                    closeCheckoutModal();
+                }
+
+                // Show thank you message with tracking
+                showThankYouWithTracking(result.orderNumber, result.trackingNumber, cartItems, orderData);
+
+                // Show success notification
+                showNotification('Order placed successfully!', 'success');
+            } else {
+                throw new Error(result.error || 'Failed to create order');
+            }
         }
 
     } catch (error) {
         console.error('Checkout error:', error);
-        showNotification('Failed to place order. Please try again.', 'error');
+        showNotification(error.message || 'Failed to process payment. Please try again.', 'error');
 
         // Restore button
         submitBtn.disabled = false;

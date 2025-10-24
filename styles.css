@@ -69,6 +69,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -79,6 +81,10 @@ body {
     line-height: 1.8;
     letter-spacing: 0.01em;
     overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
 
 img {
@@ -100,64 +106,44 @@ a {
 }
 
 /* ===========================================
-   LANGUAGE SWITCHER
+   LANGUAGE SWITCHER IN NAVBAR
    =========================================== */
 
-.language-switcher {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    animation: pulseGlow 3s ease-in-out infinite;
+.language-switcher-nav {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
 }
 
-@keyframes pulseGlow {
-    0%, 100% {
-        filter: drop-shadow(0 0 8px rgba(44, 169, 161, 0.5));
-    }
-    50% {
-        filter: drop-shadow(0 0 16px rgba(44, 169, 161, 0.9));
-    }
+/* Old language switcher class - kept for backwards compatibility */
+.language-switcher {
+    display: none; /* Hidden as we now use language-switcher-nav */
 }
 
 .lang-dropdown {
-    padding: 0.9rem 1.75rem;
-    border: 3px solid rgba(255, 255, 255, 0.4);
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
     color: var(--white);
     cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 0.85rem;
     font-family: var(--font-primary);
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(44, 169, 161, 0.5);
+    backdrop-filter: blur(10px);
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.85rem center;
-    background-size: 14px;
-    padding-right: 2.75rem;
-    min-width: 180px;
+    background-position: right 0.6rem center;
+    background-size: 10px;
+    padding-right: 2rem;
+    min-width: 85px;
 }
 
-/* Mobile adjustments for language switcher */
-@media (max-width: 768px) {
-    .language-switcher {
-        top: 15px;
-        right: 15px;
-    }
-
-    .lang-dropdown {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.9rem;
-        min-width: 150px;
-        padding-right: 2.25rem;
-        border-width: 2px;
-    }
-}
+/* Mobile adjustments handled in mobile-optimizations.css */
 
 .lang-dropdown:hover {
     transform: translateY(-3px) scale(1.05);
@@ -189,12 +175,14 @@ a {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
     z-index: 1000;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     transition: all var(--transition-normal);
     padding: 1.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
 }
 
 .navbar.scrolled {
@@ -225,6 +213,7 @@ a {
     width: 90px;
     height: 90px;
     border-radius: 50%;
+    aspect-ratio: 1 / 1;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
     padding: 3px;
     box-shadow:
@@ -234,7 +223,8 @@ a {
         inset 0 2px 8px rgba(255, 255, 255, 0.3);
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: heartbeatRotate 3s ease-in-out infinite;
+    animation: heartbeatRotate 60s linear infinite;
+    flex-shrink: 0;
 }
 
 @keyframes logoFloat {
@@ -332,6 +322,7 @@ a {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    aspect-ratio: 1 / 1;
     background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
     display: flex;
     align-items: center;
@@ -386,6 +377,7 @@ a {
     width: 85%;
     height: 85%;
     object-fit: contain;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     position: relative;
     z-index: 1;
@@ -1078,6 +1070,25 @@ a {
     margin-top: var(--spacing-md);
 }
 
+/* Reduce spacing on mobile - 12-16px between carousel and button */
+@media (max-width: 768px) {
+    .cinematic-cta {
+        margin-top: 1rem; /* 16px */
+    }
+}
+
+@media (max-width: 576px) {
+    .cinematic-cta {
+        margin-top: 0.875rem; /* 14px */
+    }
+}
+
+@media (max-width: 480px) {
+    .cinematic-cta {
+        margin-top: 0.75rem; /* 12px */
+    }
+}
+
 /* Old Grid Layout (backup) */
 .cinematic-grid {
     display: grid;
@@ -1267,7 +1278,7 @@ a {
 .device-carousel {
     position: relative;
     width: 100%;
-    height: 600px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1348,6 +1359,14 @@ a {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 300;
+}
+
+.product-price-hero {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-shadow: 0 2px 10px rgba(44, 169, 161, 0.5);
 }
 
 @keyframes fadeInUp {
@@ -1890,6 +1909,35 @@ a {
     padding: 0.25rem 0.5rem;
     border-radius: 20px;
     min-width: 20px;
+}
+
+/* Track Order Button */
+.track-order-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+.track-order-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.track-order-btn svg {
+    flex-shrink: 0;
 }
 
 .cart-modal {
@@ -3013,17 +3061,19 @@ a {
 
     /* Logo adjustments */
     .logo-circle {
-        width: 65px;
-        height: 65px;
+        width: 50px;
+        height: 50px;
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
     }
 
     .logo-initial {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .logo-text {
-        font-size: 1rem;
-        display: none; /* Hide text on very small screens */
+        font-size: 0.85rem;
+        font-weight: 800;
     }
 
     /* Mobile menu takes full width on small screens */
@@ -3510,16 +3560,19 @@ a {
 
     /* Responsive logo adjustments */
     .logo-circle {
-        width: 75px;
-        height: 75px;
+        width: 70px;
+        height: 70px;
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
     }
 
     .logo-initial {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .logo-text {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+        font-weight: 800;
     }
 }
 
@@ -3585,15 +3638,17 @@ a {
 /* Device Carousel Mobile Responsive */
 @media (max-width: 768px) {
     .device-carousel {
-        height: 450px;
+        min-height: 300px;
+        height: auto;
+        padding: 1rem 0;
     }
 
     .device-3d-large {
-        max-width: 400px;
+        max-width: 350px;
     }
 
     .device-img-large {
-        max-height: 280px;
+        max-height: 250px;
     }
 
     .device-info h3 {
@@ -3617,15 +3672,17 @@ a {
 
 @media (max-width: 480px) {
     .device-carousel {
-        height: 380px;
+        min-height: 250px;
+        height: auto;
+        padding: 0.75rem 0;
     }
 
     .device-3d-large {
-        max-width: 300px;
+        max-width: 280px;
     }
 
     .device-img-large {
-        max-height: 220px;
+        max-height: 200px;
     }
 
     .device-info {
@@ -4760,4 +4817,33 @@ a {
     .order-status-badge {
         align-self: flex-start;
     }
+}
+
+/* Mobile Navigation handled in mobile-optimizations.css */
+
+/* Payment Method Logo Styles */
+.payment-logo {
+    width: 40px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.payment-logo-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.payment-logo-group .payment-logo {
+    width: 36px;
+    height: 24px;
+}
+
+.payment-logo-single {
+    width: 48px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
 }

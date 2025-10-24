@@ -27,10 +27,20 @@ function initializeCompactCategories() {
 /**
  * Update product counts for each category
  */
+let categoryCountRetries = 0;
+const MAX_RETRIES = 10;
+
 function updateCategoryCounts() {
     if (!window.products || !Array.isArray(window.products)) {
-        console.warn('⚠️ Products not loaded yet');
-        setTimeout(updateCategoryCounts, 500);
+        if (categoryCountRetries < MAX_RETRIES) {
+            categoryCountRetries++;
+            console.warn(`⚠️ Products not loaded yet (attempt ${categoryCountRetries}/${MAX_RETRIES})`);
+            setTimeout(updateCategoryCounts, 500);
+        } else {
+            console.log('ℹ️ Using static products from products.js');
+            window.products = products; // Use products from products.js
+            updateCategoryCounts();
+        }
         return;
     }
 

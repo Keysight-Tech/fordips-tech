@@ -417,6 +417,9 @@ function buildProductDetailModal(product, enhanced) {
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
+                <button class="product-detail-favorite-btn" data-favorite-id="${product.id}" aria-label="Add to favorites" style="position: absolute; top: 1rem; right: 4rem;">
+                    🤍
+                </button>
 
                 <div class="product-detail-layout">
                     <!-- Left: Image Gallery -->
@@ -888,22 +891,40 @@ function addToCartEnhanced() {
 }
 
 /**
- * Buy Now (Quick checkout)
+ * Buy Now (Quick checkout - goes directly to checkout)
  */
 function buyNowEnhanced() {
-    addToCartEnhanced();
+    const product = products.find(p => p.id === currentProductView.productId);
 
-    // Open cart and checkout
-    setTimeout(() => {
-        if (typeof openCart === 'function') {
-            openCart();
+    const cartItem = {
+        id: currentProductView.productId,
+        name: product.name,
+        price: currentProductView.currentPrice,
+        image: product.image,
+        quantity: currentProductView.quantity,
+        selectedVariants: {
+            color: currentProductView.selectedColor?.name || null,
+            storage: currentProductView.selectedStorage?.name || null,
+            memory: currentProductView.selectedMemory?.name || null,
+            connectivity: currentProductView.selectedConnectivity?.name || null,
+            caseSize: currentProductView.selectedCaseSize?.name || null,
+            caseMaterial: currentProductView.selectedCaseMaterial?.name || null,
+            bandColor: currentProductView.selectedBandColor?.name || null,
+            option: currentProductView.selectedOption?.name || null
         }
+    };
 
-        setTimeout(() => {
-            if (typeof openCheckoutModal === 'function') {
-                openCheckoutModal();
-            }
-        }, 500);
+    // Add to cart silently (using existing cart system)
+    addToCart(cartItem);
+
+    // Close product modal
+    closeEnhancedProductDetail();
+
+    // Go directly to checkout
+    setTimeout(() => {
+        if (typeof openCheckoutModal === 'function') {
+            openCheckoutModal();
+        }
     }, 300);
 }
 

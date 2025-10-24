@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites System Compatibility Test - Fordips Tech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+        }
+        .test-section h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .test-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+        }
+        .test-name {
+            font-weight: 500;
+            color: #334155;
+        }
+        .test-result {
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .test-result.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .test-result.pass {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .test-result.fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .test-result.running {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .details {
+            margin-top: 10px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            color: #475569;
+            display: none;
+        }
+        .details.show {
+            display: block;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .summary h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .summary p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-secondary {
+            background: #64748b;
+            box-shadow: 0 4px 15px rgba(100, 116, 139, 0.4);
+        }
+        .btn-success {
+            background: #10b981;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        .btn-danger {
+            background: #ef4444;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Favorites System Compatibility Test</h1>
+        <p class="subtitle">Verify Supabase integration and functionality</p>
+
+        <div class="action-buttons">
+            <button onclick="runAllTests()" id="runTestsBtn">Run All Tests</button>
+            <button onclick="testAddFavorite()" class="btn-success">Test Add Favorite</button>
+            <button onclick="testRemoveFavorite()" class="btn-danger">Test Remove Favorite</button>
+            <button onclick="showConsoleCommands()" class="btn-secondary">Show Console Commands</button>
+        </div>
+
+        <!-- Test 1: Supabase Connection -->
+        <div class="test-section">
+            <h2>1️⃣ Supabase Connection</h2>
+            <div class="test-item" id="test-supabase-client">
+                <span class="test-name">Supabase Client Initialized</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-supabase-url">
+                <span class="test-name">Supabase URL Configured</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="details" id="details-supabase"></div>
+        </div>
+
+        <!-- Test 2: Favorites Table -->
+        <div class="test-section">
+            <h2>2️⃣ Database Table</h2>
+            <div class="test-item" id="test-table-exists">
+                <span class="test-name">Favorites Table Exists</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-table-accessible">
+                <span class="test-name">Table Accessible (RLS Policies OK)</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="details" id="details-table"></div>
+        </div>
+
+        <!-- Test 3: Favorites System -->
+        <div class="test-section">
+            <h2>3️⃣ Favorites System</h2>
+            <div class="test-item" id="test-favorites-loaded">
+                <span class="test-name">Favorites System Loaded</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-user-identifier">
+                <span class="test-name">User Identifier Generated</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="details" id="details-system"></div>
+        </div>
+
+        <!-- Test 4: CRUD Operations -->
+        <div class="test-section">
+            <h2>4️⃣ CRUD Operations</h2>
+            <div class="test-item" id="test-insert">
+                <span class="test-name">INSERT - Add to Favorites</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-select">
+                <span class="test-name">SELECT - Load Favorites</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-delete">
+                <span class="test-name">DELETE - Remove from Favorites</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="details" id="details-crud"></div>
+        </div>
+
+        <!-- Test 5: UI Integration -->
+        <div class="test-section">
+            <h2>5️⃣ UI Integration</h2>
+            <div class="test-item" id="test-css-loaded">
+                <span class="test-name">Favorites CSS Loaded</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-modal-exists">
+                <span class="test-name">Favorites Modal Exists</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="test-item" id="test-header-button">
+                <span class="test-name">Header Favorites Button Exists</span>
+                <span class="test-result pending">PENDING</span>
+            </div>
+            <div class="details" id="details-ui"></div>
+        </div>
+
+        <div class="summary" id="summary" style="display: none;">
+            <h3 id="summary-title">Test Results</h3>
+            <p id="summary-text"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script>
+        const SUPABASE_URL = window.FORDIPS_CONFIG?.SUPABASE_CONFIG?.url || 'https://loutcbvftzojsioahtdw.supabase.co';
+        const SUPABASE_ANON_KEY = window.FORDIPS_CONFIG?.SUPABASE_CONFIG?.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvdXRjYnZmdHpvanNpb2FodGR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyNDc5NjMsImV4cCI6MjA3NjgyMzk2M30.u49fBtuF99IsEAr8iYLo_3SnHAOqTR-Y7WPXnkGVKOs';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        window.supabaseClient = supabase;
+
+        let testResults = {
+            passed: 0,
+            failed: 0,
+            total: 0
+        };
+
+        function updateTestResult(testId, status, details = '') {
+            const element = document.getElementById(testId);
+            const resultSpan = element.querySelector('.test-result');
+            resultSpan.className = `test-result ${status}`;
+            resultSpan.textContent = status.toUpperCase();
+
+            if (details) {
+                const detailsId = 'details-' + testId.split('-')[1];
+                const detailsEl = document.getElementById(detailsId);
+                if (detailsEl) {
+                    detailsEl.textContent += details + '\n';
+                    detailsEl.classList.add('show');
+                }
+            }
+
+            if (status === 'pass') testResults.passed++;
+            if (status === 'fail') testResults.failed++;
+            testResults.total++;
+        }
+
+        async function runAllTests() {
+            const btn = document.getElementById('runTestsBtn');
+            btn.disabled = true;
+            btn.textContent = 'Running Tests...';
+
+            testResults = { passed: 0, failed: 0, total: 0 };
+
+            // Test 1: Supabase Connection
+            await testSupabaseConnection();
+
+            // Test 2: Database Table
+            await testDatabaseTable();
+
+            // Test 3: Favorites System
+            await testFavoritesSystem();
+
+            // Test 4: CRUD Operations
+            await testCRUDOperations();
+
+            // Test 5: UI Integration
+            await testUIIntegration();
+
+            // Show summary
+            showSummary();
+
+            btn.disabled = false;
+            btn.textContent = 'Run All Tests';
+        }
+
+        async function testSupabaseConnection() {
+            // Test Supabase client
+            if (window.supabaseClient) {
+                updateTestResult('test-supabase-client', 'pass', 'Supabase client: ' + typeof window.supabaseClient);
+            } else {
+                updateTestResult('test-supabase-client', 'fail', 'Supabase client not found');
+            }
+
+            // Test URL
+            if (SUPABASE_URL && SUPABASE_URL.includes('supabase.co')) {
+                updateTestResult('test-supabase-url', 'pass', 'URL: ' + SUPABASE_URL);
+            } else {
+                updateTestResult('test-supabase-url', 'fail', 'Invalid URL: ' + SUPABASE_URL);
+            }
+        }
+
+        async function testDatabaseTable() {
+            try {
+                // Test if table exists and is accessible
+                const { data, error, count } = await supabase
+                    .from('favorites')
+                    .select('*', { count: 'exact', head: true });
+
+                if (error) {
+                    if (error.message.includes('relation') && error.message.includes('does not exist')) {
+                        updateTestResult('test-table-exists', 'fail', 'Table does not exist. Use setup-favorites-table.html');
+                        updateTestResult('test-table-accessible', 'fail', 'Cannot test - table missing');
+                    } else {
+                        updateTestResult('test-table-exists', 'fail', 'Error: ' + error.message);
+                        updateTestResult('test-table-accessible', 'fail', 'Error: ' + error.message);
+                    }
+                } else {
+                    updateTestResult('test-table-exists', 'pass', 'Table exists');
+                    updateTestResult('test-table-accessible', 'pass', `Found ${count || 0} existing favorites`);
+                }
+            } catch (e) {
+                updateTestResult('test-table-exists', 'fail', 'Exception: ' + e.message);
+                updateTestResult('test-table-accessible', 'fail', 'Exception: ' + e.message);
+            }
+        }
+
+        async function testFavoritesSystem() {
+            // Test if favorites system loaded
+            if (window.favoritesSystem) {
+                updateTestResult('test-favorites-loaded', 'pass', 'Functions available: ' + Object.keys(window.favoritesSystem).join(', '));
+            } else {
+                updateTestResult('test-favorites-loaded', 'fail', 'window.favoritesSystem not found. Include favorites-system.js');
+            }
+
+            // Test user identifier
+            const userIdentifier = localStorage.getItem('fordipsTechUserIdentifier');
+            if (userIdentifier) {
+                updateTestResult('test-user-identifier', 'pass', 'ID: ' + userIdentifier);
+            } else {
+                updateTestResult('test-user-identifier', 'fail', 'No user identifier in localStorage');
+            }
+        }
+
+        async function testCRUDOperations() {
+            const testProductId = 99999;
+            const testProduct = {
+                id: testProductId,
+                name: 'Test Product',
+                price: 999.99,
+                image: 'test.jpg',
+                category: 'test'
+            };
+
+            try {
+                // Test INSERT
+                const { data: insertData, error: insertError } = await supabase
+                    .from('favorites')
+                    .insert({
+                        user_identifier: 'test_user',
+                        product_id: testProductId,
+                        product_name: testProduct.name,
+                        product_price: testProduct.price,
+                        product_image: testProduct.image,
+                        product_category: testProduct.category
+                    })
+                    .select();
+
+                if (insertError) {
+                    updateTestResult('test-insert', 'fail', 'Error: ' + insertError.message);
+                } else {
+                    updateTestResult('test-insert', 'pass', 'Successfully inserted test record');
+                }
+
+                // Test SELECT
+                const { data: selectData, error: selectError } = await supabase
+                    .from('favorites')
+                    .select('*')
+                    .eq('user_identifier', 'test_user')
+                    .eq('product_id', testProductId);
+
+                if (selectError) {
+                    updateTestResult('test-select', 'fail', 'Error: ' + selectError.message);
+                } else if (selectData && selectData.length > 0) {
+                    updateTestResult('test-select', 'pass', 'Successfully retrieved record');
+                } else {
+                    updateTestResult('test-select', 'fail', 'Record not found after insert');
+                }
+
+                // Test DELETE
+                const { error: deleteError } = await supabase
+                    .from('favorites')
+                    .delete()
+                    .eq('user_identifier', 'test_user')
+                    .eq('product_id', testProductId);
+
+                if (deleteError) {
+                    updateTestResult('test-delete', 'fail', 'Error: ' + deleteError.message);
+                } else {
+                    updateTestResult('test-delete', 'pass', 'Successfully deleted test record');
+                }
+
+            } catch (e) {
+                updateTestResult('test-insert', 'fail', 'Exception: ' + e.message);
+                updateTestResult('test-select', 'fail', 'Exception: ' + e.message);
+                updateTestResult('test-delete', 'fail', 'Exception: ' + e.message);
+            }
+        }
+
+        async function testUIIntegration() {
+            // Test CSS loaded
+            const cssLoaded = Array.from(document.styleSheets).some(sheet =>
+                sheet.href && sheet.href.includes('favorites-styles.css')
+            );
+
+            if (cssLoaded) {
+                updateTestResult('test-css-loaded', 'pass', 'CSS file loaded');
+            } else {
+                updateTestResult('test-css-loaded', 'fail', 'favorites-styles.css not loaded');
+            }
+
+            // For modal and header button, we need to check the main page
+            updateTestResult('test-modal-exists', 'pending', 'Check main page (index.html) for #favoritesModal');
+            updateTestResult('test-header-button', 'pending', 'Check main page (index.html) for #favoritesButton');
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary');
+            const title = document.getElementById('summary-title');
+            const text = document.getElementById('summary-text');
+
+            summary.style.display = 'block';
+
+            if (testResults.failed === 0) {
+                title.textContent = '✅ All Tests Passed!';
+                text.textContent = `${testResults.passed} out of ${testResults.total} tests passed. Your favorites system is fully functional!`;
+                summary.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            } else {
+                title.textContent = '⚠️ Some Tests Failed';
+                text.textContent = `${testResults.passed} passed, ${testResults.failed} failed out of ${testResults.total} tests. Check details above.`;
+                summary.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            }
+        }
+
+        async function testAddFavorite() {
+            if (!window.favoritesSystem) {
+                alert('Favorites system not loaded. Include favorites-system.js on main page.');
+                return;
+            }
+
+            const testProduct = {
+                id: 1,
+                name: 'Test iPhone',
+                price: 999,
+                image: 'test.jpg',
+                category: 'iphone'
+            };
+
+            try {
+                await window.favoritesSystem.addFavorite(testProduct.id, testProduct);
+                alert('✅ Test favorite added! Check console for details.');
+            } catch (e) {
+                alert('❌ Error: ' + e.message);
+            }
+        }
+
+        async function testRemoveFavorite() {
+            if (!window.favoritesSystem) {
+                alert('Favorites system not loaded. Include favorites-system.js on main page.');
+                return;
+            }
+
+            try {
+                await window.favoritesSystem.removeFavorite(1);
+                alert('✅ Test favorite removed! Check console for details.');
+            } catch (e) {
+                alert('❌ Error: ' + e.message);
+            }
+        }
+
+        function showConsoleCommands() {
+            console.clear();
+            console.log('%c🧪 Favorites System Test Commands', 'font-size: 20px; font-weight: bold; color: #667eea;');
+            console.log('%c━'.repeat(50), 'color: #667eea;');
+            console.log('\n%cBasic Checks:', 'font-weight: bold; font-size: 14px;');
+            console.log('window.supabaseClient          // Check Supabase client');
+            console.log('window.favoritesSystem         // Check favorites system');
+            console.log('\n%cTest Operations:', 'font-weight: bold; font-size: 14px;');
+            console.log('await window.favoritesSystem.getAllFavorites()  // Get all favorites');
+            console.log('window.favoritesSystem.isFavorited(1)           // Check if favorited');
+            console.log('await window.favoritesSystem.addFavorite(1, { id: 1, name: "Test", price: 999, image: "test.jpg", category: "test" })');
+            console.log('await window.favoritesSystem.removeFavorite(1)  // Remove favorite');
+            console.log('\n%cDirect Supabase Queries:', 'font-weight: bold; font-size: 14px;');
+            console.log('await supabaseClient.from("favorites").select("*")  // Get all');
+            console.log('await supabaseClient.from("favorites").select("*", { count: "exact" })  // Count');
+            console.log('%c━'.repeat(50), 'color: #667eea;');
+
+            alert('Console commands displayed! Open DevTools (F12) to see them.');
+        }
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            console.log('🧪 Test page loaded. Click "Run All Tests" to begin.');
+        });
+    </script>
+</body>
+</html>

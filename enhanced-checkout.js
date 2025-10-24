@@ -379,7 +379,12 @@ async function handleCheckoutFormSubmit(e) {
         const paymentResult = await processPayment(paymentMethod, orderData, cart);
 
         // If payment successful, create order
-        if (paymentResult.success && window.orderTracking) {
+        if (paymentResult.success) {
+            // Check if order tracking system is available
+            if (!window.orderTracking || !window.orderTracking.createOrderWithTracking) {
+                throw new Error('Order tracking system not available. Please refresh the page and try again.');
+            }
+
             const orderResult = await window.orderTracking.createOrderWithTracking(orderData, cart);
 
             if (orderResult.success) {
@@ -391,17 +396,21 @@ async function handleCheckoutFormSubmit(e) {
                 closeCheckoutModal();
 
                 // Show success message with tracking
-                showThankYouWithTracking(
-                    orderResult.orderNumber,
-                    orderResult.trackingNumber,
-                    cart,
-                    orderData
-                );
+                if (typeof showThankYouWithTracking === 'function') {
+                    showThankYouWithTracking(
+                        orderResult.orderNumber,
+                        orderResult.trackingNumber,
+                        cart,
+                        orderData
+                    );
+                }
 
                 showNotification('Order placed successfully!', 'success');
             } else {
                 throw new Error(orderResult.error || 'Failed to create order');
             }
+        } else {
+            throw new Error('Payment processing failed. Please try again.');
         }
 
     } catch (error) {

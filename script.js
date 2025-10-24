@@ -14,42 +14,144 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile menu toggle
+// Mobile Drawer Navigation
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navMenu = document.getElementById('navMenu');
+const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+const mobileDrawerSearchInput = document.getElementById('mobileDrawerSearchInput');
 
+// Open/Close Mobile Drawer
+function openMobileDrawer() {
+    navMenu.classList.add('active');
+    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileDrawer() {
+    navMenu.classList.remove('active');
+    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    // Clear search input when closing
+    if (mobileDrawerSearchInput) mobileDrawerSearchInput.value = '';
+}
+
+// Toggle drawer on menu button click
 if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-    });
-}
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (navMenu && navMenu.classList.contains('active')) {
-        if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-            navMenu.classList.remove('active');
-            document.body.style.overflow = '';
+        if (navMenu.classList.contains('active')) {
+            closeMobileDrawer();
+        } else {
+            openMobileDrawer();
         }
-    }
-});
-
-// Prevent menu from closing when clicking inside it
-if (navMenu) {
-    navMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
     });
 }
 
-// Close mobile menu on link click
+// Close drawer when clicking overlay
+if (mobileDrawerOverlay) {
+    mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+}
+
+// Close drawer on navigation link click
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        closeMobileDrawer();
     });
 });
+
+// Mobile Drawer Search Functionality
+if (mobileDrawerSearchInput) {
+    mobileDrawerSearchInput.addEventListener('input', handleMobileDrawerSearch);
+    mobileDrawerSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const searchTerm = mobileDrawerSearchInput.value.trim().toLowerCase();
+            if (searchTerm) {
+                scrollToProductSection(searchTerm);
+            }
+        }
+    });
+}
+
+function handleMobileDrawerSearch(e) {
+    const searchTerm = e.target.value.trim().toLowerCase();
+
+    if (!searchTerm) return;
+
+    // Debounce search
+    clearTimeout(window.mobileSearchTimeout);
+    window.mobileSearchTimeout = setTimeout(() => {
+        scrollToProductSection(searchTerm);
+    }, 500);
+}
+
+function scrollToProductSection(searchTerm) {
+    // Search in products array (from products.js)
+    if (typeof products === 'undefined') {
+        console.warn('Products array not loaded');
+        return;
+    }
+
+    // Find matching product
+    const matchingProduct = products.find(product =>
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm)
+    );
+
+    if (matchingProduct) {
+        // Close drawer
+        closeMobileDrawer();
+
+        // Scroll to products section first
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // After scrolling to section, try to open the category modal if it exists
+            setTimeout(() => {
+                const categoryBlock = document.querySelector(`[data-category="${matchingProduct.category}"]`);
+                if (categoryBlock && typeof openCategoryModal === 'function') {
+                    openCategoryModal(matchingProduct.category);
+                }
+            }, 600);
+        }
+    } else {
+        // Search for category keywords
+        const categoryMap = {
+            'iphone': 'iphone',
+            'samsung': 'samsung',
+            'galaxy': 'samsung',
+            'laptop': 'laptop',
+            'macbook': 'laptop',
+            'desktop': 'desktop',
+            'imac': 'desktop',
+            'tablet': 'tablet',
+            'ipad': 'tablet',
+            'watch': 'smartwatch',
+            'smartwatch': 'smartwatch',
+            'apple watch': 'smartwatch',
+            'starlink': 'other'
+        };
+
+        const matchedCategory = Object.keys(categoryMap).find(key =>
+            searchTerm.includes(key)
+        );
+
+        if (matchedCategory) {
+            closeMobileDrawer();
+            const productsSection = document.getElementById('products');
+            if (productsSection) {
+                productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                setTimeout(() => {
+                    if (typeof openCategoryModal === 'function') {
+                        openCategoryModal(categoryMap[matchedCategory]);
+                    }
+                }, 600);
+            }
+        }
+    }
+}
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -122,6 +224,7 @@ window.addEventListener('scroll', requestParallax);
 // Device Carousel Functionality
 let currentSlide = 0;
 let carouselInterval;
+let carouselInitialized = false;
 
 function initDeviceCarousel() {
     const slides = document.querySelectorAll('.device-slide');
@@ -133,6 +236,13 @@ function initDeviceCarousel() {
         console.warn('⚠️ No carousel slides found!');
         return;
     }
+
+    // Prevent double initialization
+    if (carouselInitialized) {
+        console.log('⚠️ Carousel already initialized, resetting...');
+        clearInterval(carouselInterval);
+    }
+    carouselInitialized = true;
 
     function showSlide(index) {
         // Remove active class from all slides and dots
@@ -214,8 +324,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeObserver.observe(el);
     });
 
-    // Initialize device carousel
-    initDeviceCarousel();
+    // Initialize device carousel (only if products.js hasn't already done it)
+    setTimeout(() => {
+        if (!carouselInitialized) {
+            console.log('🔄 Initializing carousel from script.js (products.js did not load it)');
+            initDeviceCarousel();
+        }
+    }, 200);
 
     console.log('🚀 Fordips Tech loaded successfully!');
     console.log(`Cart contains ${getCartCount()} items`);

@@ -64,15 +64,35 @@
 .currency-search input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #e5e7eb;
+    border: 2px solid #334155;
     border-radius: 8px;
     font-size: 14px;
+    background: #1e293b;
+    color: #94a3b8;
     outline: none;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.currency-search input:focus {
+.currency-search input::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+.currency-search input:hover {
+    border-color: #475569;
+}
+
+.currency-search input:focus,
+.currency-search input:not(:placeholder-shown) {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: #ffffff;
+    color: #1e293b;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.currency-search input:focus::placeholder {
+    color: #94a3b8;
 }
 
 .currency-list {
@@ -239,18 +259,41 @@ input[type="checkbox"]:checked + .toggle-slider::before {
 .form-group textarea {
     width: 100%;
     padding: 10px 14px;
-    border: 1px solid #d1d5db;
+    border: 2px solid #334155;
     border-radius: 8px;
     font-size: 14px;
     font-family: inherit;
-    transition: all 0.2s;
+    background: #1e293b;
+    color: #94a3b8;
+    transition: all 0.35s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #475569;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group input:not(:placeholder-shown),
+.form-group textarea:not(:placeholder-shown) {
     outline: none;
+    background: #ffffff;
+    color: #1e293b;
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+    color: #94a3b8;
 }
 
 .form-row {
