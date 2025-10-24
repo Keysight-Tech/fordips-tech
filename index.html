@@ -74,6 +74,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="category-products-styles.css">
     <link rel="stylesheet" href="compact-layout-overrides.css">
+    <link rel="stylesheet" href="location-detection-styles.css">
     <link rel="stylesheet" href="enhanced-product-styles.css">
     <link rel="stylesheet" href="enhanced-checkout-styles.css">
     <link rel="stylesheet" href="currency-styles.css">
@@ -1099,6 +1100,58 @@
         </div>
     </div>
 
+    <!-- Location Detection Modal -->
+    <div class="location-modal" id="locationModal">
+        <div class="location-modal-content">
+            <div class="location-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+            </div>
+
+            <h2>Welcome to Fordips Tech!</h2>
+            <p>We'd like to detect your location to provide you with:</p>
+
+            <div class="location-benefits">
+                <ul>
+                    <li>Automatic currency conversion for your region</li>
+                    <li>Accurate shipping costs and delivery times</li>
+                    <li>Localized product pricing</li>
+                    <li>Nearest store location information</li>
+                </ul>
+            </div>
+
+            <p style="font-size: 0.95rem; color: #666;">
+                Your location data is used only for shopping convenience and is never stored or shared.
+            </p>
+
+            <div class="location-modal-actions">
+                <button class="btn-allow-location" onclick="requestGeolocation()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    Allow Location Access
+                </button>
+                <button class="btn-decline-location" onclick="declineLocation()">
+                    Continue Without
+                </button>
+            </div>
+
+            <div id="locationStatus"></div>
+
+            <p class="privacy-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16v-4"></path>
+                    <path d="M12 8h.01"></path>
+                </svg>
+                We respect your privacy. You can change this anytime.
+            </p>
+        </div>
+    </div>
+
     <!-- Supabase Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1119,6 +1172,7 @@
     <script src="checkout-enhanced.js"></script>
     <script src="enhanced-checkout.js"></script>
     <script src="currency-system.js"></script>
+    <script src="location-detection.js"></script>
     <script src="ai-chat.js"></script>
     <script src="search-system.js"></script>
     <script src="notifications-system.js"></script>
