@@ -1086,16 +1086,16 @@ a {
     margin-top: var(--spacing-md);
 }
 
-/* Reduce spacing on mobile - 12-16px between carousel and button */
+/* Reduce spacing on mobile - minimal space between carousel and button */
 @media (max-width: 768px) {
     .cinematic-cta {
-        margin-top: 1rem; /* 16px */
+        margin-top: 0.25rem; /* 4px - tight spacing for mobile */
     }
 }
 
 @media (max-width: 576px) {
     .cinematic-cta {
-        margin-top: 0.875rem; /* 14px */
+        margin-top: 0.25rem; /* 4px - tight spacing for mobile */
     }
 }
 
@@ -1346,8 +1346,8 @@ a {
 
 .device-img-large {
     width: 100%;
-    max-height: 380px;
-    min-height: 250px;
+    max-height: 500px;
+    min-height: 350px;
     object-fit: contain;
     border-radius: 20px;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
@@ -3690,9 +3690,9 @@ a {
 /* Device Carousel Mobile Responsive */
 @media (max-width: 768px) {
     .device-carousel {
-        min-height: 450px;
+        min-height: 500px;
         height: auto;
-        padding: 2rem 0;
+        padding: 2rem 0 1rem 0;
     }
 
     .device-3d-large {
@@ -3701,8 +3701,8 @@ a {
     }
 
     .device-img-large {
-        max-height: 400px;
-        min-height: 320px;
+        max-height: 550px;
+        min-height: 420px;
         width: 100%;
         object-fit: contain;
     }
@@ -3735,9 +3735,9 @@ a {
 
 @media (max-width: 480px) {
     .device-carousel {
-        min-height: 400px;
+        min-height: 450px;
         height: auto;
-        padding: 1.5rem 0;
+        padding: 1.5rem 0 0.75rem 0;
     }
 
     .device-3d-large {
@@ -3746,8 +3746,8 @@ a {
     }
 
     .device-img-large {
-        max-height: 350px;
-        min-height: 280px;
+        max-height: 480px;
+        min-height: 360px;
         width: 100%;
     }
 
