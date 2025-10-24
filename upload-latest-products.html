@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Latest Products - Fordips Tech</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, #2CC4C4 0%, #1ea3a3 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 196, 196, 0.4);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 196, 196, 0.5);
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+        .warning { color: #f59e0b; }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #2CC4C4;
+            margin: 0;
+        }
+        .stat-card p {
+            color: #64748b;
+            margin: 0.5rem 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Upload Latest Apple Products</h1>
+        <p class="subtitle">Add the latest iPhones, MacBooks, iPads, and accessories to Supabase</p>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="totalProducts">0</h3>
+                <p>Products to Upload</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="uploadedCount">0</h3>
+                <p>Successfully Uploaded</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="failedCount">0</h3>
+                <p>Failed</p>
+            </div>
+        </div>
+
+        <button id="uploadBtn" class="btn" onclick="uploadAllProducts()">
+            📦 Upload All Products to Supabase
+        </button>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-integration.js"></script>
+
+    <script>
+        // Latest Apple Products Database (2024-2025)
+        const latestProducts = [
+            // ========== LATEST IPHONES ==========
+            {
+                name: 'iPhone 16 Pro Max',
+                category_slug: 'iphone',
+                price: 1199,
+                description: 'The ultimate iPhone with A18 Pro chip, titanium design, and the most advanced camera system. Features 6.9-inch Super Retina XDR display, ProMotion 120Hz, always-on display, Action button, Camera Control, and up to 2TB storage. The most powerful iPhone ever created.',
+                image_url: 'https://images.unsplash.com/photo-1697722662233-293036c3e0b8?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 50,
+                is_active: true
+            },
+            {
+                name: 'iPhone 16 Pro',
+                category_slug: 'iphone',
+                price: 999,
+                description: 'Pro performance in a compact 6.3-inch design. A18 Pro chip delivers desktop-class graphics and next-level photography. Features titanium design, ProMotion display, 48MP main camera with 5x optical zoom, and all-day battery life. Perfect for professionals.',
+                image_url: 'https://images.unsplash.com/photo-1697722657945-1b9774937e81?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 75,
+                is_active: true
+            },
+            {
+                name: 'iPhone 16 Plus',
+                category_slug: 'iphone',
+                price: 899,
+                description: 'Big screen, bigger battery. 6.7-inch Super Retina XDR display with A18 chip provides incredible performance for gaming, streaming, and productivity. Features advanced dual-camera system, Action button, Camera Control, and two-day battery life.',
+                image_url: 'https://images.unsplash.com/photo-1697722662684-00bae64e2b77?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 100,
+                is_active: true
+            },
+            {
+                name: 'iPhone 16',
+                category_slug: 'iphone',
+                price: 799,
+                description: 'The perfect balance of capability and value. A18 chip with 6-core GPU, 6.1-inch Super Retina XDR display, advanced dual-camera system with spatial video, and all the latest features including Action button and Camera Control.',
+                image_url: 'https://images.unsplash.com/photo-1697722662469-f1c8b5c5b6d2?w=800&q=80',
+                badge: 'POPULAR',
+                stock_quantity: 150,
+                is_active: true
+            },
+            {
+                name: 'iPhone 15 Pro Max',
+                category_slug: 'iphone',
+                price: 1099,
+                description: 'Last year\'s flagship with A17 Pro chip and titanium design. 6.7-inch always-on display, 48MP main camera with 5x telephoto, Action button, and USB-C. Still an incredible choice with excellent value.',
+                image_url: 'https://images.unsplash.com/photo-1696446702183-cbd5d3e6c88c?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 60,
+                is_active: true
+            },
+            {
+                name: 'iPhone 15 Pro',
+                category_slug: 'iphone',
+                price: 899,
+                description: 'Compact pro performance with A17 Pro chip. 6.1-inch ProMotion display, titanium frame, customizable Action button, and advanced camera system. Now at an amazing price point.',
+                image_url: 'https://images.unsplash.com/photo-1695048132726-920068d38e05?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 80,
+                is_active: true
+            },
+            {
+                name: 'iPhone 15 Plus',
+                category_slug: 'iphone',
+                price: 799,
+                description: 'Big display, all-day battery. A16 Bionic chip, 6.7-inch Super Retina XDR display, advanced dual-camera system with 2x telephoto, and USB-C connectivity. Perfect for media consumption.',
+                image_url: 'https://images.unsplash.com/photo-1695048133618-1d96b8d5e8ff?w=800&q=80',
+                badge: null,
+                stock_quantity: 90,
+                is_active: true
+            },
+            {
+                name: 'iPhone 15',
+                category_slug: 'iphone',
+                price: 699,
+                description: 'Reliable performance with A16 Bionic chip from iPhone 14 Pro. 6.1-inch Super Retina XDR display, 48MP main camera, Dynamic Island, and USB-C make this the best value iPhone.',
+                image_url: 'https://images.unsplash.com/photo-1694820162020-c665b7d5c04e?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 120,
+                is_active: true
+            },
+            {
+                name: 'iPhone 14 Pro Max',
+                category_slug: 'iphone',
+                price: 899,
+                description: 'Previous generation Pro Max with A16 Bionic, always-on display, and Dynamic Island. 48MP main camera, ProRAW, and ProRes video recording. Still incredibly powerful at a reduced price.',
+                image_url: 'https://images.unsplash.com/photo-1663765970236-9bb8f1e8c25e?w=800&q=80',
+                badge: 'SALE',
+                stock_quantity: 40,
+                is_active: true
+            },
+            {
+                name: 'iPhone 14',
+                category_slug: 'iphone',
+                price: 599,
+                description: 'A15 Bionic chip with 5-core GPU, 6.1-inch Super Retina XDR display, advanced dual-camera system, and Emergency SOS via satellite. Excellent entry-level option.',
+                image_url: 'https://images.unsplash.com/photo-1678685888221-cda269d9b8a4?w=800&q=80',
+                badge: 'SALE',
+                stock_quantity: 70,
+                is_active: true
+            },
+            {
+                name: 'iPhone SE (3rd Gen)',
+                category_slug: 'iphone',
+                price: 429,
+                description: 'Most affordable iPhone with A15 Bionic chip. Classic 4.7-inch design with Touch ID, wireless charging, 5G connectivity, and the power to run the latest iOS features. Perfect for first-time iPhone users.',
+                image_url: 'https://images.unsplash.com/photo-1592286927405-af4cce0cff9f?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 100,
+                is_active: true
+            },
+
+            // ========== MACBOOKS ==========
+            {
+                name: 'MacBook Pro 16" M4 Max',
+                category_slug: 'laptop',
+                price: 3499,
+                description: 'The ultimate creative powerhouse. M4 Max chip with up to 16-core CPU and 40-core GPU, 48GB unified memory, 16.2-inch Liquid Retina XDR display with 120Hz ProMotion, up to 8TB SSD, three Thunderbolt 5 ports, and up to 24-hour battery life. Perfect for video editing, 3D rendering, and software development.',
+                image_url: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 15,
+                is_active: true
+            },
+            {
+                name: 'MacBook Pro 14" M4 Pro',
+                category_slug: 'laptop',
+                price: 1999,
+                description: 'Pro performance in a portable package. M4 Pro chip with 12-core CPU and 18-core GPU, 18GB unified memory, 14.2-inch Liquid Retina XDR display, 512GB SSD, and 18-hour battery life. The perfect balance of power and portability for professionals.',
+                image_url: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 25,
+                is_active: true
+            },
+            {
+                name: 'MacBook Air 15" M3',
+                category_slug: 'laptop',
+                price: 1299,
+                description: 'Impossibly thin, incredibly powerful. M3 chip with 8-core CPU and 10-core GPU, 15.3-inch Liquid Retina display, 8GB unified memory, 256GB SSD, MagSafe charging, and 18-hour battery life. The ultimate everyday laptop with a gorgeous large display.',
+                image_url: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 50,
+                is_active: true
+            },
+            {
+                name: 'MacBook Air 13" M3',
+                category_slug: 'laptop',
+                price: 1099,
+                description: 'Supercharged by M3 chip. 8-core CPU, 8-core GPU, 13.6-inch Liquid Retina display, 8GB unified memory, 256GB SSD, and up to 18-hour battery life. Fanless design keeps it completely silent. Perfect for students and everyday users.',
+                image_url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80',
+                badge: 'POPULAR',
+                stock_quantity: 80,
+                is_active: true
+            },
+            {
+                name: 'MacBook Air 13" M2',
+                category_slug: 'laptop',
+                price: 999,
+                description: 'Last generation Air at an incredible price. M2 chip with 8-core CPU and 8-core GPU, 13.6-inch Liquid Retina display, 8GB memory, 256GB SSD, MagSafe 3, and fanless design. Best value MacBook available.',
+                image_url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 60,
+                is_active: true
+            },
+            {
+                name: 'MacBook Pro 16" M3 Max',
+                category_slug: 'laptop',
+                price: 3199,
+                description: 'Professional-grade performance with M3 Max chip. 16-core CPU, 40-core GPU, 36GB unified memory, 16.2-inch XDR display, 1TB SSD, and advanced thermal system. Perfect for video editors and 3D artists.',
+                image_url: 'https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=800&q=80',
+                badge: 'PRO',
+                stock_quantity: 12,
+                is_active: true
+            },
+
+            // ========== IPADS ==========
+            {
+                name: 'iPad Pro 13" M4',
+                category_slug: 'tablet',
+                price: 1299,
+                description: 'The thinnest Apple product ever. M4 chip with breakthrough performance, stunning Ultra Retina XDR display with nano-texture glass option, ProMotion 120Hz, Face ID, quad speakers, and all-day battery. Works with Apple Pencil Pro and Magic Keyboard. Your next computer is not a computer.',
+                image_url: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 30,
+                is_active: true
+            },
+            {
+                name: 'iPad Pro 11" M4',
+                category_slug: 'tablet',
+                price: 999,
+                description: 'Ultimate iPad portability meets M4 power. 11-inch Ultra Retina XDR display, Face ID, quad speakers, and support for Apple Pencil Pro. Incredibly thin at just 5.3mm. Perfect for creatives on the go.',
+                image_url: 'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 40,
+                is_active: true
+            },
+            {
+                name: 'iPad Air 11" M2',
+                category_slug: 'tablet',
+                price: 599,
+                description: 'Serious performance in a beautiful, portable design. M2 chip, 11-inch Liquid Retina display, landscape front camera, and all-day battery life. Compatible with Magic Keyboard and Apple Pencil (USB-C). The ultimate versatile iPad.',
+                image_url: 'https://images.unsplash.com/photo-1585790050230-5dd28404f8db?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 70,
+                is_active: true
+            },
+            {
+                name: 'iPad Air 13" M2',
+                category_slug: 'tablet',
+                price: 799,
+                description: 'Expansive 13-inch Liquid Retina display with M2 chip. Perfect for multitasking, note-taking with Apple Pencil, and entertainment. Landscape camera placement ideal for video calls. The productivity powerhouse.',
+                image_url: 'https://images.unsplash.com/photo-1587033411391-5d9e51cce126?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 50,
+                is_active: true
+            },
+            {
+                name: 'iPad 10th Gen',
+                category_slug: 'tablet',
+                price: 349,
+                description: 'Colorfully reimagined all-screen design. A14 Bionic chip, 10.9-inch Liquid Retina display, USB-C, landscape front camera, and support for Apple Pencil (1st gen) and Magic Keyboard Folio. The best value iPad.',
+                image_url: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&q=80',
+                badge: 'POPULAR',
+                stock_quantity: 100,
+                is_active: true
+            },
+            {
+                name: 'iPad mini 6th Gen',
+                category_slug: 'tablet',
+                price: 499,
+                description: 'Mega power, mini size. A15 Bionic chip in an ultraportable 8.3-inch design. All-screen Liquid Retina display, USB-C, Apple Pencil (2nd gen) support, and 5G. Perfect for gaming, reading, and on-the-go creativity.',
+                image_url: 'https://images.unsplash.com/photo-1586611292717-f828b167408c?w=800&q=80',
+                badge: 'POPULAR',
+                stock_quantity: 60,
+                is_active: true
+            },
+
+            // ========== APPLE WATCH ==========
+            {
+                name: 'Apple Watch Ultra 2',
+                category_slug: 'smartwatch',
+                price: 799,
+                description: 'The most rugged and capable Apple Watch. 49mm titanium case, brightest always-on Retina display, precision dual-frequency GPS, up to 36 hours battery, 100m water resistance, Action button, and advanced health sensors. Built for extreme athletes and adventurers.',
+                image_url: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80',
+                badge: 'PRO',
+                stock_quantity: 25,
+                is_active: true
+            },
+            {
+                name: 'Apple Watch Series 10',
+                category_slug: 'smartwatch',
+                price: 399,
+                description: 'The most advanced Apple Watch yet. Thinner design with larger display, faster charging, advanced health features including ECG, blood oxygen, and temperature sensing. Available in 42mm and 46mm with GPS or Cellular.',
+                image_url: 'https://images.unsplash.com/photo-1510017098667-27dfc7150acb?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 80,
+                is_active: true
+            },
+            {
+                name: 'Apple Watch SE (2nd Gen)',
+                category_slug: 'smartwatch',
+                price: 249,
+                description: 'Essential features, incredible value. Retina display, crash detection, workout tracking, heart rate notifications, and seamless iPhone integration. Perfect first Apple Watch with all the essentials.',
+                image_url: 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=800&q=80',
+                badge: 'VALUE',
+                stock_quantity: 120,
+                is_active: true
+            },
+
+            // ========== SAMSUNG GALAXY ==========
+            {
+                name: 'Samsung Galaxy S24 Ultra',
+                category_slug: 'samsung',
+                price: 1199,
+                description: 'The ultimate Galaxy experience. Snapdragon 8 Gen 3, 6.8-inch Dynamic AMOLED 2X display with 120Hz, titanium frame, integrated S Pen, quad camera with 200MP main sensor and 5x/10x telephoto, Galaxy AI features, and all-day battery with fast charging.',
+                image_url: 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80',
+                badge: 'NEW',
+                stock_quantity: 45,
+                is_active: true
+            },
+            {
+                name: 'Samsung Galaxy S24+',
+                category_slug: 'samsung',
+                price: 999,
+                description: 'Premium Galaxy performance. 6.7-inch QHD+ display with 120Hz, Snapdragon 8 Gen 3, triple camera system with AI photo editing, Galaxy AI translation and note assist, 4900mAh battery, and sleek glass design.',
+                image_url: 'https://images.unsplash.com/photo-1616348436168-de43ad0db179?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 60,
+                is_active: true
+            },
+            {
+                name: 'Samsung Galaxy S24',
+                category_slug: 'samsung',
+                price: 799,
+                description: 'Compact flagship power. 6.2-inch FHD+ display, Snapdragon 8 Gen 3, AI-powered triple camera, Circle to Search, Live Translate, and premium build quality. The perfect size premium phone.',
+                image_url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80',
+                badge: 'POPULAR',
+                stock_quantity: 85,
+                is_active: true
+            },
+            {
+                name: 'Samsung Galaxy Z Fold 6',
+                category_slug: 'samsung',
+                price: 1799,
+                description: 'The future of smartphones unfolds. 7.6-inch main display, 6.3-inch cover screen, Snapdragon 8 Gen 3, improved hinge design, IPX8 water resistance, S Pen support, and enhanced multitasking. A tablet and phone in one device.',
+                image_url: 'https://images.unsplash.com/photo-1678652632880-28b4c605100f?w=800&q=80',
+                badge: 'PRO',
+                stock_quantity: 20,
+                is_active: true
+            },
+            {
+                name: 'Samsung Galaxy Z Flip 6',
+                category_slug: 'samsung',
+                price: 999,
+                description: 'Style meets innovation. Compact flip design with 6.7-inch main display and 3.4-inch cover screen, Snapdragon 8 Gen 3, FlexCam for hands-free photos, improved crease, and all-day battery. Fashion-forward flagship.',
+                image_url: 'https://images.unsplash.com/photo-1686302913731-52a47d209959?w=800&q=80',
+                badge: 'HOT',
+                stock_quantity: 35,
+                is_active: true
+            }
+        ];
+
+        let uploadedCount = 0;
+        let failedCount = 0;
+
+        // Update stats
+        document.getElementById('totalProducts').textContent = latestProducts.length;
+
+        function log(message, type = 'info') {
+            const status = document.getElementById('status');
+            const timestamp = new Date().toLocaleTimeString();
+            const colorClass = type;
+            status.innerHTML += `<div class="${colorClass}">[${timestamp}] ${message}</div>`;
+            status.scrollTop = status.scrollHeight;
+        }
+
+        async function uploadAllProducts() {
+            const btn = document.getElementById('uploadBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Uploading...';
+
+            document.getElementById('status').innerHTML = '';
+            uploadedCount = 0;
+            failedCount = 0;
+
+            log('🚀 Starting product upload process...', 'info');
+            log(`📦 Total products to upload: ${latestProducts.length}`, 'info');
+            log('─────────────────────────────────────', 'info');
+
+            for (let i = 0; i < latestProducts.length; i++) {
+                const product = latestProducts[i];
+
+                try {
+                    log(`Uploading ${i + 1}/${latestProducts.length}: ${product.name}...`, 'info');
+
+                    const result = await window.fordipsTech.addProduct(product);
+
+                    if (result.success) {
+                        uploadedCount++;
+                        document.getElementById('uploadedCount').textContent = uploadedCount;
+                        log(`✅ SUCCESS: ${product.name} added to database`, 'success');
+                    } else {
+                        failedCount++;
+                        document.getElementById('failedCount').textContent = failedCount;
+                        log(`❌ FAILED: ${product.name} - ${result.error}`, 'error');
+                    }
+                } catch (error) {
+                    failedCount++;
+                    document.getElementById('failedCount').textContent = failedCount;
+                    log(`❌ ERROR: ${product.name} - ${error.message}`, 'error');
+                }
+
+                // Small delay to avoid rate limiting
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+
+            log('─────────────────────────────────────', 'info');
+            log('🎉 Upload process completed!', 'success');
+            log(`✅ Successful: ${uploadedCount}`, 'success');
+            if (failedCount > 0) {
+                log(`❌ Failed: ${failedCount}`, 'error');
+            }
+
+            btn.disabled = false;
+            btn.textContent = '🔄 Upload Again';
+        }
+
+        // Log initial message
+        log('Ready to upload latest Apple products to Supabase', 'info');
+        log('Click the button above to start the upload process', 'info');
+    </script>
+</body>
+</html>
