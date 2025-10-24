@@ -283,6 +283,15 @@
                     <li><a href="#locations" class="nav-link" data-i18n="navLocations">Locations</a></li>
                     <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
                     <li>
+                        <button class="account-button" id="accountButton" onclick="openAccountModal()" aria-label="My Account">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span id="accountButtonText">Account</span>
+                        </button>
+                    </li>
+                    <li>
                         <button class="favorites-button" id="favoritesButton" onclick="openFavoritesModal()" aria-label="Favorites">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -1756,7 +1765,7 @@
     <script src="product-variants.js" defer></script>
     <script src="enhanced-product-system.js" defer></script>
     <script src="stripe-payment.js" defer></script>
-    <script src="checkout-enhanced.js" defer></script>
+    <!-- <script src="checkout-enhanced.js" defer></script> DISABLED: Replaced by enhanced-checkout.js -->
     <script src="enhanced-checkout.js" defer></script>
     <script src="currency-system.js" defer></script>
     <script src="checkout-enhancements.js" defer></script>

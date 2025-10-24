@@ -333,10 +333,106 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/**
+ * Show Thank You modal with order tracking info
+ */
+function showThankYouWithTracking(orderNumber, trackingNumber, cartItems, orderData) {
+    const ADMIN_EMAIL = 'brineketum@gmail.com';
+    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemsList = cartItems.map(item =>
+        `<div class="thank-you-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="thank-you-item-info">
+                <strong>${item.name}</strong>
+                <p>Qty: ${item.quantity} × $${item.price.toFixed(2)}</p>
+            </div>
+            <span class="thank-you-item-total">$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>`
+    ).join('');
+
+    const thankYouHTML = `
+        <div class="thank-you-modal active" id="thankYouModal">
+            <div class="modal-overlay"></div>
+            <div class="thank-you-content">
+                <div class="thank-you-icon">
+                    <svg width="100" height="100" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#10b981" stroke-width="4"/>
+                        <path d="M30 50 L45 65 L70 40" fill="none" stroke="#10b981" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <h2>Thank You for Your Order!</h2>
+                <p class="thank-you-message">Your order has been placed successfully and is being processed.</p>
+
+                <div class="order-summary-box">
+                    <div class="summary-row">
+                        <span>Order Number:</span>
+                        <strong class="order-number">${orderNumber}</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tracking Number:</span>
+                        <strong class="tracking-number">${trackingNumber}</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Total:</span>
+                        <strong class="order-total">$${total.toFixed(2)}</strong>
+                    </div>
+                </div>
+
+                <div class="order-items-summary">
+                    <h4>Order Items:</h4>
+                    ${itemsList}
+                </div>
+
+                <div class="confirmation-info">
+                    <p>✉️ Confirmation email sent to <strong>${orderData.email}</strong></p>
+                    <p>📧 Admin notified at <strong>${ADMIN_EMAIL}</strong></p>
+                </div>
+
+                <div class="next-steps">
+                    <h4>What's Next?</h4>
+                    <ul>
+                        <li>✓ You'll receive an email confirmation shortly</li>
+                        <li>✓ We'll notify you when your order ships</li>
+                        <li>✓ Track your order anytime with the tracking number above</li>
+                    </ul>
+                </div>
+
+                <div class="thank-you-actions">
+                    <button onclick="window.showOrderTrackingModal('${orderNumber}')" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; padding: 0.875rem 1.75rem;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink: 0;">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>Track Order</span>
+                    </button>
+                    <button onclick="closeThankYouMessage()" class="btn btn-outline">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', thankYouHTML);
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close thank you message
+ */
+function closeThankYouMessage() {
+    const modal = document.getElementById('thankYouModal');
+    if (modal) modal.remove();
+    document.body.style.overflow = '';
+}
+
 // Export functions
 window.showOrderTrackingModal = showOrderTrackingModal;
 window.closeOrderTrackingModal = closeOrderTrackingModal;
 window.trackOrder = trackOrder;
 window.showMyOrdersModal = showMyOrdersModal;
 window.closeMyOrdersModal = closeMyOrdersModal;
+window.showThankYouWithTracking = showThankYouWithTracking;
+window.closeThankYouMessage = closeThankYouMessage;
 

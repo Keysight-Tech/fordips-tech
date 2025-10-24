@@ -68,7 +68,18 @@ document.getElementById('newsletterForm')?.addEventListener('submit', async func
 // ===================================
 // ACCOUNT MODAL
 // ===================================
-function openAccountModal() {
+async function openAccountModal() {
+    // Check if user is logged in
+    if (window.fordipsTech && window.fordipsTech.getCurrentUser) {
+        const user = await window.fordipsTech.getCurrentUser();
+        if (user) {
+            // User is logged in, redirect to my-account page
+            window.location.href = 'my-account.html';
+            return;
+        }
+    }
+
+    // User is not logged in, show login/signup modal
     document.getElementById('accountModal').classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -179,13 +190,22 @@ document.getElementById('signupForm')?.addEventListener('submit', async function
 // Helper function to update UI when user logs in
 function updateUserUI(user) {
     // Update account button text
+    const accountButtonText = document.getElementById('accountButtonText');
     const accountLinks = document.querySelectorAll('a[href="#account"]');
+    const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Account';
+
+    if (accountButtonText) {
+        accountButtonText.textContent = userName;
+    }
+
     accountLinks.forEach(link => {
-        const userName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Account';
         link.textContent = userName;
     });
 
-    // You can add more UI updates here, like showing user avatar, etc.
+    // Show notification
+    if (typeof showNotification === 'function') {
+        showNotification('Welcome back, ' + userName + '!', 'success');
+    }
 }
 
 // Check for existing session on page load

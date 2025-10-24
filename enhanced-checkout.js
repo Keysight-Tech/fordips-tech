@@ -430,8 +430,8 @@ async function handleCheckoutFormSubmit(e) {
                 closeCheckoutModal();
 
                 // Show success message with tracking
-                if (typeof showThankYouWithTracking === 'function') {
-                    showThankYouWithTracking(
+                if (typeof window.showThankYouWithTracking === 'function') {
+                    window.showThankYouWithTracking(
                         orderResult.orderNumber,
                         orderResult.trackingNumber,
                         cart,

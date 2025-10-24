@@ -218,33 +218,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showCartNotification(itemName) {
-    const notification = document.createElement('div');
-    notification.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 30px; height: 30px; background: rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">✓</div>
-            <div><strong>${itemName}</strong><br>Added to cart</div>
-        </div>
-    `;
+    // Use unified notification system if available
+    if (typeof showNotification === 'function') {
+        showNotification('Added to cart', 'success');
+    } else {
+        // Fallback notification
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+            <div style="width: 80px; height: 80px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+        `;
 
-    Object.assign(notification.style, {
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        padding: '1rem 1.5rem',
-        borderRadius: '12px',
-        background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-        color: 'white',
-        fontWeight: '600',
-        boxShadow: '0 10px 30px rgba(16, 185, 129, 0.3)',
-        zIndex: '10001',
-        animation: 'slideInUp 0.3s ease',
-        maxWidth: '300px'
-    });
+        Object.assign(notification.style, {
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            zIndex: '99999',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+            opacity: '0',
+            transform: 'translateX(100px)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+        });
 
-    document.body.appendChild(notification);
+        document.body.appendChild(notification);
 
-    setTimeout(() => {
-        notification.style.animation = 'slideOutDown 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
+        requestAnimationFrame(() => {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateX(0)';
+        });
+
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100px)';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
 }
