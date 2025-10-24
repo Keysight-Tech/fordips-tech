@@ -398,6 +398,17 @@ a {
     position: relative;
     z-index: 1;
     display: block;
+    animation: rotateClockwise 8s linear infinite;
+}
+
+/* Clock hand rotation animation */
+@keyframes rotateClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .logo:hover .logo-circle {
