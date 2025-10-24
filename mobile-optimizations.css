@@ -1073,3 +1073,83 @@
         border-bottom: none;
     }
 }
+
+/* ===== MOBILE DRAWER QUICK LINKS ===== */
+@media (max-width: 768px) {
+    .mobile-drawer-quick-links {
+        padding: 1.5rem 1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .mobile-drawer-section-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #64748b;
+        margin-bottom: 1rem;
+        padding-left: 0.25rem;
+    }
+
+    .mobile-quick-links-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+
+    .mobile-quick-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 0.5rem;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #1e293b;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 0.5rem;
+    }
+
+    .mobile-quick-link:hover,
+    .mobile-quick-link:active {
+        background: linear-gradient(135deg, rgba(44, 169, 161, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+        border-color: #2ca9a1;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(44, 169, 161, 0.15);
+    }
+
+    .mobile-quick-link svg {
+        color: #2ca9a1;
+        flex-shrink: 0;
+    }
+
+    .mobile-quick-link span {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    /* Adjust for extra small screens */
+    @media (max-width: 375px) {
+        .mobile-quick-links-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .mobile-quick-link {
+            padding: 0.85rem 0.4rem;
+        }
+
+        .mobile-quick-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .mobile-quick-link span {
+            font-size: 0.75rem;
+        }
+    }
+}

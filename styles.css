@@ -3703,25 +3703,36 @@ a {
 /* Device Carousel Mobile Responsive */
 @media (max-width: 768px) {
     .device-carousel {
-        min-height: 300px;
+        min-height: 450px;
         height: auto;
-        padding: 1rem 0;
+        padding: 2rem 0;
     }
 
     .device-3d-large {
-        max-width: 350px;
+        max-width: 95%;
+        width: 100%;
     }
 
     .device-img-large {
-        max-height: 250px;
+        max-height: 400px;
+        min-height: 320px;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .device-info {
+        margin-top: 1.5rem;
+        padding: 0 1rem;
     }
 
     .device-info h3 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        margin-bottom: 0.75rem;
     }
 
     .device-info p {
-        font-size: 0.95rem;
+        font-size: 1.05rem;
+        line-height: 1.6;
     }
 
     .carousel-dots {
@@ -3737,29 +3748,35 @@ a {
 
 @media (max-width: 480px) {
     .device-carousel {
-        min-height: 250px;
+        min-height: 400px;
         height: auto;
-        padding: 0.75rem 0;
+        padding: 1.5rem 0;
     }
 
     .device-3d-large {
-        max-width: 280px;
+        max-width: 98%;
+        width: 100%;
     }
 
     .device-img-large {
-        max-height: 200px;
+        max-height: 350px;
+        min-height: 280px;
+        width: 100%;
     }
 
     .device-info {
-        margin-top: 1rem;
+        margin-top: 1.25rem;
+        padding: 0 0.75rem;
     }
 
     .device-info h3 {
-        font-size: 1.25rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
     }
 
     .device-info p {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
     .carousel-dots .dot {
