@@ -206,8 +206,8 @@ a {
 
 /* 3D Circular Logo */
 .logo-circle {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
     padding: 3px;
@@ -218,7 +218,7 @@ a {
         inset 0 2px 8px rgba(255, 255, 255, 0.3);
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: heartbeat 1.5s ease-in-out infinite;
+    animation: heartbeatRotate 3s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
@@ -245,6 +245,42 @@ a {
     }
     40% {
         transform: scale(1);
+    }
+}
+
+@keyframes heartbeatRotate {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    10% {
+        transform: scale(1.05) rotate(36deg);
+    }
+    20% {
+        transform: scale(1) rotate(72deg);
+    }
+    30% {
+        transform: scale(1.05) rotate(108deg);
+    }
+    40% {
+        transform: scale(1) rotate(144deg);
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+    }
+    60% {
+        transform: scale(1.05) rotate(216deg);
+    }
+    70% {
+        transform: scale(1) rotate(252deg);
+    }
+    80% {
+        transform: scale(1.05) rotate(288deg);
+    }
+    90% {
+        transform: scale(1) rotate(324deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
     }
 }
 
@@ -2945,8 +2981,8 @@ a {
 
     /* Logo adjustments */
     .logo-circle {
-        width: 45px;
-        height: 45px;
+        width: 65px;
+        height: 65px;
     }
 
     .logo-initial {
@@ -3442,8 +3478,8 @@ a {
 
     /* Responsive logo adjustments */
     .logo-circle {
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 75px;
     }
 
     .logo-initial {
