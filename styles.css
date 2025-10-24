@@ -81,58 +81,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Floating Logo with Heartbeat Animation */
-.floating-logo {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
-    animation: heartbeat 1.5s ease-in-out infinite;
-    filter: drop-shadow(0 4px 20px rgba(44, 169, 161, 0.3));
-}
-
-.floating-logo img {
-    width: 120px;
-    height: auto;
-    display: block;
-    transition: var(--transition-normal);
-}
-
-.floating-logo:hover {
-    animation-play-state: paused;
-    transform: scale(1.1);
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    10% {
-        transform: scale(1.05);
-    }
-    20% {
-        transform: scale(1);
-    }
-    30% {
-        transform: scale(1.05);
-    }
-    40% {
-        transform: scale(1);
-    }
-}
-
-/* Responsive Logo Sizing */
-@media (max-width: 768px) {
-    .floating-logo {
-        top: 15px;
-        left: 15px;
-    }
-
-    .floating-logo img {
-        width: 80px;
-    }
-}
-
 img {
     max-width: 100%;
     height: auto;
@@ -270,7 +218,7 @@ a {
         inset 0 2px 8px rgba(255, 255, 255, 0.3);
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: logoFloat 6s ease-in-out infinite;
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
@@ -279,6 +227,24 @@ a {
     }
     50% {
         transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.05);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.05);
+    }
+    40% {
+        transform: scale(1);
     }
 }
 
@@ -362,6 +328,15 @@ a {
     z-index: 1;
     text-shadow: 0 2px 4px rgba(44, 169, 161, 0.2);
     letter-spacing: -0.05em;
+}
+
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
 }
 
 .logo:hover .logo-circle {
