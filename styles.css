@@ -1884,31 +1884,57 @@ a {
 
 .cart-button {
     position: relative;
-    padding: 0.75rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    padding: 0.875rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
     color: var(--white);
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-    border: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 4px 16px rgba(44, 169, 161, 0.35),
+        0 2px 8px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
 }
 
 .cart-button:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.12) rotate(5deg);
+    box-shadow:
+        0 8px 28px rgba(44, 169, 161, 0.45),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cart-button:active {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.cart-button svg {
+    width: 24px;
+    height: 24px;
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--danger);
+    top: -6px;
+    right: -6px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.25rem 0.5rem;
+    padding: 0.3rem 0.55rem;
     border-radius: 20px;
-    min-width: 20px;
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    border: 2px solid white;
 }
 
 /* Track Order Button */
