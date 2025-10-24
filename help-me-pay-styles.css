@@ -1,0 +1,504 @@
+/**
+ * FORDIPS TECH - HELP ME PAY & CURRENCY STYLES
+ * Styling for Help Me Pay feature and currency selector
+ */
+
+/* ============================================
+   CURRENCY SELECTOR
+   ============================================ */
+.currency-selector {
+    position: relative;
+    display: inline-block;
+}
+
+.currency-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    color: #374151;
+}
+
+.currency-btn:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.currency-btn svg {
+    color: #6b7280;
+}
+
+.currency-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.currency-dropdown.active {
+    max-height: 450px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.currency-search {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.currency-search input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.currency-search input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.currency-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.currency-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.currency-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.currency-item:hover {
+    background: #f9fafb;
+}
+
+.currency-code {
+    font-weight: 600;
+    color: #1f2937;
+    min-width: 45px;
+}
+
+.currency-name {
+    flex: 1;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.currency-symbol {
+    font-weight: 500;
+    color: #2563eb;
+}
+
+/* ============================================
+   HELP ME PAY SECTION
+   ============================================ */
+.help-me-pay-section {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #93c5fd;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+}
+
+.help-me-pay-toggle {
+    margin-bottom: 20px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.toggle-container input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: #cbd5e1;
+    border-radius: 24px;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    top: 2px;
+    left: 2px;
+    transition: all 0.3s;
+}
+
+input[type="checkbox"]:checked + .toggle-slider {
+    background: #2563eb;
+}
+
+input[type="checkbox"]:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+
+.toggle-label {
+    flex: 1;
+}
+
+.toggle-label strong {
+    display: block;
+    font-size: 16px;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.toggle-label small {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ============================================
+   HELP ME PAY FORM
+   ============================================ */
+.help-me-pay-form {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.help-me-pay-form h4 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #1f2937;
+}
+
+.help-text {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #374151;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* ============================================
+   HELP ME PAY PREVIEW
+   ============================================ */
+.help-me-pay-preview {
+    margin: 24px 0;
+}
+
+.help-me-pay-preview h5 {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    color: #1f2937;
+}
+
+.preview-box {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.preview-box p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+.preview-box strong {
+    color: #1f2937;
+}
+
+.preview-box em {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.preview-action {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 13px;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* ============================================
+   HELP ME PAY INFO
+   ============================================ */
+.help-me-pay-info {
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 20px;
+}
+
+.help-me-pay-info svg {
+    color: #2563eb;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.help-me-pay-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+.help-me-pay-info strong {
+    color: #1e40af;
+}
+
+/* ============================================
+   HELP ME PAY SUCCESS
+   ============================================ */
+.help-me-pay-success {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.help-me-pay-success h3 {
+    margin: 0 0 16px 0;
+    font-size: 24px;
+    color: #1f2937;
+}
+
+.help-me-pay-success p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #374151;
+}
+
+.help-me-pay-success strong {
+    color: #2563eb;
+}
+
+.help-me-pay-success .btn-primary {
+    margin-top: 24px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .currency-dropdown {
+        width: 280px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .help-me-pay-section {
+        padding: 16px;
+    }
+
+    .preview-box {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .currency-dropdown {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+
+    .help-me-pay-section {
+        margin: 16px 0;
+    }
+
+    .toggle-label strong {
+        font-size: 15px;
+    }
+
+    .toggle-label small {
+        font-size: 13px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+.currency-btn:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+.currency-item:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: -2px;
+}
+
+.toggle-container:focus-within .toggle-slider {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .help-me-pay-section {
+        border-width: 3px;
+    }
+
+    .preview-box {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .toggle-slider,
+    .toggle-slider::before,
+    .currency-dropdown,
+    .help-me-pay-form {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .currency-btn {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+    }
+
+    .currency-btn:hover {
+        background: #374151;
+        border-color: #2563eb;
+    }
+
+    .currency-dropdown {
+        background: #1f2937;
+    }
+
+    .currency-search input {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+
+    .currency-item {
+        border-bottom-color: #374151;
+    }
+
+    .currency-item:hover {
+        background: #374151;
+    }
+
+    .currency-code,
+    .toggle-label strong,
+    .help-me-pay-form h4 {
+        color: #f9fafb;
+    }
+
+    .help-me-pay-section {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+        border-color: #3b82f6;
+    }
+
+    .preview-box,
+    .help-me-pay-info {
+        background: #374151;
+        border-color: #4b5563;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+}

@@ -1,14 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fordips Tech - Premium Electronics Store. Shop latest iPhones, MacBooks, Cameras & More. Free Worldwide Shipping!">
-    <title>Fordips Tech - Premium Electronics Store | Latest iPhones, MacBooks & More</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Fordips Tech - Premium Electronics Store | Latest iPhones, MacBooks, Samsung & More</title>
+    <meta name="title" content="Fordips Tech - Premium Electronics Store | Latest iPhones, MacBooks, Samsung & More">
+    <meta name="description" content="Shop the latest iPhones, MacBooks, Samsung Galaxy, Tablets, Smartwatches & Starlink at Fordips Tech. Premium electronics with free worldwide shipping. Locations in USA & Cameroon.">
+    <meta name="keywords" content="iPhones, MacBooks, Samsung Galaxy, Tablets, Smartwatches, Starlink, Electronics, Premium Electronics, Fordips Tech, USA, Cameroon">
+    <meta name="author" content="Fordips Tech LLC">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keysight-tech.github.io/fordips-tech/">
+    <meta property="og:title" content="Fordips Tech - Premium Electronics Store">
+    <meta property="og:description" content="Shop the latest iPhones, MacBooks, Samsung Galaxy, Tablets & More. Free worldwide shipping. Locations in USA & Cameroon.">
+    <meta property="og:image" content="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Fordips Tech">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://keysight-tech.github.io/fordips-tech/">
+    <meta name="twitter:title" content="Fordips Tech - Premium Electronics Store">
+    <meta name="twitter:description" content="Shop the latest iPhones, MacBooks, Samsung Galaxy, Tablets & More. Free worldwide shipping.">
+    <meta name="twitter:image" content="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fordips Tech">
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://keysight-tech.github.io/fordips-tech/">
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="sitemap.xml">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png">
+    <link rel="apple-touch-icon" href="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png">
+
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://loutcbvftzojsioahtdw.supabase.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="config.js" as="script">
+    <link rel="preload" href="utils.js" as="script">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="enhanced-product-styles.css">
+    <link rel="stylesheet" href="enhanced-checkout-styles.css">
+    <link rel="stylesheet" href="currency-styles.css">
+    <link rel="stylesheet" href="ai-chat-styles.css">
+    <link rel="stylesheet" href="search-styles.css">
+    <link rel="stylesheet" href="notifications-styles.css">
+    <link rel="stylesheet" href="help-me-pay-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Load Configuration FIRST (before any other scripts) -->
+    <script src="config.js"></script>
+    <script src="utils.js"></script>
+
+    <!-- Schema.org Structured Data - Store -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Fordips Tech",
+      "description": "Premium Electronics Store - iPhones, MacBooks, Samsung, Tablets & More",
+      "url": "https://keysight-tech.github.io/fordips-tech/",
+      "logo": "https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png",
+      "image": "https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp",
+      "telephone": "+1-667-256-3680",
+      "email": "support@fordipstech.com",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "15706 Dorset Rd",
+          "addressLocality": "Laurel",
+          "addressRegion": "MD",
+          "postalCode": "20707",
+          "addressCountry": "US"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Mountain Plaza, Molyko",
+          "addressLocality": "Buea",
+          "addressCountry": "CM"
+        }
+      ],
+      "priceRange": "$199 - $6999",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61558105979752",
+        "https://tiktok.com/@fordipstechllc-xu2sd",
+        "https://youtube.com/@alsinna"
+      ],
+      "paymentAccepted": ["Credit Card", "PayPal", "MTN Mobile Money", "Orange Money", "Zelle", "Cash App"],
+      "currenciesAccepted": "USD, EUR, XAF, NGN",
+      "areaServed": ["US", "CM", "NG", "GH", "Global"]
+    }
+    </script>
+
+    <!-- Schema.org Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Fordips Tech LLC",
+      "alternateName": "Fordips Tech",
+      "url": "https://keysight-tech.github.io/fordips-tech/",
+      "logo": "https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-667-256-3680",
+        "contactType": "customer service",
+        "email": "support@fordipstech.com",
+        "availableLanguage": ["en", "fr"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61558105979752",
+        "https://tiktok.com/@fordipstechllc-xu2sd",
+        "https://youtube.com/@alsinna"
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Language Switcher Dropdown -->
@@ -298,12 +443,12 @@
                     <div class="location-flag">🇺🇸</div>
                     <h3 data-i18n="locationUSA">United States</h3>
                     <p class="location-address">
-                        123 Tech Avenue<br>
-                        San Francisco, CA 94102<br>
+                        15706 Dorset Rd<br>
+                        Laurel, MD 20707<br>
                         United States
                     </p>
                     <div class="location-contact">
-                        <p>📞 +1 (555) 123-4567</p>
+                        <p>📞 (667) 256-3680</p>
                         <p>📧 usa@fordipstech.com</p>
                     </div>
                 </div>
@@ -680,11 +825,15 @@
                         </div>
                         <div class="form-group">
                             <label for="checkoutEmail">Email *</label>
-                            <input type="email" id="checkoutEmail" required>
+                            <input type="email" id="checkoutEmail" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkoutPhone">Phone Number</label>
+                            <input type="tel" id="checkoutPhone" placeholder="+1 (555) 123-4567">
                         </div>
                         <div class="form-group">
                             <label for="checkoutAddress">Address *</label>
-                            <input type="text" id="checkoutAddress" required>
+                            <input type="text" id="checkoutAddress" required placeholder="123 Main Street">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -704,7 +853,10 @@
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="card" checked>
                                 <div class="payment-option-content">
-                                    <span class="payment-icon">💳</span>
+                                    <div class="payment-logo-group">
+                                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/visa.png" alt="Visa" class="payment-logo">
+                                        <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/master.jpg" alt="Mastercard" class="payment-logo">
+                                    </div>
                                     <div>
                                         <strong>Credit/Debit Card</strong>
                                         <small>Visa, Mastercard</small>
@@ -714,7 +866,7 @@
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="mtn">
                                 <div class="payment-option-content">
-                                    <span class="payment-icon">📱</span>
+                                    <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/mtn.png" alt="MTN" class="payment-logo-single">
                                     <div>
                                         <strong>MTN Mobile Money</strong>
                                         <small>Instant payment</small>
@@ -724,7 +876,7 @@
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="orange">
                                 <div class="payment-option-content">
-                                    <span class="payment-icon">🍊</span>
+                                    <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/orange%20money.png" alt="Orange Money" class="payment-logo-single">
                                     <div>
                                         <strong>Orange Money</strong>
                                         <small>Quick & secure</small>
@@ -732,11 +884,11 @@
                                 </div>
                             </label>
                             <label class="payment-option">
-                                <input type="radio" name="payment" value="zelee">
+                                <input type="radio" name="payment" value="zelle">
                                 <div class="payment-option-content">
-                                    <span class="payment-icon">💰</span>
+                                    <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/zelle.png" alt="Zelle" class="payment-logo-single">
                                     <div>
-                                        <strong>Zelee</strong>
+                                        <strong>Zelle</strong>
                                         <small>Fast transfer</small>
                                     </div>
                                 </div>
@@ -754,7 +906,7 @@
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="paypal">
                                 <div class="payment-option-content">
-                                    <span class="payment-icon">🅿️</span>
+                                    <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/papal.png" alt="PayPal" class="payment-logo-single">
                                     <div>
                                         <strong>PayPal</strong>
                                         <small>Worldwide accepted</small>
@@ -802,6 +954,61 @@
     <script src="forms.js"></script>
     <script src="reviews.js"></script>
     <script src="product-variants.js"></script>
+    <script src="enhanced-product-system.js"></script>
     <script src="checkout-enhanced.js"></script>
+    <script src="enhanced-checkout.js"></script>
+    <script src="currency-system.js"></script>
+    <script src="ai-chat.js"></script>
+    <script src="search-system.js"></script>
+    <script src="notifications-system.js"></script>
+    <script src="help-me-pay-system.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        // Register Service Worker for Progressive Web App support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then((registration) => {
+                        if (window.FORDIPS_CONFIG) {
+                            window.FORDIPS_CONFIG.logger.info('✅ Service Worker registered successfully', registration.scope);
+                        }
+                        console.log('✅ PWA Service Worker registered - Site now works offline!');
+                    })
+                    .catch((error) => {
+                        if (window.FORDIPS_CONFIG) {
+                            window.FORDIPS_CONFIG.logger.error('❌ Service Worker registration failed:', error);
+                        } else {
+                            console.error('❌ Service Worker registration failed:', error);
+                        }
+                    });
+            });
+        } else {
+            console.log('ℹ️ Service Workers not supported in this browser');
+        }
+
+        // Prompt user to install PWA on mobile
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Log for debugging
+            if (window.FORDIPS_CONFIG) {
+                window.FORDIPS_CONFIG.logger.info('📱 PWA install prompt available');
+            }
+            console.log('📱 Fordips Tech can be installed as an app!');
+        });
+
+        // Log when PWA is successfully installed
+        window.addEventListener('appinstalled', () => {
+            if (window.FORDIPS_CONFIG) {
+                window.FORDIPS_CONFIG.logger.info('✅ PWA installed successfully');
+            }
+            console.log('✅ Fordips Tech app installed!');
+            deferredPrompt = null;
+        });
+    </script>
 </body>
 </html>

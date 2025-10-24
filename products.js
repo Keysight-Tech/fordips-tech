@@ -483,7 +483,7 @@ if (document.readyState === 'loading') {
         setTimeout(() => {
             const productsGrid = document.getElementById('productsGrid');
             if (productsGrid && productsGrid.children.length === 0) {
-                console.log('🟡 Auto-initializing static products (Supabase fallback)');
+                window.FORDIPS_CONFIG?.logger.log('🟡 Auto-initializing static products (Supabase fallback)');
                 initializeProductsWithFilters();
             }
         }, 100);

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Products Page -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Categories -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#categories</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- iPhone Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=iphone</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Samsung Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=samsung</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Laptops Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=laptop</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Desktops Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=desktop</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Tablets Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=tablet</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Smartwatches Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=smartwatch</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Starlink Category -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#products?category=starlink</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Locations -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#locations</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Contact -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/#contact</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Admin Panel (noindex) -->
+    <url>
+        <loc>https://keysight-tech.github.io/fordips-tech/admin.html</loc>
+        <lastmod>2025-10-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+    </url>
+
+</urlset>

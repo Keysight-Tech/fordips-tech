@@ -15,7 +15,7 @@ let currentEditingProduct = null;
 // INITIALIZATION
 // ===================================
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Admin panel loading...');
+    window.FORDIPS_CONFIG?.logger.log('Admin panel loading...');
 
     // Check if user is authenticated and is admin
     await checkAdminAccess();

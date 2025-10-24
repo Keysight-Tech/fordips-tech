@@ -105,52 +105,68 @@ a {
 
 .language-switcher {
     position: fixed;
-    top: 100px;
+    top: 20px;
     right: 20px;
-    z-index: 999;
+    z-index: 9999;
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(44, 169, 161, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 16px rgba(44, 169, 161, 0.9));
+    }
 }
 
 .lang-dropdown {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-md);
+    padding: 0.9rem 1.75rem;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: var(--white);
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.875rem;
+    font-weight: 700;
+    font-size: 1rem;
     font-family: var(--font-primary);
-    transition: var(--transition-normal);
-    box-shadow: 0 4px 15px rgba(44, 169, 161, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(44, 169, 161, 0.5);
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 12px;
-    padding-right: 2.5rem;
-    min-width: 160px;
+    background-position: right 0.85rem center;
+    background-size: 14px;
+    padding-right: 2.75rem;
+    min-width: 180px;
 }
 
 /* Mobile adjustments for language switcher */
 @media (max-width: 768px) {
     .language-switcher {
-        top: 85px;
-        right: 10px;
+        top: 15px;
+        right: 15px;
     }
 
     .lang-dropdown {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
-        min-width: 130px;
-        padding-right: 2rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+        min-width: 150px;
+        padding-right: 2.25rem;
+        border-width: 2px;
     }
 }
 
 .lang-dropdown:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(44, 169, 161, 0.4);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 28px rgba(44, 169, 161, 0.7);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.lang-dropdown:active {
+    transform: translateY(-1px) scale(1.02);
 }
 
 .lang-dropdown:focus {

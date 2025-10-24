@@ -1,0 +1,39 @@
+# Fordips Tech - Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin.html
+Disallow: /*?session=*
+Disallow: /*?checkout=*
+
+# Disallow test files
+Disallow: /TEST_INTEGRATION.html
+Disallow: /AUTOMATED_TEST.html
+
+# Sitemap location
+Sitemap: https://keysight-tech.github.io/fordips-tech/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Specific rules for different bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

@@ -121,7 +121,7 @@ async function createOrderWithTracking(orderData, cartItems) {
         };
 
     } catch (error) {
-        console.error('Error creating order:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error creating order:', error);
         return createOrderLocalStorage(orderData, cartItems);
     }
 }
@@ -153,7 +153,7 @@ async function createCustomerOrderTracking(order, itemsCount) {
                 tracking_url: `https://fordipstech.com/track/${order.order_number}`
             });
     } catch (error) {
-        console.error('Error creating tracking entry:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error creating tracking entry:', error);
     }
 }
 
@@ -224,7 +224,7 @@ async function updateOrderStatus(orderId, newStatus, changedBy, changedByName, n
         };
 
     } catch (error) {
-        console.error('Error updating order status:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error updating order status:', error);
         return { success: false, error: error.message };
     }
 }
@@ -245,7 +245,7 @@ async function recordStatusChange(orderId, oldStatus, newStatus, changedBy, chan
                 notes: notes
             });
     } catch (error) {
-        console.error('Error recording status change:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error recording status change:', error);
     }
 }
 
@@ -299,7 +299,7 @@ async function sendOrderNotifications(order, items, notificationType) {
 
         if (error) throw error;
 
-        console.log(`✅ Notifications sent for order ${order.order_number}`);
+        window.FORDIPS_CONFIG?.logger.log(`✅ Notifications sent for order ${order.order_number}`);
 
         // Show user notification
         if (typeof showNotification === 'function' && notificationType !== 'order_placed') {
@@ -312,7 +312,7 @@ async function sendOrderNotifications(order, items, notificationType) {
         return { success: true };
 
     } catch (error) {
-        console.error('Error sending order notifications:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error sending order notifications:', error);
         return { success: false, error: error.message };
     }
 }
@@ -464,7 +464,7 @@ async function getOrderTracking(orderNumber) {
         };
 
     } catch (error) {
-        console.error('Error getting order tracking:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error getting order tracking:', error);
         return { success: false, error: error.message };
     }
 }
@@ -489,7 +489,7 @@ async function getCustomerOrders(customerEmail) {
         };
 
     } catch (error) {
-        console.error('Error getting customer orders:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error getting customer orders:', error);
         return { success: false, error: error.message };
     }
 }
@@ -510,7 +510,7 @@ async function getAdminDashboard() {
         };
 
     } catch (error) {
-        console.error('Error getting admin dashboard:', error);
+        window.FORDIPS_CONFIG?.logger.error('Error getting admin dashboard:', error);
         return { success: false, error: error.message };
     }
 }
@@ -577,4 +577,4 @@ window.orderTracking = {
     ORDER_STATUSES
 };
 
-console.log('✅ Order Tracking System loaded');
+window.FORDIPS_CONFIG?.logger.log('✅ Order Tracking System loaded');
