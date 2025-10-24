@@ -1303,8 +1303,8 @@ a {
 
 .device-img-large {
     width: 100%;
-    max-height: 500px;
-    min-height: 300px;
+    max-height: 380px;
+    min-height: 250px;
     object-fit: contain;
     border-radius: 20px;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
@@ -3577,7 +3577,7 @@ a {
     }
 
     .device-img-large {
-        max-height: 350px;
+        max-height: 280px;
     }
 
     .device-info h3 {
@@ -3609,7 +3609,7 @@ a {
     }
 
     .device-img-large {
-        max-height: 280px;
+        max-height: 220px;
     }
 
     .device-info {
