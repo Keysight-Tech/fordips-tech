@@ -165,9 +165,7 @@ function initializeCurrencySelector() {
             changeCurrency(e.target.value);
         });
 
-        console.log('✅ Currency selector initialized with existing select element');
     } else {
-        console.warn('⚠️ Currency select element not found in checkout');
     }
 
     // Initialize prices

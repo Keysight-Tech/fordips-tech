@@ -63,18 +63,12 @@
     <link rel="preconnect" href="https://loutcbvftzojsioahtdw.supabase.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://js.stripe.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
 
     <!-- Preload critical resources -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="config.js" as="script">
     <link rel="preload" href="utils.js" as="script">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" as="style">
-    <link rel="preload" href="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png" as="image">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
@@ -95,7 +89,6 @@
     <link rel="stylesheet" href="support-styles.css">
     <link rel="stylesheet" href="testimonials-about-styles.css">
     <link rel="stylesheet" href="mobile-optimizations.css">
-    <link rel="stylesheet" href="hamburger-drawer.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- Load Configuration FIRST (before any other scripts) -->
@@ -177,10 +170,10 @@
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
     <!-- Navigation -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#" class="logo" aria-label="Fordips Tech Home">
+                <a href="#" class="logo">
                     <div class="logo-circle">
                         <div class="logo-circle-inner">
                             <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png" alt="Fordips Tech Logo" class="logo-image">
@@ -190,18 +183,9 @@
                 </a>
 
                 <!-- Mobile Drawer Overlay -->
-                <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" aria-hidden="true"></div>
+                <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
 
-                <ul class="nav-menu" id="navMenu" role="menu" aria-label="Navigation menu">
-                    <!-- Mobile Drawer Close Button -->
-                    <div class="mobile-drawer-close" onclick="closeMobileDrawer()" role="button" aria-label="Close menu" tabindex="0">
-                        <h3>Menu</h3>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </div>
-
+                <ul class="nav-menu" id="navMenu">
                     <!-- Quick Links in Mobile Drawer -->
                     <div class="mobile-drawer-quick-links" style="display: block !important; width: 100%; padding: 1.5rem 1rem; background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-bottom: 2px solid #e2e8f0;">
                         <h4 class="mobile-drawer-section-title" style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #64748b; margin-bottom: 1rem;">Quick Links</h4>
@@ -286,10 +270,10 @@
                 </div>
 
                 <!-- Hamburger Menu Button - Recreated for Maximum Visibility -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMenu" style="display: flex !important; flex-direction: column; justify-content: center; align-items: center; gap: 6px; width: 48px; height: 48px; padding: 10px; background: rgba(44, 169, 161, 0.1); border: 1.5px solid rgba(44, 169, 161, 0.2); border-radius: 12px; cursor: pointer; z-index: 10000; position: relative;">
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
-                    <span aria-hidden="true" style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" style="display: flex !important; flex-direction: column; justify-content: center; align-items: center; gap: 6px; width: 48px; height: 48px; padding: 10px; background: rgba(44, 169, 161, 0.1); border: 1.5px solid rgba(44, 169, 161, 0.2); border-radius: 12px; cursor: pointer; z-index: 10000; position: relative;">
+                    <span style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
+                    <span style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
+                    <span style="display: block !important; width: 28px; height: 3px; background: #1e293b !important; border-radius: 3px; transition: all 0.3s ease;"></span>
                 </button>
             </div>
         </div>
@@ -1660,38 +1644,38 @@
     </div>
 
     <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Stripe Payment Library -->
-    <script src="https://js.stripe.com/v3/" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
     <!-- Application Scripts -->
-    <script src="translations.js" defer></script>
-    <script src="products.js" defer></script>
-    <script src="category-products.js" defer></script>
-    <script src="compact-categories.js" defer></script>
-    <script src="supabase-integration.js" defer></script>
-    <script src="contact-system.js" defer></script>
-    <script src="order-tracking-system.js" defer></script>
-    <script src="order-tracking-ui.js" defer></script>
-    <script src="cart.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="forms.js" defer></script>
-    <script src="reviews.js" defer></script>
-    <script src="product-variants.js" defer></script>
-    <script src="enhanced-product-system.js" defer></script>
-    <script src="stripe-payment.js" defer></script>
-    <script src="checkout-enhanced.js" defer></script>
-    <script src="enhanced-checkout.js" defer></script>
-    <script src="currency-system.js" defer></script>
-    <script src="checkout-enhancements.js" defer></script>
-    <script src="location-detection.js" defer></script>
-    <script src="ai-chat.js" defer></script>
-    <script src="search-system.js" defer></script>
-    <script src="notifications-system.js" defer></script>
-    <script src="help-me-pay-system.js" defer></script>
-    <script src="favorites-system.js" defer></script>
-    <script src="support-content.js" defer></script>
+    <script src="translations.js"></script>
+    <script src="products.js"></script>
+    <script src="category-products.js"></script>
+    <script src="compact-categories.js"></script>
+    <script src="supabase-integration.js"></script>
+    <script src="contact-system.js"></script>
+    <script src="order-tracking-system.js"></script>
+    <script src="order-tracking-ui.js"></script>
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+    <script src="forms.js"></script>
+    <script src="reviews.js"></script>
+    <script src="product-variants.js"></script>
+    <script src="enhanced-product-system.js"></script>
+    <script src="stripe-payment.js"></script>
+    <script src="checkout-enhanced.js"></script>
+    <script src="enhanced-checkout.js"></script>
+    <script src="currency-system.js"></script>
+    <script src="checkout-enhancements.js"></script>
+    <script src="location-detection.js"></script>
+    <script src="ai-chat.js"></script>
+    <script src="search-system.js"></script>
+    <script src="notifications-system.js"></script>
+    <script src="help-me-pay-system.js"></script>
+    <script src="favorites-system.js"></script>
+    <script src="support-content.js"></script>
 
     <!-- PWA Service Worker Registration -->
     <script>

@@ -58,7 +58,6 @@ function initializeLocationDetection() {
         // Use saved location from session
         userLocation = JSON.parse(savedLocation);
         applyLocationSettings(userLocation);
-        console.log('✅ Using saved location:', userLocation);
         return;
     }
 
@@ -97,7 +96,6 @@ function requestGeolocation() {
     const statusEl = document.getElementById('locationStatus');
 
     if (!navigator.geolocation) {
-        console.warn('⚠️ Geolocation not supported, using IP fallback');
         detectLocationByIP();
         return;
     }
@@ -110,7 +108,6 @@ function requestGeolocation() {
     navigator.geolocation.getCurrentPosition(
         // Success callback
         async (position) => {
-            console.log('📍 Geolocation success:', position.coords);
             localStorage.setItem('locationPermissionAsked', 'granted');
 
             // Get country from coordinates using reverse geocoding
@@ -118,7 +115,6 @@ function requestGeolocation() {
         },
         // Error callback
         (error) => {
-            console.warn('⚠️ Geolocation denied or failed:', error.message);
             localStorage.setItem('locationPermissionAsked', 'denied');
 
             if (statusEl) {
@@ -170,13 +166,11 @@ async function getCountryFromCoordinates(lat, lon) {
                 method: 'geolocation'
             };
 
-            console.log('✅ Location detected:', locationInfo);
             saveAndApplyLocation(locationInfo);
         } else {
             throw new Error('Country code not found');
         }
     } catch (error) {
-        console.error('❌ Reverse geocoding failed:', error);
         detectLocationByIP();
     }
 }
@@ -210,11 +204,9 @@ async function detectLocationByIP() {
             method: 'ip'
         };
 
-        console.log('✅ Location detected via IP:', locationInfo);
         saveAndApplyLocation(locationInfo);
 
     } catch (error) {
-        console.error('❌ IP-based detection failed:', error);
 
         // Ultimate fallback - use US as default
         const defaultLocation = {
@@ -266,7 +258,6 @@ function applyLocationSettings(locationInfo) {
     const currencyInfo = COUNTRY_CURRENCY_MAP[countryCode];
 
     if (currencyInfo) {
-        console.log(`💰 Setting currency to ${currencyInfo.currency} for ${currencyInfo.country}`);
 
         // Set currency using the existing currency system
         if (window.currencyManager) {
@@ -278,7 +269,6 @@ function applyLocationSettings(locationInfo) {
 
     } else {
         // Default to USD if country not in our map
-        console.log(`⚠️ No currency mapping for ${countryCode}, using USD`);
         if (window.currencyManager) {
             window.currencyManager.setCurrency('USD');
         }
@@ -434,4 +424,3 @@ if (document.readyState === 'loading') {
     initializeLocationDetection();
 }
 
-console.log('🌍 Location detection system initialized');

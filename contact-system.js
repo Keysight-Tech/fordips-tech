@@ -45,7 +45,6 @@ async function submitContactMessage(formData) {
             return saveContactToLocalStorage(contactData);
         }
     } catch (error) {
-        console.error('Error submitting contact message:', error);
         return saveContactToLocalStorage(contactData);
     }
 }
@@ -121,9 +120,7 @@ async function sendContactNotifications(contactMessage) {
                 .insert(notifications);
 
             if (error) {
-                console.error('Error saving notifications:', error);
             } else {
-                console.log('✅ Contact notifications created successfully');
 
                 // Show notification to user about admin being notified
                 if (typeof showNotification === 'function') {
@@ -139,7 +136,6 @@ async function sendContactNotifications(contactMessage) {
 
         return { success: true };
     } catch (error) {
-        console.error('Error sending contact notifications:', error);
         return { success: false, error: error.message };
     }
 }
@@ -186,7 +182,6 @@ function saveContactToLocalStorage(contactData) {
             message: 'Your message has been saved and will be sent to admin when connection is restored.'
         };
     } catch (error) {
-        console.error('Error saving to localStorage:', error);
         return {
             success: false,
             error: 'Could not save message. Please try again.'
@@ -219,7 +214,6 @@ async function loadContactMessages(status = null) {
             return status ? messages.filter(m => m.status === status) : messages;
         }
     } catch (error) {
-        console.error('Error loading contact messages:', error);
         return [];
     }
 }
@@ -242,7 +236,6 @@ async function markContactAsRead(messageId) {
             return { success: true };
         }
     } catch (error) {
-        console.error('Error marking message as read:', error);
         return { success: false, error: error.message };
     }
 }
@@ -265,7 +258,6 @@ async function getUnreadContactCount() {
             return messages.filter(m => m.status === 'new').length;
         }
     } catch (error) {
-        console.error('Error getting unread count:', error);
         return 0;
     }
 }
@@ -295,7 +287,6 @@ async function updateContactStatus(messageId, newStatus, adminNotes = null) {
             return { success: true };
         }
     } catch (error) {
-        console.error('Error updating contact status:', error);
         return { success: false, error: error.message };
     }
 }
@@ -317,7 +308,6 @@ async function getContactNotifications(messageId) {
         }
         return [];
     } catch (error) {
-        console.error('Error loading notifications:', error);
         return [];
     }
 }
@@ -333,4 +323,3 @@ window.contactSystem = {
     getContactNotifications
 };
 
-console.log('✅ Contact System with Notifications loaded');

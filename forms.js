@@ -186,7 +186,6 @@ function updateUserUI(user) {
     });
 
     // You can add more UI updates here, like showing user avatar, etc.
-    console.log('User logged in:', user.email);
 }
 
 // Check for existing session on page load
@@ -566,4 +565,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-console.log('✅ Forms & Modals functionality loaded');

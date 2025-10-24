@@ -414,7 +414,6 @@ async function handleCheckoutFormSubmit(e) {
         }
 
     } catch (error) {
-        console.error('Checkout error:', error);
 
         let errorMessage = 'Payment failed. Please try again.';
         if (error.error) {

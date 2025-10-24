@@ -339,7 +339,6 @@ if (document.readyState === 'loading') {
             if (window.products && Array.isArray(window.products)) {
                 initializeCategoryProducts();
                 setupCategoryCardFilters();
-                console.log('✅ Category-based product system initialized');
             }
         }, 200);
     });
@@ -348,7 +347,6 @@ if (document.readyState === 'loading') {
         if (window.products && Array.isArray(window.products)) {
             initializeCategoryProducts();
             setupCategoryCardFilters();
-            console.log('✅ Category-based product system initialized');
         }
     }, 200);
 }

@@ -19,15 +19,12 @@ let stripe = null;
 function initializeStripe() {
     try {
         if (typeof Stripe === 'undefined') {
-            console.error('❌ Stripe.js not loaded');
             return false;
         }
 
         stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-        console.log('✅ Stripe initialized successfully');
         return true;
     } catch (error) {
-        console.error('❌ Stripe initialization error:', error);
         return false;
     }
 }
@@ -85,7 +82,6 @@ async function processStripePayment(orderData, cartItems) {
         }
 
     } catch (error) {
-        console.error('❌ Stripe payment error:', error);
         hidePaymentProcessing();
         showPaymentError(error.message);
         return { success: false, error: error.message };
@@ -128,7 +124,6 @@ async function createCheckoutSessionViaServer(orderData, cartItems) {
         return { success: true };
 
     } catch (error) {
-        console.error('❌ Checkout session error:', error);
         return { success: false, error: error.message };
     }
 }
@@ -199,7 +194,6 @@ async function handlePaymentSuccess(sessionId) {
         }
 
     } catch (error) {
-        console.error('❌ Payment verification error:', error);
         return { success: false, error: error.message };
     }
 }
@@ -244,4 +238,3 @@ if (document.readyState === 'loading') {
     initializeStripe();
 }
 
-console.log('💳 Stripe Payment Integration loaded');

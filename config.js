@@ -70,22 +70,18 @@ const PAYMENT_CONFIG = {
 const logger = {
     log: (...args) => {
         if (APP_CONFIG.features.enableLogging) {
-            console.log('[Fordips Tech]', ...args);
         }
     },
     error: (...args) => {
         if (APP_CONFIG.features.enableLogging) {
-            console.error('[Fordips Tech ERROR]', ...args);
         }
     },
     warn: (...args) => {
         if (APP_CONFIG.features.enableLogging) {
-            console.warn('[Fordips Tech WARN]', ...args);
         }
     },
     info: (...args) => {
         if (APP_CONFIG.features.enableLogging) {
-            console.info('[Fordips Tech INFO]', ...args);
         }
     }
 };

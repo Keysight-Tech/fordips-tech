@@ -56,7 +56,6 @@ async function checkAdminAccess() {
         document.getElementById('adminUserName').textContent = userName;
 
     } catch (error) {
-        console.error('Admin access check failed:', error);
         alert('Error checking admin access');
         window.location.href = 'index.html';
     } finally {
@@ -137,7 +136,6 @@ async function loadDashboard() {
         displayRecentOrders(recentOrders);
 
     } catch (error) {
-        console.error('Error loading dashboard:', error);
         alert('Error loading dashboard data');
     } finally {
         hideLoading();
@@ -190,7 +188,6 @@ async function loadProducts() {
         allProducts = await window.fordipsTech.loadProducts();
         displayProducts(allProducts);
     } catch (error) {
-        console.error('Error loading products:', error);
         alert('Error loading products');
     } finally {
         hideLoading();
@@ -324,7 +321,6 @@ async function deleteProduct(productId, productName) {
             alert('Error deleting product: ' + (result.error || 'Unknown error'));
         }
     } catch (error) {
-        console.error('Error deleting product:', error);
         alert('Error deleting product');
     } finally {
         hideLoading();
@@ -367,7 +363,6 @@ async function handleProductSubmit(e) {
             alert('Error saving product: ' + (result.error || 'Unknown error'));
         }
     } catch (error) {
-        console.error('Error saving product:', error);
         alert('Error saving product');
     } finally {
         hideLoading();
@@ -390,7 +385,6 @@ async function loadOrders() {
         allOrders = await window.fordipsTech.getAllOrders();
         displayOrders(allOrders);
     } catch (error) {
-        console.error('Error loading orders:', error);
         alert('Error loading orders');
     } finally {
         hideLoading();
@@ -499,7 +493,6 @@ async function updateOrderStatus(orderId, newStatus) {
             await loadOrders(); // Reload to reset
         }
     } catch (error) {
-        console.error('Error updating order status:', error);
         alert('Error updating order status');
         await loadOrders();
     } finally {
@@ -562,7 +555,6 @@ async function viewOrderDetails(orderId) {
         document.getElementById('orderModal').classList.add('active');
 
     } catch (error) {
-        console.error('Error loading order details:', error);
         alert('Error loading order details');
     } finally {
         hideLoading();
@@ -583,7 +575,6 @@ async function loadContacts() {
         allContacts = await window.fordipsTech.getAllContactSubmissions();
         displayContacts(allContacts);
     } catch (error) {
-        console.error('Error loading contacts:', error);
         alert('Error loading contact submissions');
     } finally {
         hideLoading();
@@ -672,7 +663,6 @@ async function updateContactStatus(contactId, newStatus) {
             await loadContacts();
         }
     } catch (error) {
-        console.error('Error updating contact status:', error);
         alert('Error updating contact status');
         await loadContacts();
     } finally {
@@ -690,7 +680,6 @@ async function loadNewsletter() {
         allSubscribers = await window.fordipsTech.getAllNewsletterSubscribers();
         displayNewsletter(allSubscribers);
     } catch (error) {
-        console.error('Error loading subscribers:', error);
         alert('Error loading newsletter subscribers');
     } finally {
         hideLoading();
@@ -779,4 +768,3 @@ window.addEventListener('click', function(e) {
     }
 });
 
-console.log('✅ Admin panel functionality loaded');

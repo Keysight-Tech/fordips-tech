@@ -29,7 +29,6 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                console.log('Service Worker: Caching static assets');
                 return cache.addAll(STATIC_ASSETS);
             })
             .then(() => self.skipWaiting())
@@ -105,4 +104,3 @@ self.addEventListener('message', (event) => {
     }
 });
 
-console.log('Service Worker: Registered');

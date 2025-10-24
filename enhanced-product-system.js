@@ -366,7 +366,6 @@ function openEnhancedProductDetail(productId) {
     const enhanced = enhancedProductData[productId];
     if (!enhanced) {
         // Fallback for products without enhanced data
-        console.log('Product', productId, 'does not have enhanced data');
         return;
     }
 

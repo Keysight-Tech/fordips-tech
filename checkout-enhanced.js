@@ -85,7 +85,6 @@ async function handleCheckoutSubmit(e) {
         }
 
     } catch (error) {
-        console.error('Checkout error:', error);
         showNotification(error.message || 'Failed to process payment. Please try again.', 'error');
 
         // Restore button
@@ -99,7 +98,6 @@ async function saveOrderToSupabase(orderData, orderItems) {
     try {
         // Check if Supabase client exists
         if (typeof supabaseClient === 'undefined') {
-            console.error('Supabase client not initialized');
             // Fallback to localStorage for demo
             return saveOrderToLocalStorage(orderData, orderItems);
         }
@@ -128,7 +126,6 @@ async function saveOrderToSupabase(orderData, orderItems) {
         return order.id;
 
     } catch (error) {
-        console.error('Supabase error:', error);
         // Fallback to localStorage
         return saveOrderToLocalStorage(orderData, orderItems);
     }
@@ -152,7 +149,6 @@ function saveOrderToLocalStorage(orderData, orderItems) {
     // Save to localStorage
     localStorage.setItem('fordips_orders', JSON.stringify(orders));
 
-    console.log('Order saved to localStorage:', order);
     return orderId;
 }
 
@@ -191,8 +187,6 @@ async function sendOrderNotifications(orderId, orderData, orderItems) {
 
         // In a real app, you would send actual emails here
         // For now, console log the notifications
-        console.log('Customer Notification:', customerMessage);
-        console.log('Admin Notification:', adminMessage);
 
         // Store notifications in localStorage for demo
         const allNotifications = JSON.parse(localStorage.getItem('fordips_notifications') || '[]');
@@ -208,7 +202,6 @@ async function sendOrderNotifications(orderId, orderData, orderItems) {
 
         return true;
     } catch (error) {
-        console.error('Notification error:', error);
         return false;
     }
 }

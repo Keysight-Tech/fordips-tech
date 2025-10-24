@@ -713,23 +713,17 @@ function initializeProductsWithFilters() {
 
 // Load Featured Products into Hero Carousel
 function loadFeaturedProducts() {
-    console.log('🚀 loadFeaturedProducts() called');
     const featuredProducts = products.filter(p => p.featured);
-    console.log('⭐ Found featured products:', featuredProducts.length);
 
     const carousel = document.querySelector('.device-carousel');
     const dots = document.querySelector('.carousel-dots');
 
-    console.log('🎠 Carousel element:', carousel ? 'Found ✅' : 'Not found ❌');
-    console.log('🔘 Dots element:', dots ? 'Found ✅' : 'Not found ❌');
 
     if (!carousel) {
-        console.error('❌ Carousel element (.device-carousel) not found in DOM!');
         return;
     }
 
     if (featuredProducts.length === 0) {
-        console.error('❌ No featured products found!');
         return;
     }
 
@@ -759,30 +753,25 @@ function loadFeaturedProducts() {
         ).join('');
     }
 
-    console.log(`✅ Loaded ${featuredProducts.length} featured products into hero carousel`);
 
     // Re-initialize carousel functionality after loading products
     if (typeof initDeviceCarousel === 'function') {
         setTimeout(() => {
             initDeviceCarousel();
-            console.log('🔄 Carousel re-initialized with featured products');
         }, 100);
     }
 }
 
 // Load Featured Products Grid
 function loadFeaturedProductsGrid() {
-    console.log('🎯 Loading featured products grid...');
     const featuredProducts = products.filter(p => p.featured);
     const grid = document.getElementById('featuredProductsGrid');
 
     if (!grid) {
-        console.warn('⚠️ Featured products grid element not found');
         return;
     }
 
     if (featuredProducts.length === 0) {
-        console.warn('⚠️ No featured products to display');
         grid.innerHTML = '<p style="text-align:center;color:#999;">No featured products available</p>';
         return;
     }
@@ -817,18 +806,13 @@ function loadFeaturedProductsGrid() {
     if (typeof attachCartListeners === 'function') {
         attachCartListeners();
     } else {
-        console.warn('⚠️ attachCartListeners function not available yet');
     }
 
-    console.log(`✅ Loaded ${featuredProducts.length} featured products into grid`);
 }
 
 // Auto-initialize if Supabase doesn't take over (fallback)
 // Note: This will be prevented if supabase-integration.js loads first
 function initializeFeaturedProducts() {
-    console.log('🎯 Attempting to load featured products...');
-    console.log('📊 Total products:', products.length);
-    console.log('⭐ Featured products:', products.filter(p => p.featured).length);
 
     setTimeout(() => {
         loadFeaturedProducts(); // Hero carousel
@@ -837,9 +821,7 @@ function initializeFeaturedProducts() {
 }
 
 if (document.readyState === 'loading') {
-    console.log('⏳ DOM still loading, waiting for DOMContentLoaded...');
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('✅ DOM loaded, initializing featured products');
         initializeFeaturedProducts();
 
         // Only initialize if products aren't already loaded
@@ -853,6 +835,5 @@ if (document.readyState === 'loading') {
     });
 } else {
     // If DOM already loaded, run immediately
-    console.log('✅ DOM already loaded, initializing featured products immediately');
     initializeFeaturedProducts();
 }

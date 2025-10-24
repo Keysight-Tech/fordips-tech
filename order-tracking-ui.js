@@ -340,4 +340,3 @@ window.trackOrder = trackOrder;
 window.showMyOrdersModal = showMyOrdersModal;
 window.closeMyOrdersModal = closeMyOrdersModal;
 
-console.log('✅ Order Tracking UI loaded');

@@ -18,7 +18,6 @@ let favoritesCache = new Set();
  * Initialize Favorites System
  */
 async function initializeFavoritesSystem() {
-    console.log('🎯 Initializing Favorites System...');
 
     // Load favorites from Supabase
     await loadFavoritesFromDatabase();
@@ -29,7 +28,6 @@ async function initializeFavoritesSystem() {
     // Update favorites count in header
     updateFavoritesCount();
 
-    console.log('✅ Favorites System initialized');
 }
 
 /**
@@ -37,7 +35,6 @@ async function initializeFavoritesSystem() {
  */
 async function loadFavoritesFromDatabase() {
     if (!window.supabaseClient) {
-        console.warn('⚠️ Supabase client not available, using localStorage fallback');
         loadFavoritesFromLocalStorage();
         return;
     }
@@ -56,9 +53,7 @@ async function loadFavoritesFromDatabase() {
             data.forEach(item => favoritesCache.add(item.product_id));
         }
 
-        console.log(`📦 Loaded ${favoritesCache.size} favorites from database`);
     } catch (error) {
-        console.error('❌ Error loading favorites:', error);
         // Fallback to localStorage
         loadFavoritesFromLocalStorage();
     }
@@ -75,7 +70,6 @@ function loadFavoritesFromLocalStorage() {
             favoritesCache.clear();
             favorites.forEach(id => favoritesCache.add(id));
         } catch (e) {
-            console.error('Error parsing favorites from localStorage:', e);
         }
     }
 }
@@ -119,7 +113,6 @@ async function addFavorite(productId, productData = null) {
     }
 
     if (!productData) {
-        console.error('Product data not found for ID:', productId);
         showNotification('Could not add to favorites', 'error');
         return;
     }
@@ -147,16 +140,13 @@ async function addFavorite(productId, productData = null) {
             if (error) {
                 // Handle unique constraint violation (already exists)
                 if (error.code === '23505') {
-                    console.log('Product already in favorites');
                 } else {
                     throw error;
                 }
             }
 
-            console.log('✅ Added to favorites:', productData.name);
             showNotification(`${productData.name} added to favorites! ❤️`, 'success');
         } catch (error) {
-            console.error('❌ Error saving favorite:', error);
             showNotification('Failed to save favorite', 'error');
             // Rollback cache on error
             favoritesCache.delete(id);
@@ -198,10 +188,8 @@ async function removeFavorite(productId) {
 
             if (error) throw error;
 
-            console.log('✅ Removed from favorites:', productName);
             showNotification(`${productName} removed from favorites`, 'info');
         } catch (error) {
-            console.error('❌ Error removing favorite:', error);
             showNotification('Failed to remove favorite', 'error');
             // Rollback cache on error
             favoritesCache.add(id);
@@ -232,7 +220,6 @@ async function getAllFavorites() {
 
         return data || [];
     } catch (error) {
-        console.error('❌ Error fetching favorites:', error);
         return getFavoritesFromLocalStorage();
     }
 }
@@ -307,7 +294,6 @@ function updateFavoritesCount() {
 async function openFavoritesModal() {
     const modal = document.getElementById('favoritesModal');
     if (!modal) {
-        console.error('Favorites modal not found');
         return;
     }
 
@@ -447,13 +433,11 @@ function attachFavoriteListeners() {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('💖 DOM loaded, initializing favorites system...');
     initializeFavoritesSystem();
     attachFavoriteListeners();
 
     // Debug: Log favorite buttons found
     const favoriteButtons = document.querySelectorAll('[data-favorite-id]');
-    console.log(`💖 Found ${favoriteButtons.length} favorite buttons on page`);
 });
 
 // Re-attach listeners when products are loaded dynamically
@@ -480,4 +464,3 @@ window.favoritesSystem = {
     closeFavoritesModal
 };
 
-console.log('💖 Favorites System loaded');

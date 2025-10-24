@@ -22,7 +22,6 @@ const CATEGORY_NAMES = {
 function initializeCompactCategories() {
     updateCategoryCounts();
     setupCategoryModalCloseListeners();
-    console.log('✅ Compact categories initialized');
 }
 
 /**
@@ -35,10 +34,8 @@ function updateCategoryCounts() {
     if (!window.products || !Array.isArray(window.products)) {
         if (categoryCountRetries < MAX_RETRIES) {
             categoryCountRetries++;
-            console.warn(`⚠️ Products not loaded yet (attempt ${categoryCountRetries}/${MAX_RETRIES})`);
             setTimeout(updateCategoryCounts, 500);
         } else {
-            console.log('ℹ️ Using static products from products.js');
             window.products = products; // Use products from products.js
             updateCategoryCounts();
         }
@@ -56,7 +53,6 @@ function updateCategoryCounts() {
         }
     });
 
-    console.log('✅ Category counts updated');
 }
 
 /**
@@ -68,7 +64,6 @@ function openCategoryModal(category) {
     const productsEl = document.getElementById('categoryModalProducts');
 
     if (!modal || !titleEl || !productsEl) {
-        console.error('❌ Category modal elements not found');
         return;
     }
 
@@ -88,7 +83,6 @@ function openCategoryModal(category) {
         loadCategoryProducts(category, productsEl);
     }, 200);
 
-    console.log(`📂 Opened category modal: ${categoryName}`);
 }
 
 /**
@@ -107,7 +101,6 @@ function closeCategoryModal(event) {
         document.body.style.overflow = '';
     }
 
-    console.log('✅ Category modal closed');
 }
 
 /**
@@ -166,7 +159,6 @@ function setupCategoryModalCloseListeners() {
     document.removeEventListener('keydown', escKeyHandler);
     document.addEventListener('keydown', escKeyHandler);
 
-    console.log('✅ Category modal close listeners setup');
 }
 
 /**
@@ -203,7 +195,6 @@ function loadCategoryProducts(category, container) {
         attachCartListeners();
     }
 
-    console.log(`✅ Loaded ${categoryProducts.length} products for ${category}`);
 }
 
 /**
@@ -269,4 +260,3 @@ if (document.readyState === 'loading') {
     setTimeout(initializeCompactCategories, 300);
 }
 
-console.log('📦 Compact categories script loaded');

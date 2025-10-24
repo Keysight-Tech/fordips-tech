@@ -21,7 +21,6 @@ async function loadProductReviews(productId) {
             return getReviewsFromLocalStorage(productId);
         }
     } catch (error) {
-        console.error('Error loading reviews:', error);
         return getReviewsFromLocalStorage(productId);
     }
 }
@@ -67,7 +66,6 @@ async function submitReview(productId, productName, rating, reviewText, customer
             return saveReviewToLocalStorage(reviewData);
         }
     } catch (error) {
-        console.error('Error submitting review:', error);
         return saveReviewToLocalStorage(reviewData);
     }
 }
@@ -303,7 +301,6 @@ async function handleReviewSubmit(e, productId, productName) {
         }
 
     } catch (error) {
-        console.error('Error submitting review:', error);
         showNotification('Failed to submit review. Please try again.', 'error');
     }
 }

@@ -23,15 +23,34 @@ const mobileDrawerSearchInput = document.getElementById('mobileDrawerSearchInput
 // Open/Close Mobile Drawer
 function openMobileDrawer() {
     navMenu.classList.add('active');
-    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add('active');
-    if (mobileMenuToggle) mobileMenuToggle.classList.add('active');
+    if (mobileDrawerOverlay) {
+        mobileDrawerOverlay.classList.add('active');
+        mobileDrawerOverlay.setAttribute('aria-hidden', 'false');
+    }
+    if (mobileMenuToggle) {
+        mobileMenuToggle.classList.add('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+    }
+    navMenu.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Focus trap - focus first focusable element
+    const firstFocusable = navMenu.querySelector('button, a, input, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) firstFocusable.focus();
 }
 
 function closeMobileDrawer() {
     navMenu.classList.remove('active');
-    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove('active');
-    if (mobileMenuToggle) mobileMenuToggle.classList.remove('active');
+    if (mobileDrawerOverlay) {
+        mobileDrawerOverlay.classList.remove('active');
+        mobileDrawerOverlay.setAttribute('aria-hidden', 'true');
+    }
+    if (mobileMenuToggle) {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.focus(); // Return focus to toggle button
+    }
+    navMenu.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     // Clear search input when closing
     if (mobileDrawerSearchInput) mobileDrawerSearchInput.value = '';
@@ -103,6 +122,27 @@ window.addEventListener('scroll', updateActiveLink);
 // Update on page load
 document.addEventListener('DOMContentLoaded', updateActiveLink);
 
+// Keyboard Navigation Support
+// ESC key to close drawer
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+        closeMobileDrawer();
+    }
+});
+
+// Enter/Space on drawer close button
+document.addEventListener('DOMContentLoaded', () => {
+    const drawerCloseBtn = document.querySelector('.mobile-drawer-close');
+    if (drawerCloseBtn) {
+        drawerCloseBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                closeMobileDrawer();
+            }
+        });
+    }
+});
+
 // Mobile Drawer Search Functionality
 if (mobileDrawerSearchInput) {
     mobileDrawerSearchInput.addEventListener('input', handleMobileDrawerSearch);
@@ -132,7 +172,6 @@ function handleMobileDrawerSearch(e) {
 function scrollToProductSection(searchTerm) {
     // Search in products array (from products.js)
     if (typeof products === 'undefined') {
-        console.warn('Products array not loaded');
         return;
     }
 
@@ -274,16 +313,13 @@ function initDeviceCarousel() {
     const slides = document.querySelectorAll('.device-slide');
     const dots = document.querySelectorAll('.carousel-dots .dot');
 
-    console.log(`📸 Carousel found ${slides.length} slides`);
 
     if (slides.length === 0) {
-        console.warn('⚠️ No carousel slides found!');
         return;
     }
 
     // Prevent double initialization
     if (carouselInitialized) {
-        console.log('⚠️ Carousel already initialized, resetting...');
         clearInterval(carouselInterval);
     }
     carouselInitialized = true;
@@ -343,14 +379,11 @@ function initDeviceCarousel() {
     const images = document.querySelectorAll('.device-img-large');
     images.forEach((img, index) => {
         img.addEventListener('load', () => {
-            console.log(`✅ Image ${index + 1} loaded successfully`);
         });
         img.addEventListener('error', () => {
-            console.error(`❌ Image ${index + 1} failed to load: ${img.src}`);
         });
     });
 
-    console.log('✅ Device carousel initialized successfully!');
 }
 
 // Observe elements for scroll animations
@@ -371,13 +404,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize device carousel (only if products.js hasn't already done it)
     setTimeout(() => {
         if (!carouselInitialized) {
-            console.log('🔄 Initializing carousel from script.js (products.js did not load it)');
             initDeviceCarousel();
         }
     }, 200);
 
-    console.log('🚀 Fordips Tech loaded successfully!');
-    console.log(`Cart contains ${getCartCount()} items`);
 });
 
 // Add keyboard navigation

@@ -8,7 +8,6 @@ function initializeCheckoutEnhancements() {
     setupCheckoutCurrencySelector();
     setupHelpMePayButton();
     syncCheckoutWithGlobalCurrency();
-    console.log('✅ Checkout enhancements initialized');
 }
 
 /**
@@ -18,7 +17,6 @@ function setupCheckoutCurrencySelector() {
     const currencySelect = document.getElementById('checkoutCurrencySelect');
 
     if (!currencySelect) {
-        console.warn('⚠️ Checkout currency selector not found');
         return;
     }
 
@@ -31,7 +29,6 @@ function setupCheckoutCurrencySelector() {
     // Handle currency change
     currencySelect.addEventListener('change', (e) => {
         const selectedCurrency = e.target.value;
-        console.log('💱 Checkout currency changed to:', selectedCurrency);
 
         // Update global currency using currency manager
         if (window.currencyManager) {
@@ -116,13 +113,11 @@ function setupHelpMePayButton() {
     const helpMePayBtn = document.getElementById('checkoutHelpMePayBtn');
 
     if (!helpMePayBtn) {
-        console.warn('⚠️ Help Me Pay button not found in checkout');
         return;
     }
 
     helpMePayBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('💰 Help Me Pay clicked from checkout');
 
         // Get cart data for Help Me Pay
         const cartData = getCartDataForHelpMePay();
@@ -155,7 +150,6 @@ function getCartDataForHelpMePay() {
         try {
             cart = JSON.parse(localStorage.getItem('cart'));
         } catch (e) {
-            console.error('Failed to parse cart:', e);
         }
     }
 
@@ -194,7 +188,6 @@ function openHelpMePayModal(cartData) {
             // Populate with cart data
             populateHelpMePayWithCartData(cartData);
         } else {
-            console.error('❌ Help Me Pay modal not found');
             alert('Help Me Pay feature is currently unavailable. Please try again later.');
         }
     }
@@ -222,7 +215,6 @@ function populateHelpMePayWithCartData(cartData) {
         el.textContent = cartData.currency;
     });
 
-    console.log('✅ Help Me Pay populated with cart data:', cartData);
 }
 
 /**
@@ -251,7 +243,6 @@ function updateCheckoutButtonCurrency() {
         const symbol = window.currencyManager.getSymbol(currency);
 
         // You could add currency badge to button if desired
-        console.log(`Checkout button currency: ${currency} (${symbol})`);
     }
 }
 
@@ -272,4 +263,3 @@ document.addEventListener('click', (e) => {
     }
 });
 
-console.log('🛒 Checkout enhancements script loaded');
