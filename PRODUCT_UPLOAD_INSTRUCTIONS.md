@@ -1,11 +1,11 @@
 # 📦 Product Upload Instructions - Fordips Tech
 
 ## Overview
-This guide explains how to upload the latest Apple products (iPhones, MacBooks, iPads, Apple Watches, and Samsung Galaxy devices) to your Supabase database.
+This guide explains how to upload the latest tech products (Apple, Samsung, Cameras, Windows PCs, and Accessories) to your Supabase database.
 
 ## 🎯 What's Included
 
-The upload utility adds **47 latest products** across multiple categories:
+The upload utility adds **87 latest products** across multiple categories:
 
 ### iPhones (11 models)
 - iPhone 16 series (Pro Max, Pro, Plus, Standard)
@@ -34,12 +34,40 @@ The upload utility adds **47 latest products** across multiple categories:
 - Apple Watch Series 10 (Latest)
 - Apple Watch SE (2nd Gen)
 
-### Samsung Galaxy (5 models)
-- Galaxy S24 Ultra
-- Galaxy S24+
-- Galaxy S24
-- Galaxy Z Fold 6
-- Galaxy Z Flip 6
+### Samsung Galaxy (11 models)
+- Galaxy S24 series (Ultra, Plus, Standard)
+- Galaxy Z Fold 6 & Z Flip 6 (Foldables)
+- Galaxy A54 5G & A34 5G (Mid-range)
+- Galaxy Tab S9 Ultra & S9 (Tablets)
+- Galaxy Watch 6 Classic (Smartwatch)
+- Galaxy Buds2 Pro (Earbuds)
+
+### Professional Cameras (8 models)
+- Canon EOS R5 & R6 Mark II
+- Nikon Z9
+- Sony A7 IV & A7R V
+- Fujifilm X-T5
+- GoPro HERO 12 Black
+- DJI Osmo Action 4
+
+### Windows Laptops & Desktops (10 models)
+- Dell XPS 15 & XPS 13 Plus
+- HP Spectre x360 14 & Pavilion Gaming Desktop
+- Lenovo ThinkPad X1 Carbon Gen 11 & IdeaCentre AIO 5i
+- ASUS ROG Zephyrus G14
+- MSI Creator Z16P
+- Microsoft Surface Laptop 5
+- Dell Alienware Aurora R15
+
+### Premium Accessories (10 models)
+- Anker 747 Power Bank
+- Belkin 3-in-1 Wireless Charger
+- Logitech MX Master 3S Mouse & MX Keys Keyboard
+- SanDisk 2TB Extreme Portable SSD
+- Samsung 1TB T7 Shield
+- Anker USB-C Hub 7-in-1
+- Spigen & OtterBox iPhone Cases
+- Peak Design Everyday Backpack 20L
 
 ## 📋 Prerequisites
 
@@ -65,7 +93,7 @@ The upload utility adds **47 latest products** across multiple categories:
 ### Step 3: Review Product Statistics
 
 The dashboard shows:
-- **Total Products**: 47 products ready to upload
+- **Total Products**: 87 products ready to upload
 - **Successfully Uploaded**: Updates in real-time
 - **Failed**: Shows any products that couldn't be uploaded
 
@@ -148,11 +176,11 @@ Products are uploaded with these fields:
 
 1. Go to: `https://your-domain.com/admin.html`
 2. Navigate to **Products** tab
-3. You should see all 47 new products
+3. You should see all 87 new products
 4. Filter by category to verify each section
 5. Check that all products have:
    - ✅ Product images
-   - ✅ Descriptions
+   - ✅ Detailed descriptions (50-150 words)
    - ✅ Prices
    - ✅ Stock quantities
 
@@ -170,10 +198,13 @@ You can update any product details:
 | Category | Slug | Products |
 |----------|------|----------|
 | iPhones | `iphone` | 11 models |
-| MacBooks | `laptop` | 6 models |
-| iPads | `tablet` | 6 models |
-| Apple Watch | `smartwatch` | 3 models |
-| Samsung | `samsung` | 5 models |
+| MacBooks | `laptop` | 13 models (6 Mac + 7 Windows) |
+| iPads | `tablet` | 8 models (6 iPad + 2 Samsung Tab) |
+| Apple Watch | `smartwatch` | 4 models (3 Apple + 1 Samsung) |
+| Samsung Phones | `samsung` | 7 models |
+| Cameras | `camera` | 8 models |
+| Desktops | `desktop` | 3 models |
+| Accessories | `accessory` | 11 models |
 
 ## 💡 Best Practices
 
@@ -218,15 +249,16 @@ If you encounter issues:
 - [ ] Clicked upload button
 - [ ] Monitored upload progress
 - [ ] Verified in admin panel
-- [ ] All 47 products visible
-- [ ] All products have descriptions
+- [ ] All 87 products visible
+- [ ] All products have detailed descriptions
 - [ ] Images loading correctly
 - [ ] Prices are correct
 - [ ] Stock quantities set
+- [ ] All categories populated (iPhone, Samsung, Laptop, Desktop, Tablet, Camera, Smartwatch, Accessory)
 
 ## 🎉 Completion
 
-Once all steps are complete, your Fordips Tech store will have the latest Apple products ready for customers to browse and purchase!
+Once all steps are complete, your Fordips Tech store will have 87 cutting-edge products across all major categories ready for customers to browse and purchase!
 
 ---
 
