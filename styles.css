@@ -223,7 +223,7 @@ a {
         inset 0 2px 8px rgba(255, 255, 255, 0.3);
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: heartbeatRotate 60s linear infinite;
+    animation: logoPulse 3s ease-in-out infinite;
     flex-shrink: 0;
 }
 
@@ -315,6 +315,22 @@ a {
     50% {
         opacity: 1;
         transform: scale(1.1);
+    }
+}
+
+/* Subtle Logo Pulse - More Professional */
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+            0 10px 30px rgba(44, 169, 161, 0.4),
+            0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow:
+            0 15px 40px rgba(44, 169, 161, 0.5),
+            0 8px 20px rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -4895,4 +4911,36 @@ a {
     height: 32px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+/* ===========================================
+   ACCESSIBILITY - SKIP TO CONTENT LINK
+   =========================================== */
+
+.skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 1rem;
+    z-index: 10000;
+    text-decoration: none;
+    box-shadow: 0 10px 40px rgba(44, 169, 161, 0.5);
+    transition: top var(--transition-normal);
+}
+
+.skip-to-content:focus {
+    top: 20px;
+    outline: 3px solid white;
+    outline-offset: 4px;
+}
+
+.skip-to-content:hover:focus {
+    background: var(--primary-dark);
+    transform: translateX(-50%) scale(1.05);
 }

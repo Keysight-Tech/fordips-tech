@@ -657,3 +657,102 @@
 .thank-you-content::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
 }
+
+/* ===== TRUST BADGES ===== */
+.trust-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(44, 169, 161, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(44, 169, 161, 0.1);
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-normal);
+}
+
+.trust-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(44, 169, 161, 0.15);
+}
+
+.trust-badge svg {
+    flex-shrink: 0;
+    color: var(--primary);
+    filter: drop-shadow(0 2px 4px rgba(44, 169, 161, 0.2));
+}
+
+.trust-badge div {
+    flex: 1;
+    min-width: 0;
+}
+
+.trust-badge strong {
+    display: block;
+    color: var(--gray-900);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+
+.trust-badge small {
+    display: block;
+    color: var(--gray-600);
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+/* Mobile Responsive Trust Badges */
+@media (max-width: 768px) {
+    .trust-badges {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+
+    .trust-badge {
+        padding: 0.6rem;
+        gap: 0.6rem;
+    }
+
+    .trust-badge svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .trust-badge strong {
+        font-size: 0.8rem;
+    }
+
+    .trust-badge small {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .trust-badges {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .trust-badge {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .trust-badge svg {
+        width: 28px;
+        height: 28px;
+    }
+}
