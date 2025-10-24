@@ -211,6 +211,9 @@ function openProductDetails(productId) {
                         </button>
                     </div>
                 </div>
+
+                <!-- Reviews Section -->
+                <div id="reviewsSectionContainer" class="reviews-section-container"></div>
             </div>
         </div>
     `;
@@ -227,6 +230,14 @@ function openProductDetails(productId) {
     if (variants?.colors) currentProductDetail.selectedColor = variants.colors[0];
     if (variants?.storage) currentProductDetail.selectedStorage = variants.storage[0];
     if (variants?.options) currentProductDetail.selectedOption = variants.options[0];
+
+    // Load and display reviews
+    if (typeof addReviewsToProductDetail === 'function') {
+        addReviewsToProductDetail(productId, product.name).then(reviewsHTML => {
+            const container = document.getElementById('reviewsSectionContainer');
+            if (container) container.innerHTML = reviewsHTML;
+        });
+    }
 }
 
 // Close product details
