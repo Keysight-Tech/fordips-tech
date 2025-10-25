@@ -400,16 +400,28 @@ function changeLocation() {
  * Decline location detection
  */
 function declineLocation() {
+    // Mark that user declined location access
     localStorage.setItem('locationPermissionAsked', 'declined');
 
-    // Use default US location
-    const defaultLocation = {
-        countryCode: 'US',
-        country: 'United States',
-        method: 'manual'
-    };
+    // DO NOT save any location data
+    // User chose to browse without location tracking
+    userLocation = null;
+    locationDetected = false;
 
-    saveAndApplyLocation(defaultLocation);
+    // Clear any previously stored location data
+    sessionStorage.removeItem('userLocation');
+
+    // Show status message
+    const statusEl = document.getElementById('locationStatus');
+    if (statusEl) {
+        statusEl.textContent = '✓ Browsing without location';
+        statusEl.style.color = '#6b7280';
+    }
+
+    // Close modal immediately
+    setTimeout(() => {
+        hideLocationPermissionModal();
+    }, 1500);
 }
 
 // Make functions globally available
