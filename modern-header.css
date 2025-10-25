@@ -455,7 +455,11 @@
 }
 
 /* Mobile */
+/* Hide Track Order on mobile (it's in hamburger menu on mobile) */
 @media (max-width: 768px) {
+    .desktop-only-track-order {
+        display: none !important;
+    }
     .top-bar {
         font-size: 12px;
         padding: 6px 0;
