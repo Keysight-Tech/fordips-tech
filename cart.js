@@ -181,24 +181,78 @@ if (cartButton) cartButton.addEventListener('click', openCart);
 if (cartClose) cartClose.addEventListener('click', closeCart);
 if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
-// Attach cart listeners to product buttons
+// Attach cart listeners to product buttons using event delegation
 function attachCartListeners() {
-    document.querySelectorAll('.btn-add-cart').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
+    // Remove any existing delegated listener to prevent duplicates
+    const existingListener = document._cartDelegateListener;
+    if (existingListener) {
+        document.body.removeEventListener('click', existingListener);
+    }
+
+    // Create new delegated event listener
+    const cartClickHandler = function(e) {
+        // Find the closest .btn-add-cart button
+        const btn = e.target.closest('.btn-add-cart');
+
+        if (!btn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Prevent multiple rapid clicks
+        if (btn.disabled) return;
+
+        // Disable button temporarily
+        btn.disabled = true;
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<span>Adding...</span>';
+        btn.style.opacity = '0.6';
+
+        try {
             const id = parseInt(btn.dataset.id);
             const name = btn.dataset.name;
             const price = parseFloat(btn.dataset.price);
             const image = btn.dataset.image;
 
+            // Validate data
+            if (!id || !name || !price) {
+                console.error('Invalid product data:', { id, name, price, image });
+                showNotification('Invalid product data', 'error');
+                return;
+            }
+
             addToCart({ id, name, price, image });
-        });
-    });
+
+            // Re-enable button after a delay
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                btn.style.opacity = '1';
+            }, 500);
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            showNotification('Failed to add to cart', 'error');
+
+            // Re-enable button on error
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+            btn.style.opacity = '1';
+        }
+    };
+
+    // Store reference to remove later if needed
+    document._cartDelegateListener = cartClickHandler;
+
+    // Attach single delegated listener to body
+    document.body.addEventListener('click', cartClickHandler);
 }
 
-// Checkout
+// Initialize cart system on page load
 document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
+
+    // Attach cart button listeners using event delegation
+    attachCartListeners();
 
     const checkoutBtn = document.getElementById('checkoutBtn');
     if (checkoutBtn) {
