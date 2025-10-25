@@ -10,7 +10,7 @@ function openCheckoutModal() {
     const cart = JSON.parse(localStorage.getItem('fordipsTechCart')) || [];
 
     if (cart.length === 0) {
-        showNotification('Your cart is empty!', 'error');
+        showNotification(typeof t === 'function' ? t('cartEmpty') : 'Your cart is empty!', 'error');
         return;
     }
 
@@ -54,7 +54,7 @@ function updateCheckoutTotals() {
     const checkoutTotal = document.getElementById('checkoutTotal');
 
     if (checkoutSubtotal) checkoutSubtotal.textContent = `$${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    if (checkoutShipping) checkoutShipping.textContent = shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`;
+    if (checkoutShipping) checkoutShipping.textContent = shippingCost === 0 ? (typeof t === 'function' ? t('FREE') : 'FREE') : `$${shippingCost.toFixed(2)}`;
     if (checkoutTotal) checkoutTotal.textContent = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
@@ -67,10 +67,10 @@ function setupShippingOptionListeners() {
         option.addEventListener('change', () => {
             updateCheckoutTotals();
             // Add visual feedback
-            showNotification(
-                option.value === 'express' ? 'Express shipping selected' : 'Free shipping selected',
-                'success'
-            );
+            const message = option.value === 'express'
+                ? (typeof t === 'function' ? t('expressShippingSelected') : 'Express shipping selected')
+                : (typeof t === 'function' ? t('freeShippingSelected') : 'Free shipping selected');
+            showNotification(message, 'success');
         });
     });
 }

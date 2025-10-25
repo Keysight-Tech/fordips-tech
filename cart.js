@@ -102,7 +102,7 @@ function updateCartUI() {
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                 </svg>
                 <p class="empty-cart" data-i18n="cartEmpty">Your cart is empty</p>
-                <a href="#products" class="btn-start-shopping">Start Shopping</a>
+                <a href="#products" class="btn-start-shopping">${typeof t === 'function' ? t('startShopping') : 'Start Shopping'}</a>
             </div>
         `;
     } else {
@@ -205,7 +205,7 @@ function attachCartListeners() {
         // Disable button temporarily
         btn.disabled = true;
         const originalHTML = btn.innerHTML;
-        btn.innerHTML = '<span>Adding...</span>';
+        btn.innerHTML = `<span>${typeof t === 'function' ? t('adding') : 'Adding...'}</span>`;
         btn.style.opacity = '0.6';
 
         try {
@@ -217,7 +217,7 @@ function attachCartListeners() {
             // Validate data
             if (!id || !name || !price) {
                 console.error('Invalid product data:', { id, name, price, image });
-                showNotification('Invalid product data', 'error');
+                showNotification(typeof t === 'function' ? t('invalidProductData') : 'Invalid product data', 'error');
                 return;
             }
 
@@ -231,7 +231,7 @@ function attachCartListeners() {
             }, 500);
         } catch (error) {
             console.error('Error adding to cart:', error);
-            showNotification('Failed to add to cart', 'error');
+            showNotification(typeof t === 'function' ? t('failedToAddToCart') : 'Failed to add to cart', 'error');
 
             // Re-enable button on error
             btn.disabled = false;
@@ -258,15 +258,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             if (cart.length === 0) {
-                showNotification('Your cart is empty!', 'error');
+                showNotification(typeof t === 'function' ? t('cartEmpty') : 'Your cart is empty!', 'error');
                 return;
             }
 
             const total = getCartTotal();
-            showNotification(
-                `Checkout coming soon! Total: $${total.toLocaleString()}`,
-                'success'
-            );
+            const message = typeof t === 'function'
+                ? t('checkoutComingSoon').replace('{total}', `$${total.toLocaleString()}`)
+                : `Checkout coming soon! Total: $${total.toLocaleString()}`;
+            showNotification(message, 'success');
         });
     }
 });
@@ -274,7 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function showCartNotification(itemName) {
     // Use unified notification system if available
     if (typeof showNotification === 'function') {
-        showNotification(`${itemName} added to cart! ✓`, 'success');
+        const message = typeof t === 'function'
+            ? t('itemAddedToCart').replace('{item}', itemName)
+            : `${itemName} added to cart! ✓`;
+        showNotification(message, 'success');
     } else {
         // Fallback notification
         const notification = document.createElement('div');

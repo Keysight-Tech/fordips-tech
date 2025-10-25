@@ -38,7 +38,7 @@ async function submitContactMessage(formData) {
             return {
                 success: true,
                 messageId: savedMessage.id,
-                message: 'Your message has been sent successfully!'
+                message: typeof t === 'function' ? t('contactMessageSuccess') : 'Your message has been sent successfully!'
             };
         } else {
             // Fallback to localStorage
@@ -125,10 +125,10 @@ async function sendContactNotifications(contactMessage) {
                 // Show notification to user about admin being notified
                 if (typeof showNotification === 'function') {
                     setTimeout(() => {
-                        showNotification(
-                            `Admin has been notified at ${ADMIN_EMAIL}`,
-                            'success'
-                        );
+                        const message = typeof t === 'function'
+                            ? t('adminNotified').replace('{email}', ADMIN_EMAIL)
+                            : `Admin has been notified at ${ADMIN_EMAIL}`;
+                        showNotification(message, 'success');
                     }, 1500);
                 }
             }
@@ -169,22 +169,22 @@ function saveContactToLocalStorage(contactData) {
         // Show notification about admin
         if (typeof showNotification === 'function') {
             setTimeout(() => {
-                showNotification(
-                    `Message saved! Admin (${ADMIN_EMAIL}) will be notified when online.`,
-                    'success'
-                );
+                const message = typeof t === 'function'
+                    ? t('messageSavedOffline').replace('{email}', ADMIN_EMAIL)
+                    : `Message saved! Admin (${ADMIN_EMAIL}) will be notified when online.`;
+                showNotification(message, 'success');
             }, 1500);
         }
 
         return {
             success: true,
             messageId: newMessage.id,
-            message: 'Your message has been saved and will be sent to admin when connection is restored.'
+            message: typeof t === 'function' ? t('messageSavedForLater') : 'Your message has been saved and will be sent to admin when connection is restored.'
         };
     } catch (error) {
         return {
             success: false,
-            error: 'Could not save message. Please try again.'
+            error: typeof t === 'function' ? t('messageSaveError') : 'Could not save message. Please try again.'
         };
     }
 }

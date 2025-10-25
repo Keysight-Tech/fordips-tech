@@ -85,9 +85,10 @@ function saveReviewToLocalStorage(reviewData) {
 // Render reviews HTML
 function renderReviewsHTML(reviews) {
     if (!reviews || reviews.length === 0) {
+        const noReviewsText = typeof t === 'function' ? t('noReviewsYet') : 'No reviews yet. Be the first to review this product!';
         return `
             <div class="no-reviews">
-                <p>No reviews yet. Be the first to review this product!</p>
+                <p>${noReviewsText}</p>
             </div>
         `;
     }
@@ -101,7 +102,7 @@ function renderReviewsHTML(reviews) {
                 <div class="rating-stars-large">
                     ${renderStars(parseFloat(averageRating), true)}
                 </div>
-                <div class="rating-count">${reviews.length} review${reviews.length !== 1 ? 's' : ''}</div>
+                <div class="rating-count">${typeof t === 'function' ? (reviews.length === 1 ? t('reviewsCountSingular').replace('{count}', reviews.length) : t('reviewsCountPlural').replace('{count}', reviews.length)) : `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`}</div>
             </div>
         </div>
 
@@ -215,44 +216,53 @@ function initializeRatingInput() {
 
 // Show review form
 function showReviewForm(productId, productName) {
+    const writeReviewText = typeof t === 'function' ? t('writeReviewButton') : 'Write a Review';
+    const forProductText = typeof t === 'function' ? t('writeReviewFor').replace('{productName}', productName) : `for ${productName}`;
+    const yourRatingText = typeof t === 'function' ? t('yourRatingLabel') : 'Your Rating *';
+    const yourNameText = typeof t === 'function' ? t('yourNameLabel') : 'Your Name *';
+    const yourEmailText = typeof t === 'function' ? t('yourEmailLabel') : 'Your Email *';
+    const yourReviewText = typeof t === 'function' ? t('yourReviewLabel') : 'Your Review *';
+    const submitReviewText = typeof t === 'function' ? t('submitReviewButton') : 'Submit Review';
+    const reviewNoteText = typeof t === 'function' ? t('reviewNoteText') : 'Note: Your review will be reviewed by our team before being published.';
+
     const reviewFormHTML = `
         <div class="review-form-modal active" id="reviewFormModal">
             <div class="modal-overlay" onclick="closeReviewForm()"></div>
             <div class="review-form-content">
                 <button class="modal-close" onclick="closeReviewForm()">&times;</button>
 
-                <h3>Write a Review</h3>
-                <p class="review-product-name">for ${productName}</p>
+                <h3>${writeReviewText}</h3>
+                <p class="review-product-name">${forProductText}</p>
 
                 <form id="reviewSubmitForm" onsubmit="handleReviewSubmit(event, ${productId}, '${productName}')">
                     <div class="form-group">
-                        <label>Your Rating *</label>
+                        <label>${yourRatingText}</label>
                         ${renderRatingInput()}
                         <input type="hidden" id="reviewRatingValue" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="reviewName">Your Name *</label>
+                        <label for="reviewName">${yourNameText}</label>
                         <input type="text" id="reviewName" required placeholder="John Doe">
                     </div>
 
                     <div class="form-group">
-                        <label for="reviewEmail">Your Email *</label>
+                        <label for="reviewEmail">${yourEmailText}</label>
                         <input type="email" id="reviewEmail" required placeholder="john@example.com">
                     </div>
 
                     <div class="form-group">
-                        <label for="reviewText">Your Review *</label>
+                        <label for="reviewText">${yourReviewText}</label>
                         <textarea id="reviewText" rows="5" required
                                   placeholder="Share your experience with this product..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-full">
-                        Submit Review
+                        ${submitReviewText}
                     </button>
 
                     <p class="review-note">
-                        Note: Your review will be reviewed by our team before being published.
+                        ${reviewNoteText}
                     </p>
                 </form>
             </div>
@@ -283,7 +293,7 @@ async function handleReviewSubmit(e, productId, productName) {
     const reviewText = document.getElementById('reviewText').value;
 
     if (!rating || rating < 1 || rating > 5) {
-        showNotification('Please select a rating', 'error');
+        showNotification(typeof t === 'function' ? t('pleaseSelectRating') : 'Please select a rating', 'error');
         return;
     }
 
@@ -291,7 +301,7 @@ async function handleReviewSubmit(e, productId, productName) {
         await submitReview(productId, productName, rating, reviewText, name, email);
 
         closeReviewForm();
-        showNotification('Thank you! Your review has been submitted and is pending approval.', 'success');
+        showNotification(typeof t === 'function' ? t('reviewSubmittedSuccess') : 'Thank you! Your review has been submitted and is pending approval.', 'success');
 
         // Reload reviews in product detail if open
         const reviewsSection = document.getElementById('productReviews');
@@ -301,7 +311,7 @@ async function handleReviewSubmit(e, productId, productName) {
         }
 
     } catch (error) {
-        showNotification('Failed to submit review. Please try again.', 'error');
+        showNotification(typeof t === 'function' ? t('reviewSubmitError') : 'Failed to submit review. Please try again.', 'error');
     }
 }
 
@@ -309,13 +319,15 @@ async function handleReviewSubmit(e, productId, productName) {
 async function addReviewsToProductDetail(productId, productName) {
     const reviews = await loadProductReviews(productId);
     const averageRating = calculateAverageRating(reviews);
+    const customerReviewsText = typeof t === 'function' ? t('customerReviews') : 'Customer Reviews';
+    const writeReviewText = typeof t === 'function' ? t('writeReviewButton') : 'Write a Review';
 
     return `
         <div class="product-reviews-section">
             <div class="reviews-header">
-                <h3>Customer Reviews</h3>
+                <h3>${customerReviewsText}</h3>
                 <button class="btn btn-outline" onclick="showReviewForm(${productId}, '${escapeHtml(productName)}')">
-                    Write a Review
+                    ${writeReviewText}
                 </button>
             </div>
 
