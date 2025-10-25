@@ -76,7 +76,8 @@
 
 /* ===== FLAG EMOJI OPTIMIZATION ===== */
 .lang-select-minimal {
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em; /* Slightly more spacing for better flag visibility */
+    word-spacing: 0.15em; /* Space between flag emoji and text */
 }
 
 /* Enhance flag size for better visibility */
@@ -86,21 +87,11 @@
     }
 }
 
-/* ===== LANGUAGE ICON BEFORE SELECTOR ===== */
-.language-switcher-top::before {
-    content: "🌐";
-    position: absolute;
-    left: -1.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    pointer-events: none;
-}
-
-/* Alternative: Add language icon inside the selector */
-.lang-select-minimal::before {
-    content: "";
-    margin-right: 0.5rem;
+/* ===== FLAG AND TEXT SPACING ===== */
+/* Ensure flags are close to language codes with proper spacing */
+.lang-select-minimal option {
+    word-spacing: 0.2em; /* Space between flag and language code */
+    letter-spacing: 0.02em;
 }
 
 /* ===== DROPDOWN ARROW CUSTOMIZATION ===== */
@@ -134,10 +125,6 @@
         min-width: 110px;
         font-size: 1rem;
     }
-
-    .language-switcher-top::before {
-        font-size: 1.3rem;
-    }
 }
 
 /* Tablets */
@@ -145,11 +132,6 @@
     .lang-select-minimal {
         padding: 0.5rem 2.25rem 0.5rem 0.625rem;
         font-size: 0.9rem;
-    }
-
-    .language-switcher-top::before {
-        left: -1.5rem;
-        font-size: 1.1rem;
     }
 }
 
@@ -166,10 +148,7 @@
         padding: 1rem 0.875rem;
         font-size: 0.95rem;
         line-height: 2.2;
-    }
-
-    .language-switcher-top::before {
-        display: none; /* Hide globe icon on mobile to save space */
+        word-spacing: 0.25em; /* Ensure good spacing on mobile */
     }
 }
 
@@ -222,38 +201,9 @@
     }
 }
 
-/* ===== TOOLTIP ON HOVER ===== */
+/* ===== LANGUAGE SWITCHER CONTAINER ===== */
 .language-switcher-top {
     position: relative;
-}
-
-.lang-select-minimal:hover::after {
-    content: "Change language";
-    position: absolute;
-    bottom: calc(100% + 0.5rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1f2937;
-    color: white;
-    padding: 0.5rem 0.875rem;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
-    font-weight: 500;
-}
-
-.lang-select-minimal:hover::after {
-    opacity: 1;
-}
-
-@media (max-width: 768px) {
-    .lang-select-minimal:hover::after {
-        display: none; /* Hide tooltip on mobile */
-    }
 }
 
 /* ===== ACCESSIBILITY IMPROVEMENTS ===== */
