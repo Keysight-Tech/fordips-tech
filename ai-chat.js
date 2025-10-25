@@ -40,8 +40,25 @@ class FordipsTechAI {
             preferences: {}
         };
 
+        // Get user's selected language
+        this.userLang = this.getUserLanguage();
+
         // Initialize on page load
         this.init();
+    }
+
+    /**
+     * Get the user's selected language from localStorage
+     */
+    getUserLanguage() {
+        return localStorage.getItem('selectedLanguage') || 'en';
+    }
+
+    /**
+     * Translation helper that uses the global t() function
+     */
+    t(key) {
+        return typeof window.t === 'function' ? window.t(key) : key;
     }
 
     init() {
@@ -85,10 +102,10 @@ class FordipsTechAI {
                                 </svg>
                             </div>
                             <div>
-                                <div class="chat-title">Fordips AI Assistant</div>
+                                <div class="chat-title">${this.t('aiChatTitle')}</div>
                                 <div class="chat-status">
                                     <span class="status-dot"></span>
-                                    <span>Online - Ready to help!</span>
+                                    <span>${this.t('aiChatStatus')}</span>
                                 </div>
                             </div>
                         </div>
@@ -107,16 +124,16 @@ class FordipsTechAI {
                     <!-- Quick Actions -->
                     <div class="chat-quick-actions" id="chatQuickActions">
                         <button class="quick-action-btn" data-action="browse-products">
-                            🛍️ Browse All
+                            ${this.t('qaBrowseAll')}
                         </button>
                         <button class="quick-action-btn" data-action="best-deals">
-                            💰 Best Deals
+                            ${this.t('qaBestDeals')}
                         </button>
                         <button class="quick-action-btn" data-action="popular">
-                            ⭐ Popular
+                            ${this.t('qaPopular')}
                         </button>
                         <button class="quick-action-btn" data-action="track-order">
-                            📦 Track Order
+                            ${this.t('qaTrackOrder')}
                         </button>
                     </div>
 
@@ -127,7 +144,7 @@ class FordipsTechAI {
                                 type="text"
                                 class="chat-input"
                                 id="chatInput"
-                                placeholder="Search products or ask me anything..."
+                                placeholder="${this.t('aiChatPlaceholder')}"
                                 autocomplete="off"
                             />
                             <button class="chat-send-btn" id="chatSendBtn" aria-label="Send message">
@@ -230,23 +247,23 @@ class FordipsTechAI {
         if (this.conversationHistory.length === 0) {
             const welcomeMessage = {
                 role: 'assistant',
-                content: `👋 **Welcome to Fordips Tech!**
+                content: `${this.t('aiWelcomeGreeting')}
 
-I'm your personal AI shopping assistant, here to make your experience amazing!
+${this.t('aiWelcomeIntro')}
 
-**I can help you with:**
+${this.t('aiWelcomeCanHelp')}
 
-📱 **Products** - iPhones, Samsung, Google Pixel, MacBooks, iPads
-💰 **Best Deals** - Find the lowest prices and special offers
-🛒 **Shopping** - Add to cart, checkout, order tracking
-🚚 **Shipping** - FREE worldwide delivery information
-💳 **Payment** - Credit cards, Mobile Money, PayPal & more
-📍 **Locations** - USA & Cameroon store info
-❓ **Support** - Any questions or issues
+${this.t('aiWelcomeProducts')}
+${this.t('aiWelcomePricing')}
+${this.t('aiWelcomeShopping')}
+${this.t('aiWelcomeShipping')}
+${this.t('aiWelcomePayment')}
+${this.t('aiWelcomeLocations')}
+${this.t('aiWelcomeSupport')}
 
-**Just ask me anything!** I'm here 24/7 to help you find exactly what you need.
+${this.t('aiWelcomeAsk')}
 
-What can I help you with today?`,
+${this.t('aiWelcomeQuestion')}`,
                 timestamp: new Date()
             };
 
@@ -306,7 +323,7 @@ What can I help you with today?`,
         // Greetings
         if (this.matchesIntent(lowerMessage, ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'])) {
             return {
-                message: "Hello! 👋 Welcome to Fordips Tech! I'm your personal shopping assistant. How can I help you find the perfect electronics today?",
+                message: this.t('aiGreetingResponse'),
                 actions: this.getSuggestedActions(['browse', 'deals', 'recommendations'])
             };
         }
@@ -773,27 +790,27 @@ What would you like help with?`,
 
         if (cart.length === 0) {
             return {
-                message: "Your cart is currently empty. Let me help you find something great! What are you looking for?",
+                message: this.t('aiCartEmpty'),
                 actions: this.getSuggestedActions(['browse', 'deals', 'recommendations'])
             };
         }
 
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        let message = `🛒 Your cart has ${cart.length} item(s):\n\n`;
+        let message = this.t('aiCartHasItems').replace('{count}', cart.length) + '\n\n';
 
         cart.forEach((item, index) => {
             message += `${index + 1}. ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
         });
 
         message += `\n**Total: $${total.toFixed(2)}**\n\n`;
-        message += `Ready to checkout?`;
+        message += this.t('aiCheckoutReady');
 
         return {
             message,
             actions: [
-                { label: '💳 Checkout Now', action: 'checkout' },
-                { label: '🛍️ Continue Shopping', action: 'browse' },
-                { label: '🗑️ Clear Cart', action: 'clear-cart' }
+                { label: this.t('aiCheckoutNow'), action: 'checkout' },
+                { label: this.t('aiContinueShopping'), action: 'browse' },
+                { label: this.t('aiViewCart'), action: 'show-cart' }
             ],
             executeAction: { type: 'show-cart' }
         };
@@ -821,7 +838,7 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
 
         if (searchResults.length === 0) {
             return {
-                message: "Which product would you like to add to your cart? Please tell me the specific product name or describe what you're looking for.",
+                message: this.t('aiProductNotFound'),
                 actions: this.getSuggestedActions(['browse', 'iphone', 'samsung'])
             };
         }
@@ -830,7 +847,7 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
             // Exact match - add to cart
             const product = searchResults[0];
             return {
-                message: `Perfect! I'll add **${product.name}** ($${product.price}) to your cart.`,
+                message: this.t('aiAddedToCart').replace('{item}', product.name),
                 executeAction: { type: 'add-to-cart', product }
             };
         }
@@ -897,7 +914,7 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
 
         if (cart.length === 0) {
             return {
-                message: "Your cart is empty! Let me help you find something great to purchase. What are you looking for?",
+                message: this.t('aiCartEmpty'),
                 actions: this.getSuggestedActions(['browse', 'deals', 'recommendations'])
             };
         }
@@ -905,9 +922,9 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
         return {
             message: `Great! You have ${cart.length} item(s) ready for checkout. Click the checkout button below to complete your purchase.\n\n💳 We accept: Credit cards, Mobile Money, PayPal, Zelle, Cash App\n🚚 FREE worldwide shipping!`,
             actions: [
-                { label: '💳 Proceed to Checkout', action: 'checkout' },
-                { label: '🛒 View Cart', action: 'show-cart' },
-                { label: '🛍️ Continue Shopping', action: 'browse' }
+                { label: this.t('aiCheckoutNow'), action: 'checkout' },
+                { label: this.t('aiViewCart'), action: 'show-cart' },
+                { label: this.t('aiContinueShopping'), action: 'browse' }
             ],
             executeAction: { type: 'checkout' }
         };
@@ -1297,7 +1314,7 @@ How else can I help you today?`,
                     addToCart(action.product.id, action.product.name, action.product.price, action.product.image);
                     this.addMessage({
                         role: 'assistant',
-                        content: `✅ Added **${action.product.name}** to your cart! Anything else you'd like?`,
+                        content: this.t('aiAddedToCart').replace('{item}', action.product.name),
                         timestamp: new Date()
                     });
                 }
