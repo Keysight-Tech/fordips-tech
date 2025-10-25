@@ -1,0 +1,385 @@
+<!-- Admin Profile Section - Add this to admin.html -->
+<!-- Add "Profile" tab to admin navigation -->
+<!-- <button class="admin-tab" onclick="showTab('profile')">Profile & Settings</button> -->
+
+<!-- Profile Tab Content -->
+<div id="profile" class="admin-content" style="display: none;">
+    <div class="profile-container" id="profileContainer">
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar-section">
+                <div class="profile-avatar" id="profileAvatar">
+                    BK
+                </div>
+                <div class="profile-avatar-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <button class="change-avatar-btn">Change Photo</button>
+            </div>
+
+            <div class="profile-info">
+                <h1 class="profile-name">
+                    <span id="profileName">Brine Ketum</span>
+                    <span class="profile-role-badge">Super Admin</span>
+                </h1>
+                <p class="profile-email" id="profileEmail">brineketum@gmail.com</p>
+
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="profileDaysSince">0</div>
+                        <div class="profile-stat-label">Days Active</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="statTotalActions">0</div>
+                        <div class="profile-stat-label">Total Actions</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="profile-stat-value" id="statTotalMessages">0</div>
+                        <div class="profile-stat-label">Messages Handled</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Sections -->
+        <div class="profile-sections">
+
+            <!-- Sidebar Menu -->
+            <div class="profile-sidebar">
+                <h3 class="profile-menu-title">Settings</h3>
+                <ul class="profile-menu">
+                    <li>
+                        <a class="profile-menu-item active" data-section="personalInfo">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Personal Info
+                        </a>
+                    </li>
+                    <li>
+                        <a class="profile-menu-item" data-section="accountSettings">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6m8.66-10a8.66 8.66 0 0 1 0 8m-17.32 0a8.66 8.66 0 0 1 0-8"></path>
+                            </svg>
+                            Account Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a class="profile-menu-item" data-section="security">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            Security
+                        </a>
+                    </li>
+                    <li>
+                        <a class="profile-menu-item" data-section="activityLog">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            Activity Log
+                        </a>
+                    </li>
+                    <li>
+                        <a class="profile-menu-item" data-section="apiKeys">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                            </svg>
+                            API Keys
+                        </a>
+                    </li>
+                    <li>
+                        <a class="profile-menu-item" data-section="notifications">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            Notifications
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content Area -->
+            <div class="profile-content">
+
+                <!-- Personal Info Section -->
+                <div id="personalInfo" class="profile-section active">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">Personal Information</h2>
+                            <p class="profile-section-description">Update your personal details and contact information</p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="profile-stats-grid">
+                        <div class="profile-stat-card">
+                            <div class="profile-stat-card-header">
+                                <div class="profile-stat-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2v20M2 12h20"></path>
+                                    </svg>
+                                </div>
+                                <span class="profile-stat-card-trend up">
+                                    ↑ 12%
+                                </span>
+                            </div>
+                            <div class="profile-stat-card-value" id="statTotalRevenue">$0.00</div>
+                            <div class="profile-stat-card-label">Total Revenue</div>
+                        </div>
+
+                        <div class="profile-stat-card">
+                            <div class="profile-stat-card-header">
+                                <div class="profile-stat-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <span class="profile-stat-card-trend up">
+                                    ↑ 8%
+                                </span>
+                            </div>
+                            <div class="profile-stat-card-value" id="statActiveUsers">0</div>
+                            <div class="profile-stat-card-label">Active Users</div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Form -->
+                    <form class="profile-form-grid" onsubmit="return false;">
+                        <div class="profile-form-group">
+                            <label for="profileFullName">Full Name</label>
+                            <input type="text" id="profileFullName" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileEmailInput">Email Address</label>
+                            <input type="email" id="profileEmailInput" placeholder="your@email.com" readonly>
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profilePhone">Phone Number</label>
+                            <input type="tel" id="profilePhone" placeholder="+1 (555) 000-0000">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileCountry">Country</label>
+                            <select id="profileCountry">
+                                <option value="">Select country</option>
+                                <option value="US">United States</option>
+                                <option value="NG">Nigeria</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                                <option value="FR">France</option>
+                            </select>
+                        </div>
+
+                        <div class="profile-form-group profile-form-group-full">
+                            <label for="profileAddress">Address</label>
+                            <input type="text" id="profileAddress" placeholder="Street address">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileCity">City</label>
+                            <input type="text" id="profileCity" placeholder="City">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="profileZip">ZIP / Postal Code</label>
+                            <input type="text" id="profileZip" placeholder="12345">
+                        </div>
+
+                        <div class="profile-form-group profile-form-group-full">
+                            <button type="button" class="profile-btn-primary" id="saveProfileBtn">
+                                Save Changes
+                            </button>
+                            <button type="button" class="profile-btn-secondary" style="margin-left: 1rem;">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Account Settings Section -->
+                <div id="accountSettings" class="profile-section">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">Account Settings</h2>
+                            <p class="profile-section-description">Manage your account preferences and password</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; color: #0A1A2F;">Change Password</h3>
+                    <form class="profile-form-grid" onsubmit="return false;">
+                        <div class="profile-form-group profile-form-group-full">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password">
+                        </div>
+
+                        <div class="profile-form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                        </div>
+
+                        <div class="profile-form-group profile-form-group-full">
+                            <button type="button" class="profile-btn-primary" id="changePasswordBtn">
+                                Update Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security Section -->
+                <div id="security" class="profile-section">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">Security Settings</h2>
+                            <p class="profile-section-description">Enhance your account security</p>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <div class="toggle-switch" data-setting="two_factor_auth">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Login Notifications</h4>
+                            <p>Get notified when someone logs into your account</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="login_notifications">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Session Management</h4>
+                            <p>Automatically log out inactive sessions</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="auto_logout">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>IP Restriction</h4>
+                            <p>Restrict account access to specific IP addresses</p>
+                        </div>
+                        <div class="toggle-switch" data-setting="ip_restriction">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log Section -->
+                <div id="activityLog" class="profile-section">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">Activity Log</h2>
+                            <p class="profile-section-description">View your recent admin activities</p>
+                        </div>
+                    </div>
+
+                    <div class="activity-log" id="activityLogContainer">
+                        <div class="profile-loading">
+                            <div class="profile-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Keys Section -->
+                <div id="apiKeys" class="profile-section">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">API Keys</h2>
+                            <p class="profile-section-description">Manage your API keys for external integrations</p>
+                        </div>
+                        <button class="profile-btn-primary" id="generateApiKeyBtn">
+                            + Generate New Key
+                        </button>
+                    </div>
+
+                    <div id="apiKeysContainer">
+                        <div class="profile-loading">
+                            <div class="profile-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div id="notifications" class="profile-section">
+                    <div class="profile-section-header">
+                        <div>
+                            <h2 class="profile-section-title">Notification Preferences</h2>
+                            <p class="profile-section-description">Choose what notifications you want to receive</p>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Order Notifications</h4>
+                            <p>Get notified when new orders are placed</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="order_notifications">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Contact Form Notifications</h4>
+                            <p>Receive alerts for new contact form submissions</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="contact_notifications">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>Newsletter Subscriptions</h4>
+                            <p>Get notified about new newsletter subscribers</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="newsletter_notifications">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+
+                    <div class="security-option">
+                        <div class="security-option-info">
+                            <h4>System Alerts</h4>
+                            <p>Receive critical system alerts and updates</p>
+                        </div>
+                        <div class="toggle-switch active" data-setting="system_alerts">
+                            <div class="toggle-switch-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
