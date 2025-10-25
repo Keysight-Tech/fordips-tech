@@ -1020,13 +1020,13 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
         }
 
         // Multiple matches
-        let message = `I found ${searchResults.length} products. Which one would you like specifications for?\n\n`;
+        let specMessage = `I found ${searchResults.length} products. Which one would you like specifications for?\n\n`;
         searchResults.slice(0, 5).forEach((p, index) => {
-            message += `${index + 1}. **${p.name}** - $${p.price}\n`;
+            specMessage += `${index + 1}. **${p.name}** - $${p.price}\n`;
         });
 
         return {
-            message,
+            message: specMessage,
             actions: searchResults.slice(0, 3).map(p => ({
                 label: `${p.name.split(' ').slice(0, 3).join(' ')} Details`,
                 action: 'view-product',
@@ -1200,14 +1200,14 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
                 };
             } else {
                 // Multiple matches
-                let message = `I found ${searchResults.length} products. Here are the prices:\n\n`;
+                let priceMessage = `I found ${searchResults.length} products. Here are the prices:\n\n`;
                 searchResults.slice(0, 5).forEach((p, index) => {
-                    message += `${index + 1}. **${p.name}** - $${p.price}\n`;
+                    priceMessage += `${index + 1}. **${p.name}** - $${p.price}\n`;
                 });
-                message += `\nWhich one are you interested in?`;
+                priceMessage += `\nWhich one are you interested in?`;
 
                 return {
-                    message,
+                    message: priceMessage,
                     actions: searchResults.slice(0, 3).map(p => ({
                         label: `${p.name.split(' ').slice(0, 3).join(' ')} - $${p.price}`,
                         action: 'add-to-cart',
