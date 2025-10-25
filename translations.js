@@ -468,10 +468,16 @@ function translatePage(lang) {
         }
     });
 
-    // Update language dropdown
+    // Update both language dropdowns to keep them in sync
     const langDropdown = document.getElementById('languageSelect');
+    const langDropdownTop = document.getElementById('languageSelectTop');
+
     if (langDropdown) {
         langDropdown.value = lang;
+    }
+
+    if (langDropdownTop) {
+        langDropdownTop.value = lang;
     }
 
     // Save preference
@@ -488,23 +494,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('fordipsTechLang') || 'en';
     translatePage(savedLang);
 
-    // Language dropdown
+    // Function to handle language change
+    const handleLanguageChange = (lang) => {
+        translatePage(lang);
+
+        // Show notification
+        const messages = {
+            en: 'Language changed to English',
+            fr: 'Langue changée en français',
+            pcm: 'We don change to Pidgin'
+        };
+
+        if (typeof showNotification === 'function') {
+            showNotification(messages[lang] || messages.en, 'success');
+        }
+    };
+
+    // Listen to both old and new language selectors
     const langDropdown = document.getElementById('languageSelect');
+    const langDropdownTop = document.getElementById('languageSelectTop');
+
     if (langDropdown) {
         langDropdown.addEventListener('change', (e) => {
-            const lang = e.target.value;
-            translatePage(lang);
+            handleLanguageChange(e.target.value);
+        });
+    }
 
-            // Show notification
-            const messages = {
-                en: 'Language changed to English',
-                fr: 'Langue changée en français',
-                pcm: 'We don change to Pidgin'
-            };
-
-            if (typeof showNotification === 'function') {
-                showNotification(messages[lang] || messages.en, 'success');
-            }
+    if (langDropdownTop) {
+        langDropdownTop.addEventListener('change', (e) => {
+            handleLanguageChange(e.target.value);
         });
     }
 });
