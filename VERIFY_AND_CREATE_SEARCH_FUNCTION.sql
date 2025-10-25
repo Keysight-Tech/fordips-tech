@@ -158,13 +158,17 @@ SELECT
 FROM search_products('phone')
 LIMIT 5;
 
-RAISE NOTICE '';
-RAISE NOTICE '════════════════════════════════════════════════════';
-RAISE NOTICE '         SEARCH FUNCTION SETUP COMPLETE!';
-RAISE NOTICE '════════════════════════════════════════════════════';
-RAISE NOTICE '';
-RAISE NOTICE 'You can now test search in the website:';
-RAISE NOTICE '1. Go to the homepage';
-RAISE NOTICE '2. Type a search query in the search bar';
-RAISE NOTICE '3. Results should appear in real-time';
-RAISE NOTICE '';
+-- 8. Final completion message
+DO $$
+BEGIN
+    RAISE NOTICE '';
+    RAISE NOTICE '════════════════════════════════════════════════════';
+    RAISE NOTICE '         SEARCH FUNCTION SETUP COMPLETE!';
+    RAISE NOTICE '════════════════════════════════════════════════════';
+    RAISE NOTICE '';
+    RAISE NOTICE 'You can now test search in the website:';
+    RAISE NOTICE '1. Go to the homepage';
+    RAISE NOTICE '2. Type a search query in the search bar';
+    RAISE NOTICE '3. Results should appear in real-time';
+    RAISE NOTICE '';
+END $$;
