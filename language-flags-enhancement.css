@@ -1,0 +1,407 @@
+/**
+ * FORDIPS TECH - Language Selector Flags Enhancement
+ * Makes flags more visible and prominent in language selector
+ */
+
+/* ===== LANGUAGE SELECTOR BASE STYLING ===== */
+.language-switcher-top {
+    position: relative;
+}
+
+.lang-select-minimal {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.8;
+    font-feature-settings: "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== ENHANCED FLAG DISPLAY IN OPTIONS ===== */
+.lang-select-minimal option {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 2;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background: white;
+    color: #333;
+    font-weight: 500;
+}
+
+.lang-select-minimal option:hover {
+    background: #f0f4ff;
+}
+
+/* Selected option highlighting */
+.lang-select-minimal:focus option:checked {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    color: white;
+    font-weight: 600;
+}
+
+/* ===== LANGUAGE SELECTOR CUSTOM STYLING ===== */
+.lang-select-minimal {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232563eb' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+    min-width: 100px;
+}
+
+/* ===== HOVER STATES ===== */
+.lang-select-minimal:hover {
+    border-color: #2563eb;
+    background-color: #f8faff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+}
+
+/* ===== FOCUS STATES ===== */
+.lang-select-minimal:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ===== FLAG EMOJI OPTIMIZATION ===== */
+.lang-select-minimal {
+    letter-spacing: 0.03em;
+}
+
+/* Enhance flag size for better visibility */
+@supports (font-size-adjust: 1) {
+    .lang-select-minimal {
+        font-size-adjust: 0.5;
+    }
+}
+
+/* ===== LANGUAGE ICON BEFORE SELECTOR ===== */
+.language-switcher-top::before {
+    content: "🌐";
+    position: absolute;
+    left: -1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* Alternative: Add language icon inside the selector */
+.lang-select-minimal::before {
+    content: "";
+    margin-right: 0.5rem;
+}
+
+/* ===== DROPDOWN ARROW CUSTOMIZATION ===== */
+.lang-select-minimal::-ms-expand {
+    display: none;
+}
+
+/* ===== BROWSER SPECIFIC FIXES ===== */
+
+/* Firefox */
+@-moz-document url-prefix() {
+    .lang-select-minimal {
+        padding-right: 2rem;
+    }
+}
+
+/* Safari */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .lang-select-minimal {
+            background-position: right 0.6rem center;
+        }
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Desktop and large tablets */
+@media (min-width: 769px) {
+    .lang-select-minimal {
+        min-width: 110px;
+        font-size: 1rem;
+    }
+
+    .language-switcher-top::before {
+        font-size: 1.3rem;
+    }
+}
+
+/* Tablets */
+@media (max-width: 968px) {
+    .lang-select-minimal {
+        padding: 0.5rem 2.25rem 0.5rem 0.625rem;
+        font-size: 0.9rem;
+    }
+
+    .language-switcher-top::before {
+        left: -1.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    .lang-select-minimal {
+        padding: 0.5rem 2rem 0.5rem 0.625rem;
+        font-size: 0.9rem;
+        min-width: 95px;
+        border-width: 1.5px;
+    }
+
+    .lang-select-minimal option {
+        padding: 1rem 0.875rem;
+        font-size: 0.95rem;
+        line-height: 2.2;
+    }
+
+    .language-switcher-top::before {
+        display: none; /* Hide globe icon on mobile to save space */
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 576px) {
+    .lang-select-minimal {
+        padding: 0.45rem 1.875rem 0.45rem 0.5rem;
+        font-size: 0.85rem;
+        min-width: 85px;
+        border-width: 1.5px;
+    }
+
+    .lang-select-minimal option {
+        padding: 0.875rem 0.75rem;
+        font-size: 0.9rem;
+        line-height: 2;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 400px) {
+    .lang-select-minimal {
+        padding: 0.4rem 1.75rem 0.4rem 0.5rem;
+        font-size: 0.8rem;
+        min-width: 80px;
+    }
+}
+
+/* ===== DISABLED STATE ===== */
+.lang-select-minimal:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+/* ===== LANGUAGE CHANGE ANIMATION ===== */
+.lang-select-minimal.language-changing {
+    animation: languageSwitch 0.4s ease;
+}
+
+@keyframes languageSwitch {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        border-color: #2563eb;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+    }
+}
+
+/* ===== TOOLTIP ON HOVER ===== */
+.language-switcher-top {
+    position: relative;
+}
+
+.lang-select-minimal:hover::after {
+    content: "Change language";
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2937;
+    color: white;
+    padding: 0.5rem 0.875rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    font-weight: 500;
+}
+
+.lang-select-minimal:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .lang-select-minimal:hover::after {
+        display: none; /* Hide tooltip on mobile */
+    }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.lang-select-minimal:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .lang-select-minimal {
+        border-width: 3px;
+    }
+
+    .lang-select-minimal option {
+        font-weight: 700;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .lang-select-minimal,
+    .lang-select-minimal.language-changing {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* ===== WINDOWS HIGH CONTRAST MODE ===== */
+@media screen and (-ms-high-contrast: active) {
+    .lang-select-minimal {
+        border: 2px solid windowText;
+    }
+}
+
+@media screen and (-ms-high-contrast: black-on-white) {
+    .lang-select-minimal option:checked {
+        background: highlight;
+        color: highlightText;
+    }
+}
+
+/* ===== LANGUAGE LABEL STYLING (if present) ===== */
+.language-switcher-top label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #4b5563;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+/* ===== SPECIFIC LANGUAGE FLAG ENHANCEMENTS ===== */
+
+/* English (US) */
+.lang-select-minimal option[value="en"] {
+    font-weight: 600;
+}
+
+/* French */
+.lang-select-minimal option[value="fr"] {
+    font-weight: 600;
+}
+
+/* Pidgin (Nigerian) */
+.lang-select-minimal option[value="pcm"] {
+    font-weight: 600;
+}
+
+/* ===== SELECTED VALUE DISPLAY ===== */
+.lang-select-minimal {
+    text-align: left;
+}
+
+/* ===== MOBILE TOUCH OPTIMIZATION ===== */
+@media (max-width: 768px) {
+    .lang-select-minimal {
+        font-size: 16px; /* Prevent iOS zoom on focus */
+        min-height: 40px; /* Better touch target */
+        -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
+    }
+}
+
+/* ===== DROPDOWN OPENING ANIMATION ===== */
+.lang-select-minimal[size]:focus,
+.lang-select-minimal[multiple]:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ===== GRADIENT BACKGROUND ON HOVER (OPTIONAL) ===== */
+.language-switcher-top:hover .lang-select-minimal {
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232563eb' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+}
+
+/* ===== RTL SUPPORT (if needed in future) ===== */
+[dir="rtl"] .lang-select-minimal {
+    background-position: left 0.75rem center;
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+}
+
+/* ===== DARK MODE SUPPORT (if implemented) ===== */
+@media (prefers-color-scheme: dark) {
+    .lang-select-minimal {
+        background-color: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+    }
+
+    .lang-select-minimal:hover {
+        background-color: #111827;
+        border-color: #3b82f6;
+    }
+
+    .lang-select-minimal option {
+        background-color: #1f2937;
+        color: #f9fafb;
+    }
+}
+
+/* ===== FOCUS WITHIN CONTAINER ===== */
+.language-switcher-top:focus-within {
+    /* Optional: Add glow effect to container when select is focused */
+}
+
+/* ===== LOADING STATE (if language is being changed) ===== */
+.lang-select-minimal.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    cursor: wait;
+}
+
+.lang-select-minimal.loading::after {
+    content: "⏳";
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
