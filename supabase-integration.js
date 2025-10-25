@@ -142,13 +142,61 @@ async function loadProducts(category = null) {
 
         if (error) throw error;
 
-        return data || [];
+        // If we got data from Supabase, return it
+        if (data && data.length > 0) {
+            return data;
+        }
+
+        // If Supabase returned empty, fall back to local products
+        console.warn('⚠️ No products in Supabase database. Falling back to local products.');
+        console.warn('📝 To fix this, run DEPLOY_ALL.sql in your Supabase SQL Editor:');
+        console.warn('   https://supabase.com/dashboard/project/loutcbvftzojsioahtdw/sql');
+
+        return getLocalProducts(category);
     } catch (error) {
-        window.FORDIPS_CONFIG?.logger.error('Error loading products:', error);
-        return [];
+        console.error('❌ Supabase Error:', error.message || error);
+        console.warn('⚠️ Falling back to local products data.');
+        console.warn('📝 Possible causes:');
+        console.warn('   1. Products table does not exist - Run DEPLOY_ALL.sql');
+        console.warn('   2. Supabase project is paused - Check your dashboard');
+        console.warn('   3. Network connectivity issue');
+        console.warn('   Dashboard: https://supabase.com/dashboard/project/loutcbvftzojsioahtdw');
+
+        window.FORDIPS_CONFIG?.logger.error('Error loading products from Supabase:', error);
+
+        // Fall back to local products
+        return getLocalProducts(category);
     }
 }
 
+// Helper function to get local products
+function getLocalProducts(category = null) {
+    if (!window.products) {
+        console.error('❌ Local products not found! Make sure products.js is loaded.');
+        return [];
+    }
+
+    let localProducts = window.products;
+
+    // Filter by category if specified
+    if (category && category !== 'all') {
+        localProducts = localProducts.filter(p => p.category === category);
+    }
+
+    // Transform local products to match Supabase format
+    return localProducts.map(product => ({
+        id: product.id,
+        name: product.name,
+        category_slug: product.category,
+        price: product.price,
+        description: product.description,
+        image_url: product.image,
+        badge: product.badge || null,
+        stock_quantity: 100,
+        is_active: true,
+        created_at: new Date().toISOString()
+    }));
+}
 // Render products to the page
 async function renderProductsFromDB(category = null) {
     const productsGrid = document.getElementById('productsGrid');
