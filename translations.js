@@ -20,6 +20,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Search for products...',
         searchButton: 'Search',
+        freeShippingBanner: '🎉 Free Shipping on Orders Over $50',
+        trackOrder: 'Track Order',
 
         // Hero
         heroWelcome: 'WELCOME TO',
@@ -241,6 +243,8 @@ const translations = {
         mobileNavTitle: 'القائمة',
         searchPlaceholder: 'البحث عن المنتجات...',
         searchButton: 'بحث',
+        freeShippingBanner: '🎉 شحن مجاني للطلبات التي تزيد عن 50 دولار',
+        trackOrder: 'تتبع الطلب',
 
         // Hero
         heroWelcome: 'مرحباً بك في',
@@ -462,6 +466,8 @@ const translations = {
         mobileNavTitle: '导航',
         searchPlaceholder: '搜索产品...',
         searchButton: '搜索',
+        freeShippingBanner: '🎉 订单满$50免费送货',
+        trackOrder: '跟踪订单',
 
         // Hero
         heroWelcome: '欢迎来到',
@@ -683,6 +689,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Rechercher des produits...',
         searchButton: 'Rechercher',
+        freeShippingBanner: '🎉 Livraison Gratuite sur Commandes de Plus de 50$',
+        trackOrder: 'Suivre la Commande',
 
         // Hero
         heroWelcome: 'BIENVENUE CHEZ',
@@ -904,6 +912,8 @@ const translations = {
         mobileNavTitle: 'Navegación',
         searchPlaceholder: 'Buscar productos...',
         searchButton: 'Buscar',
+        freeShippingBanner: '🎉 Envío Gratis en Pedidos Superiores a $50',
+        trackOrder: 'Rastrear Pedido',
 
         // Hero
         heroWelcome: 'BIENVENIDO A',
@@ -1125,6 +1135,8 @@ const translations = {
         mobileNavTitle: 'नेविगेशन',
         searchPlaceholder: 'उत्पाद खोजें...',
         searchButton: 'खोजें',
+        freeShippingBanner: '🎉 $50 से अधिक के ऑर्डर पर मुफ्त शिपिंग',
+        trackOrder: 'ऑर्डर ट्रैक करें',
 
         // Hero
         heroWelcome: 'में आपका स्वागत है',
@@ -1346,6 +1358,8 @@ const translations = {
         mobileNavTitle: 'Menu',
         searchPlaceholder: 'Search for product dem...',
         searchButton: 'Search',
+        freeShippingBanner: '🎉 Free Shipping for Order Wey Pass $50',
+        trackOrder: 'Track Your Order',
 
         // Hero
         heroWelcome: 'WELCOME TO',
@@ -1567,6 +1581,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Lɔ́ŋɔ́ bi produi...',
         searchButton: 'Lɔ́ŋɔ́',
+        freeShippingBanner: '🎉 Livraison Gratuite pour Commande Wɔ̀ɔ̀ $50',
+        trackOrder: 'Lɔ́ŋɔ́ Commande',
 
         // Hero
         heroWelcome: 'MIYƐMBƐ NÁ',
@@ -1788,6 +1804,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Ghɔ̀y bí produi...',
         searchButton: 'Ghɔ̀y',
+        freeShippingBanner: '🎉 Livraison Gratuite yi Commande ghɔ̀y $50',
+        trackOrder: 'Ghɔ̀y Commande',
 
         // Hero
         heroWelcome: 'NJÌNƏ̀ Á',
@@ -2009,6 +2027,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Lɛ̀m bi produi...',
         searchButton: 'Lɛ̀m',
+        freeShippingBanner: '🎉 Livraison Gratuite bi Commande lɛ̀m $50',
+        trackOrder: 'Lɛ̀m Commande',
 
         // Hero
         heroWelcome: 'MIYƐ́MBƐ́ NÁ',
@@ -2230,6 +2250,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Sɛ́k bí lwálò...',
         searchButton: 'Sɛ́k',
+        freeShippingBanner: '🎉 Livraison Gratuite ná Order sɛ́k $50',
+        trackOrder: 'Sɛ́k Order',
 
         // Hero
         heroWelcome: 'LÓNGÓNÍ NÁ',
@@ -2451,6 +2473,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Chɛk bí bǐŋàlò...',
         searchButton: 'Chɛk',
+        freeShippingBanner: '🎉 Livraison Gratuite ná Order chɛk $50',
+        trackOrder: 'Chɛk Order',
 
         // Hero
         heroWelcome: 'NJƐ̀MBƐ́ NÁ',
@@ -2672,6 +2696,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Sɛ̀k bí bíŋálò...',
         searchButton: 'Sɛ̀k',
+        freeShippingBanner: '🎉 Livraison Gratuite ná Order sɛ̀k $50',
+        trackOrder: 'Sɛ̀k Order',
 
         // Hero
         heroWelcome: 'NJƐ̀MBƐ́ NÁ',
@@ -2893,6 +2919,8 @@ const translations = {
         mobileNavTitle: 'Navigation',
         searchPlaceholder: 'Produkte suchen...',
         searchButton: 'Suchen',
+        freeShippingBanner: '🎉 Kostenloser Versand bei Bestellungen über $50',
+        trackOrder: 'Bestellung Verfolgen',
 
         // Hero
         heroWelcome: 'WILLKOMMEN BEI',
@@ -3114,6 +3142,8 @@ const translations = {
         mobileNavTitle: 'Navigazione',
         searchPlaceholder: 'Cerca prodotti...',
         searchButton: 'Cerca',
+        freeShippingBanner: '🎉 Spedizione Gratuita su Ordini Superiori a $50',
+        trackOrder: 'Traccia Ordine',
 
         // Hero
         heroWelcome: 'BENVENUTO IN',
@@ -3335,6 +3365,8 @@ const translations = {
         mobileNavTitle: 'Ukuzulazula',
         searchPlaceholder: 'Sesha imikhiqizo...',
         searchButton: 'Sesha',
+        freeShippingBanner: '🎉 Ukuthunyelwa Kwamahhala Kuma-oda Angaphezu kuka-$50',
+        trackOrder: 'Landelela I-oda',
 
         // Hero
         heroWelcome: 'SIYAKWAMUKELA KU',
