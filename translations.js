@@ -18,6 +18,8 @@ const translations = {
         navContact: 'Contact',
         navAccount: 'Account',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Search for products...',
+        searchButton: 'Search',
 
         // Hero
         heroWelcome: 'WELCOME TO',
@@ -237,6 +239,8 @@ const translations = {
         navContact: 'اتصل بنا',
         navAccount: 'الحساب',
         mobileNavTitle: 'القائمة',
+        searchPlaceholder: 'البحث عن المنتجات...',
+        searchButton: 'بحث',
 
         // Hero
         heroWelcome: 'مرحباً بك في',
@@ -456,6 +460,8 @@ const translations = {
         navContact: '联系我们',
         navAccount: '账户',
         mobileNavTitle: '导航',
+        searchPlaceholder: '搜索产品...',
+        searchButton: '搜索',
 
         // Hero
         heroWelcome: '欢迎来到',
@@ -675,6 +681,8 @@ const translations = {
         navContact: 'Contact',
         navAccount: 'Compte',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Rechercher des produits...',
+        searchButton: 'Rechercher',
 
         // Hero
         heroWelcome: 'BIENVENUE CHEZ',
@@ -894,6 +902,8 @@ const translations = {
         navContact: 'Contacto',
         navAccount: 'Cuenta',
         mobileNavTitle: 'Navegación',
+        searchPlaceholder: 'Buscar productos...',
+        searchButton: 'Buscar',
 
         // Hero
         heroWelcome: 'BIENVENIDO A',
@@ -1113,6 +1123,8 @@ const translations = {
         navContact: 'संपर्क करें',
         navAccount: 'खाता',
         mobileNavTitle: 'नेविगेशन',
+        searchPlaceholder: 'उत्पाद खोजें...',
+        searchButton: 'खोजें',
 
         // Hero
         heroWelcome: 'में आपका स्वागत है',
@@ -1332,6 +1344,8 @@ const translations = {
         navContact: 'Contact Us',
         navAccount: 'Your Account',
         mobileNavTitle: 'Menu',
+        searchPlaceholder: 'Search for product dem...',
+        searchButton: 'Search',
 
         // Hero
         heroWelcome: 'WELCOME TO',
@@ -1551,6 +1565,8 @@ const translations = {
         navContact: 'Kúl Bisó',
         navAccount: 'Compte wó',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Lɔ́ŋɔ́ bi produi...',
+        searchButton: 'Lɔ́ŋɔ́',
 
         // Hero
         heroWelcome: 'MIYƐMBƐ NÁ',
@@ -1770,6 +1786,8 @@ const translations = {
         navContact: 'Tɔ́ŋ Wìi',
         navAccount: 'Account a wòo',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Ghɔ̀y bí produi...',
+        searchButton: 'Ghɔ̀y',
 
         // Hero
         heroWelcome: 'NJÌNƏ̀ Á',
@@ -1989,6 +2007,8 @@ const translations = {
         navContact: 'Nyon Bés',
         navAccount: 'Compte a nyùù',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Lɛ̀m bi produi...',
+        searchButton: 'Lɛ̀m',
 
         // Hero
         heroWelcome: 'MIYƐ́MBƐ́ NÁ',
@@ -2208,6 +2228,8 @@ const translations = {
         navContact: 'Lìmbá Bésó',
         navAccount: 'Compte a yɔ́ɔ̀',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Sɛ́k bí lwálò...',
+        searchButton: 'Sɛ́k',
 
         // Hero
         heroWelcome: 'LÓNGÓNÍ NÁ',
@@ -2427,6 +2449,8 @@ const translations = {
         navContact: 'Kɔ̀p Bɛ́sɛ̀',
         navAccount: 'Compte a ŋghɛ́',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Chɛk bí bǐŋàlò...',
+        searchButton: 'Chɛk',
 
         // Hero
         heroWelcome: 'NJƐ̀MBƐ́ NÁ',
@@ -2646,6 +2670,8 @@ const translations = {
         navContact: 'Nyɔ́ŋ Bɛ́sɛ̀',
         navAccount: 'Compte a ŋwɛ́',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Sɛ̀k bí bíŋálò...',
+        searchButton: 'Sɛ̀k',
 
         // Hero
         heroWelcome: 'NJƐ̀MBƐ́ NÁ',
@@ -2865,6 +2891,8 @@ const translations = {
         navContact: 'Kontakt',
         navAccount: 'Konto',
         mobileNavTitle: 'Navigation',
+        searchPlaceholder: 'Produkte suchen...',
+        searchButton: 'Suchen',
 
         // Hero
         heroWelcome: 'WILLKOMMEN BEI',
@@ -3084,6 +3112,8 @@ const translations = {
         navContact: 'Contatti',
         navAccount: 'Account',
         mobileNavTitle: 'Navigazione',
+        searchPlaceholder: 'Cerca prodotti...',
+        searchButton: 'Cerca',
 
         // Hero
         heroWelcome: 'BENVENUTO IN',
@@ -3303,6 +3333,8 @@ const translations = {
         navContact: 'Xhumana',
         navAccount: 'I-akhawunti',
         mobileNavTitle: 'Ukuzulazula',
+        searchPlaceholder: 'Sesha imikhiqizo...',
+        searchButton: 'Sesha',
 
         // Hero
         heroWelcome: 'SIYAKWAMUKELA KU',
