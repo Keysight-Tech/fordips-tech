@@ -191,8 +191,6 @@
                 <div class="top-bar-content">
                     <p class="announcement" data-i18n="freeShippingBanner">🎉 Free Shipping on Orders Over $50</p>
                     <div class="top-bar-links">
-                        <button onclick="showOrderTrackingModal()" class="top-link" data-i18n="trackOrder">Track Order</button>
-
                         <!-- Rotating World Globe -->
                         <div class="rotating-globe" title="Worldwide Shipping Available">
                             <div class="globe-sphere">
@@ -391,6 +389,14 @@
                                     </svg>
                                 </div>
                                 <span data-i18n="navAccount">Account</span>
+                            </a>
+                            <a href="javascript:void(0)" class="mobile-quick-link" onclick="showOrderTrackingModal(); closeMobileDrawer();">
+                                <div class="quick-link-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path>
+                                    </svg>
+                                </div>
+                                <span data-i18n="trackOrder">Track Order</span>
                             </a>
                         </div>
                     </div>
