@@ -395,17 +395,102 @@ async function removeFavoriteFromModal(productId) {
 function viewFavoriteProduct(productId) {
     closeFavoritesModal();
 
-    // Try to open product detail modal
+    // Get the product from window.products or global products array
+    const productsList = window.products || (typeof products !== 'undefined' ? products : []);
+    const product = productsList.find(p => p.id === parseInt(productId));
+
+    if (!product) {
+        console.warn('Product not found:', productId);
+        showNotification('Product not found', 'error');
+        return;
+    }
+
+    // Try to open enhanced product detail modal
     if (typeof openEnhancedProductDetail === 'function') {
         setTimeout(() => {
             openEnhancedProductDetail(productId);
         }, 300);
+    } else if (typeof openProductModal === 'function') {
+        // Fallback to basic product modal if enhanced one doesn't exist
+        setTimeout(() => {
+            openProductModal(product);
+        }, 300);
     } else {
-        // Fallback: scroll to products section
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        // Create a simple product view modal
+        setTimeout(() => {
+            openSimpleProductView(product);
+        }, 300);
+    }
+}
+
+/**
+ * Simple product view fallback
+ */
+function openSimpleProductView(product) {
+    // Create a simple product modal
+    const modal = document.createElement('div');
+    modal.id = 'simpleProductModal';
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+
+    modal.innerHTML = `
+        <div class="modal-overlay" onclick="closeSimpleProductView()"></div>
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close" onclick="closeSimpleProductView()">&times;</button>
+            <div style="padding: 2rem;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="${product.image}" alt="${product.name}" style="max-width: 100%; height: auto; border-radius: 12px;">
+                </div>
+                <h2 style="margin-bottom: 1rem; color: #1a1a2e;">${product.name}</h2>
+                ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                <p style="color: #666; margin: 1rem 0; line-height: 1.6;">${product.description || 'Premium quality product'}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #2563eb;">$${product.price.toLocaleString()}</div>
+                    <div style="color: #10b981; font-weight: 600;">In Stock</div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button
+                        onclick="addToCartFromSimpleView(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.image}')"
+                        class="btn-primary"
+                        style="flex: 1; padding: 1rem; font-size: 1rem; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                        Add to Cart
+                    </button>
+                    <button
+                        onclick="toggleFavorite(${product.id})"
+                        class="btn-secondary"
+                        style="padding: 1rem 1.5rem; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-size: 1.5rem;">
+                        ${isFavorited(product.id) ? '❤️' : '🤍'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close simple product view
+ */
+function closeSimpleProductView() {
+    const modal = document.getElementById('simpleProductModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Add to cart from simple product view
+ */
+function addToCartFromSimpleView(id, name, price, image) {
+    if (typeof addToCart === 'function') {
+        addToCart({ id, name, price, image, quantity: 1 });
+        closeSimpleProductView();
+    } else {
+        console.error('addToCart function not available');
+        showNotification('Unable to add to cart', 'error');
     }
 }
 
@@ -461,6 +546,9 @@ window.favoritesSystem = {
     isFavorited,
     getAllFavorites,
     openFavoritesModal,
-    closeFavoritesModal
+    closeFavoritesModal,
+    viewFavoriteProduct,
+    openSimpleProductView,
+    closeSimpleProductView
 };
 

@@ -624,6 +624,9 @@ const products = [
     }
 ];
 
+// Expose products globally for other scripts
+window.products = products;
+
 // Initialize products on page load
 function initializeProducts() {
     const productsGrid = document.getElementById('productsGrid');
