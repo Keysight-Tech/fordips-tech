@@ -78,6 +78,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern-header.css">
     <link rel="stylesheet" href="category-products-styles.css">
     <link rel="stylesheet" href="compact-categories-styles.css">
     <link rel="stylesheet" href="compact-layout-overrides.css">
@@ -176,23 +177,117 @@
     <!-- Skip to Content Link for Accessibility -->
     <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="#" class="logo" aria-label="Fordips Tech Home">
-                    <div class="logo-circle">
-                        <div class="logo-circle-inner">
-                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png" alt="Fordips Tech Logo" class="logo-image">
+    <!-- Modern Header -->
+    <header class="modern-header" id="modernHeader">
+        <!-- Top Announcement Bar -->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="top-bar-content">
+                    <p class="announcement">🎉 Free Shipping on Orders Over $50 | Track Your Order</p>
+                    <div class="top-bar-links">
+                        <button onclick="showOrderTrackingModal()" class="top-link">Track Order</button>
+                        <div class="language-switcher-top">
+                            <select id="languageSelectTop" class="lang-select-minimal">
+                                <option value="en" selected>EN</option>
+                                <option value="fr">FR</option>
+                                <option value="pcm">PCM</option>
+                            </select>
                         </div>
                     </div>
-                    <span class="logo-text" data-i18n="brandName">FORDIPS TECH</span>
-                </a>
+                </div>
+            </div>
+        </div>
 
-                <!-- Mobile Drawer Overlay -->
-                <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" aria-hidden="true"></div>
+        <!-- Main Header -->
+        <nav class="main-header" id="navbar" role="navigation" aria-label="Main navigation">
+            <div class="container-fluid">
+                <div class="header-grid">
+                    <!-- Logo Section -->
+                    <div class="header-logo">
+                        <a href="#" class="brand-logo" aria-label="Fordips Tech Home">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png" alt="Fordips Tech" class="logo-img">
+                            <span class="brand-name">FORDIPS TECH</span>
+                        </a>
+                    </div>
 
-                <ul class="nav-menu" id="navMenu" role="menu" aria-label="Navigation menu">
+                    <!-- Search Bar Section -->
+                    <div class="header-search">
+                        <div class="search-container">
+                            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="search"
+                                   id="headerSearch"
+                                   placeholder="Search for products..."
+                                   class="search-input"
+                                   aria-label="Search products">
+                            <button class="search-btn" aria-label="Search">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons Section -->
+                    <div class="header-actions">
+                        <button class="header-icon-btn" onclick="openAccountModal()" aria-label="Account">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span class="icon-label" id="accountLabel">Account</span>
+                        </button>
+
+                        <button class="header-icon-btn" onclick="openFavoritesModal()" aria-label="Favorites">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span class="icon-label">Favorites</span>
+                            <span class="header-badge" id="headerFavCount" style="display: none;">0</span>
+                        </button>
+
+                        <button class="header-icon-btn cart-btn-header" id="cartButton" aria-label="Cart">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            <span class="icon-label">Cart</span>
+                            <span class="header-badge" id="cartCount">0</span>
+                        </button>
+
+                        <!-- Mobile Menu Button -->
+                        <button class="mobile-menu-btn-new" id="mobileMenuToggle" aria-label="Menu">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="3" y1="12" x2="21" y2="12"></line>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <line x1="3" y1="18" x2="21" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Desktop Navigation -->
+        <div class="desktop-nav">
+            <div class="container-fluid">
+                <ul class="nav-links-horizontal">
+                    <li><a href="#home" class="nav-link-item">Home</a></li>
+                    <li><a href="#products" class="nav-link-item">Products</a></li>
+                    <li><a href="#categories" class="nav-link-item">Categories</a></li>
+                    <li><a href="#about" class="nav-link-item">About</a></li>
+                    <li><a href="#testimonials" class="nav-link-item">Reviews</a></li>
+                    <li><a href="#contact" class="nav-link-item">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Overlay -->
+        <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" aria-hidden="true"></div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-nav-drawer" id="navMenu" role="menu" aria-label="Navigation menu">
                     <!-- Mobile Drawer Header -->
                     <div class="mobile-drawer-header">
                         <div class="mobile-drawer-brand">
@@ -275,72 +370,17 @@
                     <!-- Navigation Links Section -->
                     <div class="mobile-drawer-nav-section">
                         <h4 class="mobile-drawer-section-title">Navigation</h4>
+                        <ul class="mobile-nav-list">
+                            <li><a href="#home" class="mobile-nav-link" onclick="closeMobileDrawer()">Home</a></li>
+                            <li><a href="#products" class="mobile-nav-link" onclick="closeMobileDrawer()">Products</a></li>
+                            <li><a href="#categories" class="mobile-nav-link" onclick="closeMobileDrawer()">Categories</a></li>
+                            <li><a href="#about" class="mobile-nav-link" onclick="closeMobileDrawer()">About</a></li>
+                            <li><a href="#testimonials" class="mobile-nav-link" onclick="closeMobileDrawer()">Reviews</a></li>
+                            <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileDrawer()">Contact</a></li>
+                        </ul>
                     </div>
-
-                    <li><a href="#home" class="nav-link" data-i18n="navHome">Home</a></li>
-                    <li><a href="#products" class="nav-link" data-i18n="navProducts">Products</a></li>
-                    <li><a href="#categories" class="nav-link" data-i18n="navCategories">Categories</a></li>
-                    <li><a href="#locations" class="nav-link" data-i18n="navLocations">Locations</a></li>
-                    <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
-                    <li>
-                        <button class="account-button" id="accountButton" onclick="openAccountModal()" aria-label="My Account">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            <span id="accountButtonText">Account</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="favorites-button" id="favoritesButton" onclick="openFavoritesModal()" aria-label="Favorites">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                            <span class="favorites-count" id="favoritesCount" style="display: none;">0</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="cart-button" id="cartButton" aria-label="Shopping cart">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                            </svg>
-                            <span class="cart-count" id="cartCount">0</span>
-                        </button>
-                    </li>
-                </ul>
-
-                <!-- Track Order Button -->
-                <button class="track-order-button" onclick="showOrderTrackingModal()" aria-label="Track Order">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <span>Track Order</span>
-                </button>
-
-                <!-- Language Switcher -->
-                <div class="language-switcher-nav">
-                    <select id="languageSelect" class="lang-dropdown">
-                        <option value="en" selected>🇺🇸 EN</option>
-                        <option value="fr">🇫🇷 FR</option>
-                        <option value="pcm">🇨🇲 PCM</option>
-                    </select>
                 </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                    </svg>
-                    <span class="menu-text">Menu</span>
-                </button>
-            </div>
-        </div>
-    </nav>
+    </header>
 
     <!-- Cinematic Hero Section -->
     <section class="cinematic-hero" id="main-content">
@@ -1764,6 +1804,7 @@
     <script src="order-tracking-ui.js" defer></script>
     <script src="cart.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="modern-header.js" defer></script>
     <script src="forms.js" defer></script>
     <script src="reviews.js" defer></script>
     <script src="product-variants.js" defer></script>
