@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account - Fordips Tech</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="modern-header.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -268,6 +269,19 @@
             background: #dc2626;
         }
 
+        /* Navigation improvements */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-link:hover {
+            color: #2ca9a1 !important;
+        }
+
         @media (max-width: 768px) {
             .account-grid {
                 grid-template-columns: 1fr;
@@ -280,28 +294,43 @@
             .account-content {
                 order: 1;
             }
+
+            .nav-menu {
+                display: none !important;
+            }
+
+            .brand-name {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .account-container {
+                margin-top: 100px;
+                padding: 0 1rem;
+            }
+
+            .account-header h1 {
+                font-size: 1.75rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation (same as index.html) -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" style="background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 1rem 0;">
         <div class="container">
-            <div class="nav-wrapper">
-                <a href="index.html" class="logo">
-                    <div class="logo-circle">
-                        <div class="logo-circle-inner">
-                            <span class="logo-initial">F</span>
-                        </div>
-                    </div>
-                    <span class="logo-text">FORDIPS TECH</span>
+            <div class="nav-wrapper" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="brand-logo" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/fordips%20logo.png" alt="Fordips Tech" class="logo-img">
+                    <span class="brand-name">FORDIPS TECH</span>
                 </a>
 
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#home" class="nav-link">Home</a></li>
-                    <li><a href="index.html#products" class="nav-link">Products</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                    <li><a href="my-account.html" class="nav-link active">My Account</a></li>
+                <ul class="nav-menu" id="navMenu" style="display: flex; gap: 2rem; list-style: none; margin: 0; align-items: center;">
+                    <li><a href="index.html#home" class="nav-link" style="text-decoration: none; color: #64748b; font-weight: 500;">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link" style="text-decoration: none; color: #64748b; font-weight: 500;">Products</a></li>
+                    <li><a href="index.html#contact" class="nav-link" style="text-decoration: none; color: #64748b; font-weight: 500;">Contact</a></li>
+                    <li><a href="my-account.html" class="nav-link active" style="text-decoration: none; color: #2ca9a1; font-weight: 600;">My Account</a></li>
                 </ul>
             </div>
         </div>
@@ -319,10 +348,10 @@
             <div class="account-sidebar">
                 <h3>Account Menu</h3>
                 <ul class="account-menu">
-                    <li><a href="#" class="active" onclick="showSection('dashboard')">Dashboard</a></li>
-                    <li><a href="#" onclick="showSection('orders')">My Orders</a></li>
-                    <li><a href="#" onclick="showSection('profile')">Profile</a></li>
-                    <li><a href="#" onclick="handleLogout()">Logout</a></li>
+                    <li><a href="#" class="active" onclick="showSection(event, 'dashboard'); return false;">Dashboard</a></li>
+                    <li><a href="#" onclick="showSection(event, 'orders'); return false;">My Orders</a></li>
+                    <li><a href="#" onclick="showSection(event, 'profile'); return false;">Profile</a></li>
+                    <li><a href="#" onclick="handleLogout(); return false;">Logout</a></li>
                 </ul>
             </div>
 
@@ -375,18 +404,28 @@
 
     <script>
         // Show section
-        function showSection(sectionId) {
+        function showSection(event, sectionId) {
+            // Prevent default link behavior
+            if (event) {
+                event.preventDefault();
+            }
+
             // Update menu
             document.querySelectorAll('.account-menu a').forEach(link => {
                 link.classList.remove('active');
             });
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             // Update sections
             document.querySelectorAll('.account-section').forEach(section => {
                 section.classList.remove('active');
             });
-            document.getElementById(sectionId).classList.add('active');
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
 
             // Load data for specific sections
             if (sectionId === 'orders') {
@@ -397,9 +436,22 @@
         // Handle logout
         async function handleLogout() {
             if (confirm('Are you sure you want to logout?')) {
-                await window.fordipsTech.signOut();
-                window.location.href = 'index.html';
+                try {
+                    await window.fordipsTech.signOut();
+                    // Show success notification
+                    if (typeof showNotification === 'function') {
+                        showNotification('Logged out successfully!', 'success');
+                    }
+                    // Redirect after a brief delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('Error logging out. Please try again.');
+                }
             }
+            return false;
         }
 
         // Load user data
