@@ -6,22 +6,15 @@
 const CACHE_NAME = 'fordips-tech-v1.0.0';
 const RUNTIME_CACHE = 'fordips-runtime';
 
-// Assets to cache on install
+// Assets to cache on install (using relative paths for flexibility)
 const STATIC_ASSETS = [
-    '/fordips-tech/',
-    '/fordips-tech/index.html',
-    '/fordips-tech/styles.css',
-    '/fordips-tech/enhanced-product-styles.css',
-    '/fordips-tech/enhanced-checkout-styles.css',
-    '/fordips-tech/currency-styles.css',
-    '/fordips-tech/config.js',
-    '/fordips-tech/utils.js',
-    '/fordips-tech/script.js',
-    '/fordips-tech/cart.js',
-    '/fordips-tech/products.js',
-    '/fordips-tech/supabase-integration.js',
-    '/fordips-tech/translations.js',
-    '/fordips-tech/manifest.json'
+    './',
+    './index.html',
+    './styles.css',
+    './config.js',
+    './utils.js',
+    './translations.js',
+    './manifest.json'
 ];
 
 // Install event - cache static assets
@@ -29,9 +22,22 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
-                return cache.addAll(STATIC_ASSETS);
+                // Cache files individually to prevent one failure from blocking all
+                return Promise.all(
+                    STATIC_ASSETS.map(url => {
+                        return cache.add(url).catch(err => {
+                            console.warn('Failed to cache:', url, err);
+                            // Continue even if one file fails
+                            return Promise.resolve();
+                        });
+                    })
+                );
             })
             .then(() => self.skipWaiting())
+            .catch(err => {
+                console.error('Service worker installation failed:', err);
+                self.skipWaiting(); // Skip waiting even if caching fails
+            })
     );
 });
 
