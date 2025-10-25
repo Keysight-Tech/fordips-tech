@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function showCartNotification(itemName) {
     // Use unified notification system if available
     if (typeof showNotification === 'function') {
-        showNotification('Added to cart', 'success');
+        showNotification(`${itemName} added to cart! ✓`, 'success');
     } else {
         // Fallback notification
         const notification = document.createElement('div');
