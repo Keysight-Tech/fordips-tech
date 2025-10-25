@@ -25,12 +25,29 @@ document.getElementById('contactForm')?.addEventListener('submit', async functio
     const result = await window.contactSystem.submitContactMessage(formData);
 
     if (result.success) {
-        formStatus.textContent = `Thank you ${formData.name}! Your message has been sent successfully. We'll get back to you soon. Admin notification sent to ${formData.email}.`;
+        formStatus.textContent = `Thank you ${formData.name}! Your message has been sent successfully. We'll get back to you soon.`;
         formStatus.className = 'form-status success';
+
+        // Show circular notification about admin being notified
+        if (typeof showNotification === 'function') {
+            showNotification(
+                'Message sent! Admin (brineketum@gmail.com) has been notified.',
+                'success'
+            );
+        }
+
         this.reset();
     } else {
         formStatus.textContent = 'Error: ' + (result.error || 'Could not send message');
         formStatus.className = 'form-status error';
+
+        // Show error notification
+        if (typeof showNotification === 'function') {
+            showNotification(
+                'Failed to send message. Please try again.',
+                'error'
+            );
+        }
     }
 });
 
