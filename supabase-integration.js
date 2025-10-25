@@ -193,7 +193,8 @@ async function renderProductsFromDB(category = null) {
     `).join('');
 
     // Re-attach event listeners
-    attachCartListeners();
+    // NOTE: Cart listeners are now handled by cart.js using event delegation
+    // attachCartListeners(); // DISABLED - cart.js handles this
 }
 
 // ============================================
@@ -730,6 +731,9 @@ function showNotification(message, type = 'info') {
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
+
+// Expose showNotification globally so other scripts can use it
+window.showNotification = showNotification;
 
 // Attach cart button listeners
 function attachCartListeners() {
