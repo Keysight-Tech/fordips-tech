@@ -117,7 +117,7 @@
 .brand-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     text-decoration: none;
     transition: opacity 0.2s ease;
 }
@@ -127,18 +127,30 @@
 }
 
 .logo-img {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    animation: clockRotate 8s linear infinite;
+    transform-origin: center center;
 }
 
+/* Smooth 360° rotation like a clock */
+@keyframes clockRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pause rotation on hover */
 .brand-logo:hover .logo-img {
-    transform: scale(1.05);
+    animation-play-state: paused;
 }
 
 .brand-name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     color: #0f172a;
     letter-spacing: 0.5px;
@@ -223,7 +235,8 @@
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 20px;
+    justify-content: space-evenly;
 }
 
 .header-icon-btn {
@@ -233,54 +246,68 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
-    padding: 10px 14px;
+    padding: 12px 18px;
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
     color: #1e293b;
+    min-width: 70px;
 }
 
 .header-icon-btn:hover {
-    background: #f1f5f9;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
     color: #2ca9a1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 169, 161, 0.15);
 }
 
 .header-icon-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     stroke: currentColor;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-icon-btn:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(5deg);
 }
 
 .icon-label {
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
 .header-badge {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 4px;
+    right: 10px;
     background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
     font-size: 11px;
     font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 10px;
-    min-width: 18px;
-    height: 18px;
+    padding: 3px 7px;
+    border-radius: 12px;
+    min-width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.5);
+    border: 2px solid white;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .mobile-menu-btn-new {
