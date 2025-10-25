@@ -1,0 +1,268 @@
+/**
+ * FORDIPS TECH - Currency Flags Enhancement
+ * Makes flags more visible and prominent in currency selector
+ */
+
+/* ===== CURRENCY SELECTOR WITH ENHANCED FLAGS ===== */
+.currency-select-checkout {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.6;
+}
+
+/* Enhanced flag display in options */
+.currency-select-checkout option {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 2;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background: white;
+    color: #333;
+}
+
+.currency-select-checkout option:hover {
+    background: #f0f0f0;
+}
+
+/* Ensure emoji flags render properly */
+.currency-select-checkout {
+    font-feature-settings: "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced selected option display */
+.currency-select-checkout:focus option:checked {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+}
+
+/* Better spacing for flag emojis */
+.currency-select-checkout option::before {
+    margin-right: 0.5rem;
+}
+
+/* Mobile optimizations for better flag visibility */
+@media (max-width: 768px) {
+    .currency-select-checkout option {
+        padding: 1rem;
+        font-size: 0.95rem;
+        line-height: 2.2;
+    }
+}
+
+@media (max-width: 576px) {
+    .currency-select-checkout option {
+        padding: 0.875rem;
+        font-size: 0.9rem;
+        line-height: 2;
+    }
+}
+
+/* ===== CUSTOM CURRENCY DISPLAY WITH FLAG ===== */
+.checkout-currency-selector {
+    position: relative;
+}
+
+/* Show selected currency with flag in a badge */
+.currency-select-checkout {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 3rem;
+}
+
+/* Enhanced hover state */
+.currency-select-checkout:hover {
+    border-color: #667eea;
+    background-color: #fafbff;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+/* Enhanced focus state */
+.currency-select-checkout:focus {
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    outline: none;
+}
+
+/* ===== FLAG EMOJI SIZE OPTIMIZATION ===== */
+/* Ensure flags are properly sized and visible */
+select.currency-select-checkout {
+    letter-spacing: 0.02em;
+}
+
+/* For browsers that support it, make flags bigger */
+@supports (font-size-adjust: 1) {
+    .currency-select-checkout {
+        font-size-adjust: 0.5;
+    }
+}
+
+/* ===== DROPDOWN MENU STYLING ===== */
+.currency-select-checkout::-ms-expand {
+    display: none;
+}
+
+/* Firefox specific */
+@-moz-document url-prefix() {
+    .currency-select-checkout {
+        padding-right: 2.5rem;
+    }
+}
+
+/* Safari specific */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .currency-select-checkout {
+            background-position: right 0.8rem center;
+        }
+    }
+}
+
+/* ===== LOADING STATE ===== */
+.currency-select-checkout:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f5f5f5;
+}
+
+/* ===== CURRENCY LABEL WITH FLAG ICON ===== */
+.checkout-currency-selector label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkout-currency-selector label::before {
+    content: "💱";
+    font-size: 1.2rem;
+}
+
+/* ===== ENHANCE OPTION GROUP HEADERS (if added) ===== */
+.currency-select-checkout optgroup {
+    font-weight: 700;
+    font-style: normal;
+    color: #667eea;
+    background: #f8f9ff;
+    padding: 0.5rem 0;
+}
+
+/* ===== SELECTED CURRENCY INDICATOR ===== */
+.currency-select-checkout[data-selected]::after {
+    content: attr(data-selected);
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.currency-select-checkout:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .currency-select-checkout {
+        border-width: 3px;
+    }
+
+    .currency-select-checkout option {
+        font-weight: 600;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .currency-select-checkout {
+        transition: none;
+    }
+}
+
+/* ===== CURRENCY CHANGE ANIMATION ===== */
+.currency-select-checkout.currency-changing {
+    animation: currencyPulse 0.4s ease;
+}
+
+@keyframes currencyPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    }
+}
+
+/* ===== TOOLTIP FOR CURRENCY INFO ===== */
+.checkout-currency-selector {
+    position: relative;
+}
+
+.currency-select-checkout:hover::before {
+    content: "Select your preferred currency";
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 0;
+    background: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.currency-select-checkout:hover::before {
+    opacity: 1;
+}
+
+/* ===== MOBILE TOUCH ENHANCEMENTS ===== */
+@media (max-width: 768px) {
+    .currency-select-checkout {
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 44px; /* Better touch target */
+    }
+
+    .checkout-currency-selector label::before {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .currency-select-checkout {
+        font-size: 15px;
+        padding: 0.625rem 2.5rem 0.625rem 0.875rem;
+    }
+
+    .checkout-currency-selector label {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== WINDOWS HIGH CONTRAST MODE ===== */
+@media screen and (-ms-high-contrast: active) {
+    .currency-select-checkout {
+        border: 2px solid windowText;
+    }
+}
+
+@media screen and (-ms-high-contrast: black-on-white) {
+    .currency-select-checkout option:checked {
+        background: highlight;
+        color: highlightText;
+    }
+}
