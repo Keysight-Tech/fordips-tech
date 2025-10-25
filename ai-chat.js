@@ -129,8 +129,22 @@ class FordipsTechAI {
         chatButton?.addEventListener('click', () => this.toggleChat());
         chatMinimize?.addEventListener('click', () => this.toggleChat());
         chatSendBtn?.addEventListener('click', () => this.sendMessage());
+
+        // Enhanced keyboard handling
         chatInput?.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.sendMessage();
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.sendMessage();
+            }
+        });
+
+        // Enable/disable send button based on input
+        chatInput?.addEventListener('input', (e) => {
+            const hasText = e.target.value.trim().length > 0;
+            if (chatSendBtn) {
+                chatSendBtn.disabled = !hasText;
+                chatSendBtn.style.opacity = hasText ? '1' : '0.5';
+            }
         });
 
         // Quick actions
@@ -139,6 +153,21 @@ class FordipsTechAI {
                 const action = e.target.dataset.action;
                 this.handleQuickAction(action);
             });
+        });
+
+        // Prevent body scroll when chat is open on mobile
+        const chatWindow = document.getElementById('aiChatWindow');
+        if (chatWindow) {
+            chatWindow.addEventListener('touchmove', (e) => {
+                e.stopPropagation();
+            }, { passive: false });
+        }
+
+        // Add escape key to close chat
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isOpen) {
+                this.toggleChat();
+            }
         });
     }
 
@@ -152,10 +181,22 @@ class FordipsTechAI {
             chatWindow.classList.add('active');
             chatButton.classList.add('active');
             chatBadge.style.display = 'none';
-            document.getElementById('chatInput')?.focus();
+
+            // Prevent body scroll on mobile when chat is open
+            if (window.innerWidth <= 768) {
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Focus input after animation
+            setTimeout(() => {
+                document.getElementById('chatInput')?.focus();
+            }, 300);
         } else {
             chatWindow.classList.remove('active');
             chatButton.classList.remove('active');
+
+            // Restore body scroll
+            document.body.style.overflow = '';
         }
     }
 
@@ -744,6 +785,8 @@ How else can I help you today?`,
         const messagesContainer = document.getElementById('chatMessages');
         if (!messagesContainer) return;
 
+        // Use DocumentFragment for better performance
+        const fragment = document.createDocumentFragment();
         const messageEl = document.createElement('div');
         messageEl.className = `chat-message ${message.role}`;
 
@@ -757,7 +800,8 @@ How else can I help you today?`,
             <div class="message-time">${this.formatTime(message.timestamp)}</div>
         `;
 
-        messagesContainer.appendChild(messageEl);
+        fragment.appendChild(messageEl);
+        messagesContainer.appendChild(fragment);
 
         // Attach action button listeners
         if (message.actions) {
@@ -765,9 +809,14 @@ How else can I help you today?`,
                 btn.addEventListener('click', () => {
                     const actionData = JSON.parse(btn.dataset.action);
                     this.executeAction(actionData);
-                });
+                }, { passive: true });
             });
         }
+
+        // Trigger reflow only once
+        requestAnimationFrame(() => {
+            messageEl.style.opacity = '1';
+        });
     }
 
     renderActions(actions) {
@@ -815,9 +864,13 @@ How else can I help you today?`,
     scrollToBottom() {
         const messagesContainer = document.getElementById('chatMessages');
         if (messagesContainer) {
-            setTimeout(() => {
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 100);
+            // Use requestAnimationFrame for smoother scrolling
+            requestAnimationFrame(() => {
+                messagesContainer.scrollTo({
+                    top: messagesContainer.scrollHeight,
+                    behavior: 'smooth'
+                });
+            });
         }
     }
 

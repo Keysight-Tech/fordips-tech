@@ -169,7 +169,7 @@
         "telephone": "+1-667-256-3680",
         "contactType": "customer service",
         "email": "fordipstechllc@gmail.com",
-        "availableLanguage": ["en", "fr"]
+        "availableLanguage": ["en", "ar", "zh", "es", "fr", "de", "it", "hi", "zu", "pcm", "ewo", "nso", "bas", "bkw", "mny", "bks"]
       },
       "sameAs": [
         "https://www.facebook.com/profile.php?id=61558105979752",
@@ -202,9 +202,22 @@
 
                         <div class="language-switcher-top">
                             <select id="languageSelectTop" class="lang-select-minimal">
-                                <option value="en" selected">🇺🇸 EN</option>
+                                <option value="en" selected>🇺🇸 EN</option>
+                                <option value="ar">🇸🇦 العربية</option>
+                                <option value="zh">🇨🇳 中文</option>
+                                <option value="es">🇪🇸 ES</option>
                                 <option value="fr">🇫🇷 FR</option>
+                                <option value="de">🇩🇪 DE</option>
+                                <option value="it">🇮🇹 IT</option>
+                                <option value="hi">🇮🇳 हिन्दी</option>
+                                <option value="zu">🇿🇦 Zulu</option>
                                 <option value="pcm">🇨🇲 PCM</option>
+                                <option value="ewo">🇨🇲 Ewondo</option>
+                                <option value="nso">🇨🇲 Lamnso'</option>
+                                <option value="bas">🇨🇲 Basaa</option>
+                                <option value="bkw">🇨🇲 Bakweri</option>
+                                <option value="mny">🇨🇲 Kenyang</option>
+                                <option value="bks">🇨🇲 Bakossi</option>
                             </select>
                         </div>
                     </div>
@@ -287,12 +300,12 @@
         <div class="desktop-nav">
             <div class="container-fluid">
                 <ul class="nav-links-horizontal">
-                    <li><a href="#home" class="nav-link-item">Home</a></li>
-                    <li><a href="#products" class="nav-link-item">Products</a></li>
-                    <li><a href="#categories" class="nav-link-item">Categories</a></li>
-                    <li><a href="#about" class="nav-link-item">About</a></li>
-                    <li><a href="#testimonials" class="nav-link-item">Reviews</a></li>
-                    <li><a href="#contact" class="nav-link-item">Contact</a></li>
+                    <li><a href="#home" class="nav-link-item" data-i18n="navHome">Home</a></li>
+                    <li><a href="#products" class="nav-link-item" data-i18n="navProducts">Products</a></li>
+                    <li><a href="#categories" class="nav-link-item" data-i18n="navCategories">Categories</a></li>
+                    <li><a href="#about" class="nav-link-item" data-i18n="navAbout">About</a></li>
+                    <li><a href="#testimonials" class="nav-link-item" data-i18n="navReviews">Reviews</a></li>
+                    <li><a href="#contact" class="nav-link-item" data-i18n="navContact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -350,7 +363,7 @@
                                         <path d="M12 16v-4m0-4h.01"></path>
                                     </svg>
                                 </div>
-                                <span>About</span>
+                                <span data-i18n="navAbout">About</span>
                             </a>
                             <a href="#testimonials" class="mobile-quick-link" onclick="closeMobileDrawer()">
                                 <div class="quick-link-icon">
@@ -358,7 +371,7 @@
                                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                                     </svg>
                                 </div>
-                                <span>Reviews</span>
+                                <span data-i18n="navReviews">Reviews</span>
                             </a>
                             <a href="#contact" class="mobile-quick-link" onclick="closeMobileDrawer()">
                                 <div class="quick-link-icon">
@@ -367,7 +380,7 @@
                                         <circle cx="12" cy="10" r="3"></circle>
                                     </svg>
                                 </div>
-                                <span>Contact</span>
+                                <span data-i18n="navContact">Contact</span>
                             </a>
                             <a href="my-account.html" class="mobile-quick-link">
                                 <div class="quick-link-icon">
@@ -376,21 +389,21 @@
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                 </div>
-                                <span>Account</span>
+                                <span data-i18n="navAccount">Account</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- Navigation Links Section -->
                     <div class="mobile-drawer-nav-section">
-                        <h4 class="mobile-drawer-section-title">Navigation</h4>
+                        <h4 class="mobile-drawer-section-title" data-i18n="mobileNavTitle">Navigation</h4>
                         <ul class="mobile-nav-list">
-                            <li><a href="#home" class="mobile-nav-link" onclick="closeMobileDrawer()">Home</a></li>
-                            <li><a href="#products" class="mobile-nav-link" onclick="closeMobileDrawer()">Products</a></li>
-                            <li><a href="#categories" class="mobile-nav-link" onclick="closeMobileDrawer()">Categories</a></li>
-                            <li><a href="#about" class="mobile-nav-link" onclick="closeMobileDrawer()">About</a></li>
-                            <li><a href="#testimonials" class="mobile-nav-link" onclick="closeMobileDrawer()">Reviews</a></li>
-                            <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileDrawer()">Contact</a></li>
+                            <li><a href="#home" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navHome">Home</a></li>
+                            <li><a href="#products" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navProducts">Products</a></li>
+                            <li><a href="#categories" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navCategories">Categories</a></li>
+                            <li><a href="#about" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navAbout">About</a></li>
+                            <li><a href="#testimonials" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navReviews">Reviews</a></li>
+                            <li><a href="#contact" class="mobile-nav-link" onclick="closeMobileDrawer()" data-i18n="navContact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -425,10 +438,10 @@
                 <!-- Title at top -->
                 <div class="cinematic-content-new">
                     <h1 class="cinematic-title">
-                        WELCOME TO<br>
-                        <span class="brand-highlight">FORDIP'S TECH LLC</span>
+                        <span data-i18n="heroWelcome">WELCOME TO</span><br>
+                        <span class="brand-highlight" data-i18n="heroBrand">FORDIP'S TECH LLC</span>
                     </h1>
-                    <p class="cinematic-subtitle">
+                    <p class="cinematic-subtitle" data-i18n="heroSubtitle">
                         Innovating the Future of Technology
                     </p>
                 </div>
@@ -472,7 +485,41 @@
                         </div>
                     </div>
 
-                    <!-- Slide 2: iPhone 17 Pro Max Silver -->
+                    <!-- Slide 2: Google Pixel -->
+                    <div class="showcase-slide" data-bg-color="#1a237e" data-accent-color="#4285f4">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/google%20pixel.png"
+                                 alt="Google Pixel"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-blue"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Google Pixel</h3>
+                            <p>Pure Android experience.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Samsung Galaxy Z Flip -->
+                    <div class="showcase-slide" data-bg-color="#5b21b6" data-accent-color="#a78bfa">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/samsung-galaxy-zclap.webp"
+                                 alt="Samsung Galaxy Z Flip"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-purple"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Galaxy Z Flip</h3>
+                            <p>Compact. Stylish. Unfolds to innovation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: iPhone 17 Pro Max Silver -->
                     <div class="showcase-slide" data-bg-color="#334155" data-accent-color="#94a3b8">
                         <div class="showcase-image-container">
                             <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/silver-hero-17pm.webp"
@@ -489,7 +536,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 3: Samsung Galaxy S24 Ultra -->
+                    <!-- Slide 5: Samsung Galaxy S24 Ultra -->
                     <div class="showcase-slide" data-bg-color="#4c1d95" data-accent-color="#a855f7">
                         <div class="showcase-image-container">
                             <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=1200&q=95&fit=crop&auto=format"
@@ -506,7 +553,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 4: MacBook Pro M3 -->
+                    <!-- Slide 6: MacBook Pro M3 -->
                     <div class="showcase-slide" data-bg-color="#1e293b" data-accent-color="#64748b">
                         <div class="showcase-image-container">
                             <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=95&fit=crop&auto=format"
@@ -523,7 +570,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 5: iPad Pro M5 -->
+                    <!-- Slide 7: iPad Pro M5 -->
                     <div class="showcase-slide" data-bg-color="#831843" data-accent-color="#ec4899">
                         <div class="showcase-image-container">
                             <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/ipad%20pro%20m5.webp"
@@ -540,7 +587,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 6: Apple Watch Series 9 -->
+                    <!-- Slide 8: Apple Watch Series 9 -->
                     <div class="showcase-slide" data-bg-color="#713f12" data-accent-color="#fbbf24">
                         <div class="showcase-image-container">
                             <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=1200&q=95&fit=crop&auto=format"
@@ -557,7 +604,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 7: Professional Camera -->
+                    <!-- Slide 9: Professional Camera -->
                     <div class="showcase-slide" data-bg-color="#7c2d12" data-accent-color="#f97316">
                         <div class="showcase-image-container">
                             <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg"
@@ -574,7 +621,7 @@
                         </div>
                     </div>
 
-                    <!-- Slide 8: Starlink -->
+                    <!-- Slide 10: Starlink -->
                     <div class="showcase-slide" data-bg-color="#115e59" data-accent-color="#14b8a6">
                         <div class="showcase-image-container">
                             <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/starlink.png"
@@ -588,6 +635,23 @@
                         <div class="showcase-info">
                             <h3>Starlink Internet Kit</h3>
                             <p>High-speed satellite internet anywhere.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 11: Mobile Accessories -->
+                    <div class="showcase-slide" data-bg-color="#312e81" data-accent-color="#818cf8">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/accesories%20mobilke.jpg"
+                                 alt="Mobile Accessories"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-purple"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Mobile Accessories</h3>
+                            <p>Complete your experience with premium accessories.</p>
                         </div>
                     </div>
 
@@ -617,6 +681,9 @@
                         <div class="showcase-dot" data-index="5"></div>
                         <div class="showcase-dot" data-index="6"></div>
                         <div class="showcase-dot" data-index="7"></div>
+                        <div class="showcase-dot" data-index="8"></div>
+                        <div class="showcase-dot" data-index="9"></div>
+                        <div class="showcase-dot" data-index="10"></div>
                     </div>
                 </div>
             </div>
@@ -1013,8 +1080,8 @@
     <section class="contact-section" id="contact">
         <div class="container">
             <div class="section-header fade-in-up">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+                <h2 class="section-title" data-i18n="contactTitle">Get In Touch</h2>
+                <p class="section-subtitle" data-i18n="contactSubtitle">Have questions? We'd love to hear from you</p>
             </div>
 
             <div class="contact-grid">
@@ -1027,7 +1094,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3>Visit Us</h3>
+                            <h3 data-i18n="contactVisitTitle">Visit Us</h3>
                             <p>15706 Dorset Rd, Laurel, MD<br>United States 20707</p>
                         </div>
                     </div>
@@ -1039,7 +1106,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3>Call Us</h3>
+                            <h3 data-i18n="contactCallTitle">Call Us</h3>
                             <p>(667) 256 3680</p>
                         </div>
                     </div>
@@ -1052,7 +1119,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3>Email Us</h3>
+                            <h3 data-i18n="contactEmailTitle">Email Us</h3>
                             <p>fordipstechllc@gmail.com</p>
                         </div>
                     </div>
@@ -1060,26 +1127,26 @@
 
                 <form class="contact-form fade-in-right" id="contactForm">
                     <div class="form-group">
-                        <label for="contactName">Full Name *</label>
-                        <input type="text" id="contactName" name="name" required placeholder="John Doe">
+                        <label for="contactName" data-i18n="contactFormName">Full Name *</label>
+                        <input type="text" id="contactName" name="name" required data-i18n-placeholder="contactFormNamePlaceholder" placeholder="John Doe">
                     </div>
 
                     <div class="form-group">
-                        <label for="contactEmail">Email Address *</label>
-                        <input type="email" id="contactEmail" name="email" required placeholder="john@example.com">
+                        <label for="contactEmail" data-i18n="contactFormEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" name="email" required data-i18n-placeholder="contactFormEmailPlaceholder" placeholder="john@example.com">
                     </div>
 
                     <div class="form-group">
-                        <label for="contactSubject">Subject *</label>
-                        <input type="text" id="contactSubject" name="subject" required placeholder="How can we help?">
+                        <label for="contactSubject" data-i18n="contactFormSubject">Subject *</label>
+                        <input type="text" id="contactSubject" name="subject" required data-i18n-placeholder="contactFormSubjectPlaceholder" placeholder="How can we help?">
                     </div>
 
                     <div class="form-group">
-                        <label for="contactMessage">Message *</label>
-                        <textarea id="contactMessage" name="message" rows="5" required placeholder="Tell us more about your inquiry..."></textarea>
+                        <label for="contactMessage" data-i18n="contactFormMessage">Message *</label>
+                        <textarea id="contactMessage" name="message" rows="5" required data-i18n-placeholder="contactFormMessagePlaceholder" placeholder="Tell us more about your inquiry..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    <button type="submit" class="btn btn-primary btn-full" data-i18n="contactFormSubmit">Send Message</button>
                     <p class="form-status" id="contactFormStatus"></p>
                 </form>
             </div>
@@ -1105,60 +1172,60 @@
     <section class="about-us" id="about">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">About Us</span>
-                <h2 class="section-title">Welcome to Fordips Tech LLC</h2>
-                <p class="section-subtitle">It's Either Fordips Tech or No Tech</p>
+                <span class="section-badge" data-i18n="aboutBadge">About Us</span>
+                <h2 class="section-title" data-i18n="aboutTitle">Welcome to Fordips Tech LLC</h2>
+                <p class="section-subtitle" data-i18n="aboutTagline">It's Either Fordips Tech or No Tech</p>
             </div>
 
             <div class="about-content">
                 <div class="about-story">
-                    <h3>Our Story</h3>
-                    <p>Founded in 2020, Fordips Tech LLC has been dedicated to bringing the latest technology to customers worldwide. What started as a passion for innovation has grown into a trusted name in premium electronics.</p>
+                    <h3 data-i18n="aboutStoryHeading">Our Story</h3>
+                    <p data-i18n="aboutStoryPara1">Founded in 2020, Fordips Tech LLC has been dedicated to bringing the latest technology to customers worldwide. What started as a passion for innovation has grown into a trusted name in premium electronics.</p>
 
-                    <p>We believe that everyone deserves access to world-class technology, which is why we carefully curate our selection to include only authentic, high-quality products from leading brands like Apple, Samsung, and more.</p>
+                    <p data-i18n="aboutStoryPara2">We believe that everyone deserves access to world-class technology, which is why we carefully curate our selection to include only authentic, high-quality products from leading brands like Apple, Samsung, and more.</p>
 
                     <div class="about-stats">
                         <div class="stat-item">
                             <span class="stat-number counter" data-target="50000" data-suffix="+">0</span>
-                            <span class="stat-label">Happy Customers</span>
+                            <span class="stat-label" data-i18n="statCustomers">Happy Customers</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number counter" data-target="100" data-suffix="%">0</span>
-                            <span class="stat-label">Authentic Products</span>
+                            <span class="stat-label" data-i18n="statAuthentic">Authentic Products</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number counter" data-target="4.9" data-decimals="1" data-suffix="/5">0</span>
-                            <span class="stat-label">Customer Rating</span>
+                            <span class="stat-label" data-i18n="statRating">Customer Rating</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-number counter" data-target="150" data-suffix="+">0</span>
-                            <span class="stat-label">Countries Served</span>
+                            <span class="stat-label" data-i18n="statCountries">Countries Served</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="about-values">
-                    <h3>Our Values</h3>
+                    <h3 data-i18n="aboutValuesHeading">Our Values</h3>
                     <div class="values-grid">
                         <div class="value-card">
                             <div class="value-icon">✓</div>
-                            <h4>Authenticity Guaranteed</h4>
-                            <p>100% authentic products sourced directly from authorized distributors.</p>
+                            <h4 data-i18n="valueAuthTitle">Authenticity Guaranteed</h4>
+                            <p data-i18n="valueAuthDesc">100% authentic products sourced directly from authorized distributors.</p>
                         </div>
                         <div class="value-card">
                             <div class="value-icon">🌍</div>
-                            <h4>Global Reach</h4>
-                            <p>Free shipping worldwide to bring technology to your doorstep.</p>
+                            <h4 data-i18n="valueGlobalTitle">Global Reach</h4>
+                            <p data-i18n="valueGlobalDesc">Free shipping worldwide to bring technology to your doorstep.</p>
                         </div>
                         <div class="value-card">
                             <div class="value-icon">💎</div>
-                            <h4>Premium Quality</h4>
-                            <p>Only the finest products that meet our strict quality standards.</p>
+                            <h4 data-i18n="valueQualityTitle">Premium Quality</h4>
+                            <p data-i18n="valueQualityDesc">Only the finest products that meet our strict quality standards.</p>
                         </div>
                         <div class="value-card">
                             <div class="value-icon">🤝</div>
-                            <h4>Customer First</h4>
-                            <p>Dedicated support team available to assist you every step of the way.</p>
+                            <h4 data-i18n="valueCustomerTitle">Customer First</h4>
+                            <p data-i18n="valueCustomerDesc">Dedicated support team available to assist you every step of the way.</p>
                         </div>
                     </div>
                 </div>
@@ -1170,9 +1237,9 @@
     <section class="testimonials" id="testimonials">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">Testimonials</span>
-                <h2 class="section-title">Loved by Customers Worldwide</h2>
-                <p class="section-subtitle">See what our customers have to say about their experience</p>
+                <span class="section-badge" data-i18n="testimonialsBadge">Testimonials</span>
+                <h2 class="section-title" data-i18n="testimonialsTitle">Loved by Customers Worldwide</h2>
+                <p class="section-subtitle" data-i18n="testimonialsSubtitle">See what our customers have to say about their experience</p>
             </div>
 
             <div class="testimonials-grid">
@@ -1258,19 +1325,19 @@
             <div class="trust-metrics">
                 <div class="metric">
                     <span class="metric-number counter" data-target="4.9" data-decimals="1" data-suffix="/5">0</span>
-                    <span class="metric-label">Average Rating</span>
+                    <span class="metric-label" data-i18n="metricAverageRating">Average Rating</span>
                 </div>
                 <div class="metric">
                     <span class="metric-number counter" data-target="50000" data-suffix="+">0</span>
-                    <span class="metric-label">Reviews</span>
+                    <span class="metric-label" data-i18n="metricReviews">Reviews</span>
                 </div>
                 <div class="metric">
                     <span class="metric-number counter" data-target="98" data-suffix="%">0</span>
-                    <span class="metric-label">Would Recommend</span>
+                    <span class="metric-label" data-i18n="metricRecommend">Would Recommend</span>
                 </div>
                 <div class="metric">
                     <span class="metric-number" data-static="true">24/7</span>
-                    <span class="metric-label">Support Available</span>
+                    <span class="metric-label" data-i18n="metricSupport">Support Available</span>
                 </div>
             </div>
         </div>
@@ -1309,7 +1376,7 @@
                     </div>
 
                     <div class="footer-social">
-                        <p class="social-label">Follow us on</p>
+                        <p class="social-label" data-i18n="footerFollowUs">Follow us on</p>
                         <div class="social-links">
                             <a href="https://www.facebook.com/profile.php?id=61558105979752&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="social-link-simple facebook" aria-label="Facebook">
                                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1332,47 +1399,47 @@
 
                 <!-- Offers -->
                 <div class="footer-column">
-                    <h4 class="footer-title">OFFERS</h4>
+                    <h4 class="footer-title" data-i18n="footerOffersTitle">OFFERS</h4>
                     <ul class="footer-list">
-                        <li><a href="#products">Smart phones</a></li>
-                        <li><a href="#products">Tablets</a></li>
-                        <li><a href="#products">Smart watches</a></li>
-                        <li><a href="#products">Accessories</a></li>
-                        <li><a href="#products">Laptop computers</a></li>
-                        <li><a href="#products">Starlink internet service</a></li>
+                        <li><a href="#products" data-i18n="footerSmartphones">Smart phones</a></li>
+                        <li><a href="#products" data-i18n="footerTablets">Tablets</a></li>
+                        <li><a href="#products" data-i18n="footerSmartwatches">Smart watches</a></li>
+                        <li><a href="#products" data-i18n="footerAccessories">Accessories</a></li>
+                        <li><a href="#products" data-i18n="footerLaptops">Laptop computers</a></li>
+                        <li><a href="#products" data-i18n="footerStarlink">Starlink internet service</a></li>
                     </ul>
                 </div>
 
                 <!-- Quick Links -->
                 <div class="footer-column">
-                    <h4 class="footer-title">QUICK LINKS</h4>
+                    <h4 class="footer-title" data-i18n="footerQuickLinksTitle">QUICK LINKS</h4>
                     <ul class="footer-list">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#products">Shop</a></li>
-                        <li><a href="#checkout">Checkout</a></li>
-                        <li><a href="#newsletter">Newsletter</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#account">My account</a></li>
+                        <li><a href="#home" data-i18n="navHome">Home</a></li>
+                        <li><a href="#products" data-i18n="footerShop">Shop</a></li>
+                        <li><a href="#checkout" data-i18n="footerCheckout">Checkout</a></li>
+                        <li><a href="#newsletter" data-i18n="footerNewsletter">Newsletter</a></li>
+                        <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+                        <li><a href="#account" data-i18n="footerMyAccount">My account</a></li>
                     </ul>
                 </div>
 
                 <!-- Support -->
                 <div class="footer-column">
-                    <h4 class="footer-title">SUPPORT</h4>
+                    <h4 class="footer-title" data-i18n="footerSupportTitle">SUPPORT</h4>
                     <ul class="footer-list">
-                        <li><a href="#faq">FAQs</a></li>
-                        <li><a href="#shipping">Shipping & Returns</a></li>
-                        <li><a href="#warranty">Warranty Info</a></li>
-                        <li><a href="#support">Support Center</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#faq" data-i18n="footerFAQs">FAQs</a></li>
+                        <li><a href="#shipping" data-i18n="footerShipping">Shipping & Returns</a></li>
+                        <li><a href="#warranty" data-i18n="footerWarranty">Warranty Info</a></li>
+                        <li><a href="#support" data-i18n="footerSupportCenter">Support Center</a></li>
+                        <li><a href="#privacy" data-i18n="footerPrivacy">Privacy Policy</a></li>
+                        <li><a href="#terms" data-i18n="footerTerms">Terms & Conditions</a></li>
                     </ul>
                 </div>
             </div>
 
             <!-- Bottom Bar -->
             <div class="footer-bottom">
-                <p>&copy; 2024 FTLLC Privacy Policy. All rights reserved. Designed & developed by Mylestech Solutions.</p>
+                <p data-i18n="footerCopyright">&copy; 2024 FTLLC Privacy Policy. All rights reserved. Designed & developed by Mylestech Solutions.</p>
             </div>
         </div>
     </footer>

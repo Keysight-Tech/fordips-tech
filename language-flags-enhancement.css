@@ -264,19 +264,130 @@
     font-weight: 600;
 }
 
+/* Chinese (Simplified) */
+.lang-select-minimal option[value="zh"] {
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Spanish */
+.lang-select-minimal option[value="es"] {
+    font-weight: 600;
+}
+
 /* French */
 .lang-select-minimal option[value="fr"] {
     font-weight: 600;
 }
 
-/* Pidgin (Nigerian) */
+/* German */
+.lang-select-minimal option[value="de"] {
+    font-weight: 600;
+}
+
+/* Italian */
+.lang-select-minimal option[value="it"] {
+    font-weight: 600;
+}
+
+/* Hindi */
+.lang-select-minimal option[value="hi"] {
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Devanagari", "Noto Sans", Arial, sans-serif;
+}
+
+/* Zulu */
+.lang-select-minimal option[value="zu"] {
+    font-weight: 600;
+}
+
+/* Pidgin (Cameroon) */
 .lang-select-minimal option[value="pcm"] {
+    font-weight: 600;
+}
+
+/* Ewondo (Cameroon) */
+.lang-select-minimal option[value="ewo"] {
+    font-weight: 600;
+}
+
+/* Nso'/Lamnso' (Cameroon) */
+.lang-select-minimal option[value="nso"] {
+    font-weight: 600;
+}
+
+/* Basaa (Cameroon) */
+.lang-select-minimal option[value="bas"] {
+    font-weight: 600;
+}
+
+/* Arabic */
+.lang-select-minimal option[value="ar"] {
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Arabic UI Text", "Geeza Pro", "Traditional Arabic", Arial, sans-serif;
+}
+
+/* Bakweri (Cameroon) */
+.lang-select-minimal option[value="bkw"] {
+    font-weight: 600;
+}
+
+/* Kenyang/Manyu (Cameroon) */
+.lang-select-minimal option[value="mny"] {
+    font-weight: 600;
+}
+
+/* Bakossi (Cameroon) */
+.lang-select-minimal option[value="bks"] {
     font-weight: 600;
 }
 
 /* ===== SELECTED VALUE DISPLAY ===== */
 .lang-select-minimal {
     text-align: left;
+}
+
+/* ===== LANGUAGE-SPECIFIC FONT SUPPORT ===== */
+
+/* Better font rendering for Chinese characters across the site */
+html[lang="zh"],
+html[lang="zh"] body,
+html[lang="zh"] * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Better font rendering for Hindi (Devanagari script) across the site */
+html[lang="hi"],
+html[lang="hi"] body,
+html[lang="hi"] * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Devanagari", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Better font rendering and RTL support for Arabic across the site */
+html[lang="ar"],
+html[lang="ar"] body {
+    direction: rtl;
+    text-align: right;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Arabic UI Text", "Geeza Pro", "Traditional Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html[lang="ar"] * {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Arabic UI Text", "Geeza Pro", "Traditional Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* RTL-specific layout adjustments for Arabic */
+html[lang="ar"] .showcase-info {
+    text-align: right;
+}
+
+html[lang="ar"] .product-card,
+html[lang="ar"] .feature-card {
+    text-align: right;
+}
+
+html[lang="ar"] .lang-select-minimal {
+    background-position: left 0.75rem center;
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem;
 }
 
 /* ===== MOBILE TOUCH OPTIMIZATION ===== */
