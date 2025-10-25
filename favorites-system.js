@@ -280,7 +280,7 @@ function updateAllFavoriteButtons() {
  * Update favorites count in header
  */
 function updateFavoritesCount() {
-    const countElement = document.getElementById('favoritesCount');
+    const countElement = document.getElementById('headerFavCount');
     if (countElement) {
         const count = favoritesCache.size;
         countElement.textContent = count;
