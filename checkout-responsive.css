@@ -21,7 +21,7 @@
 /* ===== PAYMENT METHODS GRID - RESPONSIVE BLOCKS ===== */
 .payment-methods {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop for 2 rows display */
     gap: 1rem;
     margin: 1.5rem 0;
 }
@@ -305,7 +305,7 @@
 /* ===== TABLET RESPONSIVE (768px - 968px) ===== */
 @media (max-width: 968px) {
     .payment-methods {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on tablet */
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on tablet */
     }
 
     .trust-badges {
@@ -330,22 +330,34 @@
         margin-bottom: 1.5rem;
     }
 
-    /* Payment methods: 1 column on mobile for better visibility */
+    /* Payment methods: 2 columns on mobile for better visibility */
     .payment-methods {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
     }
 
     .payment-option-content {
         padding: 0.875rem;
+        min-height: 80px;
     }
 
     .payment-option-content strong {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .payment-option-content small {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+    }
+
+    .payment-logo,
+    .payment-logo-single {
+        width: 32px;
+        height: 32px;
+    }
+
+    .payment-logo-group img {
+        width: 28px;
+        height: 28px;
     }
 
     /* Trust badges: 1 column on mobile */
