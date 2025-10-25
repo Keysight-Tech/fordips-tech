@@ -427,37 +427,50 @@ function viewFavoriteProduct(productId) {
  * Simple product view fallback
  */
 function openSimpleProductView(product) {
+    // Remove any existing modal first
+    const existingModal = document.getElementById('simpleProductModal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
     // Create a simple product modal
     const modal = document.createElement('div');
     modal.id = 'simpleProductModal';
     modal.className = 'modal';
     modal.style.display = 'flex';
 
+    // Safely escape HTML to prevent XSS and parsing issues
+    const safeName = (product.name || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const safeDescription = (product.description || 'Premium quality product').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const safeBadge = product.badge ? (product.badge || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') : '';
+
     modal.innerHTML = `
-        <div class="modal-overlay" onclick="closeSimpleProductView()"></div>
+        <div class="modal-overlay" data-action="close-modal"></div>
         <div class="modal-content" style="max-width: 600px;">
-            <button class="modal-close" onclick="closeSimpleProductView()">&times;</button>
+            <button class="modal-close" data-action="close-modal">&times;</button>
             <div style="padding: 2rem;">
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <img src="${product.image}" alt="${product.name}" style="max-width: 100%; height: auto; border-radius: 12px;">
+                    <img src="${product.image}" alt="${safeName}" style="max-width: 100%; height: auto; border-radius: 12px;">
                 </div>
-                <h2 style="margin-bottom: 1rem; color: #1a1a2e;">${product.name}</h2>
-                ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                <p style="color: #666; margin: 1rem 0; line-height: 1.6;">${product.description || 'Premium quality product'}</p>
+                <h2 style="margin-bottom: 1rem; color: #1a1a2e;">${safeName}</h2>
+                ${safeBadge ? `<span class="product-badge">${safeBadge}</span>` : ''}
+                <p style="color: #666; margin: 1rem 0; line-height: 1.6;">${safeDescription}</p>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0;">
                     <div style="font-size: 2rem; font-weight: 700; color: #2563eb;">$${product.price.toLocaleString()}</div>
                     <div style="color: #10b981; font-weight: 600;">In Stock</div>
                 </div>
                 <div style="display: flex; gap: 1rem;">
                     <button
-                        onclick="addToCartFromSimpleView(${product.id}, '${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.image}')"
-                        class="btn-primary"
+                        data-action="add-to-cart"
+                        data-product-id="${product.id}"
+                        class="btn-primary btn-simple-add-cart"
                         style="flex: 1; padding: 1rem; font-size: 1rem; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
                         Add to Cart
                     </button>
                     <button
-                        onclick="toggleFavorite(${product.id})"
-                        class="btn-secondary"
+                        data-action="toggle-favorite"
+                        data-product-id="${product.id}"
+                        class="btn-secondary btn-simple-favorite"
                         style="padding: 1rem 1.5rem; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer; font-size: 1.5rem;">
                         ${isFavorited(product.id) ? '❤️' : '🤍'}
                     </button>
@@ -468,6 +481,79 @@ function openSimpleProductView(product) {
 
     document.body.appendChild(modal);
     document.body.style.overflow = 'hidden';
+
+    // Attach event listeners using event delegation
+    const addToCartBtn = modal.querySelector('[data-action="add-to-cart"]');
+    const favoriteBtn = modal.querySelector('[data-action="toggle-favorite"]');
+    const closeButtons = modal.querySelectorAll('[data-action="close-modal"]');
+
+    // Add to cart handler
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Disable button to prevent multiple clicks
+            addToCartBtn.disabled = true;
+            addToCartBtn.style.opacity = '0.6';
+            addToCartBtn.textContent = 'Adding...';
+
+            // Add to cart
+            if (typeof addToCart === 'function') {
+                try {
+                    addToCart({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+
+                    // Close modal after successful add
+                    setTimeout(() => {
+                        closeSimpleProductView();
+                    }, 300);
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                    showNotification('Failed to add to cart', 'error');
+                    // Re-enable button
+                    addToCartBtn.disabled = false;
+                    addToCartBtn.style.opacity = '1';
+                    addToCartBtn.textContent = 'Add to Cart';
+                }
+            } else {
+                console.error('addToCart function not available');
+                showNotification('Unable to add to cart', 'error');
+                // Re-enable button
+                addToCartBtn.disabled = false;
+                addToCartBtn.style.opacity = '1';
+                addToCartBtn.textContent = 'Add to Cart';
+            }
+        });
+    }
+
+    // Favorite toggle handler
+    if (favoriteBtn) {
+        favoriteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (typeof toggleFavorite === 'function') {
+                toggleFavorite(product.id, product);
+                // Update button icon
+                favoriteBtn.textContent = isFavorited(product.id) ? '❤️' : '🤍';
+            }
+        });
+    }
+
+    // Close modal handlers
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeSimpleProductView();
+        });
+    });
 }
 
 /**
@@ -476,21 +562,14 @@ function openSimpleProductView(product) {
 function closeSimpleProductView() {
     const modal = document.getElementById('simpleProductModal');
     if (modal) {
-        modal.remove();
-        document.body.style.overflow = '';
-    }
-}
+        // Add fade-out animation
+        modal.style.opacity = '0';
+        modal.style.transition = 'opacity 0.3s ease';
 
-/**
- * Add to cart from simple product view
- */
-function addToCartFromSimpleView(id, name, price, image) {
-    if (typeof addToCart === 'function') {
-        addToCart({ id, name, price, image, quantity: 1 });
-        closeSimpleProductView();
-    } else {
-        console.error('addToCart function not available');
-        showNotification('Unable to add to cart', 'error');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = '';
+        }, 300);
     }
 }
 
