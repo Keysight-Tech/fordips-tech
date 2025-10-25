@@ -54,7 +54,7 @@ class FordipsTechAI {
      * Get the user's selected language from localStorage
      */
     getUserLanguage() {
-        return localStorage.getItem('selectedLanguage') || 'en';
+        return localStorage.getItem('fordipsTechLang') || 'en';
     }
 
     /**
@@ -104,6 +104,7 @@ class FordipsTechAI {
         this.createChatUI();
         this.attachEventListeners();
         this.loadConversationHistory();
+        this.setupLanguageListener();
 
         // Show welcome message after a short delay
         setTimeout(() => {
@@ -112,6 +113,65 @@ class FordipsTechAI {
 
         console.log('✅ AI Chat Assistant initialized');
         window.FORDIPS_CONFIG?.logger.log('✅ AI Chat Assistant initialized');
+    }
+
+
+    /**
+     * Update AI chat language when user changes language selector
+     */
+    updateLanguage() {
+        this.userLang = this.getUserLanguage();
+        console.log('🌍 AI Chat: Language updated to:', this.userLang);
+        
+        // Update chat UI elements
+        this.updateChatUILanguage();
+    }
+
+    /**
+     * Update the chat UI elements with new language
+     */
+    updateChatUILanguage() {
+        const chatTitle = document.querySelector('.chat-title');
+        const chatStatus = document.querySelector('.chat-status span:last-child');
+        const chatInput = document.getElementById('chatInput');
+        const quickActions = document.querySelectorAll('.quick-action-btn');
+        
+        if (chatTitle) chatTitle.textContent = this.t('aiChatTitle');
+        if (chatStatus) chatStatus.textContent = this.t('aiChatStatus');
+        if (chatInput) chatInput.placeholder = this.t('aiChatPlaceholder');
+        
+        if (quickActions.length > 0) {
+            quickActions[0].textContent = this.t('qaBrowseAll');
+            quickActions[1].textContent = this.t('qaBestDeals');
+            quickActions[2].textContent = this.t('qaPopular');
+            quickActions[3].textContent = this.t('qaTrackOrder');
+        }
+        
+        console.log('✅ AI Chat: UI language updated');
+    }
+
+    /**
+     * Setup language change listener
+     */
+    setupLanguageListener() {
+        // Listen to language change events from both selectors
+        const langSelectTop = document.getElementById('languageSelectTop');
+        const langSelectOld = document.getElementById('languageSelect');
+        
+        const handleLangChange = () => {
+            console.log('🔄 AI Chat: Detected language change');
+            setTimeout(() => this.updateLanguage(), 100);
+        };
+        
+        if (langSelectTop) {
+            langSelectTop.addEventListener('change', handleLangChange);
+            console.log('✅ AI Chat: Listening to languageSelectTop');
+        }
+        
+        if (langSelectOld) {
+            langSelectOld.addEventListener('change', handleLangChange);
+            console.log('✅ AI Chat: Listening to languageSelect');
+        }
     }
 
     createChatUI() {
