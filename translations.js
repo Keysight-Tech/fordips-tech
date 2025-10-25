@@ -49,6 +49,12 @@ const translations = {
         // Products
         productsTitle: 'Featured Products',
         productsSubtitle: 'Handpicked for you',
+        featuredProductsTitle: 'Featured Products',
+        featuredProductsSubtitle: 'Handpicked for you',
+        newsletterTitle: 'Stay Updated',
+        newsletterSubtitle: 'Subscribe to our newsletter for exclusive deals and tech news',
+        newsletterPlaceholder: 'Enter your email',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Add to Cart',
 
         // Product Details
@@ -272,6 +278,12 @@ const translations = {
         // Products
         productsTitle: 'منتجات مميزة',
         productsSubtitle: 'مختارة لك',
+        featuredProductsTitle: 'المنتجات المميزة',
+        featuredProductsSubtitle: 'مختارة بعناية لك',
+        newsletterTitle: 'ابق على اطلاع',
+        newsletterSubtitle: 'اشترك في نشرتنا الإخبارية للحصول على عروض حصرية وأخبار التكنولوجيا',
+        newsletterPlaceholder: 'أدخل بريدك الإلكتروني',
+        newsletterSubscribe: 'اشترك',
         addToCart: 'أضف إلى السلة',
 
         // Product Details
@@ -495,6 +507,12 @@ const translations = {
         // Products
         productsTitle: '精选产品',
         productsSubtitle: '为您精心挑选',
+        featuredProductsTitle: '精选产品',
+        featuredProductsSubtitle: '为您精心挑选',
+        newsletterTitle: '保持更新',
+        newsletterSubtitle: '订阅我们的新闻通讯，获取独家优惠和科技新闻',
+        newsletterPlaceholder: '输入您的电子邮件',
+        newsletterSubscribe: '订阅',
         addToCart: '加入购物车',
 
         // Product Details
@@ -718,6 +736,12 @@ const translations = {
         // Products
         productsTitle: 'Produits en vedette',
         productsSubtitle: 'Sélectionnés pour vous',
+        featuredProductsTitle: 'Produits en Vedette',
+        featuredProductsSubtitle: 'Sélectionnés pour vous',
+        newsletterTitle: 'Restez Informé',
+        newsletterSubtitle: 'Abonnez-vous à notre newsletter pour des offres exclusives et des actualités tech',
+        newsletterPlaceholder: 'Entrez votre email',
+        newsletterSubscribe: "S'abonner",
         addToCart: 'Ajouter au panier',
 
         // Product Details
@@ -941,6 +965,12 @@ const translations = {
         // Products
         productsTitle: 'Productos destacados',
         productsSubtitle: 'Seleccionados para ti',
+        featuredProductsTitle: 'Productos Destacados',
+        featuredProductsSubtitle: 'Seleccionados para ti',
+        newsletterTitle: 'Mantente Actualizado',
+        newsletterSubtitle: 'Suscríbete a nuestro boletín para ofertas exclusivas y noticias tecnológicas',
+        newsletterPlaceholder: 'Ingresa tu correo electrónico',
+        newsletterSubscribe: 'Suscribirse',
         addToCart: 'Añadir al carrito',
 
         // Product Details
@@ -1164,6 +1194,12 @@ const translations = {
         // Products
         productsTitle: 'विशेष उत्पाद',
         productsSubtitle: 'आपके लिए चुने गए',
+        featuredProductsTitle: 'विशेष उत्पाद',
+        featuredProductsSubtitle: 'आपके लिए चुने गए',
+        newsletterTitle: 'अपडेट रहें',
+        newsletterSubtitle: 'विशेष ऑफ़र और तकनीकी समाचार के लिए हमारे न्यूज़लेटर की सदस्यता लें',
+        newsletterPlaceholder: 'अपना ईमेल दर्ज करें',
+        newsletterSubscribe: 'सदस्यता लें',
         addToCart: 'कार्ट में जोड़ें',
 
         // Product Details
@@ -1387,6 +1423,12 @@ const translations = {
         // Products
         productsTitle: 'Our Best Products',
         productsSubtitle: 'We don pick am for you',
+        featuredProductsTitle: 'Special Product Dem',
+        featuredProductsSubtitle: 'We pick am for you',
+        newsletterTitle: 'Stay For Update',
+        newsletterSubtitle: 'Subscribe to our newsletter make you get special deals and tech news',
+        newsletterPlaceholder: 'Put your email',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Add For Basket',
 
         // Product Details
@@ -1610,6 +1652,12 @@ const translations = {
         // Products
         productsTitle: 'Biloko bi élɔbɛ',
         productsSubtitle: 'Mɛ kúlá yɛ̀ mbɛ́n wé',
+        featuredProductsTitle: 'Bi Produi Bi Special',
+        featuredProductsSubtitle: 'Bi lɔ́ŋɔ́ wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yá bísú yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Til ná panier',
 
         // Product Details
@@ -1833,6 +1881,12 @@ const translations = {
         // Products
         productsTitle: 'Wiri wi kibàŋ',
         productsSubtitle: 'Wir mə̀ sèrə̀ a wòo',
+        featuredProductsTitle: 'Bi Produi Special',
+        featuredProductsSubtitle: 'Ghɔ̀y wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Tòo à basket',
 
         // Product Details
@@ -2056,6 +2110,12 @@ const translations = {
         // Products
         productsTitle: 'Bikɛt bi njɛm',
         productsSubtitle: 'Bi mɛ̀ hɔ̀ɔp ŋgɛ́ i wɛ̀',
+        featuredProductsTitle: 'Bi Produi Special',
+        featuredProductsSubtitle: 'Lɛ̀m wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Gak ú panier',
 
         // Product Details
@@ -2279,6 +2339,12 @@ const translations = {
         // Products
         productsTitle: 'Lwálò lwá njɛ́m',
         productsSubtitle: 'Lwá mɛ̀ sálá ó wɛ̀',
+        featuredProductsTitle: 'Lwálò Special',
+        featuredProductsSubtitle: 'Sɛ́k ná wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Bákà ná panier',
 
         // Product Details
@@ -2502,6 +2568,12 @@ const translations = {
         // Products
         productsTitle: 'Bìkɛ̀t bì njɛ́m',
         productsSubtitle: 'Bí mɛ̀ hɔ̀p ŋgɛ́ ɛ́ wɛ̀',
+        featuredProductsTitle: 'Bǐŋàlò Special',
+        featuredProductsSubtitle: 'Chɛk ná wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Bák ní panier',
 
         // Product Details
@@ -2725,6 +2797,12 @@ const translations = {
         // Products
         productsTitle: 'Bìkɛ̀t bì njɛ́m',
         productsSubtitle: 'Bì mɛ̀ hɔ̀p ŋgɛ́ ì wɛ̀',
+        featuredProductsTitle: 'BíŋálòSpecial',
+        featuredProductsSubtitle: 'Sɛ̀k ná wɔ́ wè',
+        newsletterTitle: 'Zíŋ na Update',
+        newsletterSubtitle: 'Subscribe na newsletter yi deals special na tech news',
+        newsletterPlaceholder: 'Tɔ́b email wɔ́',
+        newsletterSubscribe: 'Subscribe',
         addToCart: 'Gàk ú panier',
 
         // Product Details
@@ -2948,6 +3026,12 @@ const translations = {
         // Products
         productsTitle: 'Ausgewählte Produkte',
         productsSubtitle: 'Handverlesen für Sie',
+        featuredProductsTitle: 'Empfohlene Produkte',
+        featuredProductsSubtitle: 'Handverlesen für Sie',
+        newsletterTitle: 'Bleiben Sie Informiert',
+        newsletterSubtitle: 'Abonnieren Sie unseren Newsletter für exklusive Angebote und Tech-News',
+        newsletterPlaceholder: 'Geben Sie Ihre E-Mail ein',
+        newsletterSubscribe: 'Abonnieren',
         addToCart: 'In den Warenkorb',
 
         // Product Details
@@ -3171,6 +3255,12 @@ const translations = {
         // Products
         productsTitle: 'Prodotti in evidenza',
         productsSubtitle: 'Selezionati per te',
+        featuredProductsTitle: 'Prodotti in Evidenza',
+        featuredProductsSubtitle: 'Selezionati per te',
+        newsletterTitle: 'Rimani Aggiornato',
+        newsletterSubtitle: 'Iscriviti alla nostra newsletter per offerte esclusive e notizie tecnologiche',
+        newsletterPlaceholder: 'Inserisci la tua email',
+        newsletterSubscribe: 'Iscriviti',
         addToCart: 'Aggiungi al carrello',
 
         // Product Details
@@ -3394,6 +3484,12 @@ const translations = {
         // Products
         productsTitle: 'Imikhiqizo Ekhethekile',
         productsSubtitle: 'Ikhethwe wena',
+        featuredProductsTitle: 'Imikhiqizo Ekhethekile',
+        featuredProductsSubtitle: 'Ikhethwe ngokucophelela wena',
+        newsletterTitle: 'Hlala Unolwazi',
+        newsletterSubtitle: 'Bhalisa ku-newsletter yethu ukuze uthole amathuba akhethekile nezindaba zobuchwepheshe',
+        newsletterPlaceholder: 'Faka i-imeyili yakho',
+        newsletterSubscribe: 'Bhalisa',
         addToCart: 'Faka esitolo',
 
         // Product Details
