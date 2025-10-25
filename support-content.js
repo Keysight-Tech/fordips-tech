@@ -3,7 +3,11 @@
  * Comprehensive content for FAQs, Shipping, Warranty, Privacy Policy, Terms & Conditions
  */
 
-const supportContent = {
+// Avoid redeclaration if already loaded
+if (typeof supportContent === 'undefined') {
+    var supportContent = {};
+}
+supportContent = {
     faq: {
         title: 'Frequently Asked Questions',
         sections: [

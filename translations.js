@@ -3744,7 +3744,7 @@ const translations = {
         aiWelcomeShopping: "🛒 **Sɔk** - Chɔp əkɔt, fɛk, yɔp ndɔŋ",
         aiWelcomeShipping: "🚚 **Ətɔk** - Ətɔk ƏSƐŊ nlog mbot",
         aiWelcomePayment: "💳 **Əfɛk** - Carte crédit, Mobile Money, PayPal na bi hiañ",
-        aiWelcomeLocations: "📍 "**Bɛrɛp** - Nkɔbɔ milong USA na Cameroun",
+        aiWelcomeLocations: "📍 **Bɛrɛp** - Nkɔbɔ milong USA na Cameroun",
         aiWelcomeSupport: "❓ **Bəkɛrɛ** - Tərɛ na bi njuŋ",
         aiWelcomeAsk: "**Tərɛ mi mbot!** Mə ɣɔk ane 24/7 ə kɛrɛ wɔ kɛt ki u lɔŋ.",
         aiWelcomeQuestion: "Ki mə nga kɛrɛ wɔ non?",

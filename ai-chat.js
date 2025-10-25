@@ -901,14 +901,14 @@ Please enter your order number (format: FT123456789) and I'll look it up for you
 
         // Multiple matches - let user choose
         const topResults = searchResults.slice(0, 5);
-        let message = `I found ${searchResults.length} products matching your search. Which one would you like to add to cart?\n\n`;
+        let responseText = `I found ${searchResults.length} products matching your search. Which one would you like to add to cart?\n\n`;
 
         topResults.forEach((product, index) => {
-            message += `${index + 1}. **${product.name}** - $${product.price}\n`;
+            responseText += `${index + 1}. **${product.name}** - $${product.price}\n`;
         });
 
         return {
-            message,
+            message: responseText,
             actions: topResults.map(p => ({
                 label: `➕ ${p.name.split(' ').slice(0, 3).join(' ')}`,
                 action: 'add-to-cart',

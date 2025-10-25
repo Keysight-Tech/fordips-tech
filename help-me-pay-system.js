@@ -97,7 +97,10 @@ class HelpMePaySystem {
         const currency = this.currencies.find(c => c.code === currencyCode);
 
         // Update UI
-        document.getElementById('selectedCurrency').textContent = currencyCode;
+        const selectedCurrencyEl = document.getElementById('selectedCurrency');
+        if (selectedCurrencyEl) {
+            selectedCurrencyEl.textContent = currencyCode;
+        }
         document.getElementById('currencyDropdown')?.classList.remove('active');
 
         // Update all prices on page
