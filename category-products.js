@@ -76,6 +76,11 @@ function renderCategoryProducts(category) {
  * Create product card HTML
  */
 function createProductCard(product) {
+    // Get translated description if product.description is a translation key
+    const description = product.descriptionKey
+        ? (typeof getProductDescription === 'function' ? getProductDescription(product.descriptionKey) : product.description)
+        : product.description;
+
     return `
         <div class="product-card" data-product-id="${product.id}">
             <div class="product-image">
@@ -88,7 +93,7 @@ function createProductCard(product) {
             <div class="product-content">
                 <div class="product-category">${product.category}</div>
                 <h3 class="product-name">${product.name}</h3>
-                <p class="product-desc">${product.description}</p>
+                <p class="product-desc">${description}</p>
                 <div class="product-price">$${product.price.toLocaleString()}</div>
                 <button class="btn btn-add-cart"
                         data-id="${product.id}"

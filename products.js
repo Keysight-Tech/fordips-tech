@@ -12,7 +12,8 @@ const products = [
         price: 199,
         image: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&q=80',
         badge: null,
-        description: 'Classic design, still reliable'
+        description: 'Classic design, still reliable',
+        descriptionKey: 'desc_classic_design'
     },
     {
         id: 2,
@@ -21,7 +22,8 @@ const products = [
         price: 249,
         image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&q=80',
         badge: null,
-        description: '3D Touch, improved camera'
+        description: '3D Touch, improved camera',
+        descriptionKey: 'desc_3d_touch'
     },
     {
         id: 3,
@@ -30,7 +32,8 @@ const products = [
         price: 299,
         image: 'https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=800&q=80',
         badge: null,
-        description: 'Water resistant, no headphone jack'
+        description: 'Water resistant, no headphone jack',
+        descriptionKey: 'desc_water_resistant'
     },
     {
         id: 4,
@@ -39,7 +42,8 @@ const products = [
         price: 349,
         image: 'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=800&q=80',
         badge: null,
-        description: 'Dual camera, larger display'
+        description: 'Dual camera, larger display',
+        descriptionKey: 'desc_dual_camera'
     },
     {
         id: 5,
@@ -49,7 +53,8 @@ const products = [
         image: 'https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp',
         badge: 'NEW',
         featured: true,
-        description: 'Titanium. So strong. So light. So Pro.'
+        description: 'Titanium. So strong. So light. So Pro.',
+        descriptionKey: 'desc_titanium_pro'
     },
     {
         id: 6,
@@ -58,7 +63,8 @@ const products = [
         price: 449,
         image: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&q=80',
         badge: null,
-        description: 'Wireless charging, glass back'
+        description: 'Wireless charging, glass back',
+        descriptionKey: 'desc_wireless_charging'
     },
     {
         id: 7,
@@ -67,7 +73,8 @@ const products = [
         price: 549,
         image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&q=80',
         badge: null,
-        description: 'Larger screen, portrait mode'
+        description: 'Larger screen, portrait mode',
+        descriptionKey: 'desc_larger_screen'
     },
 
     // ===== MACBOOKS =====
