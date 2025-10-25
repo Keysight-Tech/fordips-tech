@@ -30,12 +30,12 @@ DROP FUNCTION IF EXISTS search_products(TEXT);
 CREATE OR REPLACE FUNCTION search_products(search_query TEXT)
 RETURNS TABLE(
     id UUID,
-    name VARCHAR,
+    name TEXT,
     description TEXT,
     price DECIMAL,
-    image_url VARCHAR,
-    category_slug VARCHAR,
-    badge VARCHAR,
+    image_url TEXT,
+    category_slug TEXT,
+    badge TEXT,
     stock_quantity INTEGER,
     is_active BOOLEAN,
     created_at TIMESTAMPTZ,
