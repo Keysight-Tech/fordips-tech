@@ -1,0 +1,182 @@
+// ============================================
+// FIXES FOR LOGIN, SIGNUP, ADD TO CART, CHECKOUT FREEZING
+// ============================================
+
+// Fix 1: Wrap checkAuth with error handling
+async function checkAuth() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        currentUser = user;
+
+        if (user) {
+            // Load user cart from database with timeout protection
+            try {
+                await Promise.race([
+                    loadUserCart(),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error('Cart load timeout')), 5000)
+                    )
+                ]);
+            } catch (cartError) {
+                console.warn('⚠️ Could not load cart from database, using local cart:', cartError.message);
+                // Don't block login if cart fails to load
+            }
+            updateUIForLoggedInUser();
+        }
+
+        return user;
+    } catch (error) {
+        console.error('Error checking auth:', error);
+        return null;
+    }
+}
+
+// Fix 2: Wrap signIn with error handling
+async function signIn(email, password) {
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) throw error;
+
+        currentUser = data.user;
+
+        // Load user cart with error handling - don't block login if it fails
+        try {
+            await Promise.race([
+                loadUserCart(),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Cart load timeout')), 5000)
+                )
+            ]);
+        } catch (cartError) {
+            console.warn('⚠️ Could not load cart:', cartError.message);
+            // Continue with login even if cart fails
+        }
+
+        updateUIForLoggedInUser();
+
+        return { success: true, user: data.user };
+    } catch (error) {
+        window.FORDIPS_CONFIG?.logger.error('Login error:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// Fix 3: Add showUserDashboard function (was missing!)
+function showUserDashboard() {
+    // Redirect to my account page
+    window.location.href = 'my-account.html';
+}
+
+// Fix 4: Update loadUserCart with better error handling
+async function loadUserCart() {
+    if (!currentUser) return;
+
+    try {
+        const { data, error } = await supabase
+            .from('cart_items')
+            .select(`
+                *,
+                products (
+                    id,
+                    name,
+                    price,
+                    image_url,
+                    stock_quantity
+                )
+            `)
+            .eq('user_id', currentUser.id);
+
+        if (error) {
+            // Check if it's an RLS error
+            if (error.message && error.message.includes('infinite recursion')) {
+                console.error('❌ RLS Policy Error: Run FIX_RLS_POLICIES.sql to fix this!');
+                console.error('   Dashboard: https://supabase.com/dashboard/project/loutcbvftzojsioahtdw/sql');
+                throw new Error('Database policy error - please contact support');
+            }
+            throw error;
+        }
+
+        currentCart = data.map(item => ({
+            id: item.products.id,
+            name: item.products.name,
+            price: parseFloat(item.products.price),
+            image: item.products.image_url,
+            quantity: item.quantity
+        }));
+
+        updateCartDisplay();
+    } catch (error) {
+        window.FORDIPS_CONFIG?.logger.error('Error loading cart:', error);
+        console.warn('⚠️ Using local cart instead of database cart');
+        // Don't throw - allow user to continue with local cart
+    }
+}
+
+// Fix 5: Update addToCart with better error handling
+async function addToCart(productId, productName, productPrice, productImage) {
+    // Check if user is logged in
+    if (!currentUser) {
+        // For guest users, use localStorage
+        addToLocalCart(productId, productName, productPrice, productImage);
+        return { success: true };
+    }
+
+    try {
+        // Check if item already in cart
+        const { data: existing, error: selectError } = await supabase
+            .from('cart_items')
+            .select('*')
+            .eq('user_id', currentUser.id)
+            .eq('product_id', productId)
+            .single();
+
+        if (selectError && selectError.code !== 'PGRST116') { // PGRST116 = not found
+            throw selectError;
+        }
+
+        if (existing) {
+            // Update quantity
+            const { error } = await supabase
+                .from('cart_items')
+                .update({ quantity: existing.quantity + 1 })
+                .eq('id', existing.id);
+
+            if (error) throw error;
+        } else {
+            // Add new item
+            const { error } = await supabase
+                .from('cart_items')
+                .insert({
+                    user_id: currentUser.id,
+                    product_id: productId,
+                    quantity: 1
+                });
+
+            if (error) throw error;
+        }
+
+        await loadUserCart();
+
+        if (typeof showNotification === 'function') {
+            showNotification(`${productName} added to cart!`, 'success');
+        }
+
+        return { success: true };
+    } catch (error) {
+        console.error('Error adding to cart (database):', error);
+        console.warn('⚠️ Falling back to local cart');
+
+        // Fall back to local storage if database fails
+        addToLocalCart(productId, productName, productPrice, productImage);
+
+        if (typeof showNotification === 'function') {
+            showNotification(`${productName} added to cart!`, 'success');
+        }
+
+        return { success: true, fallback: true };
+    }
+}

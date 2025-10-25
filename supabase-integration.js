@@ -35,16 +35,31 @@ let currentCart = [];
 
 // Check if user is logged in
 async function checkAuth() {
-    const { data: { user } } = await supabase.auth.getUser();
-    currentUser = user;
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        currentUser = user;
 
-    if (user) {
-        // Load user cart from database
-        await loadUserCart();
-        updateUIForLoggedInUser();
+        if (user) {
+            // Load user cart from database with timeout protection
+            try {
+                await Promise.race([
+                    loadUserCart(),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error('Cart load timeout')), 5000)
+                    )
+                ]);
+            } catch (cartError) {
+                console.warn('⚠️ Could not load cart from database, using local cart:', cartError.message);
+                // Don't block login if cart fails to load
+            }
+            updateUIForLoggedInUser();
+        }
+
+        return user;
+    } catch (error) {
+        console.error('Error checking auth:', error);
+        return null;
     }
-
-    return user;
 }
 
 // Sign up new user
@@ -80,7 +95,20 @@ async function signIn(email, password) {
         if (error) throw error;
 
         currentUser = data.user;
-        await loadUserCart();
+
+        // Load user cart with error handling - don't block login if it fails
+        try {
+            await Promise.race([
+                loadUserCart(),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Cart load timeout')), 5000)
+                )
+            ]);
+        } catch (cartError) {
+            console.warn('⚠️ Could not load cart:', cartError.message);
+            // Continue with login even if cart fails
+        }
+
         updateUIForLoggedInUser();
 
         return { success: true, user: data.user };
@@ -119,6 +147,11 @@ function updateUIForLoggedOutUser() {
         link.textContent = 'My Account';
         link.onclick = null;
     });
+}
+
+// Show user dashboard (redirect to my account page)
+function showUserDashboard() {
+    window.location.href = 'my-account.html';
 }
 
 // ============================================
