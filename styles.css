@@ -1014,7 +1014,7 @@ a {
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 8rem 0 4rem;
+    padding: 3rem 0 1rem;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
 }
 
@@ -1114,7 +1114,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: 1rem;
     position: relative;
     z-index: 10;
     text-align: center;
@@ -1349,7 +1349,7 @@ a {
 .device-carousel {
     position: relative;
     width: 100%;
-    min-height: 400px;
+    min-height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1386,8 +1386,8 @@ a {
     position: relative;
     transform-style: preserve-3d;
     animation: deviceFloatLarge 6s ease-in-out infinite;
-    max-width: 800px;
-    width: 90%;
+    max-width: 1200px;
+    width: 98%;
 }
 
 @keyframes deviceFloatLarge {
@@ -1401,14 +1401,14 @@ a {
 
 .device-img-large {
     width: 100%;
-    max-height: 700px;
-    min-height: 500px;
-    object-fit: cover;
-    border-radius: 20px;
+    max-height: 80vh;
+    min-height: 65vh;
+    object-fit: contain;
+    border-radius: 12px;
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
     transition: all 0.6s ease;
     display: block;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
 }
 
 /* Device Info */
@@ -3308,7 +3308,7 @@ a {
 
     /* Cinematic Hero - Mobile */
     .cinematic-hero {
-        padding: 6rem 0 3rem;
+        padding: 2rem 0 1rem;
         min-height: 100vh;
     }
 
@@ -3827,21 +3827,21 @@ a {
 /* Device Carousel Mobile Responsive */
 @media (max-width: 768px) {
     .device-carousel {
-        min-height: 500px;
+        min-height: 70vh;
         height: auto;
-        padding: 2rem 0 1rem 0;
+        padding: 1rem 0 0.5rem 0;
     }
 
     .device-3d-large {
-        max-width: 95%;
+        max-width: 98%;
         width: 100%;
     }
 
     .device-img-large {
-        max-height: 750px;
-        min-height: 600px;
+        max-height: 75vh;
+        min-height: 60vh;
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .device-info {
@@ -3872,9 +3872,9 @@ a {
 
 @media (max-width: 480px) {
     .device-carousel {
-        min-height: 450px;
+        min-height: 65vh;
         height: auto;
-        padding: 1.5rem 0 0.75rem 0;
+        padding: 1rem 0 0.5rem 0;
     }
 
     .device-3d-large {
@@ -3883,10 +3883,10 @@ a {
     }
 
     .device-img-large {
-        max-height: 650px;
-        min-height: 500px;
+        max-height: 70vh;
+        min-height: 55vh;
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
     }
 
     .device-info {
