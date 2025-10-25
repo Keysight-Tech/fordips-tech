@@ -100,6 +100,9 @@
     <link rel="stylesheet" href="testimonials-about-styles.css">
     <link rel="stylesheet" href="mobile-optimizations.css">
     <link rel="stylesheet" href="hamburger-drawer.css">
+    <link rel="stylesheet" href="cinematic-showcase-styles.css">
+    <link rel="stylesheet" href="rotating-globe-styles.css">
+    <link rel="stylesheet" href="counter-animation-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- Load Configuration FIRST (before any other scripts) -->
@@ -189,9 +192,17 @@
                     <p class="announcement">🎉 Free Shipping on Orders Over $50</p>
                     <div class="top-bar-links">
                         <button onclick="showOrderTrackingModal()" class="top-link">Track Order</button>
+
+                        <!-- Rotating World Globe -->
+                        <div class="rotating-globe" title="Worldwide Shipping Available">
+                            <div class="globe-sphere">
+                                <div class="globe-map"></div>
+                            </div>
+                        </div>
+
                         <div class="language-switcher-top">
                             <select id="languageSelectTop" class="lang-select-minimal">
-                                <option value="en" selected>🇺🇸 EN</option>
+                                <option value="en" selected">🇺🇸 EN</option>
                                 <option value="fr">🇫🇷 FR</option>
                                 <option value="pcm">🇨🇲 PCM</option>
                             </select>
@@ -422,127 +433,191 @@
                     </p>
                 </div>
 
-                <!-- 3D Device Showcase Carousel -->
-                <div class="cinematic-devices">
-                    <div class="device-carousel">
-                        <!-- iPhone Slide -->
-                        <div class="device-slide active">
-                            <div class="device-3d-large">
-                                <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp" alt="iPhone 17 Pro Max" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-blue"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>iPhone 17 Pro Max</h3>
-                                <p>Titanium. So strong. So light. So Pro.</p>
-                            </div>
-                        </div>
+                <!-- 🎬 World-Class Cinematic Product Showcase -->
+                <div class="cinematic-product-showcase">
+                    <!-- Loading Animation -->
+                    <div class="showcase-loading">
+                        <div class="showcase-spinner"></div>
+                        <div class="showcase-loading-text">Loading amazing products...</div>
+                    </div>
 
-                        <!-- iPhone 17 Pro Max Silver Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/silver-hero-17pm.webp" alt="iPhone 17 Pro Max Silver" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-silver"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>iPhone 17 Pro Max Silver</h3>
-                                <p>Elegance redefined in titanium silver.</p>
-                            </div>
-                        </div>
+                    <!-- Animated Particles Background -->
+                    <div class="showcase-particles">
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                        <div class="showcase-particle"></div>
+                    </div>
 
-                        <!-- MacBook Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=95&fit=crop&auto=format" alt="MacBook Pro" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-silver"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>MacBook Pro M3</h3>
-                                <p>Mind-blowing. Head-turning. Pro performance.</p>
-                            </div>
+                    <!-- Slide 1: iPhone 17 Pro Max -->
+                    <div class="showcase-slide active" data-bg-color="#1e3a8a" data-accent-color="#3b82f6">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/17%20promax.webp"
+                                 alt="iPhone 17 Pro Max"
+                                 class="showcase-image"
+                                 loading="eager">
+                            <div class="showcase-glow glow-blue"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
                         </div>
-
-                        <!-- Camera Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg" alt="Professional Camera" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-orange"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>Professional Cameras</h3>
-                                <p>Capture every moment in stunning detail.</p>
-                            </div>
-                        </div>
-
-                        <!-- Starlink Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/starlink.png" alt="Starlink Internet Kit" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-teal"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>Starlink Internet Kit</h3>
-                                <p>High-speed satellite internet anywhere.</p>
-                            </div>
-                        </div>
-
-                        <!-- Apple Watch Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=95&fit=crop&auto=format" alt="Apple Watch" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-purple"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>Apple Watch Series 9</h3>
-                                <p>A healthy leap ahead with advanced sensors.</p>
-                            </div>
-                        </div>
-
-                        <!-- iPad Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/ipad%20pro%20m5.webp" alt="iPad Pro M5" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-pink"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>iPad Pro M5</h3>
-                                <p>Supercharged by the M5 chip.</p>
-                            </div>
-                        </div>
-
-                        <!-- Samsung Galaxy Slide -->
-                        <div class="device-slide">
-                            <div class="device-3d-large">
-                                <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=95&fit=crop&auto=format" alt="Samsung Galaxy S24 Ultra" class="device-img-large" crossorigin="anonymous">
-                                <div class="device-glow glow-blue"></div>
-                            </div>
-                            <div class="device-info">
-                                <h3>Samsung Galaxy S24 Ultra</h3>
-                                <p>Galaxy AI is here. Epic in every way.</p>
-                            </div>
+                        <div class="showcase-info">
+                            <h3>iPhone 17 Pro Max</h3>
+                            <p>Titanium. So strong. So light. So Pro.</p>
                         </div>
                     </div>
 
-                    <!-- Carousel Navigation Dots -->
-                    <div class="carousel-dots">
-                        <span class="dot active" data-slide="0"></span>
-                        <span class="dot" data-slide="1"></span>
-                        <span class="dot" data-slide="2"></span>
-                        <span class="dot" data-slide="3"></span>
-                        <span class="dot" data-slide="4"></span>
-                        <span class="dot" data-slide="5"></span>
-                        <span class="dot" data-slide="6"></span>
-                        <span class="dot" data-slide="7"></span>
+                    <!-- Slide 2: iPhone 17 Pro Max Silver -->
+                    <div class="showcase-slide" data-bg-color="#334155" data-accent-color="#94a3b8">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/silver-hero-17pm.webp"
+                                 alt="iPhone 17 Pro Max Silver"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-silver"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>iPhone 17 Pro Max Silver</h3>
+                            <p>Elegance redefined in titanium silver.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Shop Now Button below images -->
-                <div class="cinematic-cta">
-                    <a href="#products" class="btn-cinematic">
-                        <span>SHOP NOW</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+                    <!-- Slide 3: Samsung Galaxy S24 Ultra -->
+                    <div class="showcase-slide" data-bg-color="#4c1d95" data-accent-color="#a855f7">
+                        <div class="showcase-image-container">
+                            <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=1200&q=95&fit=crop&auto=format"
+                                 alt="Samsung Galaxy S24 Ultra"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-purple"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Samsung Galaxy S24 Ultra</h3>
+                            <p>Galaxy AI is here. Epic in every way.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: MacBook Pro M3 -->
+                    <div class="showcase-slide" data-bg-color="#1e293b" data-accent-color="#64748b">
+                        <div class="showcase-image-container">
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=95&fit=crop&auto=format"
+                                 alt="MacBook Pro M3"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-silver"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>MacBook Pro M3</h3>
+                            <p>Mind-blowing. Head-turning. Pro performance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: iPad Pro M5 -->
+                    <div class="showcase-slide" data-bg-color="#831843" data-accent-color="#ec4899">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/ipad%20pro%20m5.webp"
+                                 alt="iPad Pro M5"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-pink"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>iPad Pro M5</h3>
+                            <p>Supercharged by the M5 chip.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 6: Apple Watch Series 9 -->
+                    <div class="showcase-slide" data-bg-color="#713f12" data-accent-color="#fbbf24">
+                        <div class="showcase-image-container">
+                            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=1200&q=95&fit=crop&auto=format"
+                                 alt="Apple Watch Series 9"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-gold"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Apple Watch Series 9</h3>
+                            <p>A healthy leap ahead with advanced sensors.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 7: Professional Camera -->
+                    <div class="showcase-slide" data-bg-color="#7c2d12" data-accent-color="#f97316">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/canon.jpg"
+                                 alt="Professional Camera"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-orange"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Professional Cameras</h3>
+                            <p>Capture every moment in stunning detail.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 8: Starlink -->
+                    <div class="showcase-slide" data-bg-color="#115e59" data-accent-color="#14b8a6">
+                        <div class="showcase-image-container">
+                            <img src="https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/starlink.png"
+                                 alt="Starlink Internet Kit"
+                                 class="showcase-image"
+                                 loading="lazy">
+                            <div class="showcase-glow glow-teal"></div>
+                            <div class="showcase-rim-light"></div>
+                            <div class="showcase-ambient-shadow"></div>
+                        </div>
+                        <div class="showcase-info">
+                            <h3>Starlink Internet Kit</h3>
+                            <p>High-speed satellite internet anywhere.</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="showcase-nav showcase-nav-prev">
+                        <button class="showcase-nav-btn" aria-label="Previous product">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="showcase-nav showcase-nav-next">
+                        <button class="showcase-nav-btn" aria-label="Next product">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Progress Indicators -->
+                    <div class="showcase-indicators">
+                        <div class="showcase-dot active" data-index="0"></div>
+                        <div class="showcase-dot" data-index="1"></div>
+                        <div class="showcase-dot" data-index="2"></div>
+                        <div class="showcase-dot" data-index="3"></div>
+                        <div class="showcase-dot" data-index="4"></div>
+                        <div class="showcase-dot" data-index="5"></div>
+                        <div class="showcase-dot" data-index="6"></div>
+                        <div class="showcase-dot" data-index="7"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -557,6 +632,11 @@
     <!-- Categories -->
     <section class="categories" id="categories">
         <div class="container">
+            <!-- Shop Now CTA Button -->
+            <div class="shop-now-cta">
+                <a href="#products" class="btn-shop-now"><span>Shop Now</span></a>
+            </div>
+
             <div class="section-header fade-in-up">
                 <h2 class="section-title" data-i18n="categoriesTitle">Shop by Category</h2>
                 <p class="section-subtitle" data-i18n="categoriesSubtitle">Premium electronics for every need</p>
@@ -1039,19 +1119,19 @@
 
                     <div class="about-stats">
                         <div class="stat-item">
-                            <span class="stat-number">50,000+</span>
+                            <span class="stat-number counter" data-target="50000" data-suffix="+">0</span>
                             <span class="stat-label">Happy Customers</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">100%</span>
+                            <span class="stat-number counter" data-target="100" data-suffix="%">0</span>
                             <span class="stat-label">Authentic Products</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">4.9/5</span>
+                            <span class="stat-number counter" data-target="4.9" data-decimals="1" data-suffix="/5">0</span>
                             <span class="stat-label">Customer Rating</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">150+</span>
+                            <span class="stat-number counter" data-target="150" data-suffix="+">0</span>
                             <span class="stat-label">Countries Served</span>
                         </div>
                     </div>
@@ -1177,19 +1257,19 @@
 
             <div class="trust-metrics">
                 <div class="metric">
-                    <span class="metric-number">4.9/5</span>
+                    <span class="metric-number counter" data-target="4.9" data-decimals="1" data-suffix="/5">0</span>
                     <span class="metric-label">Average Rating</span>
                 </div>
                 <div class="metric">
-                    <span class="metric-number">50,000+</span>
+                    <span class="metric-number counter" data-target="50000" data-suffix="+">0</span>
                     <span class="metric-label">Reviews</span>
                 </div>
                 <div class="metric">
-                    <span class="metric-number">98%</span>
+                    <span class="metric-number counter" data-target="98" data-suffix="%">0</span>
                     <span class="metric-label">Would Recommend</span>
                 </div>
                 <div class="metric">
-                    <span class="metric-number">24/7</span>
+                    <span class="metric-number" data-static="true">24/7</span>
                     <span class="metric-label">Support Available</span>
                 </div>
             </div>
@@ -1811,6 +1891,8 @@
     <script src="help-me-pay-modal.js" defer></script>
     <script src="favorites-system.js" defer></script>
     <script src="support-content.js" defer></script>
+    <script src="cinematic-showcase.js"></script>
+    <script src="counter-animation.js"></script>
 
     <!-- PWA Service Worker Registration -->
     <script>

@@ -502,10 +502,6 @@
         margin-bottom: 0;
     }
 
-    .carousel-indicators {
-        margin-top: 1rem;
-    }
-
     .btn-cinematic {
         padding: 0.875rem 1.75rem;
         font-size: 0.95rem;
@@ -575,10 +571,6 @@
     .device-info p {
         font-size: 0.85rem;
         margin-bottom: 0;
-    }
-
-    .carousel-indicators {
-        margin-top: 0.75rem;
     }
 
     .btn-cinematic {

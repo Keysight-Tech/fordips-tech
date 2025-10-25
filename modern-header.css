@@ -68,7 +68,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
     letter-spacing: 0.3px;
 }
 
@@ -76,7 +76,12 @@
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.4);
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+}
+
+.lang-select-minimal:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 /* Make flags visible on white backgrounds in dropdown */

@@ -1,0 +1,272 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 🌍 ROTATING WORLD GLOBE - Header Animation
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * World-class rotating globe with perfect circular shape on all devices
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBE CONTAINER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.rotating-globe {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 12px;
+    cursor: help;
+    transition: transform 0.3s ease;
+}
+
+.rotating-globe:hover {
+    transform: scale(1.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GLOBE SPHERE - Perfect Circle with World Map
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.globe-sphere {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at center, #3b82f6 0%, #2563eb 100%);
+    box-shadow:
+        inset -3px -3px 10px rgba(0, 0, 0, 0.5),
+        inset 3px 3px 10px rgba(255, 255, 255, 0.15),
+        0 3px 10px rgba(14, 165, 233, 0.5);
+    overflow: hidden;
+    animation: globeGlow 3s ease-in-out infinite;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes globeGlow {
+    0%, 100% {
+        box-shadow:
+            inset -3px -3px 10px rgba(0, 0, 0, 0.5),
+            inset 3px 3px 10px rgba(255, 255, 255, 0.15),
+            0 3px 10px rgba(14, 165, 233, 0.5);
+    }
+    50% {
+        box-shadow:
+            inset -3px -3px 10px rgba(0, 0, 0, 0.5),
+            inset 4px 4px 12px rgba(255, 255, 255, 0.2),
+            0 4px 14px rgba(14, 165, 233, 0.7);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   WORLD MAP PATTERN - Rotating 360°
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.globe-map {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-image: url('https://loutcbvftzojsioahtdw.supabase.co/storage/v1/object/public/images/worlmap.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform-origin: center center;
+    animation: rotateGlobe 20s linear infinite;
+    opacity: 1;
+}
+
+@keyframes rotateGlobe {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Spherical mask to create 3D curved effect */
+.globe-sphere::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 0, 0, 0.15) 50%,
+        rgba(0, 0, 0, 0.4) 65%,
+        rgba(0, 0, 0, 0.8) 85%,
+        #000 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Spherical highlight for realism */
+.globe-sphere::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 15%,
+        transparent 30%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Pause rotation on hover for better visibility */
+.rotating-globe:hover .globe-map {
+    animation-play-state: paused;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE SIZES - Maintain Perfect Circle
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .globe-sphere {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        min-height: 30px;
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    .rotating-globe {
+        margin: 0 10px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .globe-sphere {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        min-height: 28px;
+        max-width: 28px;
+        max-height: 28px;
+    }
+
+    .rotating-globe {
+        margin: 0 8px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .globe-sphere {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+        min-height: 26px;
+        max-width: 26px;
+        max-height: 26px;
+    }
+
+    .rotating-globe {
+        margin: 0 6px;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+    .globe-sphere {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        max-width: 24px;
+        max-height: 24px;
+    }
+
+    .rotating-globe {
+        margin: 0 5px;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY & PERFORMANCE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .globe-map {
+        animation: rotateGlobeSlow 60s linear infinite;
+    }
+
+    @keyframes rotateGlobeSlow {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .globe-sphere {
+        border: 1px solid #ffffff;
+    }
+}
+
+/* Print styles */
+@media print {
+    .rotating-globe {
+        display: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOOLTIP ENHANCEMENT (Optional)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.rotating-globe::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.rotating-globe:hover::after {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+/* Mobile - hide tooltip to save space */
+@media (max-width: 768px) {
+    .rotating-globe::after {
+        display: none;
+    }
+}

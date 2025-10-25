@@ -1,0 +1,188 @@
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 🔢 COUNTER ANIMATION STYLES
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * Styles for animated counting numbers
+ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COUNTER BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.counter {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+/* Ensure smooth number transitions */
+.stat-number.counter,
+.metric-number.counter {
+    font-feature-settings: 'tnum' 1;
+    letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATION STATES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Initial state - slightly faded */
+.counter[data-target] {
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animating state */
+.counter.animating {
+    opacity: 1;
+}
+
+/* Add subtle glow effect during animation */
+@keyframes counterGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(59, 130, 246, 0);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENHANCED STAT ITEMS (About Section)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.stat-item {
+    position: relative;
+    overflow: visible;
+}
+
+.stat-item .counter {
+    position: relative;
+}
+
+/* Pulse effect on completion */
+@keyframes counterComplete {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ENHANCED METRICS (Testimonials Section)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.metric {
+    position: relative;
+    overflow: visible;
+}
+
+.metric .counter {
+    position: relative;
+}
+
+/* Add shimmer effect during counting */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.counter.animating {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.3) 25%,
+        rgba(59, 130, 246, 0.5) 50%,
+        rgba(59, 130, 246, 0.3) 75%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Pulse glow during animation */
+.counter.animating {
+    animation: shimmer 1.5s ease-in-out infinite,
+               counterPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes counterPulse {
+    0% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1.2);
+    }
+}
+
+/* Completed state with subtle highlight */
+.counter.completed {
+    animation: completedGlow 0.6s ease-out;
+}
+
+@keyframes completedGlow {
+    0% {
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+    100% {
+        text-shadow: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .counter {
+        font-feature-settings: 'tnum' 1;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .counter {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .counter.animating {
+        animation: none !important;
+        background: none !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .counter.animating {
+        background: none;
+        text-shadow: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Show placeholder while loading */
+.counter[data-target]:empty::before {
+    content: '0';
+    opacity: 0.5;
+}
