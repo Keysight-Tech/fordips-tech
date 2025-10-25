@@ -177,9 +177,21 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 1rem;
+        }
+
         .payment-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             margin: 1.5rem 0;
         }
@@ -200,15 +212,51 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .payment-option input[type="radio"]:checked + .payment-option-content {
             border-color: #2563eb;
             background: #eff6ff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .payment-option-content:hover {
             border-color: #2563eb;
+        }
+
+        .payment-details-section {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border: 2px solid #e5e7eb;
+            display: none;
+        }
+
+        .payment-details-section.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-details-section h4 {
+            margin: 0 0 1rem 0;
+            color: #1f2937;
+            font-size: 1.1rem;
         }
 
         .btn-pay {
@@ -287,6 +335,11 @@
             .payment-methods {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
         }
 
         .error-message {
@@ -317,6 +370,35 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        .card-logos {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-logos span {
+            font-size: 1.5rem;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon svg {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        small.helper-text {
+            display: block;
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
         }
     </style>
 </head>
@@ -477,50 +559,240 @@
                 </div>
 
                 <form class="payment-form" id="completePaymentForm" onsubmit="processPayment(event)">
-                    <h3 style="margin: 0 0 1.5rem 0; color: #1f2937;">Your Payment Details</h3>
+                    <h3 style="margin: 0 0 1.5rem 0; color: #1f2937;">Select Payment Method</h3>
 
-                    <div class="form-group">
-                        <label>Payment Method</label>
-                        <div class="payment-methods">
-                            <label class="payment-option">
-                                <input type="radio" name="payment" value="card" checked>
-                                <div class="payment-option-content">
-                                    <div style="font-weight: 600;">💳</div>
-                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Credit/Debit</div>
-                                </div>
-                            </label>
-                            <label class="payment-option">
-                                <input type="radio" name="payment" value="paypal">
-                                <div class="payment-option-content">
-                                    <div style="font-weight: 600;">🅿️</div>
-                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">PayPal</div>
-                                </div>
-                            </label>
-                            <label class="payment-option">
-                                <input type="radio" name="payment" value="stripe">
-                                <div class="payment-option-content">
-                                    <div style="font-weight: 600;">💼</div>
-                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Stripe</div>
-                                </div>
-                            </label>
-                            <label class="payment-option">
-                                <input type="radio" name="payment" value="mtn">
-                                <div class="payment-option-content">
-                                    <div style="font-weight: 600;">📱</div>
-                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">MTN MoMo</div>
-                                </div>
-                            </label>
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card" checked onchange="showPaymentDetails('card')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💳</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">Card</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="paypal" onchange="showPaymentDetails('paypal')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🅿️</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">PayPal</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="stripe" onchange="showPaymentDetails('stripe')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💼</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">Stripe</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="mtn" onchange="showPaymentDetails('mtn')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📱</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">MTN MoMo</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="orange" onchange="showPaymentDetails('orange')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🍊</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">Orange Money</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="zelle" onchange="showPaymentDetails('zelle')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💵</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">Zelle</div>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cashapp" onchange="showPaymentDetails('cashapp')">
+                            <div class="payment-option-content">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💰</div>
+                                <div style="font-size: 0.85rem; font-weight: 600;">Cash App</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Credit/Debit Card Details -->
+                    <div id="cardDetails" class="payment-details-section active">
+                        <h4>💳 Card Payment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="cardFirstName" required placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="cardLastName" required placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number *</label>
+                            <input type="text" id="cardNumber" required placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+                            <div class="card-logos">
+                                <span>💳</span>
+                                <span style="font-size: 1rem; color: #6b7280;">Visa, Mastercard, Amex accepted</span>
+                            </div>
+                        </div>
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label>Expiration Date *</label>
+                                <input type="text" id="cardExpiry" required placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV *</label>
+                                <input type="text" id="cardCVV" required placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            </div>
+                            <div class="form-group">
+                                <label>ZIP Code *</label>
+                                <input type="text" id="cardZip" required placeholder="12345" maxlength="10">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Your Name</label>
-                        <input type="text" required placeholder="Enter your full name" value="${orderData.helperName || ''}" id="payerName">
+                    <!-- PayPal Details -->
+                    <div id="paypalDetails" class="payment-details-section">
+                        <h4>🅿️ PayPal Payment Details</h4>
+                        <div class="form-group">
+                            <label>PayPal Email *</label>
+                            <input type="email" id="paypalEmail" placeholder="your@email.com">
+                            <small class="helper-text">We'll redirect you to PayPal to complete payment</small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="paypalFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="paypalLastName" placeholder="Doe">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Your Email</label>
-                        <input type="email" required placeholder="your@email.com" value="${orderData.helperEmail || ''}" id="payerEmail">
+                    <!-- Stripe Details -->
+                    <div id="stripeDetails" class="payment-details-section">
+                        <h4>💼 Stripe Payment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="stripeFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="stripeLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number *</label>
+                            <input type="text" id="stripeCardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
+                        </div>
+                        <div class="form-row-3">
+                            <div class="form-group">
+                                <label>Expiration *</label>
+                                <input type="text" id="stripeExpiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)">
+                            </div>
+                            <div class="form-group">
+                                <label>CVC *</label>
+                                <input type="text" id="stripeCVC" placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                            </div>
+                            <div class="form-group">
+                                <label>ZIP *</label>
+                                <input type="text" id="stripeZip" placeholder="12345" maxlength="10">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MTN Mobile Money Details -->
+                    <div id="mtnDetails" class="payment-details-section">
+                        <h4>📱 MTN Mobile Money Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="mtnFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="mtnLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>MTN Mobile Money Number *</label>
+                            <input type="tel" id="mtnPhone" placeholder="+237 6XX XXX XXX">
+                            <small class="helper-text">Enter your MTN MoMo registered phone number</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="mtnEmail" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <!-- Orange Money Details -->
+                    <div id="orangeDetails" class="payment-details-section">
+                        <h4>🍊 Orange Money Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="orangeFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="orangeLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Orange Money Number *</label>
+                            <input type="tel" id="orangePhone" placeholder="+237 6XX XXX XXX">
+                            <small class="helper-text">Enter your Orange Money registered phone number</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="orangeEmail" placeholder="your@email.com">
+                        </div>
+                    </div>
+
+                    <!-- Zelle Details -->
+                    <div id="zelleDetails" class="payment-details-section">
+                        <h4>💵 Zelle Payment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="zelleFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="zelleLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Zelle Email or Phone *</label>
+                            <input type="text" id="zelleContact" placeholder="email@example.com or +1234567890">
+                            <small class="helper-text">Enter the email or phone linked to your Zelle account</small>
+                        </div>
+                    </div>
+
+                    <!-- Cash App Details -->
+                    <div id="cashappDetails" class="payment-details-section">
+                        <h4>💰 Cash App Payment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name *</label>
+                                <input type="text" id="cashappFirstName" placeholder="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name *</label>
+                                <input type="text" id="cashappLastName" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cash App Username (Cashtag) *</label>
+                            <input type="text" id="cashappUsername" placeholder="$YourCashtag">
+                            <small class="helper-text">Enter your Cash App username (e.g., $JohnDoe)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="cashappEmail" placeholder="your@email.com">
+                        </div>
                     </div>
 
                     <div style="background: #eff6ff; border: 2px solid #93c5fd; border-radius: 12px; padding: 1.25rem; margin: 1.5rem 0;">
@@ -529,8 +801,8 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             </svg>
                             <div style="color: #1e40af; font-size: 0.9rem; line-height: 1.6;">
-                                <strong>Secure Payment</strong><br>
-                                Your payment information is encrypted and secure. We never store your card details.
+                                <strong>🔒 Secure Payment</strong><br>
+                                Your payment information is encrypted and secure. We never store your card details or payment credentials.
                             </div>
                         </div>
                     </div>
@@ -540,22 +812,129 @@
                     </button>
                 </form>
             `;
+
+            // Show card details by default
+            showPaymentDetails('card');
+        }
+
+        function showPaymentDetails(method) {
+            // Hide all payment detail sections
+            document.querySelectorAll('.payment-details-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected payment details
+            const detailsMap = {
+                'card': 'cardDetails',
+                'paypal': 'paypalDetails',
+                'stripe': 'stripeDetails',
+                'mtn': 'mtnDetails',
+                'orange': 'orangeDetails',
+                'zelle': 'zelleDetails',
+                'cashapp': 'cashappDetails'
+            };
+
+            const sectionId = detailsMap[method];
+            if (sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.classList.add('active');
+
+                    // Update required attributes based on active method
+                    updateRequiredFields(method);
+                }
+            }
+        }
+
+        function updateRequiredFields(method) {
+            // Remove required from all payment detail inputs
+            document.querySelectorAll('.payment-details-section input').forEach(input => {
+                input.removeAttribute('required');
+            });
+
+            // Add required to active section inputs
+            const activeSection = document.querySelector('.payment-details-section.active');
+            if (activeSection) {
+                activeSection.querySelectorAll('input').forEach(input => {
+                    // Don't make helper text inputs required
+                    if (!input.id.includes('helper')) {
+                        input.setAttribute('required', 'required');
+                    }
+                });
+            }
+        }
+
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            input.value = formattedValue;
+        }
+
+        function formatExpiry(input) {
+            let value = input.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            input.value = value;
         }
 
         async function processPayment(event) {
             event.preventDefault();
 
             const payButton = document.getElementById('payButton');
-            const payerName = document.getElementById('payerName').value;
-            const payerEmail = document.getElementById('payerEmail').value;
-            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const selectedMethod = document.querySelector('input[name="payment"]:checked').value;
+
+            // Get payment details based on method
+            let paymentDetails = {
+                method: selectedMethod
+            };
+
+            // Collect specific payment details
+            if (selectedMethod === 'card') {
+                paymentDetails.firstName = document.getElementById('cardFirstName').value;
+                paymentDetails.lastName = document.getElementById('cardLastName').value;
+                paymentDetails.cardNumber = document.getElementById('cardNumber').value;
+                paymentDetails.expiry = document.getElementById('cardExpiry').value;
+                paymentDetails.cvv = document.getElementById('cardCVV').value;
+                paymentDetails.zip = document.getElementById('cardZip').value;
+            } else if (selectedMethod === 'paypal') {
+                paymentDetails.email = document.getElementById('paypalEmail').value;
+                paymentDetails.firstName = document.getElementById('paypalFirstName').value;
+                paymentDetails.lastName = document.getElementById('paypalLastName').value;
+            } else if (selectedMethod === 'stripe') {
+                paymentDetails.firstName = document.getElementById('stripeFirstName').value;
+                paymentDetails.lastName = document.getElementById('stripeLastName').value;
+                paymentDetails.cardNumber = document.getElementById('stripeCardNumber').value;
+                paymentDetails.expiry = document.getElementById('stripeExpiry').value;
+                paymentDetails.cvc = document.getElementById('stripeCVC').value;
+                paymentDetails.zip = document.getElementById('stripeZip').value;
+            } else if (selectedMethod === 'mtn') {
+                paymentDetails.firstName = document.getElementById('mtnFirstName').value;
+                paymentDetails.lastName = document.getElementById('mtnLastName').value;
+                paymentDetails.phone = document.getElementById('mtnPhone').value;
+                paymentDetails.email = document.getElementById('mtnEmail').value;
+            } else if (selectedMethod === 'orange') {
+                paymentDetails.firstName = document.getElementById('orangeFirstName').value;
+                paymentDetails.lastName = document.getElementById('orangeLastName').value;
+                paymentDetails.phone = document.getElementById('orangePhone').value;
+                paymentDetails.email = document.getElementById('orangeEmail').value;
+            } else if (selectedMethod === 'zelle') {
+                paymentDetails.firstName = document.getElementById('zelleFirstName').value;
+                paymentDetails.lastName = document.getElementById('zelleLastName').value;
+                paymentDetails.contact = document.getElementById('zelleContact').value;
+            } else if (selectedMethod === 'cashapp') {
+                paymentDetails.firstName = document.getElementById('cashappFirstName').value;
+                paymentDetails.lastName = document.getElementById('cashappLastName').value;
+                paymentDetails.username = document.getElementById('cashappUsername').value;
+                paymentDetails.email = document.getElementById('cashappEmail').value;
+            }
 
             // Disable button
             payButton.disabled = true;
             payButton.textContent = 'Processing Payment...';
 
             // Simulate payment processing
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            await new Promise(resolve => setTimeout(resolve, 2500));
 
             // Update order status to paid
             const orders = JSON.parse(localStorage.getItem('helpMePayOrders') || '[]');
@@ -564,17 +943,17 @@
             if (orderIndex !== -1) {
                 orders[orderIndex].status = 'paid';
                 orders[orderIndex].paidAt = new Date().toISOString();
-                orders[orderIndex].payerName = payerName;
-                orders[orderIndex].payerEmail = payerEmail;
-                orders[orderIndex].paymentMethod = paymentMethod;
+                orders[orderIndex].payerName = `${paymentDetails.firstName} ${paymentDetails.lastName}`;
+                orders[orderIndex].paymentMethod = selectedMethod;
+                orders[orderIndex].paymentDetails = paymentDetails;
                 localStorage.setItem('helpMePayOrders', JSON.stringify(orders));
             }
 
             // Show success message
-            showPaymentSuccess(payerName);
+            showPaymentSuccess(paymentDetails.firstName, paymentDetails.lastName);
         }
 
-        function showPaymentSuccess(payerName) {
+        function showPaymentSuccess(firstName, lastName) {
             document.getElementById('paymentContent').innerHTML = `
                 <div style="text-align: center; padding: 3rem 1rem;">
                     <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; animation: scaleIn 0.5s ease;">
@@ -582,20 +961,23 @@
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     </div>
-                    <h2 style="margin: 0 0 1rem 0; color: #1f2937; font-size: 2rem;">Payment Successful!</h2>
+                    <h2 style="margin: 0 0 1rem 0; color: #1f2937; font-size: 2rem;">Payment Successful! 🎉</h2>
                     <p style="color: #6b7280; font-size: 1.1rem; margin-bottom: 2rem;">
-                        Thank you, <strong>${payerName}</strong>! Your payment has been processed successfully.
+                        Thank you, <strong>${firstName} ${lastName}</strong>!<br>Your payment has been processed successfully.
                     </p>
                     <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; text-align: left;">
                         <div style="margin-bottom: 0.75rem;"><strong>Order ID:</strong> ${orderData.orderId}</div>
                         <div style="margin-bottom: 0.75rem;"><strong>Amount Paid:</strong> $${orderData.total.toLocaleString()} ${orderData.currency}</div>
                         <div style="margin-bottom: 0.75rem;"><strong>Status:</strong> <span class="status-badge status-paid">✓ Paid</span></div>
                         <div style="margin-bottom: 0.75rem;"><strong>Date:</strong> ${new Date().toLocaleString()}</div>
+                        <div style="margin-bottom: 0.75rem;"><strong>For:</strong> ${orderData.customerName}</div>
                     </div>
-                    <p style="color: #6b7280; margin-bottom: 2rem;">
-                        ${orderData.customerName} will receive a confirmation email shortly. Thank you for your purchase!
+                    <p style="color: #6b7280; margin-bottom: 2rem; line-height: 1.6;">
+                        ${orderData.customerName} will receive a confirmation email shortly.<br>
+                        A receipt has been sent to your email address.<br>
+                        Thank you for your purchase!
                     </p>
-                    <button onclick="window.location.href='index.html'" style="padding: 1rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                    <button onclick="window.location.href='index.html'" style="padding: 1rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
                         Return to Home
                     </button>
                 </div>
