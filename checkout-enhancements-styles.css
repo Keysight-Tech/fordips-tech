@@ -223,31 +223,9 @@
     animation: currencyChange 0.3s ease;
 }
 
-/* ===== HELP ME PAY TOOLTIP ===== */
+/* ===== HELP ME PAY BUTTON - Tooltip removed for cleaner UX ===== */
 .btn-help-me-pay {
     position: relative;
-}
-
-.btn-help-me-pay::after {
-    content: 'Split payment with friends';
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    margin-bottom: 0.5rem;
-}
-
-.btn-help-me-pay:hover::after {
-    opacity: 1;
 }
 
 /* ===== CHECKOUT MODAL IMPROVEMENTS ===== */

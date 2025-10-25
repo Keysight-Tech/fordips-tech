@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Payment - FORDIPS TECH</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="checkout-responsive.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .payment-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .payment-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .payment-header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+        }
+
+        .payment-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .payment-body {
+            padding: 2rem;
+        }
+
+        .order-info {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .order-info h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+            color: #1f2937;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-top: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-qty {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .total-section {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .total-amount {
+            color: #2563eb;
+        }
+
+        .payment-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .payment-option-content {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option input[type="radio"]:checked + .payment-option-content {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .payment-option-content:hover {
+            border-color: #2563eb;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-pay:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-paid {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .message-box {
+            background: #fffbeb;
+            border: 2px solid #fcd34d;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .message-box strong {
+            color: #92400e;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .payment-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .payment-body {
+                padding: 1.5rem;
+            }
+
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Complete Payment</h1>
+            <p>FORDIPS TECH - Secure Payment</p>
+        </div>
+
+        <div class="payment-body" id="paymentContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading payment details...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get order ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order');
+
+        let orderData = null;
+
+        // Load order details
+        function loadOrderDetails() {
+            if (!orderId) {
+                showError('Invalid payment link. No order ID provided.');
+                return;
+            }
+
+            // Get orders from localStorage
+            const orders = JSON.parse(localStorage.getItem('helpMePayOrders') || '[]');
+            orderData = orders.find(o => o.orderId === orderId);
+
+            if (!orderData) {
+                showError('Order not found. This payment link may be invalid or expired.');
+                return;
+            }
+
+            // Check if expired
+            if (new Date(orderData.expiresAt) < new Date()) {
+                orderData.status = 'expired';
+            }
+
+            // Check if already paid
+            if (orderData.status === 'paid') {
+                showAlreadyPaid();
+                return;
+            }
+
+            // Check if expired
+            if (orderData.status === 'expired') {
+                showExpired();
+                return;
+            }
+
+            // Show payment form
+            showPaymentForm();
+        }
+
+        function showError(message) {
+            document.getElementById('paymentContent').innerHTML = `
+                <div class="error-message">
+                    <strong>Error:</strong> ${message}
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="index.html" style="display: inline-block; padding: 1rem 2rem; background: #2563eb; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                        Return to Home
+                    </a>
+                </div>
+            `;
+        }
+
+        function showAlreadyPaid() {
+            document.getElementById('paymentContent').innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 style="margin: 0 0 1rem 0; color: #1f2937;">Payment Complete!</h2>
+                    <p style="color: #6b7280;">This order has already been paid for.</p>
+                    <p style="margin-top: 1rem;"><strong>Order ID:</strong> ${orderData.orderId}</p>
+                </div>
+            `;
+        }
+
+        function showExpired() {
+            document.getElementById('paymentContent').innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="width: 80px; height: 80px; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h2 style="margin: 0 0 1rem 0; color: #1f2937;">Payment Link Expired</h2>
+                    <p style="color: #6b7280;">This payment link has expired. Please contact ${orderData.customerName} for a new link.</p>
+                    <p style="margin-top: 1rem;"><strong>Order ID:</strong> ${orderData.orderId}</p>
+                </div>
+            `;
+        }
+
+        function showPaymentForm() {
+            const itemsHTML = orderData.items.map(item => `
+                <div class="order-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-qty">Quantity: ${item.quantity}</div>
+                    </div>
+                    <div class="item-price">$${(item.price * item.quantity).toLocaleString()}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('paymentContent').innerHTML = `
+                ${orderData.helperMessage ? `
+                    <div class="message-box">
+                        <strong>${orderData.customerName} says:</strong><br>
+                        "${orderData.helperMessage}"
+                    </div>
+                ` : ''}
+
+                <div class="order-info">
+                    <h2>Payment Request Details</h2>
+                    <div class="info-row">
+                        <span class="info-label">From:</span>
+                        <span class="info-value">${orderData.customerName}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Order ID:</span>
+                        <span class="info-value">${orderData.orderId}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Status:</span>
+                        <span class="status-badge status-pending">⏳ Pending Payment</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Expires:</span>
+                        <span class="info-value">${new Date(orderData.expiresAt).toLocaleString()}</span>
+                    </div>
+
+                    <div class="order-items">
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: #1f2937; font-size: 1.1rem;">Order Items</h3>
+                        ${itemsHTML}
+                    </div>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-row">
+                        <span>Total Amount:</span>
+                        <span class="total-amount">$${orderData.total.toLocaleString()} ${orderData.currency}</span>
+                    </div>
+                </div>
+
+                <form class="payment-form" id="completePaymentForm" onsubmit="processPayment(event)">
+                    <h3 style="margin: 0 0 1.5rem 0; color: #1f2937;">Your Payment Details</h3>
+
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <div class="payment-option-content">
+                                    <div style="font-weight: 600;">💳</div>
+                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Credit/Debit</div>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="paypal">
+                                <div class="payment-option-content">
+                                    <div style="font-weight: 600;">🅿️</div>
+                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">PayPal</div>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="stripe">
+                                <div class="payment-option-content">
+                                    <div style="font-weight: 600;">💼</div>
+                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Stripe</div>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="mtn">
+                                <div class="payment-option-content">
+                                    <div style="font-weight: 600;">📱</div>
+                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">MTN MoMo</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" required placeholder="Enter your full name" value="${orderData.helperName || ''}" id="payerName">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" required placeholder="your@email.com" value="${orderData.helperEmail || ''}" id="payerEmail">
+                    </div>
+
+                    <div style="background: #eff6ff; border: 2px solid #93c5fd; border-radius: 12px; padding: 1.25rem; margin: 1.5rem 0;">
+                        <div style="display: flex; gap: 0.75rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            <div style="color: #1e40af; font-size: 0.9rem; line-height: 1.6;">
+                                <strong>Secure Payment</strong><br>
+                                Your payment information is encrypted and secure. We never store your card details.
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-pay" id="payButton">
+                        Complete Payment - $${orderData.total.toLocaleString()}
+                    </button>
+                </form>
+            `;
+        }
+
+        async function processPayment(event) {
+            event.preventDefault();
+
+            const payButton = document.getElementById('payButton');
+            const payerName = document.getElementById('payerName').value;
+            const payerEmail = document.getElementById('payerEmail').value;
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+            // Disable button
+            payButton.disabled = true;
+            payButton.textContent = 'Processing Payment...';
+
+            // Simulate payment processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Update order status to paid
+            const orders = JSON.parse(localStorage.getItem('helpMePayOrders') || '[]');
+            const orderIndex = orders.findIndex(o => o.orderId === orderId);
+
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = 'paid';
+                orders[orderIndex].paidAt = new Date().toISOString();
+                orders[orderIndex].payerName = payerName;
+                orders[orderIndex].payerEmail = payerEmail;
+                orders[orderIndex].paymentMethod = paymentMethod;
+                localStorage.setItem('helpMePayOrders', JSON.stringify(orders));
+            }
+
+            // Show success message
+            showPaymentSuccess(payerName);
+        }
+
+        function showPaymentSuccess(payerName) {
+            document.getElementById('paymentContent').innerHTML = `
+                <div style="text-align: center; padding: 3rem 1rem;">
+                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; animation: scaleIn 0.5s ease;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 style="margin: 0 0 1rem 0; color: #1f2937; font-size: 2rem;">Payment Successful!</h2>
+                    <p style="color: #6b7280; font-size: 1.1rem; margin-bottom: 2rem;">
+                        Thank you, <strong>${payerName}</strong>! Your payment has been processed successfully.
+                    </p>
+                    <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; text-align: left;">
+                        <div style="margin-bottom: 0.75rem;"><strong>Order ID:</strong> ${orderData.orderId}</div>
+                        <div style="margin-bottom: 0.75rem;"><strong>Amount Paid:</strong> $${orderData.total.toLocaleString()} ${orderData.currency}</div>
+                        <div style="margin-bottom: 0.75rem;"><strong>Status:</strong> <span class="status-badge status-paid">✓ Paid</span></div>
+                        <div style="margin-bottom: 0.75rem;"><strong>Date:</strong> ${new Date().toLocaleString()}</div>
+                    </div>
+                    <p style="color: #6b7280; margin-bottom: 2rem;">
+                        ${orderData.customerName} will receive a confirmation email shortly. Thank you for your purchase!
+                    </p>
+                    <button onclick="window.location.href='index.html'" style="padding: 1rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                        Return to Home
+                    </button>
+                </div>
+            `;
+        }
+
+        // Load order when page loads
+        window.addEventListener('DOMContentLoaded', loadOrderDetails);
+    </script>
+</body>
+</html>
