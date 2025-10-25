@@ -58,7 +58,42 @@ class FordipsTechAI {
      * Translation helper that uses the global t() function
      */
     t(key) {
-        return typeof window.t === 'function' ? window.t(key) : key;
+        if (typeof window.t === 'function') {
+            const translation = window.t(key);
+            // Return translation if it exists and is not the same as the key
+            return translation && translation !== key ? translation : this.getFallbackText(key);
+        }
+        return this.getFallbackText(key);
+    }
+
+    /**
+     * Get fallback English text if translation fails
+     */
+    getFallbackText(key) {
+        const fallbacks = {
+            'aiChatTitle': 'Fordips AI Assistant',
+            'aiChatStatus': 'Online - Ready to help!',
+            'aiChatPlaceholder': 'Search products or ask me anything...',
+            'aiChatSend': 'Send',
+            'qaBrowseAll': '🛍️ Browse All',
+            'qaBestDeals': '💰 Best Deals',
+            'qaPopular': '⭐ Popular',
+            'qaTrackOrder': '📦 Track Order',
+            'aiWelcomeGreeting': '👋 **Welcome to Fordips Tech!**',
+            'aiWelcomeIntro': 'I\'m your personal AI shopping assistant, here to make your experience amazing!',
+            'aiWelcomeCanHelp': '**I can help you with:**',
+            'aiGreetingResponse': 'Hello! 👋 Welcome to Fordips Tech! I\'m your personal shopping assistant.',
+            'aiCartEmpty': 'Your cart is currently empty. Let me help you find something great!',
+            'aiCartHasItems': '🛒 Your cart has {count} item(s)',
+            'aiCheckoutReady': 'Ready to checkout?',
+            'aiCheckoutNow': '💳 Checkout Now',
+            'aiContinueShopping': '🛍️ Continue Shopping',
+            'aiViewCart': '👀 View Cart',
+            'aiAddedToCart': 'Great! I\'ll add **{item}** to your cart.',
+            'aiProductNotFound': 'Which product would you like? Please tell me more.',
+            'aiTyping': 'Typing...'
+        };
+        return fallbacks[key] || key;
     }
 
     init() {
@@ -1495,10 +1530,17 @@ How else can I help you today?`,
 
 // Initialize AI Chat when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait for utils and config to load
-    setTimeout(() => {
-        window.fordipsAI = new FordipsTechAI();
-    }, 500);
+    // Wait for utils, config, and translations to load
+    const initAIChat = () => {
+        if (typeof window.t === 'function' && typeof window.FordipsUtils !== 'undefined') {
+            window.fordipsAI = new FordipsTechAI();
+        } else {
+            // Retry after a short delay if translations not ready
+            setTimeout(initAIChat, 100);
+        }
+    };
+
+    setTimeout(initAIChat, 500);
 });
 
 window.FORDIPS_CONFIG?.logger.log('✅ AI Chat module loaded');
