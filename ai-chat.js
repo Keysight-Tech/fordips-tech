@@ -31,6 +31,8 @@
 
 class FordipsTechAI {
     constructor() {
+        console.log('🤖 FordipsTechAI: Constructor called');
+
         this.conversationHistory = [];
         this.isOpen = false;
         this.isTyping = false;
@@ -42,6 +44,7 @@ class FordipsTechAI {
 
         // Get user's selected language
         this.userLang = this.getUserLanguage();
+        console.log('🤖 User language:', this.userLang);
 
         // Initialize on page load
         this.init();
@@ -97,6 +100,7 @@ class FordipsTechAI {
     }
 
     init() {
+        console.log('🤖 AI Chat: init() called');
         this.createChatUI();
         this.attachEventListeners();
         this.loadConversationHistory();
@@ -106,10 +110,12 @@ class FordipsTechAI {
             this.showWelcomeMessage();
         }, 3000);
 
+        console.log('✅ AI Chat Assistant initialized');
         window.FORDIPS_CONFIG?.logger.log('✅ AI Chat Assistant initialized');
     }
 
     createChatUI() {
+        console.log('🤖 AI Chat: createChatUI() called');
         const chatHTML = `
             <!-- AI Chat Widget -->
             <div class="ai-chat-widget" id="aiChatWidget">
@@ -196,6 +202,12 @@ class FordipsTechAI {
         `;
 
         document.body.insertAdjacentHTML('beforeend', chatHTML);
+
+        const chatWidget = document.getElementById('aiChatWidget');
+        console.log('🤖 AI Chat: Widget inserted into DOM. Element found:', chatWidget !== null);
+        if (chatWidget) {
+            console.log('🤖 AI Chat: Widget styles:', window.getComputedStyle(chatWidget).display);
+        }
     }
 
     attachEventListeners() {
@@ -1530,11 +1542,24 @@ How else can I help you today?`,
 
 // Initialize AI Chat when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🤖 AI Chat: DOM ready, starting initialization...');
+
     // Wait for utils, config, and translations to load
     const initAIChat = () => {
-        if (typeof window.t === 'function' && typeof window.FordipsUtils !== 'undefined') {
+        const hasTranslations = typeof window.t === 'function';
+        const hasUtils = typeof window.FordipsUtils !== 'undefined';
+
+        console.log('🤖 AI Chat: Checking dependencies...', {
+            hasTranslations,
+            hasUtils
+        });
+
+        if (hasTranslations && hasUtils) {
+            console.log('🤖 AI Chat: Dependencies ready! Initializing...');
             window.fordipsAI = new FordipsTechAI();
+            console.log('✅ AI Chat: Initialized successfully!');
         } else {
+            console.log('⏳ AI Chat: Dependencies not ready, retrying in 100ms...');
             // Retry after a short delay if translations not ready
             setTimeout(initAIChat, 100);
         }
